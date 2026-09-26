@@ -8,19 +8,31 @@ const site = await loadSite()
 const files = renderSite(site)
 
 /** The paths the site is mounted at on sylphx.com (see README). */
-const MOUNTS = ['/apps', '/open-source', '/zh-hant/apps', '/zh-hant/open-source', '/.well-known/']
+const MOUNTS = [
+	'/apps',
+	'/open-source',
+	'/.well-known/apple-app-site-association',
+	'/.well-known/assetlinks.json',
+]
+
+/** Gateway PathPrefix semantics: the prefix itself or a path below it. */
+const mounted = (href: string) => {
+	const path = href.split(/[?#]/)[0] ?? ''
+	return MOUNTS.some((m) => path === m || path.startsWith(`${m}/`))
+}
 
 describe('served pages', () => {
 	test('every app page exists in both languages', () => {
 		for (const app of site.apps.filter((a) => !a.external)) {
-			for (const prefix of ['', 'zh-hant/']) {
+			for (const prefix of ['apps/', 'apps/zh-hant/']) {
 				for (const page of ['', '/privacy', '/support']) {
-					expect(files.has(`${prefix}apps/${app.slug}${page}/index.html`)).toBe(true)
+					expect(files.has(`${prefix}${app.slug}${page}/index.html`)).toBe(true)
 				}
 			}
 		}
 		expect(files.has('apps/index.html')).toBe(true)
-		expect(files.has('zh-hant/open-source/index.html')).toBe(true)
+		expect(files.has('apps/zh-hant/index.html')).toBe(true)
+		expect(files.has('open-source/zh-hant/index.html')).toBe(true)
 	})
 
 	test('every internal link and asset stays inside a mounted path', () => {
@@ -28,16 +40,13 @@ describe('served pages', () => {
 			if (!path.endsWith('.html')) continue
 			for (const [, href = ''] of body.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
 				if (href === '/' || href === '/docs') continue // the platform's own pages
-				expect(
-					MOUNTS.some((m) => href.startsWith(m)),
-					`${path} links ${href}`,
-				).toBe(true)
+				expect(mounted(href), `${path} links ${href}`).toBe(true)
 			}
 		}
 	})
 
 	test('pages declare their language and both hreflang alternates', () => {
-		const zh = files.get('zh-hant/apps/number-grove/index.html') ?? ''
+		const zh = files.get('apps/zh-hant/number-grove/index.html') ?? ''
 		expect(zh).toContain('<html lang="zh-Hant">')
 		expect(zh).toContain('hreflang="en" href="https://sylphx.com/apps/number-grove"')
 		expect(zh).toContain('數字花園')
@@ -90,6 +99,10 @@ describe('content validation', () => {
 	test('rejects a missing translation', () => {
 		const broken = { ...valid, tagline: { en: 'Only English' } }
 		expect(() => validateApp(broken, file(valid.slug))).toThrow(ContentError)
+	})
+
+	test('rejects a slug that is a reserved path segment', () => {
+		expect(() => validateApp({ ...valid, slug: 'zh-hant' }, file('zh-hant'))).toThrow(/reserved/)
 	})
 
 	test('rejects a deep link outside the app path', () => {

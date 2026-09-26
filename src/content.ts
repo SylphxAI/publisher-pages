@@ -58,6 +58,8 @@ export interface OpenSource {
 }
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+/** Path segments under `/apps` that are not apps: language twins and assets. */
+const RESERVED_SLUGS = new Set(['zh-hant', '_assets'])
 const DATE = /^\d{4}-\d{2}-\d{2}$/
 const EMAIL = /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/
 const APPLE_APP_ID = /^[A-Z0-9]{10}\.[A-Za-z0-9.-]+$/
@@ -104,6 +106,7 @@ function list<T>(value: unknown, where: string, each: (item: unknown, at: string
 export function validateApp(raw: unknown, file: string): AppContent {
 	const app = raw as AppContent
 	if (typeof app.slug !== 'string' || !SLUG.test(app.slug)) fail(file, 'slug must be kebab-case')
+	if (RESERVED_SLUGS.has(app.slug)) fail(file, `slug ${app.slug} is a reserved path segment`)
 	if (!file.endsWith(`/${app.slug}.json`)) fail(file, `file name must be ${app.slug}.json`)
 	text(app.name, `${file} name`)
 	text(app.category, `${file} category`)

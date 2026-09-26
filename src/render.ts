@@ -1,7 +1,7 @@
 /**
  * Page rendering: plain HTML strings, no client JavaScript. Every URL the
  * pages use sits under a path the site is mounted at on sylphx.com
- * (`/apps`, `/open-source`, and their `/zh-hant` twins), so the pages work
+ * (`/apps`, `/open-source`, and the two app-link files), so the pages work
  * behind the path mount without any platform route of their own.
  */
 
@@ -9,12 +9,16 @@ import { type AppContent, LOCALES, type Locale, type OpenSource, type Publisher,
 import { UI } from './strings'
 
 export const ASSET_PREFIX = '/apps/_assets'
-const LOCALE_SEGMENT: Record<Locale, string> = { en: '', 'zh-Hant': '/zh-hant' }
+/** Each language's segment, placed after the mounted prefix: `/apps/zh-hant/…`. */
+export const LOCALE_SEGMENT: Record<Locale, string> = { en: '', 'zh-Hant': 'zh-hant' }
 const LOCALE_NAME: Record<Locale, string> = { en: 'English', 'zh-Hant': '繁體中文' }
 
 /** The served path of an English path in `locale`. */
 export function localized(locale: Locale, path: string): string {
-	return `${LOCALE_SEGMENT[locale]}${path}`
+	const segment = LOCALE_SEGMENT[locale]
+	if (segment === '') return path
+	const [, prefix, ...rest] = path.split('/')
+	return ['', prefix, segment, ...rest].join('/')
 }
 
 export function escapeHtml(value: string): string {
@@ -280,7 +284,7 @@ ${projects}
 export function notFound(publisher: Publisher): string {
 	const body = `\t\t\t<h1>${UI.notFound.en}</h1>
 			<p class="lede" lang="en">${UI.notFoundBody.en} <a href="/apps">/apps</a></p>
-			<p class="lede" lang="zh-Hant">${UI.notFoundBody['zh-Hant']} <a href="/zh-hant/apps">/zh-hant/apps</a></p>`
+			<p class="lede" lang="zh-Hant">${UI.notFoundBody['zh-Hant']} <a href="/apps/zh-hant">/apps/zh-hant</a></p>`
 	return page({
 		locale: 'en',
 		path: '/apps',
