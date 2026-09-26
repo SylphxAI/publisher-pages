@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'bun:test'
+import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { loadSite, renderSite } from '../src/build'
 import { type AppContent, ContentError, type OpenSourceProject, validateApp } from '../src/content'
@@ -70,11 +71,13 @@ describe('app look', () => {
 	const ng = site.apps.find((a) => a.slug === 'number-grove') as AppContent
 
 	test('an app theme sets the shared custom properties for light and dark', () => {
-		const body = files.get('apps/number-grove/index.html') ?? ''
-		expect(body).toContain(`--accent:${ng.theme?.light.accent}`)
-		expect(body).toContain(`@media (prefers-color-scheme: dark){:root{--bg:${ng.theme?.dark.bg}`)
-		expect(files.get('apps/number-grove/privacy/index.html')).toContain('<style>:root{')
-		expect(files.get('apps/index.html')).not.toContain('<style>')
+		const css = files.get('apps/_assets/number-grove/theme.css') ?? ''
+		expect(css).toContain(`--accent:${ng.theme?.light.accent}`)
+		expect(css).toContain(`@media (prefers-color-scheme: dark){:root{--bg:${ng.theme?.dark.bg}`)
+		const link = '<link rel="stylesheet" href="/apps/_assets/number-grove/theme.css">'
+		expect(files.get('apps/number-grove/index.html')).toContain(link)
+		expect(files.get('apps/number-grove/privacy/index.html')).toContain(link)
+		expect(files.get('apps/index.html')).not.toContain('theme.css')
 	})
 
 	test('sections, plans and the FAQ render on a landing page with sections', () => {
@@ -170,5 +173,45 @@ describe('content validation', () => {
 			source: { repo: 'SylphxAI/elsewhere', path: 'publisher/app.json' },
 		}
 		expect(validateApp(external, file('elsewhere')).external).toBe('https://example.com')
+	})
+})
+
+describe('content security policy', () => {
+	const conf = readFileSync(join(import.meta.dir, '../nginx.conf'), 'utf8')
+	const policy = conf.match(/add_header Content-Security-Policy "([^"]+)" always;/)?.[1] ?? ''
+	const directive = (name: string) =>
+		policy
+			.split(';')
+			.map((d) => d.trim().split(/\s+/))
+			.find(([n]) => n === name)
+			?.slice(1) ?? []
+	const pages = [...files].filter(([path]) => path.endsWith('.html'))
+
+	test('nginx sends a strict policy on every response', () => {
+		expect(policy).not.toBe('')
+		expect(policy).not.toMatch(/unsafe-(inline|eval|hashes)/)
+		expect(directive('script-src')).toEqual(["'none'"])
+		expect(directive('style-src')).toEqual(["'self'"])
+		for (const d of ['object-src', 'base-uri', 'frame-ancestors']) expect(directive(d)).toEqual(["'none'"])
+		// A location with its own add_header would drop the server-level headers.
+		expect(conf.match(/add_header/g)?.length).toBe(3)
+	})
+
+	test('pages carry no inline script, style or event handler', () => {
+		for (const [path, body] of pages) {
+			expect({ path, hit: body.match(/<script|<style|\sstyle=|\son[a-z]+=|javascript:/i)?.[0] }).toEqual({
+				path,
+				hit: undefined,
+			})
+		}
+	})
+
+	test('every image origin a page uses is allowed', () => {
+		const allowed = directive('img-src')
+		for (const [, body] of pages) {
+			for (const [, origin] of body.matchAll(/<img[^>]*\ssrc="(https?:\/\/[^/"]+)/g)) {
+				expect(allowed).toContain(origin ?? '')
+			}
+		}
 	})
 })

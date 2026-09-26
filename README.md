@@ -45,7 +45,8 @@ request when it changes.
   (package name and signing-certificate SHA-256 fingerprints) generate the
   app-link files. Apple paths default to `/apps/{slug}/*`.
 - Optional, for a fuller landing page: `theme` (the app's own colours for
-  light and dark, as `#rrggbb` for the shared sheet's custom properties),
+  light and dark, as `#rrggbb` for the shared sheet's custom properties,
+  served as `/apps/_assets/{slug}/theme.css`),
   `icon`, `hero` and `screenshots` (image files kept in
   `content/apps/{slug}/`, one per language, served from
   `/apps/_assets/{slug}/`), `sections` (`steps`, `cards` or `list`),
@@ -65,6 +66,13 @@ bun run check        # lint, type check, tests
 
 `Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
 `sylphx.toml` deploys it on Sylphx Hosting.
+
+`nginx.conf` sends a strict Content Security Policy on every response:
+`default-src 'none'; script-src 'none'; style-src 'self'`, images from the
+site and from Mark, and no `'unsafe-inline'` or `'unsafe-eval'`. Pages
+therefore carry no inline script, `<style>`, `style=` attribute or event
+handler; `bun run check` fails if one appears or if a page loads an image
+from an origin the policy does not list.
 
 ## Open-source list
 
