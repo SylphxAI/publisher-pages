@@ -1,5 +1,6 @@
 /**
- * Page rendering: plain HTML strings, no client JavaScript. Every URL the
+ * Page rendering: plain HTML strings, no client JavaScript and no inline
+ * script or style (the CSP in nginx.conf allows neither). Every URL the
  * pages use sits under a path the site is mounted at on sylphx.com
  * (`/apps`, `/open-source`, and the two app-link files), so the pages work
  * behind the path mount without any platform route of their own.
@@ -61,8 +62,8 @@ interface PageInput {
 	publisher: Publisher
 	/** Mark a page that must not be indexed. */
 	noindex?: boolean
-	/** The app's own colours, if it sets them. */
-	theme?: AppContent['theme']
+	/** URL of the app's own colour sheet, if it sets colours. */
+	themeSheet?: string
 	/** A wider content column, for landing pages with sections. */
 	wide?: boolean
 	/** Social preview image (absolute path under a mounted prefix). */
@@ -81,10 +82,19 @@ const CSS_VAR: Record<PaletteKey, string> = {
 	highlight: '--highlight',
 }
 
-/** The app's palette as custom properties over the shared sheet's defaults. */
-export function themeStyle(theme: NonNullable<AppContent['theme']>): string {
+/**
+ * The app's palette as custom properties over the shared sheet's defaults.
+ * It is served as its own file, not an inline `<style>`, so the CSP in
+ * nginx.conf needs no `'unsafe-inline'`.
+ */
+export function themeCss(theme: NonNullable<AppContent['theme']>): string {
 	const vars = (p: Palette) => PALETTE_KEYS.map((k) => `${CSS_VAR[k]}:${p[k]}`).join(';')
-	return `<style>:root{${vars(theme.light)}}@media (prefers-color-scheme: dark){:root{${vars(theme.dark)}}}</style>`
+	return `:root{${vars(theme.light)}}@media (prefers-color-scheme: dark){:root{${vars(theme.dark)}}}\n`
+}
+
+/** Served URL of an app's colour sheet, if the app sets colours. */
+export function themeSheetUrl(app: AppContent): string | undefined {
+	return app.theme ? assetUrl(app.slug, 'theme.css') : undefined
 }
 
 /** Served URL of an app asset file. */
@@ -100,7 +110,7 @@ export function page({
 	body,
 	publisher,
 	noindex,
-	theme,
+	themeSheet,
 	wide,
 	image,
 }: PageInput): string {
@@ -131,7 +141,7 @@ export function page({
 		<meta property="og:url" content="${canonical}">
 		<meta property="og:type" content="website">
 		${image ? `<meta property="og:image" content="${publisher.site}${image}">\n\t\t` : ''}<meta name="color-scheme" content="light dark">
-		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">${theme ? `\n\t\t${themeStyle(theme)}` : ''}
+		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">${themeSheet ? `\n\t\t<link rel="stylesheet" href="${themeSheet}">` : ''}
 	</head>
 	<body>
 		<a class="skip" href="#main">${t(UI.skip)}</a>
@@ -312,7 +322,7 @@ ${app.support.faq.map((f) => `\t\t\t\t<details><summary>${e(f.q)}</summary><p>${
 		description: t(app.tagline),
 		body,
 		publisher,
-		theme: app.theme,
+		themeSheet: themeSheetUrl(app),
 		wide: rich,
 		image: app.hero ? assetUrl(app.slug, app.hero.src[locale]) : undefined,
 	})
@@ -356,7 +366,7 @@ ${sections}
 		description: t(privacy.summary),
 		body,
 		publisher,
-		theme: app.theme,
+		themeSheet: themeSheetUrl(app),
 	})
 }
 
@@ -380,7 +390,7 @@ ${faq}`
 		description: t(UI.supportIntro),
 		body,
 		publisher,
-		theme: app.theme,
+		themeSheet: themeSheetUrl(app),
 	})
 }
 

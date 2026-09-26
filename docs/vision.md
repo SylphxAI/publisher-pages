@@ -23,7 +23,9 @@ gets a card that links out instead of duplicate pages.
   publisher and data controller.
 - Each app owns its content in its own repository; this repository renders it
   and fails the build on incomplete content.
-- Static pages, no client JavaScript, no tracking, no cookies.
+- Static pages, no client JavaScript, no tracking, no cookies. nginx sends a
+  strict Content Security Policy (`script-src 'none'`, `style-src 'self'`,
+  no `'unsafe-inline'`), so no page may carry an inline script or style.
 
 ## State
 

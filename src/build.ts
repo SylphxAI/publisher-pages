@@ -27,6 +27,7 @@ import {
 	localized,
 	notFound,
 	openSourcePage,
+	themeCss,
 } from './render'
 
 const ROOT = join(import.meta.dir, '..')
@@ -78,6 +79,9 @@ export function renderSite({ publisher, apps, openSource }: Site): Map<string, s
 			html(`${base}/privacy`, appPrivacy(app, locale, publisher))
 			html(`${base}/support`, appSupport(app, locale, publisher))
 		}
+	}
+	for (const app of apps) {
+		if (app.theme) files.set(`apps/_assets/${app.slug}/theme.css`, themeCss(app.theme))
 	}
 	files.set('apps/404.html', notFound(publisher))
 	files.set('.well-known/apple-app-site-association', appleAppSiteAssociation(apps))
