@@ -1,3 +1,5 @@
+![publisher-pages](https://mark.sylphx.com/api/v1/mark/hero.svg?type=minimal&color=0%3A1f5e4b%2C50%3Ae8f0ec%2C100%3Afbfaf7&text=publisher-pages&desc=The%20Sylphx%20publisher%20pages%20on%20sylphx.com)
+
 # publisher-pages
 
 The Sylphx publisher pages on `sylphx.com`: the "Built on Sylphx" apps index,
