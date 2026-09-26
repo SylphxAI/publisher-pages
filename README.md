@@ -56,3 +56,9 @@ bun run check        # lint, type check, tests
 
 `Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
 `sylphx.toml` deploys it on Sylphx Hosting.
+
+## Open-source list
+
+`content/open-source.json` is worded by the OSS lane. Each GitHub project shows
+its star count as a badge from Mark (`https://mark.sylphx.com/github/stars/{owner}/{repo}`),
+loaded by the browser in a fixed 110×20 box; set `"stars": false` to hide it.

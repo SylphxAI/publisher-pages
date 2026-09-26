@@ -48,6 +48,8 @@ export interface OpenSourceProject {
 	docs: string
 	package?: { label: string; url: string }
 	mcp?: string
+	/** Show the repository's star badge (served by Mark). Default true for a GitHub repository. */
+	stars?: boolean
 }
 
 export interface OpenSource {
@@ -179,6 +181,8 @@ export function validateOpenSource(raw: unknown, file: string): OpenSource {
 		if (typeof project.name !== 'string' || project.name === '') fail(at, 'name')
 		text(project.summary, `${at}.summary`)
 		url(project.repo, `${at}.repo`)
+		if (project.stars !== undefined && typeof project.stars !== 'boolean')
+			fail(at, 'stars must be true or false')
 		url(project.docs, `${at}.docs`)
 		if (project.package) url(project.package.url, `${at}.package.url`)
 	})

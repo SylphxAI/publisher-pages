@@ -55,6 +55,7 @@ export const UI = {
 	},
 	repository: { en: 'Repository', 'zh-Hant': '程式庫' },
 	documentation: { en: 'Documentation', 'zh-Hant': '文件' },
+	githubStars: { en: 'GitHub stars', 'zh-Hant': 'GitHub 星數' },
 	mcpRegistry: { en: 'MCP registry', 'zh-Hant': 'MCP 登記名稱' },
 	fromThePlatform: { en: 'From the platform', 'zh-Hant': '平台' },
 	footerLine: {
