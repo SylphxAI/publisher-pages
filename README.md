@@ -44,6 +44,13 @@ request when it changes.
 - `deepLinks.apple.appIds` (`TEAMID.bundle.id`) and `deepLinks.android`
   (package name and signing-certificate SHA-256 fingerprints) generate the
   app-link files. Apple paths default to `/apps/{slug}/*`.
+- Optional, for a fuller landing page: `theme` (the app's own colours for
+  light and dark, as `#rrggbb` for the shared sheet's custom properties),
+  `icon`, `hero` and `screenshots` (image files kept in
+  `content/apps/{slug}/`, one per language, served from
+  `/apps/_assets/{slug}/`), `sections` (`steps`, `cards` or `list`),
+  `featuresHeading` and `plans`. A page with `sections` uses the wide layout
+  and shows the support FAQ. The build fails on a missing image file.
 - The privacy page adds the publisher, rights and contact sections from
   [content/publisher.json](content/publisher.json); the app supplies only what
   it does with data.
