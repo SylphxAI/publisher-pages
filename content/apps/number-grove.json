@@ -1,7 +1,13 @@
 {
 	"slug": "number-grove",
-	"name": { "en": "Number Grove", "zh-Hant": "數字花園" },
-	"category": { "en": "Education, ages 3 to 7", "zh-Hant": "教育・三至七歲" },
+	"name": {
+		"en": "Number Grove",
+		"zh-Hant": "數字花園"
+	},
+	"category": {
+		"en": "Education, ages 3 to 7",
+		"zh-Hant": "教育・三至七歲"
+	},
 	"tagline": {
 		"en": "Early number sense in a calm garden, in English and Traditional Chinese.",
 		"zh-Hant": "在寧靜的花園裡建立數感，提供英文及繁體中文。"
@@ -18,31 +24,53 @@
 	],
 	"features": [
 		{
-			"title": { "en": "No ads, ever", "zh-Hant": "永不設廣告" },
+			"title": {
+				"en": "No ads, ever",
+				"zh-Hant": "永不設廣告"
+			},
 			"body": {
 				"en": "There are no ads anywhere in the app, and nothing on the child's screens asks for money.",
 				"zh-Hant": "整個應用程式都沒有廣告，孩子看到的畫面亦不會要求付款。"
 			}
 		},
 		{
-			"title": { "en": "Parents stay in control", "zh-Hant": "由家長掌控" },
+			"title": {
+				"en": "Parents stay in control",
+				"zh-Hant": "由家長掌控"
+			},
 			"body": {
-				"en": "Purchases, resetting progress and other settings sit behind a parent gate.",
-				"zh-Hant": "購買、重設進度及其他設定都在家長關卡之後。"
+				"en": "Purchases, links out, resetting progress and other settings sit behind a parent gate: a question for grown-ups, then your own PIN.",
+				"zh-Hant": "購買、外部連結、重設進度及其他設定都在家長關卡之後：先回答一條給大人的問題，再輸入你自己的密碼。"
 			}
 		},
 		{
-			"title": { "en": "Two languages", "zh-Hant": "雙語" },
+			"title": {
+				"en": "Two languages",
+				"zh-Hant": "雙語"
+			},
 			"body": {
 				"en": "Every lesson, hint and parent screen works in English and in Traditional Chinese.",
 				"zh-Hant": "每一課、每個提示和家長畫面都有英文及繁體中文。"
 			}
 		},
 		{
-			"title": { "en": "Works offline", "zh-Hant": "離線可用" },
+			"title": {
+				"en": "Works offline",
+				"zh-Hant": "離線可用"
+			},
 			"body": {
 				"en": "Progress is saved on the device and the app works without an internet connection.",
 				"zh-Hant": "進度儲存在裝置上，沒有網絡也可以使用。"
+			}
+		},
+		{
+			"title": {
+				"en": "Free to start",
+				"zh-Hant": "免費開始"
+			},
+			"body": {
+				"en": "The first garden area, the Seed Garden, is free: 23 lessons within 1 to 5, the Daily garden and first-level practice. A Garden subscription, monthly or yearly, opens every later area, all practice levels and the camera hunt.",
+				"zh-Hant": "第一個花園區域「種子花園」免費：包括 23 課 1 至 5 的內容、每日花園及第一級練習。花園訂閱（月費或年費）可打開之後所有區域、所有練習級別及相機尋寶。"
 			}
 		}
 	],
@@ -54,17 +82,33 @@
 		"email": "contact@sylphx.com",
 		"faq": [
 			{
-				"q": { "en": "Is Number Grove available yet?", "zh-Hant": "數字花園推出了嗎？" },
+				"q": {
+					"en": "Is Number Grove available yet?",
+					"zh-Hant": "數字花園推出了嗎？"
+				},
 				"a": {
 					"en": "Not yet. It will be released on the App Store and Google Play, and this page will link to both when it is.",
 					"zh-Hant": "尚未推出。應用程式將於 App Store 及 Google Play 上架，屆時本頁會提供連結。"
 				}
 			},
 			{
-				"q": { "en": "How do I reach the parent area?", "zh-Hant": "怎樣進入家長區？" },
+				"q": {
+					"en": "How do I reach the parent area?",
+					"zh-Hant": "怎樣進入家長區？"
+				},
 				"a": {
-					"en": "Open the parent area from the garden screen and enter your parent PIN. Children cannot make purchases or reset progress without it.",
-					"zh-Hant": "在花園畫面打開家長區，然後輸入家長密碼。沒有密碼，孩子無法購買或重設進度。"
+					"en": "Open the parent area from the garden screen. The first time, answer a multiplication question for grown-ups and choose a parent PIN. After that, enter your PIN. Children cannot buy, follow links or reset progress without it. If you forget the PIN, choose Forgot PIN?, answer a new question and choose a new PIN; progress is kept.",
+					"zh-Hant": "在花園畫面打開家長區。第一次使用時，先回答一條給大人的乘數問題，再設定家長密碼；之後只需輸入密碼。沒有密碼，孩子無法購買、打開外部連結或重設進度。如果忘記密碼，可選擇「忘記 PIN？」，回答新問題後重新設定，進度會保留。"
+				}
+			},
+			{
+				"q": {
+					"en": "What is free and what does the subscription add?",
+					"zh-Hant": "哪些內容免費？訂閱會增加甚麼？"
+				},
+				"a": {
+					"en": "The Seed Garden is free: 23 Adventure lessons within 1 to 5, the Daily garden and first-level practice. The Garden subscription opens every later area, all practice levels and the camera hunt. It renews monthly or yearly until you cancel it in your App Store or Google Play account. If it ends, your child keeps every star, badge and garden stage.",
+					"zh-Hant": "「種子花園」免費：包括 23 課 1 至 5 的冒險課程、每日花園及第一級練習。花園訂閱可打開之後所有區域、所有練習級別及相機尋寶，會按月或按年自動續期，直至你在 App Store 或 Google Play 帳戶中取消。訂閱結束後，孩子已得到的星星、徽章和花園成長都會保留。"
 				}
 			},
 			{
@@ -79,12 +123,12 @@
 			},
 			{
 				"q": {
-					"en": "How do I restore a purchase or ask for a refund?",
-					"zh-Hant": "怎樣恢復購買或申請退款？"
+					"en": "How do I cancel, restore a subscription or ask for a refund?",
+					"zh-Hant": "怎樣取消、恢復訂閱或申請退款？"
 				},
 				"a": {
-					"en": "Use Restore purchases in the parent area. Refunds are handled by the store you bought from (Apple or Google) under its refund policy. If anything goes wrong, email us.",
-					"zh-Hant": "在家長區選擇「恢復購買」。退款由你購買時使用的商店（Apple 或 Google）按其退款政策處理。如遇任何問題，請電郵聯絡我們。"
+					"en": "Cancel in your App Store or Google Play account settings. On a new device, use Restore purchases in the parent area. Refunds are handled by the store you bought from (Apple or Google) under its refund policy. If anything goes wrong, email us.",
+					"zh-Hant": "可在 App Store 或 Google Play 帳戶設定中取消。換了新裝置，可在家長區選擇「恢復購買」。退款由你購買時使用的商店（Apple 或 Google）按其退款政策處理。如遇任何問題，請電郵聯絡我們。"
 				}
 			}
 		]
@@ -97,7 +141,10 @@
 		},
 		"sections": [
 			{
-				"heading": { "en": "What stays on the device", "zh-Hant": "只留在裝置上的資料" },
+				"heading": {
+					"en": "What stays on the device",
+					"zh-Hant": "只留在裝置上的資料"
+				},
 				"body": [
 					{
 						"en": "Learning progress, garden growth, language choice and settings are stored on the device. The parent PIN is stored only as a salted hash, never as the PIN itself.",
@@ -106,7 +153,10 @@
 				]
 			},
 			{
-				"heading": { "en": "Camera", "zh-Hant": "相機" },
+				"heading": {
+					"en": "Camera",
+					"zh-Hant": "相機"
+				},
 				"body": [
 					{
 						"en": "The optional camera counting game asks for camera permission first. Images are processed on the device to count objects. They are not stored or sent to us or anyone else.",
@@ -115,16 +165,22 @@
 				]
 			},
 			{
-				"heading": { "en": "Purchases", "zh-Hant": "購買" },
+				"heading": {
+					"en": "Purchases",
+					"zh-Hant": "購買"
+				},
 				"body": [
 					{
-						"en": "Purchases are made by a parent through the App Store or Google Play, which process the payment under their own privacy policies. We receive the store's purchase record to confirm what was bought and to unlock it. It contains no information about the child.",
-						"zh-Hant": "購買由家長透過 App Store 或 Google Play 進行，付款由這些商店按其私隱政策處理。我們會收到商店的購買紀錄，用來確認購買內容並解鎖，當中不包含任何關於孩子的資料。"
+						"en": "A parent buys the Garden subscription through the App Store or Google Play, which process the payment under their own privacy policies. We receive the store's purchase record to confirm the subscription and keep it for as long as the subscription lasts. It contains no information about the child.",
+						"zh-Hant": "家長透過 App Store 或 Google Play 購買花園訂閱，付款由這些商店按其私隱政策處理。我們會收到商店的購買紀錄，用來確認訂閱，並在訂閱期間保留。當中不包含任何關於孩子的資料。"
 					}
 				]
 			},
 			{
-				"heading": { "en": "Children", "zh-Hant": "兒童" },
+				"heading": {
+					"en": "Children",
+					"zh-Hant": "兒童"
+				},
 				"body": [
 					{
 						"en": "We do not knowingly collect personal information from children. There is no chat, no sharing, no account for the child and no advertising identifier.",
@@ -133,11 +189,26 @@
 				]
 			},
 			{
-				"heading": { "en": "Deleting your data", "zh-Hant": "刪除資料" },
+				"heading": {
+					"en": "Deleting your data",
+					"zh-Hant": "刪除資料"
+				},
 				"body": [
 					{
 						"en": "Resetting progress in the parent area, or deleting the app, removes everything stored on the device. For a purchase record we hold, email us and we will delete it unless the law requires us to keep it.",
 						"zh-Hant": "在家長區重設進度，或刪除應用程式，即會移除裝置上儲存的所有資料。如需刪除我們持有的購買紀錄，請電郵聯絡我們；除非法律要求保留，我們會將其刪除。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Who we are",
+					"zh-Hant": "我們是誰"
+				},
+				"body": [
+					{
+						"en": "Number Grove is published by Sylphx Limited, a company registered in England and Wales (company 16438428), 128 City Road, London, EC1V 2NX, United Kingdom. Contact: contact@sylphx.com. In the UK you may complain to the Information Commissioner's Office.",
+						"zh-Hant": "數字花園由 Sylphx Limited 發行。該公司於英格蘭及威爾斯註冊（公司編號 16438428），地址為 128 City Road, London, EC1V 2NX, United Kingdom。聯絡電郵：contact@sylphx.com。在英國，你可向資訊專員辦公室（ICO）投訴。"
 					}
 				]
 			}
@@ -147,6 +218,6 @@
 	"source": {
 		"repo": "SylphxAI/number-grove-keel",
 		"path": "publisher/app.json",
-		"note": "Seed written by the publisher-pages repository on 2026-09-26 from the app's docs/vision.md and docs/PRIVACY.md. The app's repository takes this over as publisher/app.json."
+		"note": "Owned by the app repository; copied into SylphxAI/publisher-pages content/apps/number-grove.json by PR whenever it changes."
 	}
 }
