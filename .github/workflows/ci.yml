@@ -11,10 +11,12 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: sylphx-linux-standard
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Every job runs on our own runners
+        run: bash .github/scripts/check-ci-runner-profile.sh
       - uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2.0.2
         with:
           bun-version: 1.4.0
@@ -25,7 +27,7 @@ jobs:
   # Checks the lines a pull request or merge group adds.
   zh-hant:
     if: github.event_name != 'push'
-    runs-on: ubuntu-latest
+    runs-on: sylphx-linux-standard
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -37,7 +39,7 @@ jobs:
   ci-ok:
     if: always()
     needs: [check, zh-hant]
-    runs-on: ubuntu-latest
+    runs-on: sylphx-linux-standard
     timeout-minutes: 2
     steps:
       - run: test "${{ needs.check.result }}" = success && case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
