@@ -11,7 +11,12 @@ import {
 	type Locale,
 	type OpenSource,
 	type OpenSourceProject,
+	PALETTE_KEYS,
+	type Palette,
+	type PaletteKey,
+	type Picture,
 	type Publisher,
+	type Section,
 	type Text,
 } from './content'
 import { UI } from './strings'
@@ -56,9 +61,49 @@ interface PageInput {
 	publisher: Publisher
 	/** Mark a page that must not be indexed. */
 	noindex?: boolean
+	/** The app's own colours, if it sets them. */
+	theme?: AppContent['theme']
+	/** A wider content column, for landing pages with sections. */
+	wide?: boolean
+	/** Social preview image (absolute path under a mounted prefix). */
+	image?: string
 }
 
-export function page({ locale, path, title, description, body, publisher, noindex }: PageInput): string {
+const CSS_VAR: Record<PaletteKey, string> = {
+	bg: '--bg',
+	fg: '--fg',
+	muted: '--muted',
+	line: '--line',
+	card: '--card',
+	accent: '--accent',
+	accentFg: '--accent-fg',
+	tag: '--tag',
+	highlight: '--highlight',
+}
+
+/** The app's palette as custom properties over the shared sheet's defaults. */
+export function themeStyle(theme: NonNullable<AppContent['theme']>): string {
+	const vars = (p: Palette) => PALETTE_KEYS.map((k) => `${CSS_VAR[k]}:${p[k]}`).join(';')
+	return `<style>:root{${vars(theme.light)}}@media (prefers-color-scheme: dark){:root{${vars(theme.dark)}}}</style>`
+}
+
+/** Served URL of an app asset file. */
+export function assetUrl(slug: string, file: string): string {
+	return `${ASSET_PREFIX}/${slug}/${file}`
+}
+
+export function page({
+	locale,
+	path,
+	title,
+	description,
+	body,
+	publisher,
+	noindex,
+	theme,
+	wide,
+	image,
+}: PageInput): string {
 	const t = (s: Text) => s[locale]
 	const canonical = `${publisher.site}${localized(locale, path)}`
 	const alternates = LOCALES.map(
@@ -85,8 +130,8 @@ export function page({ locale, path, title, description, body, publisher, noinde
 		<meta property="og:description" content="${escapeHtml(description)}">
 		<meta property="og:url" content="${canonical}">
 		<meta property="og:type" content="website">
-		<meta name="color-scheme" content="light dark">
-		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">
+		${image ? `<meta property="og:image" content="${publisher.site}${image}">\n\t\t` : ''}<meta name="color-scheme" content="light dark">
+		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">${theme ? `\n\t\t${themeStyle(theme)}` : ''}
 	</head>
 	<body>
 		<a class="skip" href="#main">${t(UI.skip)}</a>
@@ -94,7 +139,7 @@ export function page({ locale, path, title, description, body, publisher, noinde
 			<a class="brand" href="/">Sylphx</a>
 			<nav aria-label="${t(UI.language)}">${switcher}</nav>
 		</header>
-		<main id="main">
+		<main id="main"${wide ? ' class="wide"' : ''}>
 ${body}
 		</main>
 		<footer class="foot">
@@ -155,25 +200,111 @@ function appNav(app: AppContent, locale: Locale): string {
 			</nav>`
 }
 
+function img(slug: string, p: Picture, locale: Locale, eager = false): string {
+	const loading = eager ? 'fetchpriority="high"' : 'loading="lazy"'
+	return `<img src="${assetUrl(slug, p.src[locale])}" alt="${escapeHtml(p.alt[locale])}" width="${p.width}" height="${p.height}" ${loading} decoding="async">`
+}
+
+function section(s: Section, locale: Locale): string {
+	const t = (x: Text) => escapeHtml(x[locale])
+	const tag = s.style === 'steps' ? 'ol' : 'ul'
+	const items = s.items.map((i) => `\t\t\t\t\t<li><h3>${t(i.title)}</h3><p>${t(i.body)}</p></li>`).join('\n')
+	return `\t\t\t<section class="block">
+				<h2>${t(s.heading)}</h2>
+				${s.intro ? `<p class="lede">${t(s.intro)}</p>` : ''}
+				<${tag} class="${s.style}">
+${items}
+				</${tag}>
+			</section>`
+}
+
 export function appLanding(app: AppContent, locale: Locale, publisher: Publisher): string {
 	const t = (s: Text) => s[locale]
+	const e = (s: Text) => escapeHtml(s[locale])
+	const rich = app.sections !== undefined
 	const stores = app.availability?.stores ?? []
 	const get =
 		stores.length > 0
 			? `<p class="stores">${stores.map((s) => `<a class="button" href="${escapeHtml(s.url)}">${storeLabel(s.kind, locale)}</a>`).join(' ')}</p>`
 			: `<p class="note"><span class="tag">${t(UI.comingSoon)}</span> ${t(UI.notYetInStores)}</p>`
-	const features = (app.features ?? [])
-		.map((f) => `\t\t\t\t<li><h2>${escapeHtml(t(f.title))}</h2><p>${escapeHtml(t(f.body))}</p></li>`)
+	const itemHeading = app.featuresHeading ? 'h3' : 'h2'
+	const featureItems = (app.features ?? [])
+		.map((f) => `\t\t\t\t<li><${itemHeading}>${e(f.title)}</${itemHeading}><p>${e(f.body)}</p></li>`)
 		.join('\n')
-	const body = `${appNav(app, locale)}
-			<p class="eyebrow">${escapeHtml(t(app.category))}</p>
-			<h1>${escapeHtml(t(app.name))}</h1>
-			<p class="lede">${escapeHtml(t(app.tagline))}</p>
-			${get}
-			${(app.description ?? []).map((p) => `<p>${escapeHtml(t(p))}</p>`).join('\n\t\t\t')}
-			<ul class="features">
-${features}
+	const features = app.featuresHeading
+		? `\t\t\t<section class="block">
+				<h2>${e(app.featuresHeading)}</h2>
+				<ul class="features">
+${featureItems}
+				</ul>
+			</section>`
+		: `\t\t\t<ul class="features">
+${featureItems}
 			</ul>`
+	const icon = app.icon
+		? `<img class="app-icon" src="${assetUrl(app.slug, app.icon)}" alt="" width="88" height="88">`
+		: ''
+	const heroText = `${icon}
+				<p class="eyebrow">${e(app.category)}</p>
+				<h1>${e(app.name)}</h1>
+				<p class="lede">${e(app.tagline)}</p>
+				${get}`
+	const hero = app.hero
+		? `\t\t\t<section class="hero">
+				<div>
+				${heroText}
+				</div>
+				<figure class="shot">${img(app.slug, app.hero, locale, true)}</figure>
+			</section>`
+		: `\t\t\t${heroText}`
+	const description = (app.description ?? []).map((p) => `<p>${e(p)}</p>`).join('\n\t\t\t')
+	const plans = app.plans
+		? `\t\t\t<section class="block">
+				<h2>${e(app.plans.heading)}</h2>
+				${app.plans.intro ? `<p class="lede">${e(app.plans.intro)}</p>` : ''}
+				<ul class="plans">
+${app.plans.tiers
+	.map(
+		(tier) => `\t\t\t\t\t<li>
+						<h3>${e(tier.name)}</h3>
+						${tier.price ? `<p class="price">${e(tier.price)}</p>` : ''}
+						<ul class="list">${tier.items.map((i) => `<li>${e(i)}</li>`).join('')}</ul>
+					</li>`,
+	)
+	.join('\n')}
+				</ul>
+				${app.plans.note ? `<p class="note">${e(app.plans.note)}</p>` : ''}
+			</section>`
+		: ''
+	const shots = app.screenshots
+		? `\t\t\t<section class="block">
+				<h2>${e(app.screenshots.heading)}</h2>
+				<ul class="gallery">
+${app.screenshots.items.map((p) => `\t\t\t\t\t<li>${img(app.slug, p, locale)}</li>`).join('\n')}
+				</ul>
+			</section>`
+		: ''
+	const base = localized(locale, `/apps/${app.slug}`)
+	const faq =
+		rich && app.support
+			? `\t\t\t<section class="block">
+				<h2>${t(UI.faq)}</h2>
+${app.support.faq.map((f) => `\t\t\t\t<details><summary>${e(f.q)}</summary><p>${e(f.a)}</p></details>`).join('\n')}
+				<p class="links"><a href="${base}/support">${t(UI.support)}</a> <a href="${base}/privacy">${t(UI.privacy)}</a></p>
+			</section>`
+			: ''
+	const body = [
+		appNav(app, locale),
+		hero,
+		description ? `\t\t\t<div class="intro">\n\t\t\t${description}\n\t\t\t</div>` : '',
+		...(app.sections ?? []).map((s) => section(s, locale)),
+		features,
+		plans,
+		shots,
+		faq,
+	]
+		.filter(Boolean)
+		.join('\n')
 	return page({
 		locale,
 		path: `/apps/${app.slug}`,
@@ -181,6 +312,9 @@ ${features}
 		description: t(app.tagline),
 		body,
 		publisher,
+		theme: app.theme,
+		wide: rich,
+		image: app.hero ? assetUrl(app.slug, app.hero.src[locale]) : undefined,
 	})
 }
 
@@ -222,6 +356,7 @@ ${sections}
 		description: t(privacy.summary),
 		body,
 		publisher,
+		theme: app.theme,
 	})
 }
 
@@ -245,6 +380,7 @@ ${faq}`
 		description: t(UI.supportIntro),
 		body,
 		publisher,
+		theme: app.theme,
 	})
 }
 

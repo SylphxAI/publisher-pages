@@ -66,6 +66,38 @@ describe('served pages', () => {
 	})
 })
 
+describe('app look', () => {
+	const ng = site.apps.find((a) => a.slug === 'number-grove') as AppContent
+
+	test('an app theme sets the shared custom properties for light and dark', () => {
+		const body = files.get('apps/number-grove/index.html') ?? ''
+		expect(body).toContain(`--accent:${ng.theme?.light.accent}`)
+		expect(body).toContain(`@media (prefers-color-scheme: dark){:root{--bg:${ng.theme?.dark.bg}`)
+		expect(files.get('apps/number-grove/privacy/index.html')).toContain('<style>:root{')
+		expect(files.get('apps/index.html')).not.toContain('<style>')
+	})
+
+	test('sections, plans and the FAQ render on a landing page with sections', () => {
+		const body = files.get('apps/zh-hant/number-grove/index.html') ?? ''
+		expect(body).toContain('<main id="main" class="wide">')
+		expect(body).toContain('<ol class="steps">')
+		expect(body).toContain('<ul class="plans">')
+		expect(body).toContain('<details><summary>')
+		expect(body).toContain('src="/apps/_assets/number-grove/icon.svg"')
+	})
+
+	test('rejects a theme colour that is not #rrggbb', () => {
+		const theme = { light: { ...ng.theme?.light, accent: 'green' }, dark: ng.theme?.dark }
+		expect(() => validateApp({ ...ng, theme }, 'content/apps/number-grove.json')).toThrow(/#rrggbb/)
+	})
+
+	test('rejects an asset path that leaves the app folder', () => {
+		expect(() => validateApp({ ...ng, icon: '../x.svg' }, 'content/apps/number-grove.json')).toThrow(
+			/asset file name/,
+		)
+	})
+})
+
 describe('star badges', () => {
 	test('every GitHub project shows a fixed-size, lazy badge from Mark', () => {
 		const body = files.get('open-source/zh-hant/index.html') ?? ''

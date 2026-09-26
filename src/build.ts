@@ -4,10 +4,12 @@
  * Output paths mirror the served URLs. nginx serves `dist/` as-is.
  */
 
-import { mkdir, readdir, rm, writeFile } from 'node:fs/promises'
+import { access, copyFile, mkdir, readdir, rm, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import {
 	type AppContent,
+	appAssets,
+	ContentError,
 	LOCALES,
 	type OpenSource,
 	type Publisher,
@@ -37,6 +39,8 @@ export interface Site {
 	publisher: Publisher
 	apps: AppContent[]
 	openSource: OpenSource
+	/** Where each app's asset files live: `content/apps/{slug}/`. */
+	contentDir: string
 }
 
 export async function loadSite(contentDir = join(ROOT, 'content')): Promise<Site> {
@@ -49,9 +53,15 @@ export async function loadSite(contentDir = join(ROOT, 'content')): Promise<Site
 	const files = (await readdir(appDir)).filter((f) => f.endsWith('.json')).sort()
 	const apps: AppContent[] = []
 	for (const file of files) {
-		apps.push(validateApp(await readJson(join(appDir, file)), `content/apps/${file}`))
+		const app = validateApp(await readJson(join(appDir, file)), `content/apps/${file}`)
+		for (const asset of appAssets(app)) {
+			await access(join(appDir, app.slug, asset)).catch(() => {
+				throw new ContentError(`content/apps/${file}: missing asset content/apps/${app.slug}/${asset}`)
+			})
+		}
+		apps.push(app)
 	}
-	return { publisher, apps, openSource }
+	return { publisher, apps, openSource, contentDir }
 }
 
 /** Every file of the built site, keyed by its path under `dist/`. */
@@ -76,7 +86,8 @@ export function renderSite({ publisher, apps, openSource }: Site): Map<string, s
 }
 
 export async function build(outDir = join(ROOT, 'dist')): Promise<Map<string, string>> {
-	const files = renderSite(await loadSite())
+	const site = await loadSite()
+	const files = renderSite(site)
 	await rm(outDir, { recursive: true, force: true })
 	for (const [path, body] of files) {
 		const target = join(outDir, path)
@@ -86,6 +97,13 @@ export async function build(outDir = join(ROOT, 'dist')): Promise<Map<string, st
 	const css = join(outDir, 'apps/_assets/site.css')
 	await mkdir(dirname(css), { recursive: true })
 	await writeFile(css, await Bun.file(join(ROOT, 'src/site.css')).text())
+	for (const app of site.apps) {
+		for (const asset of appAssets(app)) {
+			const target = join(outDir, 'apps/_assets', app.slug, asset)
+			await mkdir(dirname(target), { recursive: true })
+			await copyFile(join(site.contentDir, 'apps', app.slug, asset), target)
+		}
+	}
 	return files
 }
 
