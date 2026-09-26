@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'bun:test'
 import { join } from 'node:path'
 import { loadSite, renderSite } from '../src/build'
-import { type AppContent, ContentError, validateApp } from '../src/content'
-import { appleAppSiteAssociation, assetLinks } from '../src/render'
+import { type AppContent, ContentError, type OpenSourceProject, validateApp } from '../src/content'
+import { appleAppSiteAssociation, assetLinks, starsBadge } from '../src/render'
 
 const site = await loadSite()
 const files = renderSite(site)
@@ -63,6 +63,24 @@ describe('served pages', () => {
 		for (const [path, body] of files) {
 			if (path.endsWith('.html')) expect(body).not.toContain('<script')
 		}
+	})
+})
+
+describe('star badges', () => {
+	test('every GitHub project shows a fixed-size, lazy badge from Mark', () => {
+		const body = files.get('open-source/zh-hant/index.html') ?? ''
+		for (const p of site.openSource.projects) {
+			const name = p.repo.replace('https://github.com/', '')
+			expect(body).toContain(
+				`<img class="badge" src="https://mark.sylphx.com/github/stars/${name}" alt="GitHub 星數" width="110" height="20" loading="lazy"`,
+			)
+		}
+	})
+
+	test('a project can opt out, and a non-GitHub repository has none', () => {
+		const p = site.openSource.projects[0] as OpenSourceProject
+		expect(starsBadge({ ...p, stars: false }, 'en')).toBe('')
+		expect(starsBadge({ ...p, repo: 'https://example.com/x/y' }, 'en')).toBe('')
 	})
 })
 

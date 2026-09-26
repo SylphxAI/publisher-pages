@@ -188,3 +188,10 @@ code {
 	font-size: 1.05rem;
 	margin: 16px 0 4px;
 }
+
+.badge {
+	align-self: center;
+	margin-left: -8px;
+	object-fit: contain;
+	object-position: left center;
+}

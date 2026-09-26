@@ -5,7 +5,15 @@
  * behind the path mount without any platform route of their own.
  */
 
-import { type AppContent, LOCALES, type Locale, type OpenSource, type Publisher, type Text } from './content'
+import {
+	type AppContent,
+	LOCALES,
+	type Locale,
+	type OpenSource,
+	type OpenSourceProject,
+	type Publisher,
+	type Text,
+} from './content'
 import { UI } from './strings'
 
 export const ASSET_PREFIX = '/apps/_assets'
@@ -240,12 +248,26 @@ ${faq}`
 	})
 }
 
+const GITHUB_REPO = /^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)\/?$/
+
+/**
+ * The repository's star count as a badge from Mark (mark.sylphx.com), loaded
+ * by the browser: no GitHub API call at build time. Fixed box, so a count of
+ * any width never shifts the layout.
+ */
+export function starsBadge(project: OpenSourceProject, locale: Locale): string {
+	const match = project.stars === false ? null : GITHUB_REPO.exec(project.repo)
+	if (!match) return ''
+	const src = `https://mark.sylphx.com/github/stars/${match[1]}/${match[2]}`
+	return `<img class="badge" src="${escapeHtml(src)}" alt="${UI.githubStars[locale]}" width="110" height="20" loading="lazy" decoding="async">`
+}
+
 export function openSourcePage(os: OpenSource, locale: Locale, publisher: Publisher): string {
 	const t = (s: Text) => s[locale]
 	const projects = os.projects
 		.map((p) => {
 			const links = [
-				`<a href="${escapeHtml(p.repo)}">${t(UI.repository)}</a>`,
+				`<a href="${escapeHtml(p.repo)}">${t(UI.repository)}</a>${starsBadge(p, locale)}`,
 				`<a href="${escapeHtml(p.docs)}">${t(UI.documentation)}</a>`,
 				p.package ? `<a href="${escapeHtml(p.package.url)}">${escapeHtml(p.package.label)}</a>` : '',
 			]
