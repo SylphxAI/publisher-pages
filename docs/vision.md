@@ -31,10 +31,13 @@ gets a card that links out instead of duplicate pages.
 
 - The site builds and passes its checks.
 - Deployment and the path mount are pending:
-  - the Sylphx Hosting project for this repository needs creating in the
-    Sylphx organisation;
+  - the Hosting project `sylphx-publisher-pages` is declared in
+    SylphxAI/cloud#9147 and is created after that deploys;
   - mounting it at paths of `sylphx.com` needs domain-level `paths`
-    (SylphxAI/cloud#9128). Until then no page is served on `sylphx.com`.
+    (SylphxAI/cloud#9128). The `[[environments.production.domains]]` block
+    with the four paths is added to `sylphx.toml` only after #9128 is live:
+    before that the platform reads the host as a catch-all next to its own
+    and the release fails. Until then no page is served on `sylphx.com`.
 - `sylphx.com/open-source` is still served by the platform's own page. It is
   replaced by this site's page when the mount is live.
 - Number Grove's content is a seed written here; its repository takes it over.

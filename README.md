@@ -16,13 +16,17 @@ the universal-link and app-link files. Owner decision:
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/support` | Privacy policy and support page |
 | `/open-source` | anymd, repomap, lockdocs, Firestore ODM, and the platform's SDK and CLI |
-| `/zh-hant/…` | The same pages in Traditional Chinese |
+| `/apps/zh-hant/…`, `/open-source/zh-hant` | The same pages in Traditional Chinese |
 | `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
 
-The site is a separate Sylphx Hosting project mounted at those paths of
-`sylphx.com`. The platform repository (`SylphxAI/cloud`) names no product, so
-all product text lives here. Every URL the pages use stays inside the mounted
-paths; the stylesheet is at `/apps/_assets/site.css`.
+The site is a separate Sylphx Hosting project mounted at exactly four paths of
+`sylphx.com`: `/apps`, `/open-source`, `/.well-known/apple-app-site-association`
+and `/.well-known/assetlinks.json`. Everything else on the host, including
+`/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
+platform repository (`SylphxAI/cloud`) names no product, so all product text
+lives here. Every URL the pages use stays inside the mounted paths: language
+twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.
+The app slugs `zh-hant` and `_assets` are reserved.
 
 ## Adding or changing an app
 
