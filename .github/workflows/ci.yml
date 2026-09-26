@@ -22,7 +22,9 @@ jobs:
       - run: bun run check
       - run: bun run build
 
+  # Checks the lines a pull request or merge group adds.
   zh-hant:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -38,4 +40,4 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - run: test "${{ needs.check.result }}" = success && test "${{ needs.zh-hant.result }}" = success
+      - run: test "${{ needs.check.result }}" = success && case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
