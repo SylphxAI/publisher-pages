@@ -22,7 +22,9 @@ jobs:
       - run: bun run check
       - run: bun run build
 
+  # Checks the lines a pull request or merge group adds.
   zh-hant:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -30,3 +32,12 @@ jobs:
         with:
           fetch-depth: 0
       - uses: SylphxAI/.github/.github/actions/zh-hant@e48f73367c3f873a1a6930c844d053ac22b32262
+
+  # The one required check (ruleset sylphx-merge-queue): the merge queue waits on this.
+  ci-ok:
+    if: always()
+    needs: [check, zh-hant]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: test "${{ needs.check.result }}" = success && case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
