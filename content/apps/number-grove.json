@@ -1,0 +1,152 @@
+{
+	"slug": "number-grove",
+	"name": { "en": "Number Grove", "zh-Hant": "數字花園" },
+	"category": { "en": "Education, ages 3 to 7", "zh-Hant": "教育・三至七歲" },
+	"tagline": {
+		"en": "Early number sense in a calm garden, in English and Traditional Chinese.",
+		"zh-Hant": "在寧靜的花園裡建立數感，提供英文及繁體中文。"
+	},
+	"description": [
+		{
+			"en": "Number Grove helps children aged 3 to 7 understand numbers: recognising them, counting, matching, adding, comparing and putting them in order. Each short session leads with one clear next activity, and the garden grows as the child learns.",
+			"zh-Hant": "數字花園幫助三至七歲的孩子理解數字：認數、點數、配對、加法、比較和排序。每節短小的練習都以一個清楚的下一步開始，孩子學得越多，花園就長得越茂盛。"
+		},
+		{
+			"en": "A wrong answer keeps the child on the same idea and shows how to fix it, without shame or timers. Missing a day never takes away progress.",
+			"zh-Hant": "答錯時，孩子會留在同一個概念上，並清楚看到怎樣改正，沒有責備，也沒有倒數計時。哪怕幾天沒有玩，已有的進度也不會消失。"
+		}
+	],
+	"features": [
+		{
+			"title": { "en": "No ads, ever", "zh-Hant": "永不設廣告" },
+			"body": {
+				"en": "There are no ads anywhere in the app, and nothing on the child's screens asks for money.",
+				"zh-Hant": "整個應用程式都沒有廣告，孩子看到的畫面亦不會要求付款。"
+			}
+		},
+		{
+			"title": { "en": "Parents stay in control", "zh-Hant": "由家長掌控" },
+			"body": {
+				"en": "Purchases, resetting progress and other settings sit behind a parent gate.",
+				"zh-Hant": "購買、重設進度及其他設定都在家長關卡之後。"
+			}
+		},
+		{
+			"title": { "en": "Two languages", "zh-Hant": "雙語" },
+			"body": {
+				"en": "Every lesson, hint and parent screen works in English and in Traditional Chinese.",
+				"zh-Hant": "每一課、每個提示和家長畫面都有英文及繁體中文。"
+			}
+		},
+		{
+			"title": { "en": "Works offline", "zh-Hant": "離線可用" },
+			"body": {
+				"en": "Progress is saved on the device and the app works without an internet connection.",
+				"zh-Hant": "進度儲存在裝置上，沒有網絡也可以使用。"
+			}
+		}
+	],
+	"availability": {
+		"status": "coming-soon",
+		"stores": []
+	},
+	"support": {
+		"email": "contact@sylphx.com",
+		"faq": [
+			{
+				"q": { "en": "Is Number Grove available yet?", "zh-Hant": "數字花園推出了嗎？" },
+				"a": {
+					"en": "Not yet. It will be released on the App Store and Google Play, and this page will link to both when it is.",
+					"zh-Hant": "尚未推出。應用程式將於 App Store 及 Google Play 上架，屆時本頁會提供連結。"
+				}
+			},
+			{
+				"q": { "en": "How do I reach the parent area?", "zh-Hant": "怎樣進入家長區？" },
+				"a": {
+					"en": "Open the parent area from the garden screen and enter your parent PIN. Children cannot make purchases or reset progress without it.",
+					"zh-Hant": "在花園畫面打開家長區，然後輸入家長密碼。沒有密碼，孩子無法購買或重設進度。"
+				}
+			},
+			{
+				"q": {
+					"en": "Will my child lose progress if they skip a few days?",
+					"zh-Hant": "幾天沒玩會失去進度嗎？"
+				},
+				"a": {
+					"en": "No. Progress is kept on the device and is never taken away for missed days.",
+					"zh-Hant": "不會。進度保存在裝置上，不會因為沒有玩而被扣減。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I restore a purchase or ask for a refund?",
+					"zh-Hant": "怎樣恢復購買或申請退款？"
+				},
+				"a": {
+					"en": "Use Restore purchases in the parent area. Refunds are handled by the store you bought from (Apple or Google) under its refund policy. If anything goes wrong, email us.",
+					"zh-Hant": "在家長區選擇「恢復購買」。退款由你購買時使用的商店（Apple 或 Google）按其退款政策處理。如遇任何問題，請電郵聯絡我們。"
+				}
+			}
+		]
+	},
+	"privacy": {
+		"updated": "2026-09-26",
+		"summary": {
+			"en": "Number Grove is made for young children. It has no ads, no third-party analytics and no tracking, and it does not ask a child for any personal information.",
+			"zh-Hant": "數字花園為幼童而設。應用程式沒有廣告、沒有第三方分析工具，亦不作任何追蹤，更不會要求孩子提供任何個人資料。"
+		},
+		"sections": [
+			{
+				"heading": { "en": "What stays on the device", "zh-Hant": "只留在裝置上的資料" },
+				"body": [
+					{
+						"en": "Learning progress, garden growth, language choice and settings are stored on the device. The parent PIN is stored only as a salted hash, never as the PIN itself.",
+						"zh-Hant": "學習進度、花園成長、語言選擇及設定都儲存在裝置上。家長密碼只以加鹽雜湊值儲存，從不儲存密碼本身。"
+					}
+				]
+			},
+			{
+				"heading": { "en": "Camera", "zh-Hant": "相機" },
+				"body": [
+					{
+						"en": "The optional camera counting game asks for camera permission first. Images are processed on the device to count objects. They are not stored or sent to us or anyone else.",
+						"zh-Hant": "可選的相機點數遊戲會先要求相機權限。影像只在裝置上處理以點算物件，不會被儲存，也不會傳送給我們或任何其他人。"
+					}
+				]
+			},
+			{
+				"heading": { "en": "Purchases", "zh-Hant": "購買" },
+				"body": [
+					{
+						"en": "Purchases are made by a parent through the App Store or Google Play, which process the payment under their own privacy policies. We receive the store's purchase record to confirm what was bought and to unlock it. It contains no information about the child.",
+						"zh-Hant": "購買由家長透過 App Store 或 Google Play 進行，付款由這些商店按其私隱政策處理。我們會收到商店的購買紀錄，用來確認購買內容並解鎖，當中不包含任何關於孩子的資料。"
+					}
+				]
+			},
+			{
+				"heading": { "en": "Children", "zh-Hant": "兒童" },
+				"body": [
+					{
+						"en": "We do not knowingly collect personal information from children. There is no chat, no sharing, no account for the child and no advertising identifier.",
+						"zh-Hant": "我們不會蓄意收集兒童的個人資料。應用程式沒有聊天、分享功能，孩子毋須開設帳戶，亦不使用廣告識別碼。"
+					}
+				]
+			},
+			{
+				"heading": { "en": "Deleting your data", "zh-Hant": "刪除資料" },
+				"body": [
+					{
+						"en": "Resetting progress in the parent area, or deleting the app, removes everything stored on the device. For a purchase record we hold, email us and we will delete it unless the law requires us to keep it.",
+						"zh-Hant": "在家長區重設進度，或刪除應用程式，即會移除裝置上儲存的所有資料。如需刪除我們持有的購買紀錄，請電郵聯絡我們；除非法律要求保留，我們會將其刪除。"
+					}
+				]
+			}
+		]
+	},
+	"deepLinks": {},
+	"source": {
+		"repo": "SylphxAI/number-grove-keel",
+		"path": "publisher/app.json",
+		"note": "Seed written by the publisher-pages repository on 2026-09-26 from the app's docs/vision.md and docs/PRIVACY.md. The app's repository takes this over as publisher/app.json."
+	}
+}

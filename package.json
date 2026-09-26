@@ -1,0 +1,16 @@
+{
+	"name": "publisher-pages",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "bun src/build.ts",
+		"test": "bun test",
+		"check": "biome check . && tsc --noEmit && bun test",
+		"serve": "bun run build && docker build -t publisher-pages . && docker run --rm -p 8080:8080 publisher-pages"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.4",
+		"@types/bun": "1.2.22",
+		"typescript": "5.9.2"
+	}
+}
