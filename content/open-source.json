@@ -38,6 +38,15 @@
 			"mcp": "io.github.SylphxAI/lockdocs"
 		},
 		{
+			"name": "Mark",
+			"summary": {
+				"en": "Beautiful README images from one URL: banners, shields-compatible badges, GitHub stats cards, tech icons and typing text. Free, no account.",
+				"zh-Hant": "一條網址就生成好看的 README 圖片：橫幅、與 shields 相容的徽章、GitHub 數據卡、技術圖示及打字效果。免費，毋須帳戶。"
+			},
+			"repo": "https://github.com/SylphxAI/readme-mark",
+			"docs": "https://mark.sylphx.com"
+		},
+		{
 			"name": "Firestore ODM",
 			"summary": {
 				"en": "Type-safe Firestore ODM for Flutter and Dart, the maintained successor to cloud_firestore_odm.",
