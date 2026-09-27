@@ -29,18 +29,24 @@ gets a card that links out instead of duplicate pages.
 
 ## State
 
-2026-09-26:
+2026-09-27:
 
-- The site builds and passes its checks.
-- Deployment and the path mount are pending:
+- The site builds and passes its checks in CI on our own runners. Pages ship
+  no JavaScript and pass the strict CSP check.
+- Served: nothing on `sylphx.com` yet (`/apps` returns 404). Deployment and
+  the path mount are pending:
   - the Hosting project `sylphx-publisher-pages` is declared in
-    SylphxAI/cloud#9147 and is created after that deploys;
+    SylphxAI/cloud#9147 (open) and is created after that deploys;
   - mounting it at paths of `sylphx.com` needs domain-level `paths`
-    (SylphxAI/cloud#9128). The `[[environments.production.domains]]` block
-    with the four paths is added to `sylphx.toml` only after #9128 is live:
-    before that the platform reads the host as a catch-all next to its own
-    and the release fails. Until then no page is served on `sylphx.com`.
+    (SylphxAI/cloud#9128, open). The `[[environments.production.domains]]`
+    block with the four paths waits as publisher-pages#3 (draft) and is
+    queued only after #9128 is live: before that the platform reads the host
+    as a catch-all next to its own and the release fails.
 - `sylphx.com/open-source` is still served by the platform's own page. It is
-  replaced by this site's page when the mount is live.
-- Number Grove's content is a seed written here; its repository takes it over.
+  replaced by this site's page when the mount is live (SylphxAI/cloud#9146
+  moves the footer links then).
+- Apps listed: Number Grove. Its content is owned by number-grove-keel as
+  `publisher/app.json` and copied here by pull request. `deepLinks` wait for
+  the Sylphx store accounts.
 - Tachyn is not listed until `tachyn.ai` is live; it will be an external card.
+- Site move to Keel (owner#739, stage 1) starts after the mount is live.

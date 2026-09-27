@@ -7,7 +7,7 @@ one landing, privacy and support page per app, the open-source tools list, and
 the universal-link and app-link files. Owner decision:
 [SylphxAI/owner company/decisions.md, 2026-09-26 "Publisher pages, and when a product gets a domain"](https://github.com/SylphxAI/owner/blob/main/company/decisions.md).
 
-- Live: <https://sylphx.com/apps> and <https://sylphx.com/open-source>, once the path mount below is served (see [docs/vision.md](docs/vision.md#state)).
+- Not served yet: <https://sylphx.com/apps> returns 404 and `/open-source` is still the platform's own page until the path mount below is live (see [docs/vision.md](docs/vision.md#state)).
 - Vision: [docs/vision.md](docs/vision.md)
 
 ## What it serves
@@ -17,7 +17,7 @@ the universal-link and app-link files. Owner decision:
 | `/apps` | Index, "Built on Sylphx" |
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/support` | Privacy policy and support page |
-| `/open-source` | anymd, repomap, lockdocs, Firestore ODM, and the platform's SDK and CLI |
+| `/open-source` | anymd, repomap, lockdocs, Mark, Firestore ODM, and the platform's SDK and CLI |
 | `/apps/zh-hant/…`, `/open-source/zh-hant` | The same pages in Traditional Chinese |
 | `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
 
@@ -63,6 +63,9 @@ bun install          # bootstrap
 bun run build        # write dist/
 bun run check        # lint, type check, tests
 ```
+
+CI runs `bun run check` and the build on our own runners (`sylphx-linux-standard`);
+the merge queue requires the single `ci-ok` check.
 
 `Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
 `sylphx.toml` deploys it on Sylphx Hosting.
