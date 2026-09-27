@@ -23,6 +23,7 @@ import {
 	appPrivacy,
 	appSupport,
 	appsIndex,
+	appTerms,
 	assetLinks,
 	localized,
 	notFound,
@@ -77,6 +78,7 @@ export function renderSite({ publisher, apps, openSource }: Site): Map<string, s
 			const base = localized(locale, `/apps/${app.slug}`)
 			html(base, appLanding(app, locale, publisher))
 			html(`${base}/privacy`, appPrivacy(app, locale, publisher))
+			html(`${base}/terms`, appTerms(app, locale, publisher))
 			html(`${base}/support`, appSupport(app, locale, publisher))
 		}
 	}

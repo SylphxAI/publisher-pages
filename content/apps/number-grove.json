@@ -496,7 +496,7 @@
 		]
 	},
 	"privacy": {
-		"updated": "2026-09-26",
+		"updated": "2026-09-27",
 		"summary": {
 			"en": "Number Grove is made for young children. It has no ads, no third-party analytics and no tracking, and it does not ask a child for any personal information.",
 			"zh-Hant": "數字花園為幼童而設。應用程式沒有廣告、沒有第三方分析工具，亦不作任何追蹤，更不會要求孩子提供任何個人資料。"
@@ -533,8 +533,44 @@
 				},
 				"body": [
 					{
-						"en": "A parent buys the Garden subscription through the App Store or Google Play, which process the payment under their own privacy policies. We receive the store's purchase record to confirm the subscription and keep it for as long as the subscription lasts. It contains no information about the child.",
-						"zh-Hant": "家長透過 App Store 或 Google Play 購買花園訂閱，付款由這些商店按其私隱政策處理。我們會收到商店的購買紀錄，用來確認訂閱，並在訂閱期間保留。當中不包含任何關於孩子的資料。"
+						"en": "A parent buys the Garden subscription through the App Store or Google Play. The store takes the payment and handles your payment details under its own privacy policy; we never see them. The store sends us a purchase record (a transaction reference, the product, its dates and its status), which our payment service uses to confirm the subscription. It contains no information about the child.",
+						"zh-Hant": "家長透過 App Store 或 Google Play 購買花園訂閱。付款及你的付款資料由商店按其私隱政策處理，我們永遠看不到。商店會向我們發送購買紀錄（交易編號、產品、日期及狀態），我們的付款服務用它來確認訂閱。當中不包含任何關於孩子的資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Why we use it",
+					"zh-Hant": "我們使用資料的原因"
+				},
+				"body": [
+					{
+						"en": "We use the purchase record to provide the subscription you bought (performance of a contract), to keep tax and accounting records (legal obligation), and to prevent fraud, keep the service secure and establish or defend legal claims (our legitimate interests).",
+						"zh-Hant": "我們使用購買紀錄，以提供你購買的訂閱（履行合約）、保存稅務及會計紀錄（法律責任），以及防止欺詐、保障服務安全和確立或抗辯法律申索（我們的正當利益）。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Who receives it",
+					"zh-Hant": "資料的接收者"
+				},
+				"body": [
+					{
+						"en": "Apple or Google, as the store you bought from, act independently under their own privacy policies. Our payment service runs on servers in the European Economic Area, which UK law recognises as giving adequate protection. We do not sell personal information or share it for advertising.",
+						"zh-Hant": "你購買時使用的商店（Apple 或 Google）按其私隱政策獨立處理資料。我們的付款服務在歐洲經濟區的伺服器上運行，英國法律認可該地區提供足夠保障。我們不會出售個人資料，亦不會為廣告用途分享個人資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "How long we keep it",
+					"zh-Hant": "保存期限"
+				},
+				"body": [
+					{
+						"en": "We keep the purchase record while the subscription runs, and afterwards for as long as tax and accounting law requires or we need it to establish or defend legal claims. Then we delete or anonymise it.",
+						"zh-Hant": "我們在訂閱期間保存購買紀錄；訂閱結束後，按稅務及會計法律要求的期間，或在我們需要確立或抗辯法律申索的期間內繼續保存。其後我們會將其刪除或匿名化。"
 					}
 				]
 			},
@@ -545,8 +581,8 @@
 				},
 				"body": [
 					{
-						"en": "We do not knowingly collect personal information from children. There is no chat, no sharing, no account for the child and no advertising identifier.",
-						"zh-Hant": "我們不會蓄意收集兒童的個人資料。應用程式沒有聊天、分享功能，孩子毋須開設帳戶，亦不使用廣告識別碼。"
+						"en": "Number Grove does not collect personal information from children. There is no chat, no sharing, no account for the child and no advertising identifier. If we learn that we hold personal information about a child, we delete it.",
+						"zh-Hant": "數字花園不會收集兒童的個人資料。應用程式沒有聊天、分享功能，孩子毋須開設帳戶，亦不使用廣告識別碼。如我們得悉持有任何兒童的個人資料，會將其刪除。"
 					}
 				]
 			},
@@ -557,8 +593,8 @@
 				},
 				"body": [
 					{
-						"en": "Resetting progress in the parent area, or deleting the app, removes everything stored on the device. For a purchase record we hold, email us and we will delete it unless the law requires us to keep it.",
-						"zh-Hant": "在家長區重設進度，或刪除應用程式，即會移除裝置上儲存的所有資料。如需刪除我們持有的購買紀錄，請電郵聯絡我們；除非法律要求保留，我們會將其刪除。"
+						"en": "Resetting progress in the parent area, or deleting the app, removes everything stored on the device. You can ask us to delete a purchase record we hold; we delete it unless we need to keep it for a reason the law allows, such as tax records or a legal claim.",
+						"zh-Hant": "在家長區重設進度，或刪除應用程式，即會移除裝置上儲存的所有資料。你可要求我們刪除我們持有的購買紀錄；除非我們基於法律容許的理由（例如稅務紀錄或法律申索）需要保留，否則會將其刪除。"
 					}
 				]
 			}
