@@ -2,7 +2,7 @@ import type { Text } from './content'
 
 /**
  * Terms of use for every app published here, at `/apps/{app}/terms`.
- * Placeholders: {app}, {legal}, {number}, {office}, {email}.
+ * Placeholders: {app}, {legal}, {number}, {email}.
  *
  * Drafted to owner standards/commercial.md "Legal surface": the widest terms
  * the law of England and Wales enforces, with the consumer rights, the
@@ -43,9 +43,9 @@ export const TERMS_SECTIONS: { heading: Text; body: Text[] }[] = [
 		heading: { en: 'About these terms', 'zh-Hant': '關於這些條款' },
 		body: [
 			{
-				en: 'These terms are an agreement between you and {legal} (“we”, “us”), company number {number}, registered office {office}, for the {app} app and its content. By downloading or using {app} you accept them. Only an adult can accept them: if a child uses {app}, the parent or guardian who lets them accepts these terms and is responsible for that use. The privacy policy explains how we handle personal information.',
+				en: 'These terms are an agreement between you and {legal} (“we”, “us”), a company registered in England and Wales with company number {number}, for the {app} app and its content. By downloading or using {app} you accept them. Only an adult can accept them: if a child uses {app}, the parent or guardian who lets them accepts these terms and is responsible for that use. The privacy policy explains how we handle personal information.',
 				'zh-Hant':
-					'這些條款是你與{legal}（「我們」，公司編號{number}，註冊辦事處位於 {office}）之間就{app}應用程式及其內容訂立的協議。下載或使用{app}，即表示你接受這些條款。只有成年人可接受這些條款：如兒童使用{app}，容許其使用的家長或監護人即接受這些條款，並須為該使用負責。私隱政策說明我們如何處理個人資料。',
+					'這些條款是你與{legal}（「我們」，於英格蘭及威爾斯註冊的公司，公司編號{number}）之間就{app}應用程式及其內容訂立的協議。下載或使用{app}，即表示你接受這些條款。只有成年人可接受這些條款：如兒童使用{app}，容許其使用的家長或監護人即接受這些條款，並須為該使用負責。私隱政策說明我們如何處理個人資料。',
 			},
 		],
 	},

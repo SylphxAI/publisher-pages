@@ -38,9 +38,9 @@ export const UI = {
 	lastUpdated: { en: 'Last updated', 'zh-Hant': '最後更新' },
 	whoWeAre: { en: 'Who we are', 'zh-Hant': '我們是誰' },
 	whoWeAreBody: {
-		en: '{app} is published by {legal}, a company registered in {jurisdiction} (company number {number}), registered office {office}. {legal} is the data controller for the app.',
+		en: '{app} is published by {legal}, a company registered in {jurisdiction} (company number {number}). {legal} is the data controller for the app.',
 		'zh-Hant':
-			'{app} 由 {legal} 發佈。{legal} 是在{jurisdiction}註冊的公司（公司編號 {number}），註冊辦事處位於 {office}，並是本應用程式的資料控制者。',
+			'{app} 由 {legal} 發佈。{legal} 是在{jurisdiction}註冊的公司（公司編號 {number}），並是本應用程式的資料控制者。',
 	},
 	yourRights: { en: 'Your rights', 'zh-Hant': '你的權利' },
 	yourRightsBody: {

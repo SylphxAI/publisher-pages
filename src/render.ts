@@ -339,7 +339,6 @@ export function appPrivacy(app: AppContent, locale: Locale, publisher: Publisher
 		legal: escapeHtml(publisher.legalName),
 		jurisdiction: escapeHtml(t(publisher.jurisdiction)),
 		number: escapeHtml(publisher.companyNumber),
-		office: escapeHtml(publisher.registeredOffice),
 	})
 	const email = `<a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a>`
 	const sections = privacy.sections
@@ -380,7 +379,6 @@ export function appTerms(app: AppContent, locale: Locale, publisher: Publisher):
 		app: escapeHtml(t(app.name)),
 		legal: escapeHtml(publisher.legalName),
 		number: escapeHtml(publisher.companyNumber),
-		office: escapeHtml(publisher.registeredOffice),
 		email: `<a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a>`,
 	}
 	const text = (s: Text) => fill(escapeHtml(t(s)), values)
