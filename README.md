@@ -56,8 +56,7 @@ request when it changes.
   [content/publisher.json](content/publisher.json); the app supplies only what
   it does with data.
 - The terms of use are shared by every app: [src/terms.ts](src/terms.ts),
-  drafted to owner `standards/commercial.md` "Legal surface" and pending
-  owner and lawyer review before public launch.
+  drafted to owner `standards/commercial.md` "Legal surface" (owner#779).
 
 ## Commands
 

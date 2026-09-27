@@ -7,7 +7,6 @@ import type { Text } from './content'
  * Drafted to owner standards/commercial.md "Legal surface": the widest terms
  * the law of England and Wales enforces, with the consumer rights, the
  * death, injury and fraud carve-outs, and Apple's minimum EULA terms kept.
- * Pending owner and lawyer review before public launch.
  */
 export const TERMS_UPDATED = '2026-09-27'
 
