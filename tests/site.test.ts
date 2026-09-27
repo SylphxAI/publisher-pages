@@ -58,6 +58,12 @@ describe('served pages', () => {
 		expect(body).toContain('Sylphx Limited')
 		expect(body).toContain('16438428')
 		expect(body).toContain('data controller')
+		// Companies (Trading Disclosures) Regulations 2008 reg 25: name, number,
+		// place of registration and registered office on every page.
+		for (const [path, html] of files) {
+			if (path.endsWith('.html')) expect(html, path).toContain('128 City Road, London EC1V 2NX')
+		}
+		expect(body).toContain('Registered office: 128 City Road, London EC1V 2NX')
 	})
 
 	test('terms keep the mandatory lines and the company-side ones', () => {
@@ -86,7 +92,6 @@ describe('served pages', () => {
 			if (!path.endsWith('.html')) continue
 			expect(body, path).not.toContain('within two working days')
 			expect(body, path).not.toContain('shown in the app before it applies')
-			expect(body, path).not.toContain('City Road') // no street address (owner#781)
 		}
 	})
 

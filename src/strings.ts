@@ -38,9 +38,9 @@ export const UI = {
 	lastUpdated: { en: 'Last updated', 'zh-Hant': '最後更新' },
 	whoWeAre: { en: 'Who we are', 'zh-Hant': '我們是誰' },
 	whoWeAreBody: {
-		en: '{app} is published by {legal}, a company registered in {jurisdiction} (company number {number}). {legal} is the data controller for the app.',
+		en: '{app} is published by {legal}, registered in {jurisdiction}, company no. {number}. Registered office: {office}. {legal} is the data controller for the app.',
 		'zh-Hant':
-			'{app} 由 {legal} 發佈。{legal} 是在{jurisdiction}註冊的公司（公司編號 {number}），並是本應用程式的資料控制者。',
+			'{app} 由 {legal} 發佈。{legal} 於{jurisdiction}註冊，公司編號 {number}。註冊辦事處：{office}。{legal} 是本應用程式的資料控制者。',
 	},
 	yourRights: { en: 'Your rights', 'zh-Hant': '你的權利' },
 	yourRightsBody: {
@@ -71,8 +71,8 @@ export const UI = {
 	mcpRegistry: { en: 'MCP registry', 'zh-Hant': 'MCP 登記名稱' },
 	fromThePlatform: { en: 'From the platform', 'zh-Hant': '平台' },
 	footerLine: {
-		en: '© {year} {legal}. Registered in {jurisdiction}, company number {number}.',
-		'zh-Hant': '© {year} {legal}。於{jurisdiction}註冊，公司編號 {number}。',
+		en: '© {year} {legal}, registered in {jurisdiction}, company no. {number}. Registered office: {office}.',
+		'zh-Hant': '© {year} {legal}，於{jurisdiction}註冊，公司編號 {number}。註冊辦事處：{office}。',
 	},
 	skip: { en: 'Skip to content', 'zh-Hant': '跳至內容' },
 	language: { en: 'Language', 'zh-Hant': '語言' },
