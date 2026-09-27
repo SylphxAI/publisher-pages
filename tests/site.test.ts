@@ -86,6 +86,7 @@ describe('served pages', () => {
 			if (!path.endsWith('.html')) continue
 			expect(body, path).not.toContain('within two working days')
 			expect(body, path).not.toContain('shown in the app before it applies')
+			expect(body, path).not.toContain('City Road') // no street address (owner#781)
 		}
 	})
 
