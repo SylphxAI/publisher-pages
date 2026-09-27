@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   check:
-    runs-on: sylphx-linux-standard
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -27,7 +27,7 @@ jobs:
   # Checks the lines a pull request or merge group adds.
   zh-hant:
     if: github.event_name != 'push'
-    runs-on: sylphx-linux-standard
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -39,7 +39,7 @@ jobs:
   ci-ok:
     if: always()
     needs: [check, zh-hant]
-    runs-on: sylphx-linux-standard
+    runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
       - run: test "${{ needs.check.result }}" = success && case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
