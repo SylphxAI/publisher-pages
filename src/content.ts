@@ -11,6 +11,7 @@ export type Text = Record<Locale, string>
 export interface Publisher {
 	legalName: string
 	companyNumber: string
+	registeredOffice: string
 	jurisdiction: Text
 	contactEmail: string
 	site: string
@@ -315,7 +316,7 @@ export function validateOpenSource(raw: unknown, file: string): OpenSource {
 
 export function validatePublisher(raw: unknown, file: string): Publisher {
 	const p = raw as Publisher
-	for (const key of ['legalName', 'companyNumber'] as const) {
+	for (const key of ['legalName', 'companyNumber', 'registeredOffice'] as const) {
 		if (typeof p[key] !== 'string' || p[key] === '') fail(file, key)
 	}
 	text(p.jurisdiction, `${file} jurisdiction`)
