@@ -26,7 +26,7 @@ describe('served pages', () => {
 	test('every app page exists in both languages', () => {
 		for (const app of site.apps.filter((a) => !a.external)) {
 			for (const prefix of ['apps/', 'apps/zh-hant/']) {
-				for (const page of ['', '/privacy', '/support']) {
+				for (const page of ['', '/privacy', '/terms', '/support']) {
 					expect(files.has(`${prefix}${app.slug}${page}/index.html`)).toBe(true)
 				}
 			}
@@ -58,6 +58,35 @@ describe('served pages', () => {
 		expect(body).toContain('Sylphx Limited')
 		expect(body).toContain('16438428')
 		expect(body).toContain('data controller')
+	})
+
+	test('terms keep the mandatory lines and the company-side ones', () => {
+		const body = files.get('apps/number-grove/terms/index.html') ?? ''
+		for (const line of [
+			'Key terms',
+			'Sylphx Limited',
+			'death or personal injury',
+			'reasonable care and skill',
+			'14-day right to cancel',
+			'fees paid for Number Grove in the 12 months',
+			'within one year',
+			'third-party beneficiaries',
+			'exclusive jurisdiction of the courts of England and Wales',
+		]) {
+			expect(body).toContain(line)
+		}
+		expect(files.get('apps/zh-hant/number-grove/terms/index.html')).toContain('主要條款')
+	})
+
+	test('privacy and support pages carry no promise the law does not require', () => {
+		const privacy = files.get('apps/number-grove/privacy/index.html') ?? ''
+		expect(privacy).toContain('Your right to object')
+		expect(privacy).toContain('Information Commissioner')
+		for (const [path, body] of files) {
+			if (!path.endsWith('.html')) continue
+			expect(body, path).not.toContain('within two working days')
+			expect(body, path).not.toContain('shown in the app before it applies')
+		}
 	})
 
 	test('content text is escaped', () => {

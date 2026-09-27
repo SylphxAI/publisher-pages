@@ -3,7 +3,7 @@
 ## Destination
 
 Every app Sylphx publishes has a public home at `sylphx.com/apps/{app}`: a
-landing page, a privacy policy and a support page, in English and Traditional
+landing page, a privacy policy, terms of use and a support page, in English and Traditional
 Chinese, plus the universal-link and app-link files its store builds need. The
 `/apps` index presents them as "Built on Sylphx", and `/open-source` lists the
 developer tools Sylphx maintains. The pages are linked from the sylphx.com

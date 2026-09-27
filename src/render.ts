@@ -21,6 +21,7 @@ import {
 	type Text,
 } from './content'
 import { UI } from './strings'
+import { KEY_TERMS, TERMS_SECTIONS, TERMS_UPDATED } from './terms'
 
 export const ASSET_PREFIX = '/apps/_assets'
 /** Each language's segment, placed after the mounted prefix: `/apps/zh-hant/…`. */
@@ -206,6 +207,7 @@ function appNav(app: AppContent, locale: Locale): string {
 				<a href="${localized(locale, '/apps')}">${t(UI.allApps)}</a>
 				<a href="${base}">${escapeHtml(t(app.name))}</a>
 				<a href="${base}/privacy">${t(UI.privacy)}</a>
+				<a href="${base}/terms">${t(UI.terms)}</a>
 				<a href="${base}/support">${t(UI.support)}</a>
 			</nav>`
 }
@@ -300,7 +302,7 @@ ${app.screenshots.items.map((p) => `\t\t\t\t\t<li>${img(app.slug, p, locale)}</l
 			? `\t\t\t<section class="block">
 				<h2>${t(UI.faq)}</h2>
 ${app.support.faq.map((f) => `\t\t\t\t<details><summary>${e(f.q)}</summary><p>${e(f.a)}</p></details>`).join('\n')}
-				<p class="links"><a href="${base}/support">${t(UI.support)}</a> <a href="${base}/privacy">${t(UI.privacy)}</a></p>
+				<p class="links"><a href="${base}/support">${t(UI.support)}</a> <a href="${base}/privacy">${t(UI.privacy)}</a> <a href="${base}/terms">${t(UI.terms)}</a></p>
 			</section>`
 			: ''
 	const body = [
@@ -355,6 +357,8 @@ export function appPrivacy(app: AppContent, locale: Locale, publisher: Publisher
 ${sections}
 			<h2>${t(UI.yourRights)}</h2>
 			<p>${t(UI.yourRightsBody)}</p>
+			<h2>${t(UI.rightToObject)}</h2>
+			<p>${t(UI.rightToObjectBody)}</p>
 			<h2>${t(UI.changes)}</h2>
 			<p>${t(UI.changesBody)}</p>
 			<h2>${t(UI.contact)}</h2>
@@ -364,6 +368,41 @@ ${sections}
 		path: `/apps/${app.slug}/privacy`,
 		title: `${t(UI.privacy)} · ${t(app.name)}`,
 		description: t(privacy.summary),
+		body,
+		publisher,
+		themeSheet: themeSheetUrl(app),
+	})
+}
+
+export function appTerms(app: AppContent, locale: Locale, publisher: Publisher): string {
+	const t = (s: Text) => s[locale]
+	const values = {
+		app: escapeHtml(t(app.name)),
+		legal: escapeHtml(publisher.legalName),
+		number: escapeHtml(publisher.companyNumber),
+		office: escapeHtml(publisher.registeredOffice),
+		email: `<a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a>`,
+	}
+	const text = (s: Text) => fill(escapeHtml(t(s)), values)
+	const key = KEY_TERMS.map((k) => `\t\t\t\t<li>${text(k)}</li>`).join('\n')
+	const sections = TERMS_SECTIONS.map(
+		(s, n) =>
+			`\t\t\t<h2>${n + 1}. ${text(s.heading)}</h2>\n${s.body.map((p) => `\t\t\t<p>${text(p)}</p>`).join('\n')}`,
+	).join('\n')
+	const body = `${appNav(app, locale)}
+			<h1>${escapeHtml(t(app.name))}: ${t(UI.terms)}</h1>
+			<p class="note">${t(UI.lastUpdated)}: <time datetime="${TERMS_UPDATED}">${TERMS_UPDATED}</time></p>
+			<h2>${t(UI.keyTerms)}</h2>
+			<p>${t(UI.termsIntro)}</p>
+			<ul>
+${key}
+			</ul>
+${sections}`
+	return page({
+		locale,
+		path: `/apps/${app.slug}/terms`,
+		title: `${t(UI.terms)} · ${t(app.name)}`,
+		description: fill(t(KEY_TERMS[0] as Text), { app: t(app.name) }),
 		body,
 		publisher,
 		themeSheet: themeSheetUrl(app),

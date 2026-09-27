@@ -3,7 +3,7 @@
 # publisher-pages
 
 The Sylphx publisher pages on `sylphx.com`: the "Built on Sylphx" apps index,
-one landing, privacy and support page per app, the open-source tools list, and
+one landing, privacy, terms and support page per app, the open-source tools list, and
 the universal-link and app-link files. Owner decision:
 [SylphxAI/owner company/decisions.md, 2026-09-26 "Publisher pages, and when a product gets a domain"](https://github.com/SylphxAI/owner/blob/main/company/decisions.md).
 
@@ -16,7 +16,7 @@ the universal-link and app-link files. Owner decision:
 |---|---|
 | `/apps` | Index, "Built on Sylphx" |
 | `/apps/{app}` | App landing page |
-| `/apps/{app}/privacy`, `/apps/{app}/support` | Privacy policy and support page |
+| `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
 | `/open-source` | anymd, repomap, lockdocs, Mark, Firestore ODM, and the platform's SDK and CLI |
 | `/apps/zh-hant/…`, `/open-source/zh-hant` | The same pages in Traditional Chinese |
 | `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
@@ -55,6 +55,9 @@ request when it changes.
 - The privacy page adds the publisher, rights and contact sections from
   [content/publisher.json](content/publisher.json); the app supplies only what
   it does with data.
+- The terms of use are shared by every app: [src/terms.ts](src/terms.ts),
+  drafted to owner `standards/commercial.md` "Legal surface" and pending
+  owner and lawyer review before public launch.
 
 ## Commands
 
