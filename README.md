@@ -100,7 +100,7 @@ colour (owner `standards/experience.md`, "Brand home").
 - `scripts/sync-brand.sh <brand checkout>` copies the token sheet, the font
   loader with its IBM Plex files, the two header lockups and the browser icons
   into `vendor/brand/`, then writes `vendor/brand/SOURCE`: the commit it copied
-  from and each file's sha256. The copy is pinned at SylphxAI/brand `e5376cb`.
+  from and each file's sha256. The copy is pinned at SylphxAI/brand `99d7d0c`.
   Run the script in the pull request that needs new brand files; **never edit
   `vendor/brand/` by hand**, and never add a brand file that the home does not
   have.
@@ -109,12 +109,12 @@ colour (owner `standards/experience.md`, "Brand home").
   `--fg: var(--sx-text)`, `--accent: var(--sx-accent)`, …), so the palette is
   the home's by construction. An app's `theme.css` overrides those same names
   for its own pages.
-- Pages load one stylesheet, `/apps/_assets/site.css`: the home's tokens, then
-  its font loader, then this site's sheet. These pages are mounted at paths of
-  `sylphx.com` and not at a host root, so the loader's `/fonts/…` urls are
-  pointed at `/apps/_assets/brand/fonts/…` at build time; that substitution is
-  the whole difference from the vendored file, and `tests/brand.test.ts`
-  checks it is the only one.
+- Pages link the home's own sheets as files, each served exactly as vendored:
+  `/apps/_assets/brand/tokens/brand.css`, then
+  `/apps/_assets/brand/fonts/fonts.css`, then this site's
+  `/apps/_assets/site.css`. The font loader names its `.woff2` files relatively,
+  so the faces travel beside it under `/apps/_assets/brand/fonts/` and load
+  from this origin with no build-time rewrite.
 - The header is the home's lockup: `sylphx-lockup-colour.svg`, with
   `sylphx-lockup-colour-on-dark.svg` as a `<picture>` source for
   `prefers-color-scheme: dark` — a media source rather than a CSS switch,
@@ -122,9 +122,9 @@ colour (owner `standards/experience.md`, "Brand home").
   above the home's 88 px minimum), and its alt text is "Sylphx".
 - `tests/brand.test.ts` fails if a vendored file differs from its recorded
   sha256, if `vendor/brand/` holds anything besides the recorded files, if a
-  colour literal appears in this repository's own CSS, if the sheet loads a
-  face from another origin, or if a page points at a brand file the build does
-  not serve.
+  colour literal appears in this repository's own CSS, if the served font
+  loader is not byte for byte the home's or a face it names is missing beside
+  it, or if a page points at a brand file the build does not serve.
 
 ## Open-source list
 

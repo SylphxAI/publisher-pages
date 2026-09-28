@@ -57,16 +57,18 @@ gets a card that links out instead of duplicate pages.
 2026-09-28:
 
 - The publisher's own look now comes from the company brand home. SylphxAI/brand
-  is vendored into `vendor/brand/` and pinned at `e5376cb` by
+  is vendored into `vendor/brand/` and pinned at `99d7d0c` by
   `scripts/sync-brand.sh`, which records the commit and every file's sha256 in
   `vendor/brand/SOURCE`. The sheet aliases the home's roles instead of holding
   a palette, the header is the home's lockup in its light and dark cuts, the
   browser and home-screen icons are the home's favicon set, and the faces are
-  the home's IBM Plex files, served from this site's origin through its own
-  loader. `tests/brand.test.ts` fails on a vendored file that differs from its
+  the home's IBM Plex files: the home's own loader is served beside them, its
+  relative urls resolving under this site's paths with no rewrite.
+  `tests/brand.test.ts` fails on a vendored file that differs from its
   recorded hash, on an extra file in `vendor/brand/`, on a colour literal in
-  this repository's own CSS, and on a page that points at a brand file the
-  build does not serve.
+  this repository's own CSS, on a font loader that is not byte for byte the
+  home's or a face it names missing beside it, and on a page that points at a
+  brand file the build does not serve.
 - Number Grove's `theme` in `content/apps/number-grove.json` still holds
   colours its own brand home does not, and they stay as they are until it
   does. Its light palette (canvas, surface, border, ink, ink-muted, leaf) and

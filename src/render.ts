@@ -6,7 +6,7 @@
  * behind the path mount without any platform route of their own.
  */
 
-import { iconLinks, LOCKUP, LOCKUP_HEIGHT, LOCKUP_WIDTH } from './brand'
+import { BRAND_SHEETS, iconLinks, LOCKUP, LOCKUP_HEIGHT, LOCKUP_WIDTH } from './brand'
 import {
 	type AppContent,
 	LOCALES,
@@ -149,6 +149,8 @@ export function page({
 		<meta property="og:url" content="${canonical}">
 		<meta property="og:type" content="website">
 		${image ? `<meta property="og:image" content="${publisher.site}${image}">\n\t\t` : ''}<meta name="color-scheme" content="light dark">
+		<link rel="stylesheet" href="${BRAND_SHEETS.tokens}">
+		<link rel="stylesheet" href="${BRAND_SHEETS.fonts}">
 		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">${themeSheet ? `\n\t\t<link rel="stylesheet" href="${themeSheet}">` : ''}
 	</head>
 	<body>
