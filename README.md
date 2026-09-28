@@ -52,6 +52,11 @@ request when it changes.
   `/apps/_assets/{slug}/`), `sections` (`steps`, `cards` or `list`),
   `featuresHeading` and `plans`. A page with `sections` uses the wide layout
   and shows the support FAQ. The build fails on a missing image file.
+- `icon` and `theme` come from the app's brand home, the `brand/` folder in
+  its own repository (owner `standards/experience.md`, "Brand home"): the icon
+  is a byte-for-byte copy of the app's app-icon master, and the theme colours
+  are values from its `brand/tokens.json`. Never redraw an icon or pick a
+  colour here. Number Grove's `icon.svg` is its `brand/svg/number-grove-app-icon.svg`.
 - The privacy page adds the publisher, rights and contact sections from
   [content/publisher.json](content/publisher.json); the app supplies only what
   it does with data.
