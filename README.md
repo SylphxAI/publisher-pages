@@ -56,8 +56,10 @@ request when it changes.
   its own repository (owner `standards/experience.md`, "Brand home"): the icon
   is a byte-for-byte copy of the app's app-icon master, and the theme colours
   are values from its `brand/tokens.json`. Never redraw an icon or pick a
-  colour here. Number Grove's `icon.svg` is its `docs/design/brand/app-icon.svg`;
-  its `theme` is the one gap left ([docs/vision.md](docs/vision.md#state)).
+  colour here. Number Grove's `icon.svg` is its
+  `brand/svg/number-grove-app-icon.svg` (same SHA-256) and its light palette
+  is that home's values; the colours that home does not hold yet are listed
+  in [docs/vision.md](docs/vision.md#state).
 - The privacy page adds the publisher, rights and contact sections from
   [content/publisher.json](content/publisher.json); the app supplies only what
   it does with data.

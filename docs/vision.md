@@ -67,12 +67,11 @@ gets a card that links out instead of duplicate pages.
   recorded hash, on an extra file in `vendor/brand/`, on a colour literal in
   this repository's own CSS, and on a page that points at a brand file the
   build does not serve.
-- One gap remains: Number Grove's `theme` in
-  `content/apps/number-grove.json` — its dark set and the light `tag` and
-  `highlight` tints — has no brand home to come from. Its other values are the
-  title's own, and the title keeps them as float RGB in
-  `crates/number-grove/src/theme.rs` rather than in a `brand/` folder, so there
-  is no `brand/tokens.json` to read them from (checked 2026-09-28). Its
+- Number Grove's `theme` in `content/apps/number-grove.json` still holds
+  colours its own brand home does not, and they stay as they are until it
+  does. Its light palette (canvas, surface, border, ink, ink-muted, leaf) and
+  its dark accent are that home's `brand/tokens.json` values; its dark set
+  (background, surface, border, text, muted text, the label on the accent and
+  the `tag`) and its light `tag` and `highlight` tints are picked here. Its
   `icon.svg` is a byte copy of that repository's
-  `docs/design/brand/app-icon.svg`. The colours stay as they are until the
-  title has a brand home.
+  `brand/svg/number-grove-app-icon.svg`, same SHA-256 (checked 2026-09-28).
