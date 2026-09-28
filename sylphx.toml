@@ -1,0 +1,20 @@
+# Sylphx publisher pages: sylphx.com/apps, /open-source and the app-link files.
+version = "1"
+
+[project]
+name = "publisher-pages"
+description = "Publisher pages for apps published by Sylphx, and its open-source tools"
+
+[build]
+strategy = "dockerfile"
+dockerfile = "Dockerfile"
+context = "."
+
+[[services]]
+name = "web"
+port = 8080
+public_networking = true
+
+[services.health]
+mode = "http"
+path = "/healthz"

@@ -1,0 +1,71 @@
+{
+	"intro": {
+		"en": "Developer tools we build and maintain in the open. Each one has its own repository and documentation site, and all are MIT licensed.",
+		"zh-Hant": "我們公開開發和維護的開發者工具。每個工具都有自己的程式庫和文件網站，全部以 MIT 授權發佈。"
+	},
+	"projects": [
+		{
+			"name": "anymd",
+			"summary": {
+				"en": "Any file to clean Markdown for AI agents: PDF, Office, EPUB, HTML and web pages, images, audio and video. A local MCP server and CLI. No API key.",
+				"zh-Hant": "把任何檔案轉成供 AI 代理使用的乾淨 Markdown：PDF、Office、EPUB、HTML 與網頁、圖片、音訊及影片。在本機執行的 MCP 伺服器及命令列工具，毋須 API 金鑰。"
+			},
+			"repo": "https://github.com/SylphxAI/anymd",
+			"docs": "https://sylphxai.github.io/anymd/",
+			"package": { "label": "npm @sylphx/anymd", "url": "https://www.npmjs.com/package/@sylphx/anymd" },
+			"mcp": "io.github.SylphxAI/anymd"
+		},
+		{
+			"name": "repomap",
+			"summary": {
+				"en": "A map of your codebase for AI agents: code graph, search, call paths and change impact, with an interactive graph UI. No API key.",
+				"zh-Hant": "給 AI 代理的程式碼地圖：程式碼關係圖、搜尋、呼叫路徑及改動影響，附互動式關係圖介面。毋須 API 金鑰。"
+			},
+			"repo": "https://github.com/SylphxAI/repomap",
+			"docs": "https://sylphxai.github.io/repomap/",
+			"package": { "label": "npm @sylphx/repomap", "url": "https://www.npmjs.com/package/@sylphx/repomap" },
+			"mcp": "io.github.SylphxAI/repomap"
+		},
+		{
+			"name": "lockdocs",
+			"summary": {
+				"en": "Exact-version library docs from your lockfile: local, offline, no rate limits. npm, PyPI, crates.io and Go.",
+				"zh-Hant": "按鎖定檔提供準確版本的程式庫文件：在本機、離線、沒有用量限制。支援 npm、PyPI、crates.io 及 Go。"
+			},
+			"repo": "https://github.com/SylphxAI/lockdocs",
+			"docs": "https://sylphxai.github.io/lockdocs/",
+			"package": { "label": "npm @sylphx/lockdocs", "url": "https://www.npmjs.com/package/@sylphx/lockdocs" },
+			"mcp": "io.github.SylphxAI/lockdocs"
+		},
+		{
+			"name": "Mark",
+			"summary": {
+				"en": "Beautiful README images from one URL: banners, shields-compatible badges, GitHub stats cards, tech icons and typing text. Free, no account.",
+				"zh-Hant": "一條網址就生成好看的 README 圖片：橫幅、與 shields 相容的徽章、GitHub 數據卡、技術圖示及打字效果。免費，毋須帳戶。"
+			},
+			"repo": "https://github.com/SylphxAI/readme-mark",
+			"docs": "https://mark.sylphx.com"
+		},
+		{
+			"name": "Firestore ODM",
+			"summary": {
+				"en": "Type-safe Firestore ODM for Flutter and Dart, the maintained successor to cloud_firestore_odm.",
+				"zh-Hant": "Flutter 及 Dart 的型別安全 Firestore ODM，是 cloud_firestore_odm 的持續維護後繼者。"
+			},
+			"repo": "https://github.com/SylphxAI/firestore_odm",
+			"docs": "https://sylphxai.github.io/firestore_odm/",
+			"package": { "label": "pub.dev firestore_odm", "url": "https://pub.dev/packages/firestore_odm" }
+		}
+	],
+	"platform": {
+		"en": "The Sylphx platform publishes its SDK, CLI and API contract too: see the documentation.",
+		"zh-Hant": "Sylphx 平台亦公開發佈 SDK、命令列工具及 API 合約，詳見文件。"
+	},
+	"platformLinks": [
+		{ "label": "Documentation", "url": "/docs" },
+		{ "label": "npm @sylphx/sdk", "url": "https://www.npmjs.com/package/@sylphx/sdk" },
+		{ "label": "npm @sylphx/cli", "url": "https://www.npmjs.com/package/@sylphx/cli" },
+		{ "label": "crates.io sylphx-cli", "url": "https://crates.io/crates/sylphx-cli" },
+		{ "label": "GitHub SylphxAI", "url": "https://github.com/SylphxAI" }
+	]
+}

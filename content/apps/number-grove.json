@@ -1,0 +1,609 @@
+{
+	"slug": "number-grove",
+	"name": {
+		"en": "Number Grove",
+		"zh-Hant": "數字花園"
+	},
+	"category": {
+		"en": "Education, ages 3 to 7",
+		"zh-Hant": "教育・三至七歲"
+	},
+	"tagline": {
+		"en": "Calm number sense for ages 3 to 7: one small idea at a time, and a garden that grows as they learn.",
+		"zh-Hant": "給三至七歲孩子的安靜數感花園：一次一個小概念，花園隨着學習慢慢長大。"
+	},
+	"icon": "icon.svg",
+	"hero": {
+		"src": {
+			"en": "hub.en.webp",
+			"zh-Hant": "hub.zh.webp"
+		},
+		"alt": {
+			"en": "The garden home: one Start button for today's short session, with other ways to play below.",
+			"zh-Hant": "花園主頁：一個「開始」按鈕進入今天的短練習，下面是其他玩法。"
+		},
+		"width": 600,
+		"height": 1298
+	},
+	"theme": {
+		"light": {
+			"bg": "#FBF6EA",
+			"fg": "#1E3B2F",
+			"muted": "#56705F",
+			"line": "#E7DECB",
+			"card": "#FFFFFF",
+			"accent": "#2E7D57",
+			"accentFg": "#FFFFFF",
+			"tag": "#E3EFD6",
+			"highlight": "#FBE3A8"
+		},
+		"dark": {
+			"bg": "#13241C",
+			"fg": "#F3EEDF",
+			"muted": "#B7C4B3",
+			"line": "#2C4436",
+			"card": "#1B3127",
+			"accent": "#7CC08A",
+			"accentFg": "#10231A",
+			"tag": "#2C4436",
+			"highlight": "#5B4717"
+		}
+	},
+	"description": [
+		{
+			"en": "Number Grove helps young children understand what numbers mean: recognising them, counting, matching a numeral to a quantity, adding, comparing and putting numbers in order. Every screen asks one clear question, with big numerals and seeds to count, so a child can play without being able to read.",
+			"zh-Hant": "數字花園幫助幼童明白數字的意思：認數、點數、把數字配對數量、加法、比較和排序。每個畫面只問一條清楚的問題，配上大大的數字和可以點數的種子，孩子不識字也能玩。"
+		},
+		{
+			"en": "It is calm by design. There are no timers, no lives to lose and no noise to chase. A wrong answer stays on the same idea and shows how to fix it, and a missed day never takes progress away. Everything works in English and in Traditional Chinese.",
+			"zh-Hant": "它刻意設計得安靜：沒有計時、沒有會失去的生命，也沒有吵鬧的獎勵。答錯時會留在同一個概念上，並示範怎樣改正；哪怕幾天沒有玩，進度也不會被拿走。所有內容都有英文及繁體中文。"
+		}
+	],
+	"sections": [
+		{
+			"heading": {
+				"en": "How a session works",
+				"zh-Hant": "每節怎樣進行"
+			},
+			"intro": {
+				"en": "A few minutes, one idea, and a clear place to stop.",
+				"zh-Hant": "幾分鐘、一個概念，以及一個清楚的停下來的地方。"
+			},
+			"style": "steps",
+			"items": [
+				{
+					"title": {
+						"en": "See one idea",
+						"zh-Hant": "看一個概念"
+					},
+					"body": {
+						"en": "A numeral or a group of seeds, large and clear, with one question about it.",
+						"zh-Hant": "一個數字或一組種子，大而清楚，只問一條相關的問題。"
+					}
+				},
+				{
+					"title": {
+						"en": "Try an answer",
+						"zh-Hant": "試着回答"
+					},
+					"body": {
+						"en": "Tap a choice. A miss stays on the same idea and shows what to look at; a correct answer moves on.",
+						"zh-Hant": "點選一個答案。答錯會留在同一個概念上，提示要看哪裏；答對便前進。"
+					}
+				},
+				{
+					"title": {
+						"en": "Watch the garden grow",
+						"zh-Hant": "看花園長大"
+					},
+					"body": {
+						"en": "Each correct answer grows the garden. Then rest, or choose the next lesson.",
+						"zh-Hant": "每答對一題，花園就長大一點。之後可以休息，或選擇下一課。"
+					}
+				}
+			]
+		},
+		{
+			"heading": {
+				"en": "The learning path",
+				"zh-Hant": "學習路線"
+			},
+			"intro": {
+				"en": "Each step builds on the one before, from 1 to 5 first and then up to 10.",
+				"zh-Hant": "每一步都建基於上一步：先學 1 至 5，再到 10。"
+			},
+			"style": "list",
+			"items": [
+				{
+					"title": {
+						"en": "Recognise numerals",
+						"zh-Hant": "認識數字"
+					},
+					"body": {
+						"en": "Which number is this?",
+						"zh-Hant": "這是甚麼數字？"
+					}
+				},
+				{
+					"title": {
+						"en": "Count",
+						"zh-Hant": "點數"
+					},
+					"body": {
+						"en": "How many seeds are there?",
+						"zh-Hant": "有多少粒種子？"
+					}
+				},
+				{
+					"title": {
+						"en": "Match",
+						"zh-Hant": "配對"
+					},
+					"body": {
+						"en": "Join a numeral to the group it names.",
+						"zh-Hant": "把數字配對到相應數量的一組。"
+					}
+				},
+				{
+					"title": {
+						"en": "Add gently",
+						"zh-Hant": "簡單加法"
+					},
+					"body": {
+						"en": "Put two small groups together.",
+						"zh-Hant": "把兩小組合在一起。"
+					}
+				},
+				{
+					"title": {
+						"en": "Compare and order",
+						"zh-Hant": "比較和排序"
+					},
+					"body": {
+						"en": "More, same or less; what comes next on the number line.",
+						"zh-Hant": "多、一樣或少；數線上下一個是甚麼。"
+					}
+				},
+				{
+					"title": {
+						"en": "Find the missing number",
+						"zh-Hant": "找出缺少的數字"
+					},
+					"body": {
+						"en": "Fill the gap in a short sequence.",
+						"zh-Hant": "填補短數列中的空位。"
+					}
+				},
+				{
+					"title": {
+						"en": "Count real things",
+						"zh-Hant": "點算真實物件"
+					},
+					"body": {
+						"en": "With the camera, once the basics are secure. Optional.",
+						"zh-Hant": "打好基礎後，用相機點算身邊物件。可選。"
+					}
+				}
+			]
+		},
+		{
+			"heading": {
+				"en": "What's inside",
+				"zh-Hant": "內容一覽"
+			},
+			"style": "cards",
+			"items": [
+				{
+					"title": {
+						"en": "Adventure",
+						"zh-Hant": "冒險"
+					},
+					"body": {
+						"en": "The guided path through every idea, with a rest point along the way.",
+						"zh-Hant": "按次序帶孩子走過每個概念的路線，途中設有休息點。"
+					}
+				},
+				{
+					"title": {
+						"en": "Daily garden",
+						"zh-Hant": "每日花園"
+					},
+					"body": {
+						"en": "A short set each day within 1 to 5. Missing a day costs nothing.",
+						"zh-Hant": "每天一小組 1 至 5 的題目。錯過一天也不會失去甚麼。"
+					}
+				},
+				{
+					"title": {
+						"en": "Practice",
+						"zh-Hant": "練習"
+					},
+					"body": {
+						"en": "Picks the skill that needs work next, and shows how close the next level is.",
+						"zh-Hant": "自動挑選下一個需要練習的技能，並顯示離下一級還有多遠。"
+					}
+				},
+				{
+					"title": {
+						"en": "Free play",
+						"zh-Hant": "自由玩"
+					},
+					"body": {
+						"en": "A mixed garden of questions with soft rests and no path to finish.",
+						"zh-Hant": "混合各種題目的花園，設有休息點，沒有必須完成的路線。"
+					}
+				},
+				{
+					"title": {
+						"en": "Camera hunt",
+						"zh-Hant": "相機尋寶"
+					},
+					"body": {
+						"en": "Count real toys around the room. The camera is asked for first, and images stay on the device.",
+						"zh-Hant": "點算房間裏真實的玩具。會先徵求相機權限，影像只留在裝置上。"
+					}
+				}
+			]
+		}
+	],
+	"featuresHeading": {
+		"en": "For parents",
+		"zh-Hant": "給家長"
+	},
+	"features": [
+		{
+			"title": {
+				"en": "A parent gate on everything that matters",
+				"zh-Hant": "重要設定都有家長關卡"
+			},
+			"body": {
+				"en": "Purchases, links out, resetting progress and settings sit behind a question for grown-ups, then your own PIN.",
+				"zh-Hant": "購買、外部連結、重設進度及設定，都要先回答一條給大人的問題，再輸入你自己的密碼。"
+			}
+		},
+		{
+			"title": {
+				"en": "No ads, no tracking",
+				"zh-Hant": "沒有廣告，沒有追蹤"
+			},
+			"body": {
+				"en": "No ads anywhere, no third-party analytics, and no advertising identifier. Nothing on the child's screens asks for money.",
+				"zh-Hant": "完全沒有廣告、沒有第三方分析工具，也不使用廣告識別碼。孩子看到的畫面不會要求付款。"
+			}
+		},
+		{
+			"title": {
+				"en": "Progress stays on the device",
+				"zh-Hant": "進度保存在裝置上"
+			},
+			"body": {
+				"en": "No account for the child. Progress, language and settings are saved on the device, and the app works offline.",
+				"zh-Hant": "孩子毋須開設帳戶。進度、語言和設定都儲存在裝置上，離線也可以使用。"
+			}
+		},
+		{
+			"title": {
+				"en": "Camera frames are never kept",
+				"zh-Hant": "相機影像從不保留"
+			},
+			"body": {
+				"en": "The camera game counts on the device. Images are never stored or sent to us or anyone else.",
+				"zh-Hant": "相機遊戲在裝置上點算，影像不會被儲存，也不會傳送給我們或任何人。"
+			}
+		},
+		{
+			"title": {
+				"en": "Two languages",
+				"zh-Hant": "雙語"
+			},
+			"body": {
+				"en": "Every lesson, hint and parent screen works in English and in Traditional Chinese.",
+				"zh-Hant": "每一課、每個提示和家長畫面都有英文及繁體中文。"
+			}
+		},
+		{
+			"title": {
+				"en": "Honest progress",
+				"zh-Hant": "誠實的進度"
+			},
+			"body": {
+				"en": "The parent area shows what your child has practised and what comes next, in plain words.",
+				"zh-Hant": "家長區以簡單的文字說明孩子練習了甚麼，以及下一步是甚麼。"
+			}
+		}
+	],
+	"plans": {
+		"heading": {
+			"en": "Free to start, one subscription for the rest",
+			"zh-Hant": "免費開始，一個訂閱打開其餘內容"
+		},
+		"intro": {
+			"en": "There are no ads, coins or one-off unlocks. A parent buys inside the parent area only.",
+			"zh-Hant": "沒有廣告、代幣或單次解鎖。只有家長可在家長區內購買。"
+		},
+		"tiers": [
+			{
+				"name": {
+					"en": "Seed Garden, free",
+					"zh-Hant": "種子花園（免費）"
+				},
+				"items": [
+					{
+						"en": "23 Adventure lessons within 1 to 5",
+						"zh-Hant": "23 課 1 至 5 的冒險課程"
+					},
+					{
+						"en": "The Daily garden",
+						"zh-Hant": "每日花園"
+					},
+					{
+						"en": "First-level Practice and Free play",
+						"zh-Hant": "第一級練習及自由玩"
+					},
+					{
+						"en": "Progress, garden growth, badges and the parent report",
+						"zh-Hant": "進度、花園成長、徽章及家長報告"
+					}
+				]
+			},
+			{
+				"name": {
+					"en": "Garden subscription",
+					"zh-Hant": "花園訂閱"
+				},
+				"price": {
+					"en": "US$7.99 a month or US$59.99 a year",
+					"zh-Hant": "每月 7.99 美元或每年 59.99 美元"
+				},
+				"items": [
+					{
+						"en": "Every later garden area",
+						"zh-Hant": "之後所有花園區域"
+					},
+					{
+						"en": "Every Practice and Free play level",
+						"zh-Hant": "所有練習及自由玩級別"
+					},
+					{
+						"en": "The camera hunt",
+						"zh-Hant": "相機尋寶"
+					},
+					{
+						"en": "Keep every star and badge if it ends",
+						"zh-Hant": "訂閱結束後，所有星星和徽章都會保留"
+					}
+				]
+			}
+		],
+		"note": {
+			"en": "US prices shown; your store shows the price for your country, including tax, before you buy. It renews until you cancel it in your App Store or Google Play account.",
+			"zh-Hant": "以上為美國價格；購買前，商店會顯示你所在地區連稅的價格。訂閱會自動續期，直至你在 App Store 或 Google Play 帳戶中取消。"
+		}
+	},
+	"screenshots": {
+		"heading": {
+			"en": "Inside the app",
+			"zh-Hant": "應用程式內"
+		},
+		"items": [
+			{
+				"src": {
+					"en": "lesson.en.webp",
+					"zh-Hant": "lesson.zh.webp"
+				},
+				"alt": {
+					"en": "A lesson: which number is this? Three large answer buttons.",
+					"zh-Hant": "課堂：這是甚麼數字？三個大大的答案按鈕。"
+				},
+				"width": 600,
+				"height": 1298
+			},
+			{
+				"src": {
+					"en": "count.en.webp",
+					"zh-Hant": "count.zh.webp"
+				},
+				"alt": {
+					"en": "Counting: how many seeds do you see? Seeds sit in a ten-frame.",
+					"zh-Hant": "點數：你看到多少粒種子？種子排在十格框內。"
+				},
+				"width": 600,
+				"height": 1298
+			},
+			{
+				"src": {
+					"en": "compare.en.webp",
+					"zh-Hant": "compare.zh.webp"
+				},
+				"alt": {
+					"en": "Comparing: which side has more? Left, Same or Right.",
+					"zh-Hant": "比較：哪一邊較多？左、一樣或右。"
+				},
+				"width": 600,
+				"height": 1298
+			},
+			{
+				"src": {
+					"en": "reward.en.webp",
+					"zh-Hant": "reward.zh.webp"
+				},
+				"alt": {
+					"en": "After a session the garden has grown, with a calm message to keep playing or rest.",
+					"zh-Hant": "完成後花園長大了，並以平靜的訊息讓孩子繼續玩或休息。"
+				},
+				"width": 600,
+				"height": 1298
+			}
+		]
+	},
+	"availability": {
+		"status": "coming-soon",
+		"stores": []
+	},
+	"support": {
+		"email": "contact@sylphx.com",
+		"faq": [
+			{
+				"q": {
+					"en": "Is Number Grove available yet?",
+					"zh-Hant": "數字花園推出了嗎？"
+				},
+				"a": {
+					"en": "Not yet. It will be released on the App Store and Google Play, and this page will link to both when it is.",
+					"zh-Hant": "尚未推出。應用程式將於 App Store 及 Google Play 上架，屆時本頁會提供連結。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I reach the parent area?",
+					"zh-Hant": "怎樣進入家長區？"
+				},
+				"a": {
+					"en": "Open the parent area from the garden screen. The first time, answer a multiplication question for grown-ups and choose a parent PIN. After that, enter your PIN. Children cannot buy, follow links or reset progress without it. If you forget the PIN, choose Forgot PIN?, answer a new question and choose a new PIN; progress is kept.",
+					"zh-Hant": "在花園畫面打開家長區。第一次使用時，先回答一條給大人的乘數問題，再設定家長密碼；之後只需輸入密碼。沒有密碼，孩子無法購買、打開外部連結或重設進度。如果忘記密碼，可選擇「忘記 PIN？」，回答新問題後重新設定，進度會保留。"
+				}
+			},
+			{
+				"q": {
+					"en": "What is free and what does the subscription add?",
+					"zh-Hant": "哪些內容免費？訂閱會增加甚麼？"
+				},
+				"a": {
+					"en": "The Seed Garden is free: 23 Adventure lessons within 1 to 5, the Daily garden and first-level practice. The Garden subscription opens every later area, all practice levels and the camera hunt. It renews monthly or yearly until you cancel it in your App Store or Google Play account. If it ends, your child keeps every star, badge and garden stage.",
+					"zh-Hant": "「種子花園」免費：包括 23 課 1 至 5 的冒險課程、每日花園及第一級練習。花園訂閱可打開之後所有區域、所有練習級別及相機尋寶，會按月或按年自動續期，直至你在 App Store 或 Google Play 帳戶中取消。訂閱結束後，孩子已得到的星星、徽章和花園成長都會保留。"
+				}
+			},
+			{
+				"q": {
+					"en": "Will my child lose progress if they skip a few days?",
+					"zh-Hant": "幾天沒玩會失去進度嗎？"
+				},
+				"a": {
+					"en": "No. Progress is kept on the device and is never taken away for missed days.",
+					"zh-Hant": "不會。進度保存在裝置上，不會因為沒有玩而被扣減。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I cancel, restore a subscription or ask for a refund?",
+					"zh-Hant": "怎樣取消、恢復訂閱或申請退款？"
+				},
+				"a": {
+					"en": "Cancel in your App Store or Google Play account settings. On a new device, use Restore purchases in the parent area. Refunds are handled by the store you bought from (Apple or Google) under its refund policy. If anything goes wrong, email us.",
+					"zh-Hant": "可在 App Store 或 Google Play 帳戶設定中取消。換了新裝置，可在家長區選擇「恢復購買」。退款由你購買時使用的商店（Apple 或 Google）按其退款政策處理。如遇任何問題，請電郵聯絡我們。"
+				}
+			}
+		]
+	},
+	"privacy": {
+		"updated": "2026-09-27",
+		"summary": {
+			"en": "Number Grove is made for young children. It has no ads, no third-party analytics and no tracking, and it does not ask a child for any personal information.",
+			"zh-Hant": "數字花園為幼童而設。應用程式沒有廣告、沒有第三方分析工具，亦不作任何追蹤，更不會要求孩子提供任何個人資料。"
+		},
+		"sections": [
+			{
+				"heading": {
+					"en": "What stays on the device",
+					"zh-Hant": "只留在裝置上的資料"
+				},
+				"body": [
+					{
+						"en": "Learning progress, garden growth, language choice and settings are stored on the device. The parent PIN is stored only as a salted hash, never as the PIN itself.",
+						"zh-Hant": "學習進度、花園成長、語言選擇及設定都儲存在裝置上。家長密碼只以加鹽雜湊值儲存，從不儲存密碼本身。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Camera",
+					"zh-Hant": "相機"
+				},
+				"body": [
+					{
+						"en": "The optional camera counting game asks for camera permission first. Images are processed on the device to count objects. They are not stored or sent to us or anyone else.",
+						"zh-Hant": "可選的相機點數遊戲會先要求相機權限。影像只在裝置上處理以點算物件，不會被儲存，也不會傳送給我們或任何其他人。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Purchases",
+					"zh-Hant": "購買"
+				},
+				"body": [
+					{
+						"en": "A parent buys the Garden subscription through the App Store or Google Play. The store takes the payment and handles your payment details under its own privacy policy; we never see them. The store sends us a purchase record (a transaction reference, the product, its dates and its status), which our payment service uses to confirm the subscription. It contains no information about the child.",
+						"zh-Hant": "家長透過 App Store 或 Google Play 購買花園訂閱。付款及你的付款資料由商店按其私隱政策處理，我們永遠看不到。商店會向我們發送購買紀錄（交易編號、產品、日期及狀態），我們的付款服務用它來確認訂閱。當中不包含任何關於孩子的資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Why we use it",
+					"zh-Hant": "我們使用資料的原因"
+				},
+				"body": [
+					{
+						"en": "We use the purchase record to provide the subscription you bought (performance of a contract), to keep tax and accounting records (legal obligation), and to prevent fraud, keep the service secure and establish or defend legal claims (our legitimate interests).",
+						"zh-Hant": "我們使用購買紀錄，以提供你購買的訂閱（履行合約）、保存稅務及會計紀錄（法律責任），以及防止欺詐、保障服務安全和確立或抗辯法律申索（我們的正當利益）。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Who receives it",
+					"zh-Hant": "資料的接收者"
+				},
+				"body": [
+					{
+						"en": "Apple or Google, as the store you bought from, act independently under their own privacy policies. Our payment service runs on servers in the European Economic Area, which UK law recognises as giving adequate protection. We do not sell personal information or share it for advertising.",
+						"zh-Hant": "你購買時使用的商店（Apple 或 Google）按其私隱政策獨立處理資料。我們的付款服務在歐洲經濟區的伺服器上運行，英國法律認可該地區提供足夠保障。我們不會出售個人資料，亦不會為廣告用途分享個人資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "How long we keep it",
+					"zh-Hant": "保存期限"
+				},
+				"body": [
+					{
+						"en": "We keep the purchase record while the subscription runs, and afterwards for as long as tax and accounting law requires or we need it to establish or defend legal claims. Then we delete or anonymise it.",
+						"zh-Hant": "我們在訂閱期間保存購買紀錄；訂閱結束後，按稅務及會計法律要求的期間，或在我們需要確立或抗辯法律申索的期間內繼續保存。其後我們會將其刪除或匿名化。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Children",
+					"zh-Hant": "兒童"
+				},
+				"body": [
+					{
+						"en": "Number Grove does not collect personal information from children. There is no chat, no sharing, no account for the child and no advertising identifier. If we learn that we hold personal information about a child, we delete it.",
+						"zh-Hant": "數字花園不會收集兒童的個人資料。應用程式沒有聊天、分享功能，孩子毋須開設帳戶，亦不使用廣告識別碼。如我們得悉持有任何兒童的個人資料，會將其刪除。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Deleting your data",
+					"zh-Hant": "刪除資料"
+				},
+				"body": [
+					{
+						"en": "Resetting progress in the parent area, or deleting the app, removes everything stored on the device. You can ask us to delete a purchase record we hold; we delete it unless we need to keep it for a reason the law allows, such as tax records or a legal claim.",
+						"zh-Hant": "在家長區重設進度，或刪除應用程式，即會移除裝置上儲存的所有資料。你可要求我們刪除我們持有的購買紀錄；除非我們基於法律容許的理由（例如稅務紀錄或法律申索）需要保留，否則會將其刪除。"
+					}
+				]
+			}
+		]
+	},
+	"deepLinks": {},
+	"source": {
+		"repo": "SylphxAI/number-grove-keel",
+		"path": "publisher/app.json",
+		"note": "Owned by the app repository; copied into SylphxAI/publisher-pages content/apps/number-grove.json by PR whenever it changes."
+	}
+}

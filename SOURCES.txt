@@ -1,0 +1,16 @@
+Screenshots for the brand-home pull request (SylphxAI/publisher-pages,
+branch brand/home). This branch holds evidence only; nothing here is built
+or deployed, and it can be deleted once the pull request has been reviewed.
+
+Taken 2026-09-28 from the built site served by the repository's own
+nginx.conf (root pointed at dist/, port 8099, unprivileged) in headless
+Chromium over CDP, full page, no scrollbars:
+
+  viewport   device pixels  schemes
+  390x844    780 wide, DPR 2  light, dark
+  1440x900   1440 wide, DPR 1 light, dark
+
+Pages: /apps, /apps/number-grove, /open-source, /apps/zh-hant.
+Colour scheme emulated with Emulation.setEmulatedMedia
+(prefers-color-scheme). Every page also passed a computed WCAG AA contrast
+audit in both schemes (every text node against its composited background).
