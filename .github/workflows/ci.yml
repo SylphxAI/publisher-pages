@@ -35,11 +35,28 @@ jobs:
           fetch-depth: 0
       - uses: SylphxAI/.github/.github/actions/zh-hant@e48f73367c3f873a1a6930c844d053ac22b32262
 
+  # Checks the lines a pull request or merge group adds (owner standards/identifiers.md).
+  identifiers:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Non-v7 ids on added lines (owner standards/identifiers.md)
+        uses: SylphxAI/.github/.github/actions/identifiers@e4a5ea41cbcc87cd93914f89f0d7c3981c868bf9
+
   # The one required check (ruleset sylphx-merge-queue): the merge queue waits on this.
   ci-ok:
     if: always()
-    needs: [check, zh-hant]
+    needs: [check, zh-hant, identifiers]
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - run: test "${{ needs.check.result }}" = success && case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
+      - run: |
+          set -euo pipefail
+          test "${{ needs.check.result }}" = success
+          case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
+          case "${{ needs.identifiers.result }}" in success|skipped) ;; *) exit 1 ;; esac
