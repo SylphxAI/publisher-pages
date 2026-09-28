@@ -11,8 +11,16 @@
 
 /** Served path of the vendored brand home. */
 export const BRAND_PREFIX = '/apps/_assets/brand'
-/** Served path of the vendored IBM Plex files the sheet loads. */
-export const FONT_PREFIX = `${BRAND_PREFIX}/fonts`
+
+/**
+ * The home's own sheets, served exactly as vendored: the token roles first,
+ * then the faces. The loader names its files relatively, so the `.woff2` files
+ * travel beside it and resolve under this site's paths with no rewrite.
+ */
+export const BRAND_SHEETS = {
+	tokens: `${BRAND_PREFIX}/tokens/brand.css`,
+	fonts: `${BRAND_PREFIX}/fonts/fonts.css`,
+}
 
 const SVG = `${BRAND_PREFIX}/logo/svg`
 const FAVICON = `${BRAND_PREFIX}/logo/favicon`

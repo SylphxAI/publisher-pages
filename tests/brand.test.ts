@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto'
 import { mkdtempSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { BRAND_PREFIX, FONT_PREFIX, LOCKUP } from '../src/brand'
+import { BRAND_PREFIX, BRAND_SHEETS, LOCKUP } from '../src/brand'
 import { build, loadSite, renderSite } from '../src/build'
 
 const ROOT = join(import.meta.dir, '..')
@@ -21,8 +21,6 @@ const ELSEWHERE = new Set(['.git', 'dist', 'node_modules', 'vendor'])
 const site = await loadSite()
 const rendered = await renderSite(site)
 const pages = [...rendered].filter(([path]) => path.endsWith('.html'))
-/** The sheet the pages load: the home's tokens and loader, then site.css. */
-const sheet = rendered.get('apps/_assets/site.css') ?? ''
 
 /** What scripts/sync-brand.sh recorded: the commit, and each file's hash. */
 const source = readFileSync(join(VENDOR, 'SOURCE'), 'utf8')
@@ -69,14 +67,36 @@ describe('the vendored brand home', () => {
 })
 
 describe('the site on the brand home', () => {
-	test('the sheet is the home’s tokens and its font loader, then site.css', () => {
-		const read = (path: string) => readFileSync(join(VENDOR, path), 'utf8').trim()
-		expect(sheet).toContain(read('tokens/brand.css'))
-		// The loader's urls are the one substitution: these pages are mounted at
-		// paths of sylphx.com, so they serve the files from FONT_PREFIX.
-		const asVendored = sheet.replaceAll(`url(${FONT_PREFIX}/`, 'url(/fonts/')
-		expect(asVendored).toContain(read('fonts/fonts.css'))
-		expect(sheet).toContain(readFileSync(join(ROOT, 'src/site.css'), 'utf8').trim())
+	test('pages link the home’s sheets and this site’s own, from this origin', () => {
+		expect(rendered.has('apps/_assets/site.css')).toBe(true)
+		for (const [path, body] of pages) {
+			for (const sheet of [BRAND_SHEETS.tokens, BRAND_SHEETS.fonts, '/apps/_assets/site.css']) {
+				expect(body, `${path} does not link ${sheet}`).toContain(`<link rel="stylesheet" href="${sheet}">`)
+			}
+			for (const [, href = ''] of body.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)) {
+				expect(href, `${path} loads a sheet from another origin`).toStartWith('/')
+			}
+		}
+	})
+
+	test('the face loader is the home’s file, byte for byte, with its faces beside it', async () => {
+		const dist = mkdtempSync(join(tmpdir(), 'publisher-pages-'))
+		await build(dist)
+		const servedDir = join(dist, 'apps/_assets/brand/fonts')
+		const vendored = readFileSync(join(VENDOR, 'fonts/fonts.css'))
+		expect(readFileSync(join(servedDir, 'fonts.css')).equals(vendored)).toBe(true)
+		// The loader names its files relatively, so each one must travel beside
+		// it in the vendored home and in the served copy.
+		const named = [...vendored.toString('utf8').matchAll(/url\("\.\/([^"]+)"\)/g)].map(
+			([, file = '']) => file,
+		)
+		expect(named.length).toBeGreaterThan(1)
+		for (const file of named) {
+			expect(statSync(join(VENDOR, 'fonts', file), { throwIfNoEntry: false })?.isFile(), file).toBe(true)
+			expect(statSync(join(servedDir, file), { throwIfNoEntry: false })?.isFile(), `served ${file}`).toBe(
+				true,
+			)
+		}
 	})
 
 	test('no colour is picked in this repository', () => {
@@ -88,14 +108,6 @@ describe('the site on the brand home', () => {
 			if (path.startsWith('content/')) continue
 			const hits = readFileSync(join(ROOT, path), 'utf8').match(/#[0-9a-f]{3,8}\b/gi) ?? []
 			expect(hits, `${path} picks a colour`).toEqual([])
-		}
-	})
-
-	test('the sheet loads the home’s faces from this origin only', () => {
-		expect(sheet).toContain('font-family: "IBM Plex Sans"')
-		expect(sheet).toContain('font-family: "IBM Plex Mono"')
-		for (const [, url = ''] of sheet.matchAll(/url\(([^)]+)\)/g)) {
-			expect(url, 'a font from another origin').toStartWith(`${FONT_PREFIX}/`)
 		}
 	})
 

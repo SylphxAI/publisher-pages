@@ -1,10 +1,10 @@
 # The Sylphx brand home, as consumed by these pages.
 # Written by scripts/sync-brand.sh; do not edit.
 repository: SylphxAI/brand
-commit: e5376cb7b14d95127a6d1632d8c4a912041c1d73
+commit: 99d7d0cc924e6639f4420e63d94c5e918cc2536f
 sha256:
 aeb51e9ab88dcecf8da2449e475eed212663981aeef59a7b0f299887bb0d106e  tokens/brand.css
-581af4a7906f78428f5c8210d9525d54a6dc4b8973572f4e930f3f3c3c36ce41  fonts/fonts.css
+09496dc10ca60b137adac28df48356202630f6816dbb41eaae3a2843f5737e1e  fonts/fonts.css
 7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da  fonts/OFL.txt
 3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e  fonts/ibm-plex-sans-latin-400-normal.woff2
 0717336fb31fcdcde4b8deb3675bb4a0f7f6d484864afcd6751ac29975962203  fonts/ibm-plex-sans-latin-500-normal.woff2
