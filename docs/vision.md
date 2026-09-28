@@ -23,6 +23,9 @@ gets a card that links out instead of duplicate pages.
   publisher and data controller.
 - Each app owns its content in its own repository; this repository renders it
   and fails the build on incomplete content.
+- Brand files come from brand homes and are never redrawn here: an app's icon
+  and theme from its `brand/` folder, the publisher's own look from the company
+  brand home, SylphxAI/brand.
 - Static pages, no client JavaScript, no tracking, no cookies. nginx sends a
   strict Content Security Policy (`script-src 'none'`, `style-src 'self'`,
   no `'unsafe-inline'`), so no page may carry an inline script or style.
@@ -50,3 +53,11 @@ gets a card that links out instead of duplicate pages.
   the Sylphx store accounts.
 - Tachyn is not listed until `tachyn.ai` is live; it will be an external card.
 - Site move to Keel (owner#739, stage 1) starts after the mount is live.
+- Brand (checked 2026-09-28): Number Grove's icon is a byte copy of its
+  brand master, and its theme repeats its token values. The publisher's own
+  look does not come from SylphxAI/brand yet: `src/site.css` has its own green
+  palette and the header sets "Sylphx" as text, because the company brand home
+  has no tokens or wordmark for this sheet (its tokens mix an orange mark and a
+  blue UI palette, and its logo files are auto-traced). This waits on
+  SylphxAI/brand being rebuilt to the brand-home standard; then the sheet
+  imports its tokens and the header uses its wordmark.
