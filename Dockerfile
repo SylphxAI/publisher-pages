@@ -5,6 +5,7 @@ COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 COPY content content
 COPY src src
+COPY vendor/brand vendor/brand
 RUN bun run build
 
 FROM nginxinc/nginx-unprivileged:1.27-alpine
