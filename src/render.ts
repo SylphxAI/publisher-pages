@@ -6,6 +6,7 @@
  * behind the path mount without any platform route of their own.
  */
 
+import { iconLinks, LOCKUP, LOCKUP_HEIGHT, LOCKUP_WIDTH } from './brand'
 import {
 	type AppContent,
 	LOCALES,
@@ -87,9 +88,13 @@ const CSS_VAR: Record<PaletteKey, string> = {
  * The app's palette as custom properties over the shared sheet's defaults.
  * It is served as its own file, not an inline `<style>`, so the CSP in
  * nginx.conf needs no `'unsafe-inline'`.
+ *
+ * The app's own accent is also its accent *text*: unlike Sylphx, an app's
+ * brand home names one accent rather than a fill and a text value.
  */
 export function themeCss(theme: NonNullable<AppContent['theme']>): string {
-	const vars = (p: Palette) => PALETTE_KEYS.map((k) => `${CSS_VAR[k]}:${p[k]}`).join(';')
+	const vars = (p: Palette) =>
+		[...PALETTE_KEYS.map((k) => `${CSS_VAR[k]}:${p[k]}`), `--accent-text:${p.accent}`].join(';')
 	return `:root{${vars(theme.light)}}@media (prefers-color-scheme: dark){:root{${vars(theme.dark)}}}\n`
 }
 
@@ -135,6 +140,7 @@ export function page({
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		${iconLinks()}
 		<title>${escapeHtml(title)}</title>
 		<meta name="description" content="${escapeHtml(description)}">
 		${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">\n\t\t${alternates}\n\t\t<link rel="alternate" hreflang="x-default" href="${publisher.site}${path}">`}
@@ -148,7 +154,12 @@ export function page({
 	<body>
 		<a class="skip" href="#main">${t(UI.skip)}</a>
 		<header class="bar">
-			<a class="brand" href="/">Sylphx</a>
+			<a class="brand" href="/">
+				<picture>
+					<source srcset="${LOCKUP.dark}" media="(prefers-color-scheme: dark)">
+					<img src="${LOCKUP.light}" alt="Sylphx" width="${LOCKUP_WIDTH}" height="${LOCKUP_HEIGHT}">
+				</picture>
+			</a>
 			<nav aria-label="${t(UI.language)}">${switcher}</nav>
 		</header>
 		<main id="main"${wide ? ' class="wide"' : ''}>

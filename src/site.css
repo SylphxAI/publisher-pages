@@ -1,31 +1,26 @@
+/*
+ * This site's own sheet, on the Sylphx brand home (`SylphxAI/brand`, vendored
+ * by `scripts/sync-brand.sh` and composed in front of this file by the build).
+ * Every value here is one of the home's roles — no colour or face is picked in
+ * this repository (owner `standards/experience.md`, "Brand home").
+ *
+ * An app's own colours sheet overrides the same names after this file.
+ */
 :root {
-	--bg: #fbfaf7;
-	--fg: #1d1d1b;
-	--muted: #5c5b57;
-	--line: #e3e0d8;
-	--card: #ffffff;
-	--accent: #1f5e4b;
-	--accent-fg: #ffffff;
-	--tag: #e8f0ec;
-	--highlight: #e8f0ec;
-	font-family:
-		system-ui, -apple-system, "Segoe UI", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+	--bg: var(--sx-background);
+	--fg: var(--sx-text);
+	--muted: var(--sx-text-secondary);
+	--line: var(--sx-border);
+	--card: var(--sx-surface);
+	--accent: var(--sx-accent);
+	--accent-text: var(--sx-accent-text);
+	--accent-fg: var(--sx-on-accent);
+	--tag: var(--sx-accent-soft);
+	--highlight: var(--sx-surface-sunken);
+	font-family: var(--sx-font-sans);
 	line-height: 1.6;
 	color: var(--fg);
 	background: var(--bg);
-}
-@media (prefers-color-scheme: dark) {
-	:root {
-		--bg: #141513;
-		--fg: #ecebe6;
-		--muted: #a9a8a2;
-		--line: #2c2e2a;
-		--card: #1b1d1a;
-		--accent: #7cc8a8;
-		--accent-fg: #0f1a15;
-		--tag: #22342c;
-		--highlight: #22342c;
-	}
 }
 * {
 	box-sizing: border-box;
@@ -35,7 +30,7 @@ body {
 	background: var(--bg);
 }
 a {
-	color: var(--accent);
+	color: var(--accent-text);
 	text-underline-offset: 0.2em;
 }
 a:focus-visible {
@@ -71,11 +66,9 @@ main {
 	align-items: center;
 	min-height: 44px;
 }
-.brand {
-	font-weight: 700;
-	font-size: 1.15rem;
-	color: var(--fg);
-	text-decoration: none;
+/* The brand home's lockup, in its light and dark cut (see the <picture>). */
+.brand img {
+	display: block;
 }
 main {
 	padding-bottom: 48px;
@@ -140,7 +133,7 @@ h3 {
 }
 .more {
 	margin: 0;
-	color: var(--accent);
+	color: var(--accent-text);
 	font-weight: 600;
 }
 .features {
@@ -176,6 +169,7 @@ h3 {
 	min-height: 44px;
 }
 code {
+	font-family: var(--sx-font-mono);
 	font-size: 0.95em;
 	overflow-wrap: anywhere;
 }
@@ -431,7 +425,7 @@ summary::after {
 	margin-left: auto;
 	font-size: 1.4rem;
 	font-weight: 400;
-	color: var(--accent);
+	color: var(--accent-text);
 }
 details[open] > summary::after {
 	content: "−";

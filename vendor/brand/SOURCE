@@ -1,0 +1,28 @@
+# The Sylphx brand home, as consumed by these pages.
+# Written by scripts/sync-brand.sh; do not edit.
+repository: SylphxAI/brand
+commit: e5376cb7b14d95127a6d1632d8c4a912041c1d73
+sha256:
+aeb51e9ab88dcecf8da2449e475eed212663981aeef59a7b0f299887bb0d106e  tokens/brand.css
+581af4a7906f78428f5c8210d9525d54a6dc4b8973572f4e930f3f3c3c36ce41  fonts/fonts.css
+7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da  fonts/OFL.txt
+3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e  fonts/ibm-plex-sans-latin-400-normal.woff2
+0717336fb31fcdcde4b8deb3675bb4a0f7f6d484864afcd6751ac29975962203  fonts/ibm-plex-sans-latin-500-normal.woff2
+8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f  fonts/ibm-plex-sans-latin-600-normal.woff2
+c93d2a12aaa280f68b9ab7b726ff8dfedda67c99ef9abed047c1847a1cc6d583  fonts/ibm-plex-sans-latin-ext-400-normal.woff2
+2846035d85100f84c79393f80f1442d4ee720129ab8b3ffa8969aae281db8c6c  fonts/ibm-plex-sans-latin-ext-500-normal.woff2
+b25dfd4f979e442ae1e25cd0894463434cf01ba21ac1a35d39f4a82bd4cc060e  fonts/ibm-plex-sans-latin-ext-600-normal.woff2
+08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7  fonts/ibm-plex-mono-latin-400-normal.woff2
+01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22  fonts/ibm-plex-mono-latin-500-normal.woff2
+6bc0f226a5b7884a8170e3f62c63d7675609d4631bdc5931b5cdab81821f00eb  fonts/ibm-plex-mono-latin-ext-400-normal.woff2
+6bb06407c97584b0867a959e05e8874693bfeb8c317de190811c51598f2d99ea  fonts/ibm-plex-mono-latin-ext-500-normal.woff2
+339f3383a4445a164fbc8a2aa73b34c6fa96348ceb425da487fc60dfa297062a  logo/svg/sylphx-lockup-colour.svg
+e13a86053a69eb702c5b6e6b12228c5661574ae0daeb7ba48eae1c05b4174b05  logo/svg/sylphx-lockup-colour-on-dark.svg
+761414bc3f599f0a30dd7d21a3b13198671bd6edefdbdccb027acffa60635b62  logo/favicon/favicon.svg
+55e652aa8d7f682c40c16376213ee27f0857e499fb85dcf9ea3b2722136da381  logo/favicon/favicon.ico
+175139b2a70d58cd7b4309a0a1ec21544c054a422b3cf45ad6bb116ec1ef2569  logo/favicon/favicon-16.png
+6d9073b3e09f7d446869f03d78e29b60d4046d3caeb366eae0cb2e6c1da2d069  logo/favicon/favicon-32.png
+183588cb974d088257fb988f1c43d08241239369a8d6613476a33530a9367e1c  logo/favicon/favicon-48.png
+5148bdffdb69a5870a6efd136010acd6051188eeb9008941e5eeb5f38290faca  logo/favicon/favicon-192.png
+f5247a933756df6a53bf52c580e525f67d5cf043461a9040c0ee1dcfcbeec9ca  logo/favicon/favicon-512.png
+8d469fa83080aeb2bbf02596e35e3551d85c7baa822a9389559cd700b71f0069  logo/favicon/apple-touch-icon-180.png

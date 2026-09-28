@@ -6,7 +6,7 @@ import { type AppContent, ContentError, type OpenSourceProject, validateApp } fr
 import { appleAppSiteAssociation, assetLinks, starsBadge } from '../src/render'
 
 const site = await loadSite()
-const files = renderSite(site)
+const files = await renderSite(site)
 
 /** The paths the site is mounted at on sylphx.com (see README). */
 const MOUNTS = [

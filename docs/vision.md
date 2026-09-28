@@ -53,11 +53,25 @@ gets a card that links out instead of duplicate pages.
   the Sylphx store accounts.
 - Tachyn is not listed until `tachyn.ai` is live; it will be an external card.
 - Site move to Keel (owner#739, stage 1) starts after the mount is live.
-- Brand (checked 2026-09-28): Number Grove's icon is a byte copy of its
-  brand master, and its theme repeats its token values. The publisher's own
-  look does not come from SylphxAI/brand yet: `src/site.css` has its own green
-  palette and the header sets "Sylphx" as text, because the company brand home
-  has no tokens or wordmark for this sheet (its tokens mix an orange mark and a
-  blue UI palette, and its logo files are auto-traced). This waits on
-  SylphxAI/brand being rebuilt to the brand-home standard; then the sheet
-  imports its tokens and the header uses its wordmark.
+
+2026-09-28:
+
+- The publisher's own look now comes from the company brand home. SylphxAI/brand
+  is vendored into `vendor/brand/` and pinned at `e5376cb` by
+  `scripts/sync-brand.sh`, which records the commit and every file's sha256 in
+  `vendor/brand/SOURCE`. The sheet aliases the home's roles instead of holding
+  a palette, the header is the home's lockup in its light and dark cuts, the
+  browser and home-screen icons are the home's favicon set, and the faces are
+  the home's IBM Plex files, served from this site's origin through its own
+  loader. `tests/brand.test.ts` fails on a vendored file that differs from its
+  recorded hash, on an extra file in `vendor/brand/`, on a colour literal in
+  this repository's own CSS, and on a page that points at a brand file the
+  build does not serve.
+- Number Grove's `theme` in `content/apps/number-grove.json` still holds
+  colours its own brand home does not, and they stay as they are until it
+  does. Its light palette (canvas, surface, border, ink, ink-muted, leaf) and
+  its dark accent are that home's `brand/tokens.json` values; its dark set
+  (background, surface, border, text, muted text, the label on the accent and
+  the `tag`) and its light `tag` and `highlight` tints are picked here. Its
+  `icon.svg` is a byte copy of that repository's
+  `brand/svg/number-grove-app-icon.svg`, same SHA-256 (checked 2026-09-28).
