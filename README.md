@@ -66,8 +66,11 @@ bun run build        # write dist/
 bun run check        # lint, type check, tests
 ```
 
-CI runs `bun run check` and the build on our own runners (`sylphx-linux-standard`);
-the merge queue requires the single `ci-ok` check.
+CI runs `bun run check` and the build on GitHub's free standard hosted runners
+(`ubuntu-latest`), which a public repository may use; the merge queue requires
+the single `ci-ok` check. An `identifiers` job checks the lines a pull request
+or merge group adds for id generators and primary keys that are not UUIDv7
+(owner `standards/identifiers.md`).
 
 `Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
 `sylphx.toml` deploys it on Sylphx Hosting.
