@@ -7,7 +7,6 @@ one landing, privacy, terms and support page per app, and
 the universal-link and app-link files. Owner decision:
 [SylphxAI/owner company/decisions.md, 2026-09-26 "Publisher pages, and when a product gets a domain"](https://github.com/SylphxAI/owner/blob/main/company/decisions.md).
 
-- Not served yet: <https://sylphx.com/apps> returns 404 until the path mount below is live, expected 09-30 (see [docs/vision.md](docs/vision.md#state)).
 - Vision: [docs/vision.md](docs/vision.md)
 
 ## What it serves
@@ -46,8 +45,8 @@ runs. Never list:
 - a Cubeage title (Cubeage is a separate Hong Kong publisher, and Cubeage
   products carry no Sylphx branding).
 
-Number Grove is listed only once its landing is live and its `sylphx.toml`
-declares a service.
+An app is listed only once its landing is live and its `sylphx.toml` declares
+a service; Number Grove keeps its pages but is not listed until then.
 
 ## Adding or changing an app
 
@@ -77,8 +76,9 @@ request when it changes.
   are values from its `brand/tokens.json`. Never redraw an icon or pick a
   colour here. Number Grove's `icon.svg` is its
   `brand/svg/number-grove-app-icon.svg` (same SHA-256) and its light palette
-  is that home's values; the colours that home does not hold yet are listed
-  in [docs/vision.md](docs/vision.md#state).
+  is that home's values. Its dark palette, `tag` and `highlight` tints are
+  not in that home yet and are picked in `content/apps/number-grove.json`;
+  replace them when the home holds them.
 - The privacy page adds the publisher, rights and contact sections from
   [content/publisher.json](content/publisher.json); the app supplies only what
   it does with data.
@@ -119,7 +119,7 @@ colour (owner `standards/experience.md`, "Brand home").
 - `scripts/sync-brand.sh <brand checkout>` copies the token sheet, the font
   loader with its IBM Plex files, the two header lockups and the browser icons
   into `vendor/brand/`, then writes `vendor/brand/SOURCE`: the commit it copied
-  from and each file's sha256. The copy is pinned at SylphxAI/brand `99d7d0c`.
+  from and each file's sha256.
   Run the script in the pull request that needs new brand files; **never edit
   `vendor/brand/` by hand**, and never add a brand file that the home does not
   have.
