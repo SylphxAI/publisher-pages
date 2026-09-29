@@ -1,0 +1,22 @@
+{
+	"slug": "mark",
+	"name": {
+		"en": "Mark",
+		"zh-Hant": "Mark"
+	},
+	"category": {
+		"en": "Developer tools",
+		"zh-Hant": "開發者工具"
+	},
+	"tagline": {
+		"en": "README images from one URL: banners, badges, icons and GitHub stats cards.",
+		"zh-Hant": "一個網址生成 README 圖像：橫幅、徽章、圖示及 GitHub 統計卡。"
+	},
+	"external": "https://mark.sylphx.com",
+	"services": ["Hosting"],
+	"source": {
+		"repo": "SylphxAI/mark",
+		"path": "sylphx.toml",
+		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+	}
+}

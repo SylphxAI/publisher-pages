@@ -14,7 +14,8 @@ the universal-link and app-link files. Owner decision:
 
 | Path on sylphx.com | Page |
 |---|---|
-| `/apps` | Index, "Built on Sylphx" |
+| `/apps` | Hub, "Built on Sylphx": one card per app that runs on Sylphx |
+| `/apps/index.json` | The same list as `[{slug, name, url, summary, services}]`, cached one hour; sylphx.com's home page reads it |
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
 | `/apps/zh-hant/…` | The same pages in Traditional Chinese |
@@ -28,6 +29,14 @@ platform repository (`SylphxAI/cloud`) names no product, so all product text
 lives here. Every URL the pages use stays inside the mounted paths: language
 twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.
 The app slugs `zh-hant` and `_assets` are reserved.
+
+## The hub
+
+An app is listed on `/apps` and in `/apps/index.json` when its JSON has
+`services`: the Sylphx services it runs on, proven by the `sylphx.toml` in its
+repository and a public URL that answers 200. An app with its own site sets
+`external` and gets a card only; its name and one-liner (`tagline`) are its own,
+never Sylphx-branded. An app without `services` is not listed.
 
 ## Adding or changing an app
 

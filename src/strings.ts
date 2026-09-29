@@ -4,10 +4,14 @@ import type { Text } from './content'
 export const UI = {
 	appsTitle: { en: 'Built on Sylphx', 'zh-Hant': '建基於 Sylphx' },
 	appsIntro: {
-		en: 'Apps published by Sylphx and run on the Sylphx platform. Each one keeps its own name and is sold through its app store.',
-		'zh-Hant':
-			'由 Sylphx 發佈、在 Sylphx 平台上運行的應用程式。每個應用程式都保留自己的名稱，並透過應用程式商店銷售。',
+		en: 'The products Sylphx builds and runs on its own platform.',
+		'zh-Hant': 'Sylphx 在自家平台上打造及運行的產品。',
 	},
+	appsDescription: {
+		en: 'The products Sylphx builds and runs on its own platform: what each one does, where to find it, and which Sylphx services it runs on.',
+		'zh-Hant': 'Sylphx 在自家平台上打造及運行的產品：各自的用途、網址，以及所使用的 Sylphx 服務。',
+	},
+	runsOn: { en: 'Runs on: Sylphx {services}', 'zh-Hant': '運行於：Sylphx {services}' },
 	openSourceTitle: { en: 'Open source', 'zh-Hant': '開源項目' },
 	comingSoon: { en: 'Coming soon', 'zh-Hant': '即將推出' },
 	available: { en: 'Available', 'zh-Hant': '已推出' },

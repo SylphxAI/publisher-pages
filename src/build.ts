@@ -21,6 +21,7 @@ import {
 	appPrivacy,
 	appSupport,
 	appsIndex,
+	appsIndexJson,
 	appTerms,
 	assetLinks,
 	localized,
@@ -90,6 +91,7 @@ export async function renderSite({ publisher, apps }: Site): Promise<Map<string,
 		if (app.theme) files.set(`apps/_assets/${app.slug}/theme.css`, themeCss(app.theme))
 	}
 	files.set('apps/_assets/site.css', await Bun.file(join(ROOT, 'src/site.css')).text())
+	files.set('apps/index.json', appsIndexJson(apps, publisher))
 	files.set('apps/404.html', notFound(publisher))
 	files.set('.well-known/apple-app-site-association', appleAppSiteAssociation(apps))
 	files.set('.well-known/assetlinks.json', assetLinks(apps))

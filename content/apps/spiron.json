@@ -1,0 +1,22 @@
+{
+	"slug": "spiron",
+	"name": {
+		"en": "Spiron",
+		"zh-Hant": "Spiron"
+	},
+	"category": {
+		"en": "AI agent",
+		"zh-Hant": "AI 代理"
+	},
+	"tagline": {
+		"en": "An AI agent that sees a job through on its own, asks only when the call is yours, and hands back the result with proof.",
+		"zh-Hant": "自行把工作做完的 AI 代理，只在需要你決定時才詢問，並附證據交回成果。"
+	},
+	"external": "https://spiron.ai",
+	"services": ["Hosting", "Data", "AI"],
+	"source": {
+		"repo": "SylphxAI/agents",
+		"path": "sylphx.toml",
+		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"slug": "puzzled",
+	"name": {
+		"en": "Puzzled",
+		"zh-Hant": "Puzzled"
+	},
+	"category": {
+		"en": "Games",
+		"zh-Hant": "遊戲"
+	},
+	"tagline": {
+		"en": "A free daily brain game: word, logic, number and spatial puzzles, one free puzzle every day.",
+		"zh-Hant": "每日免費腦力遊戲：文字、邏輯、數字及空間謎題，每天一道免費謎題。"
+	},
+	"external": "https://puzzled.gg",
+	"services": ["Hosting", "Data"],
+	"source": {
+		"repo": "SylphxAI/puzzled",
+		"path": "sylphx.toml",
+		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+	}
+}

@@ -68,6 +68,8 @@ interface PageInput {
 	wide?: boolean
 	/** Social preview image (absolute path under a mounted prefix). */
 	image?: string
+	/** Structured data, written as one `application/ld+json` block (a data block: the CSP has no script). */
+	jsonLd?: unknown
 }
 
 const CSS_VAR: Record<PaletteKey, string> = {
@@ -117,6 +119,7 @@ export function page({
 	themeSheet,
 	wide,
 	image,
+	jsonLd,
 }: PageInput): string {
 	const t = (s: Text) => s[locale]
 	const canonical = `${publisher.site}${localized(locale, path)}`
@@ -149,7 +152,7 @@ export function page({
 		${image ? `<meta property="og:image" content="${publisher.site}${image}">\n\t\t` : ''}<meta name="color-scheme" content="light dark">
 		<link rel="stylesheet" href="${BRAND_SHEETS.tokens}">
 		<link rel="stylesheet" href="${BRAND_SHEETS.fonts}">
-		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">${themeSheet ? `\n\t\t<link rel="stylesheet" href="${themeSheet}">` : ''}
+		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">${themeSheet ? `\n\t\t<link rel="stylesheet" href="${themeSheet}">` : ''}${jsonLd ? `\n\t\t<script type="application/ld+json">${JSON.stringify(jsonLd).replaceAll('<', '\\u003c')}</script>` : ''}
 	</head>
 	<body>
 		<a class="skip" href="#main">${t(UI.skip)}</a>
@@ -179,21 +182,41 @@ function storeLabel(kind: 'app-store' | 'google-play' | 'web', locale: Locale): 
 	return labels[kind][locale]
 }
 
+/** The apps the hub lists: those that name the Sylphx services they run on. */
+export function hubApps(apps: AppContent[]): AppContent[] {
+	return apps.filter((a) => (a.services?.length ?? 0) > 0)
+}
+
+/** Where an app lives: its own site, or its page here. */
+function appUrl(app: AppContent, publisher: Publisher): string {
+	return app.external ?? `${publisher.site}/apps/${app.slug}`
+}
+
+/** `/apps/index.json`: the machine-readable hub, read by sylphx.com's home page. */
+export function appsIndexJson(apps: AppContent[], publisher: Publisher): string {
+	const entries = hubApps(apps).map((app) => ({
+		slug: app.slug,
+		name: app.name.en,
+		url: appUrl(app, publisher),
+		summary: app.tagline.en,
+		services: app.services,
+	}))
+	return `${JSON.stringify(entries, null, '\t')}\n`
+}
+
 export function appsIndex(apps: AppContent[], locale: Locale, publisher: Publisher): string {
 	const t = (s: Text) => s[locale]
-	const cards = apps
+	const listed = hubApps(apps)
+	const cards = listed
 		.map((app) => {
 			const href = app.external ?? localized(locale, `/apps/${app.slug}`)
-			const status =
-				app.external === undefined && app.availability?.status === 'coming-soon'
-					? `<span class="tag">${t(UI.comingSoon)}</span>`
-					: ''
-			const action = app.external ? t(UI.visitSite) : t(UI.learnMore)
+			const runsOn = fill(t(UI.runsOn), { services: escapeHtml((app.services ?? []).join(', ')) })
 			return `\t\t\t<li class="card">
-				<p class="eyebrow">${escapeHtml(t(app.category))} ${status}</p>
+				<p class="eyebrow">${escapeHtml(t(app.category))}</p>
 				<h2><a href="${escapeHtml(href)}">${escapeHtml(t(app.name))}</a></h2>
 				<p>${escapeHtml(t(app.tagline))}</p>
-				<p class="more" aria-hidden="true">${action} →</p>
+				<p class="eyebrow">${runsOn}</p>
+				<p class="more" aria-hidden="true">${app.external ? t(UI.visitSite) : t(UI.learnMore)} →</p>
 			</li>`
 		})
 		.join('\n')
@@ -202,13 +225,30 @@ export function appsIndex(apps: AppContent[], locale: Locale, publisher: Publish
 			<ul class="cards">
 ${cards}
 			</ul>`
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		name: t(UI.appsTitle),
+		itemListElement: listed.map((app, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			item: {
+				'@type': 'SoftwareApplication',
+				name: t(app.name),
+				description: t(app.tagline),
+				url: appUrl(app, publisher),
+				applicationCategory: t(app.category),
+			},
+		})),
+	}
 	return page({
 		locale,
 		path: '/apps',
 		title: `${t(UI.appsTitle)} · Sylphx`,
-		description: t(UI.appsIntro),
+		description: t(UI.appsDescription),
 		body,
 		publisher,
+		jsonLd,
 	})
 }
 

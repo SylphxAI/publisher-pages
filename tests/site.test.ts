@@ -8,6 +8,10 @@ import { appleAppSiteAssociation, assetLinks } from '../src/render'
 const site = await loadSite()
 const files = await renderSite(site)
 
+/** Structured data is the one script-tag allowed: a data block the browser never runs. */
+const withoutJsonLd = (html: string) =>
+	html.replace(/<script type="application\/ld\+json">[^<]*<\/script>/g, '')
+
 /** The paths the site is mounted at on sylphx.com (see README). */
 const MOUNTS = ['/apps', '/.well-known/apple-app-site-association', '/.well-known/assetlinks.json']
 
@@ -91,7 +95,7 @@ describe('served pages', () => {
 
 	test('content text is escaped', () => {
 		for (const [path, body] of files) {
-			if (path.endsWith('.html')) expect(body).not.toContain('<script')
+			if (path.endsWith('.html')) expect(withoutJsonLd(body)).not.toContain('<script')
 		}
 	})
 })
@@ -158,7 +162,7 @@ describe('app-link files', () => {
 
 describe('content validation', () => {
 	const file = (slug: string) => join('content/apps', `${slug}.json`)
-	const valid = site.apps[0] as AppContent
+	const valid = site.apps.find((a) => a.slug === 'number-grove') as AppContent
 
 	test('rejects a missing translation', () => {
 		const broken = { ...valid, tagline: { en: 'Only English' } }
@@ -210,7 +214,10 @@ describe('content security policy', () => {
 
 	test('pages carry no inline script, style or event handler', () => {
 		for (const [path, body] of pages) {
-			expect({ path, hit: body.match(/<script|<style|\sstyle=|\son[a-z]+=|javascript:/i)?.[0] }).toEqual({
+			expect({
+				path,
+				hit: withoutJsonLd(body).match(/<script|<style|\sstyle=|\son[a-z]+=|javascript:/i)?.[0],
+			}).toEqual({
 				path,
 				hit: undefined,
 			})

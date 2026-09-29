@@ -1,0 +1,22 @@
+{
+	"slug": "viszy",
+	"name": {
+		"en": "Viszy",
+		"zh-Hant": "Viszy"
+	},
+	"category": {
+		"en": "Tools for sellers",
+		"zh-Hant": "賣家工具"
+	},
+	"tagline": {
+		"en": "Product photos and promo videos for online sellers, made from one photo.",
+		"zh-Hant": "為網店賣家由一張相片製作產品相和宣傳短片。"
+	},
+	"external": "https://viszy.ai",
+	"services": ["Hosting", "Data"],
+	"source": {
+		"repo": "SylphxAI/viszy.ai",
+		"path": "sylphx.toml",
+		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+	}
+}
