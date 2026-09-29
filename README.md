@@ -38,6 +38,17 @@ repository and a public URL that answers 200. An app with its own site sets
 `external` and gets a card only; its name and one-liner (`tagline`) are its own,
 never Sylphx-branded. An app without `services` is not listed.
 
+Who may be listed (owner rule, 2026-09-29): only products Sylphx builds and
+runs. Never list:
+
+- a Hypothesis-Idea product (a partner company, not ours);
+- `SylphxAI/bgca` (a client project);
+- a Cubeage title (Cubeage is a separate Hong Kong publisher, and Cubeage
+  products carry no Sylphx branding).
+
+Number Grove is listed only once its landing is live and its `sylphx.toml`
+declares a service.
+
 ## Adding or changing an app
 
 Each app owns its content as one JSON file, `publisher/app.json` in the app's
