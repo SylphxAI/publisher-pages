@@ -104,3 +104,21 @@ describe('services field', () => {
 		])
 	})
 })
+
+describe('Also from Sylphx', () => {
+	const zh = files.get('apps/zh-hant/index.html') ?? ''
+	test('lists each open-source tool with its link, in both languages', () => {
+		expect(hub).toContain('<h2>Also from Sylphx</h2>')
+		expect(zh).toContain('<h2>Sylphx 的其他產品</h2>')
+		for (const name of ['anymd', 'repomap', 'lockdocs', 'skills', 'Mark']) {
+			expect(hub).toContain(`>${name}</a> — `)
+			expect(zh).toContain(`>${name}</a> — `)
+		}
+		expect(hub).toContain('href="https://github.com/SylphxAI/lockdocs"')
+		expect(hub).toContain('href="https://mark.sylphx.com"')
+	})
+	test('does not add an /open-source page', () => {
+		expect(files.has('apps/open-source/index.html')).toBe(false)
+		expect(files.has('open-source/index.html')).toBe(false)
+	})
+})
