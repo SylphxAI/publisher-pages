@@ -11,6 +11,11 @@ export const UI = {
 		en: 'The products Sylphx builds and runs on its own platform: what each one does, where to find it, and which Sylphx services it runs on.',
 		'zh-Hant': 'Sylphx 在自家平台上打造及運行的產品：各自的用途、網址，以及所使用的 Sylphx 服務。',
 	},
+	alsoFromTitle: { en: 'Also from Sylphx', 'zh-Hant': 'Sylphx 的其他產品' },
+	alsoFromIntro: {
+		en: 'Open-source tools we publish.',
+		'zh-Hant': '我們發佈的開源工具。',
+	},
 	runsOn: { en: 'Runs on: Sylphx {services}', 'zh-Hant': '運行於：Sylphx {services}' },
 	openSourceTitle: { en: 'Open source', 'zh-Hant': '開源項目' },
 	comingSoon: { en: 'Coming soon', 'zh-Hant': '即將推出' },

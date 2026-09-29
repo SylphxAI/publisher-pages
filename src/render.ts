@@ -21,6 +21,7 @@ import {
 } from './content'
 import { UI } from './strings'
 import { KEY_TERMS, TERMS_SECTIONS, TERMS_UPDATED } from './terms'
+import { TOOLS } from './tools'
 
 export const ASSET_PREFIX = '/apps/_assets'
 /** Each language's segment, placed after the mounted prefix: `/apps/zh-hant/…`. */
@@ -220,11 +221,22 @@ export function appsIndex(apps: AppContent[], locale: Locale, publisher: Publish
 			</li>`
 		})
 		.join('\n')
+	const tools = TOOLS.map(
+		(tool) =>
+			`\t\t\t\t\t<li><a href="${escapeHtml(tool.url)}">${escapeHtml(tool.name)}</a> — ${escapeHtml(t(tool.summary))}</li>`,
+	).join('\n')
 	const body = `\t\t\t<h1>${t(UI.appsTitle)}</h1>
 			<p class="lede">${t(UI.appsIntro)}</p>
 			<ul class="cards">
 ${cards}
-			</ul>`
+			</ul>
+			<section class="block also-from">
+				<h2>${t(UI.alsoFromTitle)}</h2>
+				<p class="lede">${t(UI.alsoFromIntro)}</p>
+				<ul class="list">
+${tools}
+				</ul>
+			</section>`
 	const jsonLd = {
 		'@context': 'https://schema.org',
 		'@type': 'ItemList',
