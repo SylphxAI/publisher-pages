@@ -42,13 +42,4 @@ export const TOOLS: Tool[] = [
 			'zh-Hant': '可重複使用、不限機構的代理技能，涵蓋產品、工程、營運、設計及研究工作。',
 		},
 	},
-	{
-		name: 'Mark',
-		url: 'https://mark.sylphx.com',
-		summary: {
-			en: 'Beautiful README images from one URL: banners, badges, typing text, tech icons and GitHub stats cards. Free, no token, no signup.',
-			'zh-Hant':
-				'一個網址生成精美的 README 圖像：橫幅、徽章、打字動畫文字、技術圖示及 GitHub 統計卡。免費，無需權杖，無需註冊。',
-		},
-	},
 ]
