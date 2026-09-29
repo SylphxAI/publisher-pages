@@ -9,11 +9,7 @@ const site = await loadSite()
 const files = await renderSite(site)
 
 /** The paths the site is mounted at on sylphx.com (see README). */
-const MOUNTS = [
-	'/apps',
-	'/.well-known/apple-app-site-association',
-	'/.well-known/assetlinks.json',
-]
+const MOUNTS = ['/apps', '/.well-known/apple-app-site-association', '/.well-known/assetlinks.json']
 
 /** Gateway PathPrefix semantics: the prefix itself or a path below it. */
 const mounted = (href: string) => {
