@@ -5,8 +5,7 @@
 Every app Sylphx publishes has a public home at `sylphx.com/apps/{app}`: a
 landing page, a privacy policy, terms of use and a support page, in English and Traditional
 Chinese, plus the universal-link and app-link files its store builds need. The
-`/apps` index presents them as "Built on Sylphx", and `/open-source` lists the
-developer tools Sylphx maintains. The pages are linked from the sylphx.com
+`/apps` index presents them as "Built on Sylphx". The pages are linked from the sylphx.com
 footer, never from the platform navigation.
 
 A store-first app needs no domain of its own. An app that has its own website
@@ -42,12 +41,12 @@ gets a card that links out instead of duplicate pages.
     SylphxAI/cloud#9147 (open) and is created after that deploys;
   - mounting it at paths of `sylphx.com` needs domain-level `paths`
     (SylphxAI/cloud#9128, open). The `[[environments.production.domains]]`
-    block with the four paths waits as publisher-pages#3 (draft) and is
+    block with the three paths waits as publisher-pages#3 (draft) and is
     queued only after #9128 is live: before that the platform reads the host
     as a catch-all next to its own and the release fails.
-- `sylphx.com/open-source` is still served by the platform's own page. It is
-  replaced by this site's page when the mount is live (SylphxAI/cloud#9146
-  moves the footer links then).
+- `sylphx.com/open-source` stays the platform's own page; this site does not
+  serve it and its footer links there. The open-source tools belong to the
+  Sylphx OSS lane.
 - Apps listed: Number Grove. Its content is owned by number-grove-keel as
   `publisher/app.json` and copied here by pull request. `deepLinks` wait for
   the Sylphx store accounts.

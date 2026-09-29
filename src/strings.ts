@@ -65,11 +65,6 @@ export const UI = {
 		en: 'Questions about privacy go to {email}.',
 		'zh-Hant': '有關私隱的查詢，請電郵至 {email}。',
 	},
-	repository: { en: 'Repository', 'zh-Hant': '程式庫' },
-	documentation: { en: 'Documentation', 'zh-Hant': '文件' },
-	githubStars: { en: 'GitHub stars', 'zh-Hant': 'GitHub 星數' },
-	mcpRegistry: { en: 'MCP registry', 'zh-Hant': 'MCP 登記名稱' },
-	fromThePlatform: { en: 'From the platform', 'zh-Hant': '平台' },
 	footerLine: {
 		en: '© {year} {legal}, registered in {jurisdiction}, company no. {number}. Registered office: {office}.',
 		'zh-Hant': '© {year} {legal}，於{jurisdiction}註冊，公司編號 {number}。註冊辦事處：{office}。',
