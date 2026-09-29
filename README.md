@@ -3,11 +3,11 @@
 # publisher-pages
 
 The Sylphx publisher pages on `sylphx.com`: the "Built on Sylphx" apps index,
-one landing, privacy, terms and support page per app, the open-source tools list, and
+one landing, privacy, terms and support page per app, and
 the universal-link and app-link files. Owner decision:
 [SylphxAI/owner company/decisions.md, 2026-09-26 "Publisher pages, and when a product gets a domain"](https://github.com/SylphxAI/owner/blob/main/company/decisions.md).
 
-- Not served yet: <https://sylphx.com/apps> returns 404 and `/open-source` is still the platform's own page until the path mount below is live (see [docs/vision.md](docs/vision.md#state)).
+- Not served yet: <https://sylphx.com/apps> returns 404 until the path mount below is live, expected 09-30 (see [docs/vision.md](docs/vision.md#state)).
 - Vision: [docs/vision.md](docs/vision.md)
 
 ## What it serves
@@ -17,14 +17,13 @@ the universal-link and app-link files. Owner decision:
 | `/apps` | Index, "Built on Sylphx" |
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
-| `/open-source` | anymd, repomap, lockdocs, Mark, Firestore ODM, and the platform's SDK and CLI |
-| `/apps/zh-hant/…`, `/open-source/zh-hant` | The same pages in Traditional Chinese |
+| `/apps/zh-hant/…` | The same pages in Traditional Chinese |
 | `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
 
-The site is a separate Sylphx Hosting project mounted at exactly four paths of
-`sylphx.com`: `/apps`, `/open-source`, `/.well-known/apple-app-site-association`
+The site is a separate Sylphx Hosting project mounted at exactly three paths of
+`sylphx.com`: `/apps`, `/.well-known/apple-app-site-association`
 and `/.well-known/assetlinks.json`. Everything else on the host, including
-`/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
+`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
 platform repository (`SylphxAI/cloud`) names no product, so all product text
 lives here. Every URL the pages use stays inside the mounted paths: language
 twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.
@@ -125,9 +124,3 @@ colour (owner `standards/experience.md`, "Brand home").
   colour literal appears in this repository's own CSS, if the served font
   loader is not byte for byte the home's or a face it names is missing beside
   it, or if a page points at a brand file the build does not serve.
-
-## Open-source list
-
-`content/open-source.json` is worded by the OSS lane. Each GitHub project shows
-its star count as a badge from Mark (`https://mark.sylphx.com/github/stars/{owner}/{repo}`),
-loaded by the browser in a fixed 110×20 box; set `"stars": false` to hide it.

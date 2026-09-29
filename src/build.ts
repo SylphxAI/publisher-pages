@@ -11,10 +11,8 @@ import {
 	appAssets,
 	ContentError,
 	LOCALES,
-	type OpenSource,
 	type Publisher,
 	validateApp,
-	validateOpenSource,
 	validatePublisher,
 } from './content'
 import {
@@ -27,7 +25,6 @@ import {
 	assetLinks,
 	localized,
 	notFound,
-	openSourcePage,
 	themeCss,
 } from './render'
 
@@ -53,17 +50,12 @@ async function vendoredBrand(dir = VENDOR, prefix = ''): Promise<[string, string
 export interface Site {
 	publisher: Publisher
 	apps: AppContent[]
-	openSource: OpenSource
 	/** Where each app's asset files live: `content/apps/{slug}/`. */
 	contentDir: string
 }
 
 export async function loadSite(contentDir = join(ROOT, 'content')): Promise<Site> {
 	const publisher = validatePublisher(await readJson(join(contentDir, 'publisher.json')), 'publisher.json')
-	const openSource = validateOpenSource(
-		await readJson(join(contentDir, 'open-source.json')),
-		'open-source.json',
-	)
 	const appDir = join(contentDir, 'apps')
 	const files = (await readdir(appDir)).filter((f) => f.endsWith('.json')).sort()
 	const apps: AppContent[] = []
@@ -76,16 +68,15 @@ export async function loadSite(contentDir = join(ROOT, 'content')): Promise<Site
 		}
 		apps.push(app)
 	}
-	return { publisher, apps, openSource, contentDir }
+	return { publisher, apps, contentDir }
 }
 
 /** Every file of the built site, keyed by its path under `dist/`. */
-export async function renderSite({ publisher, apps, openSource }: Site): Promise<Map<string, string>> {
+export async function renderSite({ publisher, apps }: Site): Promise<Map<string, string>> {
 	const files = new Map<string, string>()
 	const html = (path: string, body: string) => files.set(join(path.slice(1), 'index.html'), body)
 	for (const locale of LOCALES) {
 		html(localized(locale, '/apps'), appsIndex(apps, locale, publisher))
-		html(localized(locale, '/open-source'), openSourcePage(openSource, locale, publisher))
 		for (const app of apps) {
 			if (app.external) continue
 			const base = localized(locale, `/apps/${app.slug}`)

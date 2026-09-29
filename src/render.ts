@@ -2,7 +2,7 @@
  * Page rendering: plain HTML strings, no client JavaScript and no inline
  * script or style (the CSP in nginx.conf allows neither). Every URL the
  * pages use sits under a path the site is mounted at on sylphx.com
- * (`/apps`, `/open-source`, and the two app-link files), so the pages work
+ * (`/apps` and the two app-link files), so the pages work
  * behind the path mount without any platform route of their own.
  */
 
@@ -11,8 +11,6 @@ import {
 	type AppContent,
 	LOCALES,
 	type Locale,
-	type OpenSource,
-	type OpenSourceProject,
 	PALETTE_KEYS,
 	type Palette,
 	type PaletteKey,
@@ -168,7 +166,7 @@ export function page({
 ${body}
 		</main>
 		<footer class="foot">
-			<nav><a href="${localized(locale, '/apps')}">${t(UI.appsTitle)}</a> <a href="${localized(locale, '/open-source')}">${t(UI.openSourceTitle)}</a> <a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a></nav>
+			<nav><a href="${localized(locale, '/apps')}">${t(UI.appsTitle)}</a> <a href="https://sylphx.com/open-source">${t(UI.openSourceTitle)}</a> <a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a></nav>
 			<p>${footer}</p>
 		</footer>
 	</body>
@@ -444,61 +442,6 @@ ${faq}`
 		body,
 		publisher,
 		themeSheet: themeSheetUrl(app),
-	})
-}
-
-const GITHUB_REPO = /^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)\/?$/
-
-/**
- * The repository's star count as a badge from Mark (mark.sylphx.com), loaded
- * by the browser: no GitHub API call at build time. Fixed box, so a count of
- * any width never shifts the layout.
- */
-export function starsBadge(project: OpenSourceProject, locale: Locale): string {
-	const match = project.stars === false ? null : GITHUB_REPO.exec(project.repo)
-	if (!match) return ''
-	const src = `https://mark.sylphx.com/github/stars/${match[1]}/${match[2]}`
-	return `<img class="badge" src="${escapeHtml(src)}" alt="${UI.githubStars[locale]}" width="110" height="20" loading="lazy" decoding="async">`
-}
-
-export function openSourcePage(os: OpenSource, locale: Locale, publisher: Publisher): string {
-	const t = (s: Text) => s[locale]
-	const projects = os.projects
-		.map((p) => {
-			const links = [
-				`<a href="${escapeHtml(p.repo)}">${t(UI.repository)}</a>${starsBadge(p, locale)}`,
-				`<a href="${escapeHtml(p.docs)}">${t(UI.documentation)}</a>`,
-				p.package ? `<a href="${escapeHtml(p.package.url)}">${escapeHtml(p.package.label)}</a>` : '',
-			]
-				.filter(Boolean)
-				.join(' ')
-			const mcp = p.mcp ? `<p class="note">${t(UI.mcpRegistry)}: <code>${escapeHtml(p.mcp)}</code></p>` : ''
-			return `\t\t\t<li class="card">
-				<h2><a href="${escapeHtml(p.repo)}">${escapeHtml(p.name)}</a></h2>
-				<p>${escapeHtml(t(p.summary))}</p>
-				${mcp}
-				<p class="links">${links}</p>
-			</li>`
-		})
-		.join('\n')
-	const platform = os.platformLinks
-		.map((l) => `<a href="${escapeHtml(l.url)}">${escapeHtml(l.label)}</a>`)
-		.join(' ')
-	const body = `\t\t\t<h1>${t(UI.openSourceTitle)}</h1>
-			<p class="lede">${escapeHtml(t(os.intro))}</p>
-			<ul class="cards">
-${projects}
-			</ul>
-			<h2>${t(UI.fromThePlatform)}</h2>
-			<p>${escapeHtml(t(os.platform))}</p>
-			<p class="links">${platform}</p>`
-	return page({
-		locale,
-		path: '/open-source',
-		title: `${t(UI.openSourceTitle)} · Sylphx`,
-		description: t(os.intro),
-		body,
-		publisher,
 	})
 }
 

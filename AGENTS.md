@@ -3,8 +3,9 @@
 Read [README.md](README.md) and [docs/vision.md](docs/vision.md) first.
 
 - Run `bun run check` before pushing; `bun run build` must succeed.
-- Every URL a page uses must stay under `/apps` or `/open-source`, or be one of
+- Every URL a page uses must stay under `/apps`, or be one of
   the two app-link files: those are the only paths mounted on sylphx.com.
+  `/open-source` is the platform's own page: link to it, never serve it.
   Language twins go under the prefix (`/apps/zh-hant/…`). The tests enforce it.
 - Product text lives here, never in SylphxAI/cloud.
 - The publisher's look comes from SylphxAI/brand, vendored into `vendor/brand/`

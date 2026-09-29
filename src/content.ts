@@ -92,24 +92,6 @@ export interface AppContent {
 	source: { repo: string; path: string; note?: string }
 }
 
-export interface OpenSourceProject {
-	name: string
-	summary: Text
-	repo: string
-	docs: string
-	package?: { label: string; url: string }
-	mcp?: string
-	/** Show the repository's star badge (served by Mark). Default true for a GitHub repository. */
-	stars?: boolean
-}
-
-export interface OpenSource {
-	intro: Text
-	projects: OpenSourceProject[]
-	platform: Text
-	platformLinks: Array<{ label: string; url: string }>
-}
-
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 /** Path segments under `/apps` that are not apps: language twins and assets. */
 const RESERVED_SLUGS = new Set(['zh-hant', '_assets'])
@@ -292,26 +274,6 @@ export function validateApp(raw: unknown, file: string): AppContent {
 		})
 	}
 	return app
-}
-
-export function validateOpenSource(raw: unknown, file: string): OpenSource {
-	const os = raw as OpenSource
-	text(os.intro, `${file} intro`)
-	text(os.platform, `${file} platform`)
-	list(os.projects, `${file} projects`, (p, at) => {
-		const project = p as OpenSourceProject
-		if (typeof project.name !== 'string' || project.name === '') fail(at, 'name')
-		text(project.summary, `${at}.summary`)
-		url(project.repo, `${at}.repo`)
-		if (project.stars !== undefined && typeof project.stars !== 'boolean')
-			fail(at, 'stars must be true or false')
-		url(project.docs, `${at}.docs`)
-		if (project.package) url(project.package.url, `${at}.package.url`)
-	})
-	list(os.platformLinks, `${file} platformLinks`, (l, at) => {
-		url((l as { url: unknown }).url, `${at}.url`)
-	})
-	return os
 }
 
 export function validatePublisher(raw: unknown, file: string): Publisher {
