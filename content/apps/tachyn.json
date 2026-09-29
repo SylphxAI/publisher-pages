@@ -1,0 +1,22 @@
+{
+	"slug": "tachyn",
+	"name": {
+		"en": "Tachyn",
+		"zh-Hant": "疾書 Tachyn"
+	},
+	"category": {
+		"en": "Productivity",
+		"zh-Hant": "效率工具"
+	},
+	"tagline": {
+		"en": "Push-to-talk dictation for every app on your Mac, in Cantonese, English or Mandarin.",
+		"zh-Hant": "適用於 Mac 上每個應用程式的按鍵說話輸入，支援粵語、英語及普通話。"
+	},
+	"external": "https://tachyn.ai",
+	"services": ["Hosting", "Data", "Auth", "AI"],
+	"source": {
+		"repo": "SylphxAI/tachyn",
+		"path": "sylphx.toml",
+		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+	}
+}

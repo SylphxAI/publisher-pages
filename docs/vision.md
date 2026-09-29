@@ -50,7 +50,6 @@ gets a card that links out instead of duplicate pages.
 - Apps listed: Number Grove. Its content is owned by number-grove-keel as
   `publisher/app.json` and copied here by pull request. `deepLinks` wait for
   the Sylphx store accounts.
-- Tachyn is not listed until `tachyn.ai` is live; it will be an external card.
 - Site move to Keel (owner#739, stage 1) starts after the mount is live.
 
 2026-09-28:
@@ -76,3 +75,12 @@ gets a card that links out instead of duplicate pages.
   the `tag`) and its light `tag` and `highlight` tints are picked here. Its
   `icon.svg` is a byte copy of that repository's
   `brand/svg/number-grove-app-icon.svg`, same SHA-256 (checked 2026-09-28).
+
+2026-09-29:
+
+- The hub `/apps` and `/apps/index.json` list eight apps with their own sites
+  (Tryit, Puzzled, Luzzy, Viszy, Spiron, Kalkas, Tachyn, Mark). Each answered
+  200 and declares its services in its repository's `sylphx.toml`. Still not
+  served until the path mount is live.
+- Number Grove keeps its landing, privacy, terms and support pages but is not on
+  the hub: it declares no hosted service yet.

@@ -8,6 +8,19 @@ export type Locale = (typeof LOCALES)[number]
 /** A string in every served language. */
 export type Text = Record<Locale, string>
 
+/** Platform services an app may name as what it runs on. */
+export const PLATFORM_SERVICES = [
+	'Hosting',
+	'Data',
+	'AI',
+	'Auth',
+	'Workflows',
+	'Money',
+	'Events',
+	'Notify',
+] as const
+export type PlatformService = (typeof PLATFORM_SERVICES)[number]
+
 export interface Publisher {
 	legalName: string
 	companyNumber: string
@@ -67,6 +80,11 @@ export interface AppContent {
 	tagline: Text
 	/** An app with its own site: the index links there and no pages are built. */
 	external?: string
+	/**
+	 * Sylphx platform services the app runs on, proven by its repository's
+	 * `sylphx.toml`. An app with services is listed on the hub and in `/apps/index.json`.
+	 */
+	services?: PlatformService[]
 	description?: Text[]
 	features?: Array<{ title: Text; body: Text }>
 	/** Optional look: the app's own colours for light and dark, and its icon. */
@@ -178,6 +196,14 @@ export function validateApp(raw: unknown, file: string): AppContent {
 	text(app.tagline, `${file} tagline`)
 	if (typeof app.source?.repo !== 'string' || typeof app.source?.path !== 'string') {
 		fail(file, 'source.repo and source.path are required')
+	}
+	if (app.services !== undefined) {
+		if (!Array.isArray(app.services) || app.services.length === 0)
+			fail(file, 'services must be a non-empty list')
+		for (const service of app.services) {
+			if (!PLATFORM_SERVICES.includes(service)) fail(file, `unknown platform service: ${service}`)
+		}
+		if (new Set(app.services).size !== app.services.length) fail(file, 'services repeat')
 	}
 	if (app.external !== undefined) {
 		url(app.external, `${file} external`)
