@@ -13,7 +13,12 @@ const withoutJsonLd = (html: string) =>
 	html.replace(/<script type="application\/ld\+json">[^<]*<\/script>/g, '')
 
 /** The paths the site is mounted at on sylphx.com (see README). */
-const MOUNTS = ['/apps', '/.well-known/apple-app-site-association', '/.well-known/assetlinks.json']
+const MOUNTS = [
+	'/apps',
+	'/open-source',
+	'/.well-known/apple-app-site-association',
+	'/.well-known/assetlinks.json',
+]
 
 /** Gateway PathPrefix semantics: the prefix itself or a path below it. */
 const mounted = (href: string) => {
@@ -32,6 +37,24 @@ describe('served pages', () => {
 		}
 		expect(files.has('apps/index.html')).toBe(true)
 		expect(files.has('apps/zh-hant/index.html')).toBe(true)
+	})
+
+	test('the open-source page exists in both languages and stays inside the mounts', () => {
+		for (const [path, locale] of [
+			['open-source/index.html', 'en'],
+			['open-source/zh-hant/index.html', 'zh-Hant'],
+		]) {
+			const body = files.get(path ?? '') ?? ''
+			expect(body).toContain(`<html lang="${locale}">`)
+			expect(withoutJsonLd(body)).not.toMatch(/<script|<style|\sstyle=|\son[a-z]+=|javascript:/i)
+			for (const [, href = ''] of body.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
+				if (href === '/') continue
+				expect(mounted(href), `${path} links ${href}`).toBe(true)
+			}
+		}
+		expect(files.get('open-source/zh-hant/index.html')).toContain(
+			'hreflang="en" href="https://sylphx.com/open-source"',
+		)
 	})
 
 	test('every internal link and asset stays inside a mounted path', () => {

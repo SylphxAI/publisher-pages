@@ -18,12 +18,14 @@ the universal-link and app-link files. Owner decision:
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
 | `/apps/zh-hant/…` | The same pages in Traditional Chinese |
+| `/open-source`, `/open-source/zh-hant` | What Sylphx publishes (docs, SDK and CLI packages, API discovery, GitHub org, open-source tools) and what stays closed |
 | `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
 
-The site is a separate Sylphx Hosting project mounted at exactly three paths of
-`sylphx.com`: `/apps`, `/.well-known/apple-app-site-association`
-and `/.well-known/assetlinks.json`. Everything else on the host, including
-`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
+The site is a separate Sylphx Hosting project mounted at two path prefixes of
+`sylphx.com`, `/apps` and `/open-source` (`path_prefixes` in `sylphx.toml`).
+Everything else on the host, including `/zh-hant` and all of `/.well-known`,
+belongs to the platform site; the app-link files are built here but not
+mounted by the routes above. The
 platform repository (`SylphxAI/cloud`) names no product, so all product text
 lives here. Every URL the pages use stays inside the mounted paths: language
 twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.

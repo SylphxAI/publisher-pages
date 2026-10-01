@@ -122,8 +122,9 @@ describe('Also from Sylphx', () => {
 		expect(hub.match(/href="https:\/\/mark\.sylphx\.com"/g)?.length).toBe(1)
 		expect(zh.match(/href="https:\/\/mark\.sylphx\.com"/g)?.length).toBe(1)
 	})
-	test('does not add an /open-source page', () => {
+	test('serves /open-source at its own prefix, not under /apps', () => {
 		expect(files.has('apps/open-source/index.html')).toBe(false)
-		expect(files.has('open-source/index.html')).toBe(false)
+		expect(files.has('open-source/index.html')).toBe(true)
+		expect(files.has('open-source/zh-hant/index.html')).toBe(true)
 	})
 })

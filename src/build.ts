@@ -26,6 +26,7 @@ import {
 	assetLinks,
 	localized,
 	notFound,
+	openSourcePage,
 	themeCss,
 } from './render'
 
@@ -78,6 +79,7 @@ export async function renderSite({ publisher, apps }: Site): Promise<Map<string,
 	const html = (path: string, body: string) => files.set(join(path.slice(1), 'index.html'), body)
 	for (const locale of LOCALES) {
 		html(localized(locale, '/apps'), appsIndex(apps, locale, publisher))
+		html(localized(locale, '/open-source'), openSourcePage(locale, publisher))
 		for (const app of apps) {
 			if (app.external) continue
 			const base = localized(locale, `/apps/${app.slug}`)

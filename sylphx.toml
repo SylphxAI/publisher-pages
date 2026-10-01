@@ -1,4 +1,4 @@
-# Sylphx publisher pages: sylphx.com/apps and the app-link files.
+# Sylphx publisher pages: the service serves sylphx.com/apps and /open-source.
 version = "1"
 
 [project]
@@ -14,6 +14,7 @@ context = "."
 name = "web"
 port = 8080
 public_networking = true
+path_prefixes = ["/apps", "/open-source"]
 
 [services.health]
 mode = "http"

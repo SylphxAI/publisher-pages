@@ -19,6 +19,7 @@ import {
 	type Section,
 	type Text,
 } from './content'
+import { OPEN_SOURCE, SURFACES } from './open-source'
 import { UI } from './strings'
 import { KEY_TERMS, TERMS_SECTIONS, TERMS_UPDATED } from './terms'
 import { TOOLS } from './tools'
@@ -170,7 +171,7 @@ export function page({
 ${body}
 		</main>
 		<footer class="foot">
-			<nav><a href="${localized(locale, '/apps')}">${t(UI.appsTitle)}</a> <a href="https://sylphx.com/open-source">${t(UI.openSourceTitle)}</a> <a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a></nav>
+			<nav><a href="${localized(locale, '/apps')}">${t(UI.appsTitle)}</a> <a href="${localized(locale, '/open-source')}">${t(UI.openSourceTitle)}</a> <a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a></nav>
 			<p>${footer}</p>
 		</footer>
 	</body>
@@ -494,6 +495,62 @@ ${faq}`
 		body,
 		publisher,
 		themeSheet: themeSheetUrl(app),
+	})
+}
+
+export function openSourcePage(locale: Locale, publisher: Publisher): string {
+	const t = (s: Text) => s[locale]
+	const o = OPEN_SOURCE
+	const surfaces = SURFACES.map((surface) => {
+		const links = surface.links
+			.map((l) => `<a href="${escapeHtml(l.url)}">${escapeHtml(l.label)}</a>`)
+			.join(', ')
+		return `\t\t\t\t\t<li><h3>${escapeHtml(t(surface.name))}</h3><p>${escapeHtml(t(surface.what))}</p><p>${links}</p></li>`
+	}).join('\n')
+	const tools = TOOLS.map(
+		(tool) =>
+			`\t\t\t\t\t<li><a href="${escapeHtml(tool.url)}">${escapeHtml(tool.name)}</a> — ${escapeHtml(t(tool.summary))}</li>`,
+	).join('\n')
+	const paras = (items: Text[]) => items.map((p) => `\t\t\t\t<p>${escapeHtml(t(p))}</p>`).join('\n')
+	const closed = o.closed.map((p) => `\t\t\t\t\t<li>${escapeHtml(t(p))}</li>`).join('\n')
+	const corrections = fill(escapeHtml(t(o.corrections)), {
+		email: `<a href="mailto:${publisher.contactEmail}">${escapeHtml(publisher.contactEmail)}</a>`,
+	})
+	const body = `\t\t\t<h1>${escapeHtml(t(o.title))}</h1>
+			<p class="lede">${escapeHtml(t(o.intro))}</p>
+			<section class="block">
+				<h2>${escapeHtml(t(o.publishedTitle))}</h2>
+				<p class="lede">${escapeHtml(t(o.publishedIntro))}</p>
+				<ul class="list">
+${surfaces}
+				</ul>
+			</section>
+			<section class="block">
+				<h2>${escapeHtml(t(o.toolsTitle))}</h2>
+				<p class="lede">${escapeHtml(t(o.toolsIntro))}</p>
+				<ul class="list">
+${tools}
+				</ul>
+			</section>
+			<section class="block">
+				<h2>${escapeHtml(t(o.licenceTitle))}</h2>
+${paras(o.licence)}
+			</section>
+			<section class="block">
+				<h2>${escapeHtml(t(o.closedTitle))}</h2>
+				<p class="lede">${escapeHtml(t(o.closedIntro))}</p>
+				<ul class="list">
+${closed}
+				</ul>
+			</section>
+			<p>${corrections}</p>`
+	return page({
+		locale,
+		path: '/open-source',
+		title: `${t(o.navLabel)} · Sylphx`,
+		description: t(o.description),
+		body,
+		publisher,
 	})
 }
 
