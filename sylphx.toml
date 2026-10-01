@@ -1,4 +1,4 @@
-# Sylphx publisher pages: sylphx.com/apps and the app-link files.
+# Sylphx publisher pages: sylphx.com/apps. Platform serves the app-link files.
 version = "1"
 
 [project]
@@ -18,3 +18,10 @@ public_networking = true
 [services.health]
 mode = "http"
 path = "/healthz"
+
+# Supported domain-level path mount (SylphxAI/cloud#9128).
+# The platform retains /, /open-source and both /.well-known app-link files.
+[[domains]]
+hostname = "sylphx.com"
+service = "web"
+paths = ["/apps"]
