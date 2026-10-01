@@ -496,9 +496,9 @@
 		]
 	},
 	"privacy": {
-		"updated": "2026-09-27",
+		"updated": "2026-10-01",
 		"summary": {
-			"en": "Number Grove is made for young children. It has no ads, no third-party analytics and no tracking, and it does not ask a child for any personal information.",
+			"en": "Number Grove is made for young children. It has no ads, no third-party analytics and no tracking. It does not ask a child for any personal information.",
 			"zh-Hant": "數字花園為幼童而設。應用程式沒有廣告、沒有第三方分析工具，亦不作任何追蹤，更不會要求孩子提供任何個人資料。"
 		},
 		"sections": [
@@ -535,6 +535,30 @@
 					{
 						"en": "A parent buys the Garden subscription through the App Store or Google Play. The store takes the payment and handles your payment details under its own privacy policy; we never see them. The store sends us a purchase record (a transaction reference, the product, its dates and its status), which our payment service uses to confirm the subscription. It contains no information about the child.",
 						"zh-Hant": "家長透過 App Store 或 Google Play 購買花園訂閱。付款及你的付款資料由商店按其私隱政策處理，我們永遠看不到。商店會向我們發送購買紀錄（交易編號、產品、日期及狀態），我們的付款服務用它來確認訂閱。當中不包含任何關於孩子的資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Learning statistics",
+					"zh-Hant": "學習統計"
+				},
+				"body": [
+					{
+						"en": "Learning session counts stay on your device. Number Grove does not send these counts to Sylphx or an analytics company.",
+						"zh-Hant": "學習次數統計只保存在你的裝置上。數字花園不會將這些統計傳送給 Sylphx 或任何分析公司。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Security and operational logs",
+					"zh-Hant": "安全及運作日誌"
+				},
+				"body": [
+					{
+						"en": "We don't store IP addresses in analytics records. Our infrastructure and edge provider keep security and operational logs, which can include IP address and user agent.",
+						"zh-Hant": "我們不會在分析紀錄中儲存 IP 位址。我們的基礎設施及邊緣服務供應商會保留安全及運作日誌，當中可能包含 IP 位址及使用者代理資訊。"
 					}
 				]
 			},
