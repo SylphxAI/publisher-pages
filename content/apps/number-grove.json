@@ -557,8 +557,8 @@
 				},
 				"body": [
 					{
-						"en": "We don't store IP addresses in analytics records. Our infrastructure and edge provider keep security and operational logs, which can include IP address and user agent, for up to 7 days.",
-						"zh-Hant": "我們不會在分析紀錄中儲存 IP 位址。我們的基礎設施及邊緣服務供應商會保留安全及運作日誌，當中可能包含 IP 位址及使用者代理資訊，最長保留 7 天。"
+						"en": "We don't store IP addresses in analytics records. Our infrastructure and edge provider keep security and operational logs, which can include IP address and user agent.",
+						"zh-Hant": "我們不會在分析紀錄中儲存 IP 位址。我們的基礎設施及邊緣服務供應商會保留安全及運作日誌，當中可能包含 IP 位址及使用者代理資訊。"
 					}
 				]
 			},
