@@ -23,8 +23,8 @@ the universal-link and app-link files. Owner decision:
 
 The site is a separate Sylphx Hosting project mounted at four paths of
 `sylphx.com`: `/apps`, `/open-source`, `/.well-known/apple-app-site-association`
-and `/.well-known/assetlinks.json` (the `domains` block in `sylphx.toml`; it takes
-effect once the platform admits path-scoped domains on the apex host). Everything
+and `/.well-known/assetlinks.json` (the `[[domains]]` block and the service's `path_prefixes` in `sylphx.toml`; they
+take effect once the platform's path-scoped routing lands). Everything
 else on the host, including `/zh-hant` and the rest of `/.well-known`, belongs to
 the platform site. The platform repository (`SylphxAI/cloud`) names no product,
 so all product text lives here. Every URL the pages use stays inside the mounted
