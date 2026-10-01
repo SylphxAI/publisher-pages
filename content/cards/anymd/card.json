@@ -1,0 +1,21 @@
+{
+	"slug": "anymd",
+	"kind": "open-source",
+	"name": {
+		"en": "anymd",
+		"zh-Hant": "anymd"
+	},
+	"tagline": {
+		"en": "Any file to clean Markdown for AI agents. Runs on your machine, no API key.",
+		"zh-Hant": "把任何檔案轉為供 AI 代理使用的整潔 Markdown。在你的電腦上運行，無需 API 金鑰。"
+	},
+	"category": {
+		"en": "Developer tools",
+		"zh-Hant": "開發者工具"
+	},
+	"url": "https://github.com/SylphxAI/anymd",
+	"status": "available",
+	"repo": "SylphxAI/anymd",
+	"licence": "MIT",
+	"docs": "https://sylphxai.github.io/anymd/"
+}

@@ -1,0 +1,20 @@
+{
+	"slug": "skills",
+	"kind": "open-source",
+	"name": {
+		"en": "skills",
+		"zh-Hant": "skills"
+	},
+	"tagline": {
+		"en": "Reusable, organization-neutral Agent Skills for product, engineering, design and research.",
+		"zh-Hant": "可重複使用、不限機構的代理技能，涵蓋產品、工程、設計及研究工作。"
+	},
+	"category": {
+		"en": "Developer tools",
+		"zh-Hant": "開發者工具"
+	},
+	"url": "https://github.com/SylphxAI/skills",
+	"status": "available",
+	"repo": "SylphxAI/skills",
+	"licence": "MIT"
+}

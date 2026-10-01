@@ -1,0 +1,19 @@
+{
+	"slug": "viszy",
+	"kind": "app",
+	"name": {
+		"en": "Viszy",
+		"zh-Hant": "Viszy"
+	},
+	"tagline": {
+		"en": "Product photos and promo videos for online sellers, made from one photo.",
+		"zh-Hant": "為網店賣家由一張相片製作產品相和宣傳短片。"
+	},
+	"category": {
+		"en": "Business",
+		"zh-Hant": "商業"
+	},
+	"url": "https://viszy.ai",
+	"status": "available",
+	"services": ["Hosting", "Data"]
+}

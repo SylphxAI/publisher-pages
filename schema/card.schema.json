@@ -1,0 +1,220 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://sylphx.com/apps/_assets/card.schema.json",
+	"title": "publisher/card.json",
+	"description": "A product's card on the sylphx.com/apps and /open-source hubs. Validated by validateCard in src/content.ts, which is the authority (it also enforces banned tagline words and the image file rules).",
+	"type": "object",
+	"additionalProperties": false,
+	"required": ["slug", "kind", "name", "tagline", "category", "url", "status"],
+	"properties": {
+		"slug": {
+			"type": "string",
+			"pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+			"not": {
+				"enum": ["zh-hant", "_assets"]
+			}
+		},
+		"kind": {
+			"enum": ["app", "open-source"]
+		},
+		"name": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["en", "zh-Hant"],
+			"properties": {
+				"en": {
+					"type": "string",
+					"minLength": 1
+				},
+				"zh-Hant": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"tagline": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["en", "zh-Hant"],
+			"properties": {
+				"en": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 110
+				},
+				"zh-Hant": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 110
+				}
+			}
+		},
+		"category": {
+			"oneOf": [
+				{
+					"type": "object",
+					"properties": {
+						"en": {
+							"const": "AI agents"
+						},
+						"zh-Hant": {
+							"const": "AI 代理"
+						}
+					},
+					"required": ["en", "zh-Hant"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"en": {
+							"const": "Developer tools"
+						},
+						"zh-Hant": {
+							"const": "開發者工具"
+						}
+					},
+					"required": ["en", "zh-Hant"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"en": {
+							"const": "Productivity"
+						},
+						"zh-Hant": {
+							"const": "效率工具"
+						}
+					},
+					"required": ["en", "zh-Hant"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"en": {
+							"const": "Learning"
+						},
+						"zh-Hant": {
+							"const": "學習"
+						}
+					},
+					"required": ["en", "zh-Hant"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"en": {
+							"const": "Games and fun"
+						},
+						"zh-Hant": {
+							"const": "遊戲及娛樂"
+						}
+					},
+					"required": ["en", "zh-Hant"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"en": {
+							"const": "Business"
+						},
+						"zh-Hant": {
+							"const": "商業"
+						}
+					},
+					"required": ["en", "zh-Hant"],
+					"additionalProperties": false
+				}
+			]
+		},
+		"url": {
+			"type": "string",
+			"pattern": "^https://"
+		},
+		"status": {
+			"enum": ["available", "early-access"]
+		},
+		"image": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["src", "alt"],
+			"properties": {
+				"src": {
+					"type": "string",
+					"pattern": "^[a-z0-9][a-z0-9._-]*\\.webp$"
+				},
+				"alt": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": ["en", "zh-Hant"],
+					"properties": {
+						"en": {
+							"type": "string",
+							"minLength": 1
+						},
+						"zh-Hant": {
+							"type": "string",
+							"minLength": 1
+						}
+					}
+				}
+			},
+			"description": "1200x750 webp, at most 61440 bytes, a real product screenshot"
+		},
+		"icon": {
+			"type": "string",
+			"pattern": "^[a-z0-9][a-z0-9._-]*\\.(svg|png|webp|avif|jpg)$"
+		},
+		"services": {
+			"type": "array",
+			"minItems": 1,
+			"uniqueItems": true,
+			"items": {
+				"enum": ["Hosting", "Data", "AI", "Auth", "Workflows", "Money", "Events", "Notify"]
+			}
+		},
+		"repo": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9._-]+$"
+		},
+		"licence": {
+			"type": "string",
+			"description": "SPDX identifier, equal to the repository's licence on GitHub"
+		},
+		"docs": {
+			"type": "string",
+			"pattern": "^https://"
+		}
+	},
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"kind": {
+						"const": "open-source"
+					}
+				}
+			},
+			"then": {
+				"required": ["repo", "licence"]
+			},
+			"else": {
+				"required": ["services"],
+				"not": {
+					"anyOf": [
+						{
+							"required": ["repo"]
+						},
+						{
+							"required": ["licence"]
+						}
+					]
+				}
+			}
+		}
+	]
+}
