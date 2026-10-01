@@ -496,10 +496,10 @@
 		]
 	},
 	"privacy": {
-		"updated": "2026-09-28",
+		"updated": "2026-10-01",
 		"summary": {
-			"en": "Number Grove is made for young children. It has no ads, no third-party analytics and no tracking. It does not ask a child for any personal information. A parent can choose to share one anonymous weekly count.",
-			"zh-Hant": "數字花園為幼童而設。應用程式沒有廣告、沒有第三方分析工具，亦不作任何追蹤，更不會要求孩子提供任何個人資料。家長可選擇分享一項匿名的每週統計。"
+			"en": "Number Grove is made for young children. It has no ads, no third-party analytics and no tracking. It does not ask a child for any personal information.",
+			"zh-Hant": "數字花園為幼童而設。應用程式沒有廣告、沒有第三方分析工具，亦不作任何追蹤，更不會要求孩子提供任何個人資料。"
 		},
 		"sections": [
 			{
@@ -540,13 +540,13 @@
 			},
 			{
 				"heading": {
-					"en": "Anonymous weekly count (off unless a parent turns it on)",
-					"zh-Hant": "匿名每週統計（除非家長開啟，否則關閉）"
+					"en": "Learning statistics",
+					"zh-Hant": "學習統計"
 				},
 				"body": [
 					{
-						"en": "In the parent area, behind the parent gate, a switch called \"Anonymous weekly count\" is off by default. If a parent turns it on, the app sends one small message to Sylphx at the start of each week and no more often. The message contains only the app version, the language (English or Traditional Chinese), the platform (iOS, Android or web), the week it covers, and a rough number of learning sessions in that week (0, 1 to 2, 3 to 5, or 6 or more). It carries no device, install or account identifier, no name and no exact time. It is sent straight to Sylphx, not to any analytics company, and we do not keep the sender's IP address with it. We use it only to count how many families learn each week. Turn the switch off at any time and nothing more is sent.",
-						"zh-Hant": "在家長區（需通過家長驗證）有一個「匿名每週統計」開關，預設為關閉。如家長開啟，應用程式會在每週開始時向 Sylphx 發送一則簡短訊息，不會更頻密。訊息只包含應用程式版本、語言（英文或繁體中文）、平台（iOS、Android 或網頁）、所涵蓋的週次，以及該週學習次數的大概範圍（0、1 至 2、3 至 5，或 6 次或以上）。訊息不含任何裝置、安裝或帳戶識別碼，沒有姓名，也沒有確切時間。訊息直接傳送給 Sylphx，不經任何分析公司，我們亦不會連同訊息保存發送者的 IP 位址。我們只用它計算每週有多少家庭在學習。你可隨時關閉開關，之後不會再發送任何資料。"
+						"en": "Learning session counts stay on your device. Number Grove does not send these counts to Sylphx or an analytics company.",
+						"zh-Hant": "學習次數統計只保存在你的裝置上。數字花園不會將這些統計傳送給 Sylphx 或任何分析公司。"
 					}
 				]
 			},
