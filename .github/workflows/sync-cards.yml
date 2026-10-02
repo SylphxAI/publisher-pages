@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: Sync one card by slug (default: all)
+        description: "Sync one card by slug (default: all)"
         required: false
 
 permissions:
