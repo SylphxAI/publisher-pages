@@ -1,0 +1,245 @@
+{
+	"slug": "puzzled",
+	"name": {
+		"en": "Puzzled",
+		"zh-Hant": "Puzzled"
+	},
+	"category": {
+		"en": "Games and fun",
+		"zh-Hant": "遊戲及娛樂"
+	},
+	"tagline": {
+		"en": "A free daily brain game: word, logic, number and spatial puzzles, one free puzzle every day.",
+		"zh-Hant": "每日免費腦力遊戲：文字、邏輯、數字及空間謎題，每天一道免費謎題。"
+	},
+	"icon": "icon.svg",
+	"description": [
+		{
+			"en": "Puzzled is a daily brain-games site: a few short puzzles every day across word, logic, number and spatial play, including Five, Threads, Hive, Mini Grid, Sudoku, Paint, Rungs and Arithmo. One puzzle is always free, and you need no account to play it.",
+			"zh-Hant": "Puzzled 是每日腦力遊戲網站：每天幾道短謎題，涵蓋文字、邏輯、數字及空間類型，包括 Five、Threads、Hive、Mini Grid、Sudoku、Paint、Rungs 及 Arithmo。每天總有一道免費謎題，毋須帳戶即可遊玩。"
+		},
+		{
+			"en": "Everyone gets the same set each day, and a new set appears at midnight Hong Kong time. Results can be shared without spoilers. An optional Puzzled Plus subscription adds the archive, stats and more. Puzzled runs in your browser and can be added to your home screen; there is no separate app to download.",
+			"zh-Hant": "每個人每天都玩同一組謎題，新一組於香港時間午夜更新。結果可以分享而不會劇透。可選的 Puzzled Plus 訂閱提供歷史存檔、統計等功能。Puzzled 在瀏覽器中運行，可加到主畫面；毋須另外下載應用程式。"
+		}
+	],
+	"features": [
+		{
+			"title": {
+				"en": "One free puzzle every day",
+				"zh-Hant": "每天一道免費謎題"
+			},
+			"body": {
+				"en": "The free daily puzzle never needs an account.",
+				"zh-Hant": "免費的每日謎題毋須帳戶。"
+			}
+		},
+		{
+			"title": {
+				"en": "Same puzzles for everyone",
+				"zh-Hant": "人人同一組謎題"
+			},
+			"body": {
+				"en": "A new daily set appears at midnight Hong Kong time, and streaks use the same clock.",
+				"zh-Hant": "新的每日謎題於香港時間午夜更新，連續紀錄亦按同一時鐘計算。"
+			}
+		},
+		{
+			"title": {
+				"en": "Play anywhere",
+				"zh-Hant": "隨處可玩"
+			},
+			"body": {
+				"en": "Works in any modern browser and can be added to your home screen.",
+				"zh-Hant": "可在任何現代瀏覽器使用，亦可加到主畫面。"
+			}
+		},
+		{
+			"title": {
+				"en": "Optional Puzzled Plus",
+				"zh-Hant": "可選的 Puzzled Plus"
+			},
+			"body": {
+				"en": "A subscription adds the archive and stats. Cancel any time in Settings.",
+				"zh-Hant": "訂閱可使用歷史存檔及統計。可隨時在設定中取消。"
+			}
+		}
+	],
+	"availability": {
+		"status": "available",
+		"stores": [
+			{
+				"kind": "web",
+				"url": "https://puzzled.gg"
+			}
+		]
+	},
+	"support": {
+		"email": "hi@puzzled.gg",
+		"faq": [
+			{
+				"q": {
+					"en": "I cannot get back into my account. What now?",
+					"zh-Hant": "我無法登入帳戶，怎麼辦？"
+				},
+				"a": {
+					"en": "Sign in with the email and password you registered with, or with the same provider button if you created the account that way. If the password is gone, choose Forgot password? on the sign-in page and a reset link is emailed to you.",
+					"zh-Hant": "請用註冊時的電郵和密碼登入，或按你建立帳戶時使用的同一個登入方式按鈕。忘記密碼的話，在登入頁選擇「忘記密碼？」，重設連結會寄到你的電郵。"
+				}
+			},
+			{
+				"q": {
+					"en": "I played as a guest. Is that progress saved?",
+					"zh-Hant": "我以訪客身分玩，進度會保存嗎？"
+				},
+				"a": {
+					"en": "A guest finish counts for the day you played, but it is stored against that browser, not an account, so it does not follow you to another device. A signed-in account keeps your streak, results and stats across devices.",
+					"zh-Hant": "訪客的完成紀錄會計入當天，但只保存於該瀏覽器而非帳戶，不會跟到其他裝置。登入帳戶才可跨裝置保留連續紀錄、結果及統計。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I cancel Puzzled Plus?",
+					"zh-Hant": "怎樣取消 Puzzled Plus？"
+				},
+				"a": {
+					"en": "Cancel at any time in Settings > Subscription. You keep Plus until the end of the period you have paid for and are not charged again.",
+					"zh-Hant": "可隨時在「設定 > 訂閱」中取消。你可使用 Plus 至已付費期間結束，之後不會再收費。"
+				}
+			},
+			{
+				"q": {
+					"en": "Can I get a refund?",
+					"zh-Hant": "可以退款嗎？"
+				},
+				"a": {
+					"en": "Payments are non-refundable, and part-used periods are not refunded, except where the terms or the law say otherwise. If something we delivered did not work, we put it right, and your statutory consumer rights are not affected. Write to hi@puzzled.gg for a question about a payment.",
+					"zh-Hant": "款項不獲退還，已部分使用的期間亦不退款，但條款或法律另有規定者除外。如我們提供的服務有問題，我們會處理，你的法定消費者權利不受影響。有關付款的疑問，請電郵 hi@puzzled.gg。"
+				}
+			},
+			{
+				"q": {
+					"en": "When does a new puzzle day start?",
+					"zh-Hant": "新的謎題日何時開始？"
+				},
+				"a": {
+					"en": "Everything runs on Hong Kong time (UTC+8, no daylight saving). A new daily set appears at midnight, and results and streaks use the same clock.",
+					"zh-Hant": "一切以香港時間（UTC+8，無夏令時間）計算。新的每日謎題於午夜出現，結果及連續紀錄亦用同一時鐘。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I get a copy of my data, or delete it?",
+					"zh-Hant": "怎樣取得我的資料副本或刪除資料？"
+				},
+				"a": {
+					"en": "Write to hi@puzzled.gg for access, an export, correction or deletion. That one address handles those requests.",
+					"zh-Hant": "請電郵 hi@puzzled.gg 要求查閱、匯出、更正或刪除資料，所有此類要求均由此地址處理。"
+				}
+			}
+		]
+	},
+	"privacy": {
+		"updated": "2026-10-01",
+		"summary": {
+			"en": "Puzzled collects only what it needs to run your account, scores and subscription. We do not sell personal data. Analytics and advertising cookies stay off unless you turn them on.",
+			"zh-Hant": "Puzzled 只收集運作帳戶、成績及訂閱所需的資料。我們不會出售個人資料。分析及廣告 cookie 預設關閉，除非你自行開啟。"
+		},
+		"sections": [
+			{
+				"heading": {
+					"en": "What we collect",
+					"zh-Hant": "我們收集的資料"
+				},
+				"body": [
+					{
+						"en": "Account information (name, email address, profile picture), game data (scores, statistics, streaks, history), and technical data (IP address, browser type, device information). Payments are handled by Sylphx Money and its processor Stripe; we receive your subscription status, amounts, dates and payment references, never your full card number.",
+						"zh-Hant": "帳戶資料（姓名、電郵、頭像）、遊戲資料（成績、統計、連續紀錄、歷史）及技術資料（IP 位址、瀏覽器類型、裝置資料）。付款由 Sylphx Money 及其處理商 Stripe 處理；我們只收到訂閱狀態、金額、日期及付款參考，不會收到完整卡號。"
+					},
+					{
+						"en": "When a page or server fails we record the error message, stack trace and page path, never the query string, email addresses or anything you typed.",
+						"zh-Hant": "頁面或伺服器出錯時，我們記錄錯誤訊息、堆疊追蹤及頁面路徑，絕不包括查詢字串、電郵或你輸入的內容。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Cookies and measurement",
+					"zh-Hant": "Cookie 與數據量度"
+				},
+				"body": [
+					{
+						"en": "Strictly necessary cookies sign you in, keep Puzzled secure and remember your settings. Google Analytics and the referral cookie load only if you accept analytics; advertising measurement only if you separately turn on advertising. Nothing is pre-selected, and you can change your choice at any time. Players without Puzzled Plus may see Google AdSense advertising on archive and result screens, never during a puzzle, and only if advertising cookies are on.",
+						"zh-Hant": "必要的 cookie 用於登入、保障安全及記住設定。Google Analytics 及推薦 cookie 僅在你接受分析後載入；廣告量度僅在你另行開啟廣告後使用。沒有預設選項，你可隨時更改選擇。沒有 Puzzled Plus 的玩家可能在存檔及結果畫面看到 Google AdSense 廣告（遊戲進行中不會出現），且僅在廣告 cookie 開啟時才會顯示。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Why we use it",
+					"zh-Hant": "我們使用資料的原因"
+				},
+				"body": [
+					{
+						"en": "To provide Puzzled, your account and Puzzled Plus (performance of a contract); to keep the service secure, prevent cheating and fraud, fix faults and improve our games (legitimate interests); to measure play and which links or ads bring players (your consent, which you can withdraw); and to keep tax and accounting records and defend legal claims (legal obligation and legitimate interests).",
+						"zh-Hant": "提供 Puzzled、你的帳戶及 Puzzled Plus（履行合約）；保障服務安全、防止作弊及欺詐、修復故障及改善遊戲（正當利益）；量度遊玩情況及哪些連結或廣告帶來玩家（需你同意，可隨時撤回）；以及保存稅務及會計紀錄和抗辯法律申索（法律責任及正當利益）。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Who receives it",
+					"zh-Hant": "資料的接收者"
+				},
+				"body": [
+					{
+						"en": "Service providers that process data for us under contract: Sylphx Money and Stripe (payments), Google (sign-in, and analytics and ad measurement after you consent), and our hosting and email providers. Some providers process data outside the UK, under UK adequacy regulations or approved safeguards. We do not sell personal data.",
+						"zh-Hant": "按合約為我們處理資料的服務供應商：Sylphx Money 及 Stripe（付款）、Google（登入，以及你同意後的分析及廣告量度），以及我們的主機和電郵供應商。部分供應商在英國以外處理資料，依據英國充分性規例或認可的保障措施。我們不會出售個人資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "How long we keep it",
+					"zh-Hant": "保存期限"
+				},
+				"body": [
+					{
+						"en": "We keep your account and game data while your account is open. When you delete your account we erase your game history, stats, streaks, profile and settings. Payment records are kept, without your player ID, for as long as tax and accounting law requires.",
+						"zh-Hant": "帳戶開啟期間，我們保存你的帳戶及遊戲資料。你刪除帳戶後，我們會清除遊戲歷史、統計、連續紀錄、個人檔案及設定。付款紀錄在稅務及會計法律要求的期間內保存，並不再附有你的玩家編號。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Children",
+					"zh-Hant": "兒童"
+				},
+				"body": [
+					{
+						"en": "Puzzled accounts are for people aged 13 and over. If we learn that we hold an account of a child under 13, we may close it and delete its data. We do not profile children for marketing.",
+						"zh-Hant": "Puzzled 帳戶供 13 歲或以上人士使用。如我們得悉持有 13 歲以下兒童的帳戶，可能會將其關閉並刪除資料。我們不會為營銷而對兒童進行行為分析。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Deleting your data",
+					"zh-Hant": "刪除資料"
+				},
+				"body": [
+					{
+						"en": "Write to hi@puzzled.gg to access, export, correct or delete your data. The full policy is at puzzled.gg/privacy.",
+						"zh-Hant": "請電郵 hi@puzzled.gg 要求查閱、匯出、更正或刪除資料。完整政策載於 puzzled.gg/privacy。"
+					}
+				]
+			}
+		]
+	},
+	"deepLinks": {},
+	"source": {
+		"repo": "SylphxAI/puzzled",
+		"path": "https://puzzled.gg/privacy",
+		"note": "Puzzled is a web product with no native app, so no app-link entries. Facts from puzzled.gg/privacy, /terms and /support and apps/puzzled/public/manifest.webmanifest; icon is apps/puzzled/public/brand/mark.svg."
+	}
+}

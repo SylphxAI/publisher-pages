@@ -624,7 +624,11 @@
 			}
 		]
 	},
-	"deepLinks": {},
+	"deepLinks": {
+		"apple": {
+			"appIds": ["3P3M2P34DS.com.sylphx.numbergrove"]
+		}
+	},
 	"source": {
 		"repo": "SylphxAI/number-grove-keel",
 		"path": "publisher/app.json",
