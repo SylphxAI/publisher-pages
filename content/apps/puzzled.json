@@ -142,8 +142,8 @@
 	"privacy": {
 		"updated": "2026-10-01",
 		"summary": {
-			"en": "Puzzled collects only what it needs to run your account, scores and subscription. We do not sell personal data. Analytics and advertising cookies stay off unless you turn them on.",
-			"zh-Hant": "Puzzled 只收集運作帳戶、成績及訂閱所需的資料。我們不會出售個人資料。分析及廣告 cookie 預設關閉，除非你自行開啟。"
+			"en": "Puzzled collects only what it needs to run your account, scores and subscription, plus technical and error data. We do not sell personal data. Analytics, referral and advertising cookies stay off unless you turn them on.",
+			"zh-Hant": "Puzzled 只收集運作帳戶、成績及訂閱所需的資料，以及技術及錯誤資料。我們不會出售個人資料。分析、推薦及廣告 cookie 預設關閉，除非你自行開啟。"
 		},
 		"sections": [
 			{
@@ -240,6 +240,6 @@
 	"source": {
 		"repo": "SylphxAI/puzzled",
 		"path": "https://puzzled.gg/privacy",
-		"note": "Puzzled is a web product with no native app, so no app-link entries. Facts from puzzled.gg/privacy, /terms and /support and apps/puzzled/public/manifest.webmanifest; icon is apps/puzzled/public/brand/mark.svg."
+		"note": "Puzzled is a web product with no native app, so no app-link entries. Facts from puzzled.gg/privacy, /terms and /support and apps/puzzled/public/manifest.webmanifest; icon is apps/puzzled/public/brand/mark.svg (the #248 mark, origin/main)."
 	}
 }
