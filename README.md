@@ -100,9 +100,11 @@ matches GitHub's. A changed card gets its own pull request on
 `sync/card-{slug}`, labelled `owner:services`, with auto-merge through the merge
 queue. A failing card fails only itself: its last good copy stays live, and the
 run turns red. `bun scripts/sync-cards.ts --dry-run` reads and checks without
-writing. The workflow needs the repository secrets `CARD_SYNC_APP_ID` and
-`CARD_SYNC_APP_KEY` of a GitHub App installed on every source repository
-(contents and metadata read; contents and pull requests write only here).
+writing. The workflow uses the company's builder GitHub App (installed on all
+repositories, contents and pull requests write): the repository variable
+`SYLPHX_BUILDER_APP_ID` and the organisation secret `SYLPHX_BUILDER_PRIVATE_KEY`
+must be available to this repository. Its source-read token is limited to
+contents and metadata read; the write token is limited to this repository.
 
 `content/surfaces.json` lists the platform's own packages (SDK, contract, CLI)
 shown under the open-source gallery.
