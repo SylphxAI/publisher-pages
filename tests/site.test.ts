@@ -161,9 +161,16 @@ describe('app-link files', () => {
 	})
 
 	test('are valid when no app declares ids', () => {
-		expect(JSON.parse(files.get('.well-known/apple-app-site-association') ?? '')).toEqual({
-			applinks: { details: [] },
-		})
+		const bare = site.apps.map((a) => ({ ...a, deepLinks: {} }))
+		expect(JSON.parse(appleAppSiteAssociation(bare))).toEqual({ applinks: { details: [] } })
+		expect(JSON.parse(assetLinks(bare))).toEqual([])
+	})
+
+	test('publish the declared ids and only those', () => {
+		const apple = JSON.parse(files.get('.well-known/apple-app-site-association') ?? '')
+		expect(apple.applinks.details).toEqual([
+			{ appIDs: ['3P3M2P34DS.com.sylphx.numbergrove'], components: [{ '/': '/apps/number-grove/*' }] },
+		])
 		expect(JSON.parse(files.get('.well-known/assetlinks.json') ?? '')).toEqual([])
 	})
 
