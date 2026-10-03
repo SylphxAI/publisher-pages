@@ -12,6 +12,7 @@ context = "."
 
 [[services]]
 name = "web"
+instance_type = "nano"
 port = 8080
 public_networking = true
 
