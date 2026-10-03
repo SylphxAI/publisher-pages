@@ -8,6 +8,7 @@ the universal-link and app-link files. Owner decision:
 [SylphxAI/owner company/decisions.md, 2026-09-26 "Publisher pages, and when a product gets a domain"](https://github.com/SylphxAI/owner/blob/main/company/decisions.md).
 
 - Vision: [docs/vision.md](docs/vision.md)
+- Product sites, one project and one site per product: [docs/product-sites.md](docs/product-sites.md)
 
 ## What it serves
 
