@@ -1,0 +1,19 @@
+{
+	"slug": "luzzy",
+	"kind": "app",
+	"name": {
+		"en": "Luzzy",
+		"zh-Hant": "Luzzy"
+	},
+	"tagline": {
+		"en": "Practise real conversations with an AI partner and get feedback that quotes you.",
+		"zh-Hant": "與 AI 夥伴練習真實對話，並獲得引用你原話的回饋。"
+	},
+	"category": {
+		"en": "Learning",
+		"zh-Hant": "學習"
+	},
+	"url": "https://luzzy.chat",
+	"status": "available",
+	"services": ["Hosting", "Data", "Auth", "AI"]
+}

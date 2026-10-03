@@ -1,0 +1,19 @@
+{
+	"slug": "tryit",
+	"kind": "app",
+	"name": {
+		"en": "Tryit",
+		"zh-Hant": "Tryit"
+	},
+	"tagline": {
+		"en": "One-minute plays with a result worth sending. Free, no account, no ads.",
+		"zh-Hant": "一分鐘小遊戲，結果值得分享。免費、免註冊、無廣告。"
+	},
+	"category": {
+		"en": "Games and fun",
+		"zh-Hant": "遊戲及娛樂"
+	},
+	"url": "https://tryit.fun",
+	"status": "available",
+	"services": ["Hosting", "Data", "AI"]
+}

@@ -4,16 +4,24 @@
  * Output paths mirror the served URLs. nginx serves `dist/` as-is.
  */
 
-import { access, copyFile, mkdir, readdir, rm, writeFile } from 'node:fs/promises'
+import { access, copyFile, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import {
 	type AppContent,
 	appAssets,
+	type Card,
 	ContentError,
+	cardAssets,
+	cardImageProblem,
 	LOCALES,
 	type Publisher,
+	type Source,
+	type Surface,
 	validateApp,
+	validateCard,
 	validatePublisher,
+	validateSources,
+	validateSurfaces,
 } from './content'
 import {
 	appLanding,
@@ -24,8 +32,11 @@ import {
 	appsIndexJson,
 	appTerms,
 	assetLinks,
+	filterCss,
+	hubOgFile,
 	localized,
 	notFound,
+	openSourceIndex,
 	themeCss,
 } from './render'
 
@@ -51,7 +62,13 @@ async function vendoredBrand(dir = VENDOR, prefix = ''): Promise<[string, string
 export interface Site {
 	publisher: Publisher
 	apps: AppContent[]
-	/** Where each app's asset files live: `content/apps/{slug}/`. */
+	/** Product cards, one per `content/cards/{slug}/card.json`. */
+	cards: Card[]
+	/** The repositories the cards are read from. */
+	sources: Source[]
+	/** The platform's own published surfaces, for the open-source hub. */
+	surfaces: Surface[]
+	/** Where each app's and card's asset files live: `content/apps/{slug}/`, `content/cards/{slug}/`. */
 	contentDir: string
 }
 
@@ -69,17 +86,51 @@ export async function loadSite(contentDir = join(ROOT, 'content')): Promise<Site
 		}
 		apps.push(app)
 	}
-	return { publisher, apps, contentDir }
+	const sources = validateSources(await readJson(join(contentDir, 'sources.json')), 'content/sources.json')
+	const surfaces = validateSurfaces(
+		await readJson(join(contentDir, 'surfaces.json')),
+		'content/surfaces.json',
+	)
+	const cardDir = join(contentDir, 'cards')
+	const cards: Card[] = []
+	for (const slug of (await readdir(cardDir)).sort()) {
+		const where = `content/cards/${slug}/card.json`
+		const card = validateCard(await readJson(join(cardDir, slug, 'card.json')), where)
+		if (card.slug !== slug) throw new ContentError(`${where}: slug must be ${slug}`)
+		for (const file of cardAssets(card)) {
+			const bytes = await readFile(join(cardDir, slug, file)).catch(() => {
+				throw new ContentError(`${where}: missing asset content/cards/${slug}/${file}`)
+			})
+			if (card.image?.src === file) {
+				const problem = cardImageProblem(bytes)
+				if (problem) throw new ContentError(`${where}: ${problem}`)
+			}
+		}
+		cards.push(card)
+	}
+	const listed = new Set(sources.map((s) => s.slug))
+	for (const card of cards) {
+		if (!listed.has(card.slug))
+			throw new ContentError(`content/cards/${card.slug}: not in content/sources.json`)
+	}
+	for (const source of sources) {
+		if (!cards.some((c) => c.slug === source.slug)) {
+			throw new ContentError(
+				`content/sources.json: ${source.slug} has no content/cards/${source.slug}/card.json`,
+			)
+		}
+	}
+	return { publisher, apps, cards, sources, surfaces, contentDir }
 }
 
 /** Every file of the built site, keyed by its path under `dist/`. */
-export async function renderSite({ publisher, apps }: Site): Promise<Map<string, string>> {
+export async function renderSite({ publisher, apps, cards, surfaces }: Site): Promise<Map<string, string>> {
 	const files = new Map<string, string>()
 	const html = (path: string, body: string) => files.set(join(path.slice(1), 'index.html'), body)
 	for (const locale of LOCALES) {
-		html(localized(locale, '/apps'), appsIndex(apps, locale, publisher))
+		html(localized(locale, '/apps'), appsIndex(cards, locale, publisher))
+		html(localized(locale, '/open-source'), openSourceIndex(cards, surfaces, locale, publisher))
 		for (const app of apps) {
-			if (app.external) continue
 			const base = localized(locale, `/apps/${app.slug}`)
 			html(base, appLanding(app, locale, publisher))
 			html(`${base}/privacy`, appPrivacy(app, locale, publisher))
@@ -90,8 +141,11 @@ export async function renderSite({ publisher, apps }: Site): Promise<Map<string,
 	for (const app of apps) {
 		if (app.theme) files.set(`apps/_assets/${app.slug}/theme.css`, themeCss(app.theme))
 	}
-	files.set('apps/_assets/site.css', await Bun.file(join(ROOT, 'src/site.css')).text())
-	files.set('apps/index.json', appsIndexJson(apps, publisher))
+	files.set(
+		'apps/_assets/site.css',
+		`${await Bun.file(join(ROOT, 'src/site.css')).text()}${filterCss(cards)}`,
+	)
+	files.set('apps/index.json', appsIndexJson(cards, publisher))
 	files.set('apps/404.html', notFound(publisher))
 	files.set('.well-known/apple-app-site-association', appleAppSiteAssociation(apps))
 	files.set('.well-known/assetlinks.json', assetLinks(apps))
@@ -113,6 +167,22 @@ export async function build(outDir = join(ROOT, 'dist')): Promise<Map<string, st
 		const target = join(outDir, 'apps/_assets/brand', path)
 		await mkdir(dirname(target), { recursive: true })
 		await copyFile(from, target)
+	}
+	for (const card of site.cards) {
+		for (const asset of cardAssets(card)) {
+			const target = join(outDir, 'apps/_assets/cards', card.slug, asset)
+			await mkdir(dirname(target), { recursive: true })
+			await copyFile(join(site.contentDir, 'cards', card.slug, asset), target)
+		}
+	}
+	// The hubs' share images, designed once from the brand tokens.
+	for (const hub of ['apps', 'open-source'] as const) {
+		for (const locale of LOCALES) {
+			const file = hubOgFile(hub, locale)
+			const target = join(outDir, 'apps/_assets/hub', file)
+			await mkdir(dirname(target), { recursive: true })
+			await copyFile(join(site.contentDir, 'hub', file), target)
+		}
 	}
 	for (const app of site.apps) {
 		for (const asset of appAssets(app)) {

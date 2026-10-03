@@ -1,0 +1,21 @@
+{
+	"slug": "repomap",
+	"kind": "open-source",
+	"name": {
+		"en": "repomap",
+		"zh-Hant": "repomap"
+	},
+	"tagline": {
+		"en": "A map of your codebase for AI agents: code graph, search, call paths and change impact.",
+		"zh-Hant": "為 AI 代理而設的程式碼地圖：程式碼關係圖、搜尋、呼叫路徑及改動影響。"
+	},
+	"category": {
+		"en": "Developer tools",
+		"zh-Hant": "開發者工具"
+	},
+	"url": "https://github.com/SylphxAI/repomap",
+	"status": "available",
+	"repo": "SylphxAI/repomap",
+	"licence": "MIT",
+	"docs": "https://sylphxai.github.io/repomap/"
+}

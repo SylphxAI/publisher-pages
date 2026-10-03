@@ -3,6 +3,8 @@
 	"companyNumber": "16438428",
 	"registeredOffice": "128 City Road, London EC1V 2NX",
 	"jurisdiction": { "en": "England and Wales", "zh-Hant": "英格蘭及威爾斯" },
-	"contactEmail": "contact@sylphx.com",
-	"site": "https://sylphx.com"
+	"contactEmail": "hi@sylphx.com",
+	"phone": "+44 333 335 7935",
+	"site": "https://sylphx.com",
+	"starBadge": "https://mark.sylphx.com/github/stars/{repo}.svg?style=flat-square&logo=github"
 }

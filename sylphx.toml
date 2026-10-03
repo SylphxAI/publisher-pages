@@ -1,4 +1,4 @@
-# Sylphx publisher pages: sylphx.com/apps and the app-link files.
+# Sylphx publisher pages: the service serves sylphx.com/apps and /open-source.
 version = "1"
 
 [project]
@@ -15,7 +15,15 @@ name = "web"
 instance_type = "nano"
 port = 8080
 public_networking = true
+path_prefixes = ["/apps", "/open-source"]
 
 [services.health]
 mode = "http"
 path = "/healthz"
+
+# The apex host routes to this service's path_prefixes (/apps, /open-source);
+# the platform's own catch-all keeps everything else. Takes effect once the
+# platform change for path-scoped service routing lands.
+[[domains]]
+hostname = "sylphx.com"
+service = "web"
