@@ -13,6 +13,8 @@ context = "."
 [[services]]
 name = "web"
 port = 8080
+# nano (0.1 CPU, 256 MiB): 7-day p95 0.07 GiB, peak 0.07 GiB, CPU p95 0.000 (read 2026-10-04).
+instance_type = "nano"
 public_networking = true
 
 [services.health]
