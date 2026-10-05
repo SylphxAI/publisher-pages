@@ -20,3 +20,7 @@ public_networking = true
 [services.health]
 mode = "http"
 path = "/healthz"
+
+[ci]
+merge = "optimistic"
+on_red = "revert"

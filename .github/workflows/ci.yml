@@ -3,13 +3,32 @@ name: ci
 on:
   pull_request:
   merge_group:
-  push:
-    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
+  actions: read
+  checks: read
+  pull-requests: read
 
 jobs:
+  # Stop the line: while the trunk's newest conclusive Verify run is red and its
+  # way back is in motion, a merge group is admitted only for a revert, a
+  # live-outage fix or a pull request labelled `main-red-fix`. Observe mode
+  # first; set `mode: enforce` after a few merge groups have been read.
+  main-state:
+    if: github.event_name == 'merge_group'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: SylphxAI/.github/.github/actions/main-red-gate@05ac6474b96425bcb4965addd025a93e061b66c4
+        with:
+          mode: observe
+
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -22,11 +41,9 @@ jobs:
           bun-version: 1.4.0
       - run: bun install --frozen-lockfile
       - run: bun run check
-      - run: bun run build
 
   # Checks the lines a pull request or merge group adds.
   zh-hant:
-    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -37,7 +54,6 @@ jobs:
 
   # Checks the lines a pull request or merge group adds (owner standards/identifiers.md).
   identifiers:
-    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -48,15 +64,21 @@ jobs:
       - name: Non-v7 ids on added lines (owner standards/identifiers.md)
         uses: SylphxAI/.github/.github/actions/identifiers@e4a5ea41cbcc87cd93914f89f0d7c3981c868bf9
 
+  # The full suite (the production build) on a pull request that is ready;
+  # after merge verify.yml runs it on the trunk. Never in a merge group or a draft.
+  suite:
+    if: github.event_name != 'merge_group' && !github.event.pull_request.draft
+    uses: ./.github/workflows/verify.yml
+
   # The one required check (ruleset sylphx-merge-queue): the merge queue waits on this.
   ci-ok:
     if: always()
-    needs: [check, zh-hant, identifiers]
+    needs: [main-state, check, zh-hant, identifiers, suite]
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 5
     steps:
-      - run: |
-          set -euo pipefail
-          test "${{ needs.check.result }}" = success
-          case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
-          case "${{ needs.identifiers.result }}" in success|skipped) ;; *) exit 1 ;; esac
+      - uses: SylphxAI/.github/.github/actions/needs-pass@05ac6474b96425bcb4965addd025a93e061b66c4
+        with:
+          needs: ${{ toJSON(needs) }}
+          required: check,zh-hant,identifiers
+          required-unless-merge-group: ${{ github.event.pull_request.draft && ' ' || 'suite' }}
