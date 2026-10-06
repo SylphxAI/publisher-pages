@@ -48,15 +48,33 @@ jobs:
       - name: Non-v7 ids on added lines (owner standards/identifiers.md)
         uses: SylphxAI/.github/.github/actions/identifiers@e4a5ea41cbcc87cd93914f89f0d7c3981c868bf9
 
+  # No new departure from the default stack (docs/stack-conformance.md in
+  # SylphxAI/.github): a backend service off Rust or a migration engine other
+  # than atlas fails unless .github/stack-departures.txt, which may only
+  # shrink, already lists it. Reads git objects only; a few seconds.
+  stack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          filter: blob:none
+      - uses: SylphxAI/.github/.github/actions/stack-conformance@bc664ac7410c00d233fe4f729b6747969a4a9bed # SylphxAI/.github#208
+        with:
+          base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || '' }}
+
   # The one required check (ruleset sylphx-merge-queue): the merge queue waits on this.
   ci-ok:
     if: always()
-    needs: [check, zh-hant, identifiers]
+    needs: [check, zh-hant, identifiers, stack]
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
       - run: |
           set -euo pipefail
           test "${{ needs.check.result }}" = success
+          test "${{ needs.stack.result }}" = success
           case "${{ needs.zh-hant.result }}" in success|skipped) ;; *) exit 1 ;; esac
           case "${{ needs.identifiers.result }}" in success|skipped) ;; *) exit 1 ;; esac
