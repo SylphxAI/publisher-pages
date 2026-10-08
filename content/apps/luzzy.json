@@ -13,12 +13,7 @@
 		"zh-Hant": "與 AI 夥伴練習真實對話，並獲得引用你原話的回饋。"
 	},
 	"external": "https://luzzy.chat",
-	"services": [
-		"Hosting",
-		"Data",
-		"Auth",
-		"AI"
-	],
+	"services": ["Hosting", "Data", "Auth", "AI"],
 	"privacy": {
 		"updated": "2026-10-08",
 		"summary": {
@@ -152,6 +147,6 @@
 	"source": {
 		"repo": "SylphxAI/luzzy",
 		"path": "publisher/app.json",
-		"note": "Copied from SylphxAI/luzzy@2b1a5c9f935a709c19941394044e3391b608c90f publisher/app.json (https://github.com/SylphxAI/luzzy/blob/2b1a5c9f935a709c19941394044e3391b608c90f/publisher/app.json). Behaviour evidence: publisher/README.md at the same commit. Services: sylphx.toml at the same commit."
+		"note": "Copied from SylphxAI/luzzy@cea51f4be7112e0fd3dbf7d0d950fee8ea3551f9 publisher/app.json (https://github.com/SylphxAI/luzzy/blob/cea51f4be7112e0fd3dbf7d0d950fee8ea3551f9/publisher/app.json). Behaviour evidence: publisher/README.md at the same commit. Services: sylphx.toml at the same commit."
 	}
 }
