@@ -13,11 +13,7 @@
 		"zh-Hant": "自行把工作做完的 AI 代理，只在需要你決定時才詢問，並附證據交回成果。"
 	},
 	"external": "https://spiron.ai",
-	"services": [
-		"Hosting",
-		"Data",
-		"AI"
-	],
+	"services": ["Hosting", "Data", "AI"],
 	"privacy": {
 		"updated": "2026-10-04",
 		"summary": {
@@ -113,6 +109,6 @@
 	"source": {
 		"repo": "SylphxAI/agents",
 		"path": "publisher/app.json",
-		"note": "Copied from SylphxAI/agents@4d8307a8379c9a29a30fd6b54a93502613d14dae:publisher/app.json. Product-owned privacy and support; external hub link retained."
+		"note": "Copied from SylphxAI/agents@4ae3917d1050f66a776f1ed5b45e8430d66269c2:publisher/app.json. Product-owned privacy and support; external hub link retained."
 	}
 }
