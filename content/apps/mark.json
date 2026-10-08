@@ -13,9 +13,7 @@
 		"zh-Hant": "一個網址生成 README 圖像：橫幅、徽章、圖示及 GitHub 統計卡。"
 	},
 	"external": "https://mark.sylphx.com",
-	"services": [
-		"Hosting"
-	],
+	"services": ["Hosting"],
 	"privacy": {
 		"updated": "2026-10-08",
 		"summary": {
@@ -163,6 +161,6 @@
 	"source": {
 		"repo": "SylphxAI/mark",
 		"path": "publisher/app.json",
-		"note": "Copied from SylphxAI/mark@61aff183dca45e0e5c0e830c93ac061b8525c9a4:publisher/app.json. Manually authored product-owned payload. Behaviour verified at 77b2357a65687a9ba1da8739b048bc031e9d639b: README.md; docs/vision.md; templates/legal-privacy.html; src/interfaces/http/mod.rs, client.rs, response.rs and footer.html; src/capabilities/live/application/cache.rs, service.rs, registries.rs and switch_registries.rs; src/capabilities/mark/domain/svg.rs. Hosting is declared in sylphx.toml. Publisher copy records the exact payload commit."
+		"note": "Copied from SylphxAI/mark@311c2450a5caba4d303f05917666e295f0f300e0:publisher/app.json. Manually authored product-owned payload. Behaviour verified at 77b2357a65687a9ba1da8739b048bc031e9d639b: README.md; docs/vision.md; templates/legal-privacy.html; src/interfaces/http/mod.rs, client.rs, response.rs and footer.html; src/capabilities/live/application/cache.rs, service.rs, registries.rs and switch_registries.rs; src/capabilities/mark/domain/svg.rs. Hosting is declared in sylphx.toml. Publisher copy records the exact payload commit."
 	}
 }
