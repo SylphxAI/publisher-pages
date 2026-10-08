@@ -1,22 +1,19 @@
 {
 	"slug": "kalkas",
+	"kind": "app",
 	"name": {
 		"en": "Kalkas",
 		"zh-Hant": "嘉衡 Kalkas"
-	},
-	"category": {
-		"en": "Forecasting",
-		"zh-Hant": "預測"
 	},
 	"tagline": {
 		"en": "Calibrated forecasts, committed before the event and scored against the closing market in public.",
 		"zh-Hant": "經校準的預測，於事件前記錄，並公開對照收市價評分。"
 	},
-	"external": "https://kalkas.ai",
-	"services": ["Hosting", "Data"],
-	"source": {
-		"repo": "SylphxAI/kalkas",
-		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
-	}
+	"category": {
+		"en": "Business",
+		"zh-Hant": "商業"
+	},
+	"url": "https://kalkas.ai",
+	"status": "available",
+	"services": ["Hosting", "Data"]
 }

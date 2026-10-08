@@ -1,0 +1,21 @@
+{
+	"slug": "lockdocs",
+	"kind": "open-source",
+	"name": {
+		"en": "lockdocs",
+		"zh-Hant": "lockdocs"
+	},
+	"tagline": {
+		"en": "Exact-version library docs from your lockfile, local and offline, with no rate limits.",
+		"zh-Hant": "按你的鎖定檔取得完全對應版本的函式庫文件，在本機離線運行，沒有請求次數限制。"
+	},
+	"category": {
+		"en": "Developer tools",
+		"zh-Hant": "開發者工具"
+	},
+	"url": "https://github.com/SylphxAI/lockdocs",
+	"status": "available",
+	"repo": "SylphxAI/lockdocs",
+	"licence": "MIT",
+	"docs": "https://sylphxai.github.io/lockdocs/"
+}

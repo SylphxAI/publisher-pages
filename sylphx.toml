@@ -1,4 +1,4 @@
-# Sylphx publisher pages: sylphx.com/apps and the app-link files.
+# Sylphx publisher pages: the service serves sylphx.com/apps and /open-source.
 version = "1"
 
 [project]
@@ -16,7 +16,15 @@ port = 8080
 # micro (0.25 CPU, 512 MiB): 7-day p95 0.07 GiB, peak 0.07 GiB, CPU p95 0.000 (read 2026-10-04). Not nano: a nano revision of this service did not become ready on 2026-10-03.
 instance_type = "micro"
 public_networking = true
+path_prefixes = ["/apps", "/open-source"]
 
 [services.health]
 mode = "http"
 path = "/healthz"
+
+# The apex host routes to this service's path_prefixes (/apps, /open-source);
+# the platform's own catch-all keeps everything else. Takes effect once the
+# platform change for path-scoped service routing lands.
+[[domains]]
+hostname = "sylphx.com"
+service = "web"

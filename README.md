@@ -2,8 +2,8 @@
 
 # publisher-pages
 
-The Sylphx publisher pages on `sylphx.com`: the "Built on Sylphx" apps index,
-one landing, privacy, terms and support page per app, and
+The Sylphx publisher pages on `sylphx.com`: the "Built on Sylphx" apps gallery,
+the open-source gallery, one landing, privacy, terms and support page per app, and
 the universal-link and app-link files. Owner decision:
 [SylphxAI/owner company/decisions.md, 2026-09-26 "Publisher pages, and when a product gets a domain"](https://github.com/SylphxAI/owner/blob/main/company/decisions.md).
 
@@ -16,29 +16,33 @@ the universal-link and app-link files. Owner decision:
 
 | Path on sylphx.com | Page |
 |---|---|
-| `/apps` | Hub, "Built on Sylphx": one card per app that runs on Sylphx |
+| `/apps` | Hub, "Built on Sylphx": an image card per product that runs on Sylphx, with status and service chips |
+| `/open-source` | Hub of the open-source tools Sylphx publishes: image cards with licence, GitHub link and star badge, then the platform's SDK and CLI packages |
 | `/apps/index.json` | The same list as `[{slug, name, url, summary, services}]`, cached one hour; sylphx.com's home page reads it |
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
-| `/apps/zh-hant/…` | The same pages in Traditional Chinese |
+| `/apps/zh-hant/…`, `/open-source/zh-hant` | The same pages in Traditional Chinese |
 | `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
 
-The site is a separate Sylphx Hosting project mounted at exactly three paths of
-`sylphx.com`: `/apps`, `/.well-known/apple-app-site-association`
-and `/.well-known/assetlinks.json`. Everything else on the host, including
-`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
-platform repository (`SylphxAI/cloud`) names no product, so all product text
-lives here. Every URL the pages use stays inside the mounted paths: language
-twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.
-The app slugs `zh-hant` and `_assets` are reserved.
+The site is a separate Sylphx Hosting project mounted at four paths of
+`sylphx.com`: `/apps`, `/open-source`, `/.well-known/apple-app-site-association`
+and `/.well-known/assetlinks.json` (the `[[domains]]` block and the service's `path_prefixes` in `sylphx.toml`; they
+take effect once the platform's path-scoped routing lands). Everything
+else on the host, including `/zh-hant` and the rest of `/.well-known`, belongs to
+the platform site. The platform repository (`SylphxAI/cloud`) names no product,
+so all product text lives here. Every URL the pages use stays inside the mounted
+paths or is a platform page the shell links to (`PLATFORM_PATHS` in `src/render.ts`):
+language twins sit under each prefix, and the stylesheet and every image are under
+`/apps/_assets/`. The app slugs `zh-hant` and `_assets` are reserved.
 
-## The hub
+## The hubs
 
-An app is listed on `/apps` and in `/apps/index.json` when its JSON has
-`services`: the Sylphx services it runs on, proven by the `sylphx.toml` in its
-repository and a public URL that answers 200. An app with its own site sets
-`external` and gets a card only; its name and one-liner (`tagline`) are its own,
-never Sylphx-branded. An app without `services` is not listed.
+A product is listed by its **card**: `publisher/card.json` in the product's own
+repository, copied here to `content/cards/{slug}/` by the sync below. A card
+with `services` (the Sylphx services it runs on) is listed on `/apps` and in
+`/apps/index.json`; a card of `kind: "open-source"` is listed on `/open-source`.
+A card can be on both (one record, both hubs). No product name is in `src/`:
+`tests/hub.test.ts` fails if one appears.
 
 Who may be listed (owner rule, 2026-09-29): only products Sylphx builds and
 runs. Never list:
@@ -48,20 +52,72 @@ runs. Never list:
 - a Cubeage title (Cubeage is a separate Hong Kong publisher, and Cubeage
   products carry no Sylphx branding).
 
-An app is listed only once its landing is live and its `sylphx.toml` declares
-a service; Number Grove keeps its pages but is not listed until then.
+`content/sources.json` is the listing gate: one line per product
+(`{ "slug", "repo", "ref" }`), approved by Services in a pull request.
+
+Number Grove keeps its landing, privacy, terms and support pages but has no
+card and no store link yet, so its pages carry `noindex` and no "coming soon"
+text (an app without a store link is not indexed).
 
 ## Adding or changing an app
 
-Each app owns its content as one JSON file, `publisher/app.json` in the app's
-own repository, in the format of [content/apps/number-grove.json](content/apps/number-grove.json)
-and the `AppContent` type in [src/content.ts](src/content.ts). This repository
-keeps a copy at `content/apps/{slug}.json`; copy the app's file here in a pull
-request when it changes.
+**Owners edit their own repository, never this one.** Each product keeps its
+card in `publisher/` of its own repository:
+
+```
+publisher/card.json     the card (schema/card.schema.json)
+publisher/card.webp     optional image: a real screenshot, 1200x750 webp, at most 60 KB
+publisher/icon.svg      optional icon: a byte copy of the brand-home icon
+```
+
+```jsonc
+{
+  "slug": "example",                    // kebab-case, unique, not zh-hant or _assets
+  "kind": "app",                        // or "open-source"
+  "name":     { "en": "Example", "zh-Hant": "範例" },
+  "tagline":  { "en": "One sentence.", "zh-Hant": "一句。" }, // at most 110 characters; no "coming soon", "soon", "beta", "waitlist", "launching"
+  "category": { "en": "Productivity", "zh-Hant": "效率工具" }, // CARD_CATEGORIES in src/content.ts
+  "url": "https://example.com",         // https; answers 200 at sync time
+  "status": "available",                // or "early-access"; an unshipped product is not listed
+  "image": { "src": "card.webp", "alt": { "en": "…", "zh-Hant": "…" } },
+  "icon": "icon.svg",
+  "services": ["Hosting", "Data"],      // listed on /apps when non-empty
+  "repo": "SylphxAI/example",           // open-source only: public repository
+  "licence": "MIT",                     // open-source only: equals the repository's SPDX licence
+  "docs": "https://example.com/docs"
+}
+```
+
+To list a new product: add its line to `content/sources.json` in a pull request
+here (Services approves). From then on every change to its `publisher/` files
+reaches the hubs with no pull request from the owner.
+
+**The sync.** `.github/workflows/sync-cards.yml` runs hourly, on
+`repository_dispatch` (type `card-changed`, optional `client_payload.slug`) and
+by hand, on `ubuntu-latest` (free for this public repository). For every source
+it reads `publisher/` with a read-only GitHub App token, validates the card
+(`validateCard`: both languages, no unknown field, closed category list,
+tagline rules, image size and weight), checks that `url` answers 200 on its own
+site, and for open-source cards that the repository is public and its licence
+matches GitHub's. A changed card gets its own pull request on
+`sync/card-{slug}`, labelled `owner:services`, with auto-merge through the merge
+queue. A failing card fails only itself: its last good copy stays live, and the
+run turns red. `bun scripts/sync-cards.ts --dry-run` reads and checks without
+writing. The workflow uses the company's builder GitHub App (installed on all
+repositories, contents and pull requests write): the repository variable
+`SYLPHX_BUILDER_APP_ID` and the organisation secret `SYLPHX_BUILDER_PRIVATE_KEY`
+must be available to this repository. Its source-read token is limited to
+contents and metadata read; the write token is limited to this repository.
+
+`content/surfaces.json` lists the platform's own packages (SDK, contract, CLI)
+shown under the open-source gallery.
+
+Apps that also have landing pages here keep the rest in `content/apps/{slug}.json`
+(the `AppContent` type in [src/content.ts](src/content.ts), the format of
+[content/apps/number-grove.json](content/apps/number-grove.json)); their card
+fields live in the card, not in that file.
 
 - Every text field has `en` and `zh-Hant`. The build fails on a missing one.
-- An app with its own website sets `external` to that URL: it gets a card on
-  `/apps` that links out, and no pages here.
 - `deepLinks.apple.appIds` (`TEAMID.bundle.id`) and `deepLinks.android`
   (package name and signing-certificate SHA-256 fingerprints) generate the
   app-link files. Apple paths default to `/apps/{slug}/*`.
@@ -83,10 +139,12 @@ request when it changes.
   not in that home yet and are picked in `content/apps/number-grove.json`;
   replace them when the home holds them.
 - The privacy page adds the publisher, rights and contact sections from
-  [content/publisher.json](content/publisher.json); the app supplies only what
-  it does with data.
+  [content/publisher.json](content/publisher.json) (name, number, office,
+  phone, `hi@sylphx.com`); the app supplies only what it does with data.
 - The terms of use are shared by every app: [src/terms.ts](src/terms.ts),
   drafted to owner `standards/commercial.md` "Legal surface" (owner#779).
+- Hub share images are `content/hub/{apps,open-source}-og.{en,zh}.webp`
+  (1200x630), served from `/apps/_assets/hub/`.
 
 ## Commands
 

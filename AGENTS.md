@@ -1,6 +1,6 @@
 # publisher-pages
 
-The static pages for Sylphx-published apps on `sylphx.com/apps`: the hub, and
+The static pages for Sylphx-published apps and tools on `sylphx.com/apps` and `/open-source`: the two gallery hubs, and
 per app a landing, privacy, terms and support page in English and Traditional
 Chinese, plus the app-link files. Start with [README.md](README.md) and
 [docs/vision.md](docs/vision.md).
@@ -12,10 +12,11 @@ Chinese, plus the app-link files. Start with [README.md](README.md) and
 
 ## Rules and reasons
 
-- Every URL a page uses stays under `/apps`, or is one of the two app-link
-  files, because only those paths are mounted on sylphx.com. `/open-source` is
-  the platform's page: link to it, do not serve it. Language twins go under the
-  prefix (`/apps/zh-hant/...`). The tests enforce it.
+- Every URL a page uses stays under `/apps` or `/open-source`, or is one of
+  the two app-link files, because only those paths are mounted on sylphx.com;
+  the shell links to platform pages listed in `PLATFORM_PATHS`. This
+  repository serves both hubs. Language twins go under the prefix
+  (`/apps/zh-hant/...`, `/open-source/zh-hant`). The tests enforce it.
 - Product text lives here, never in SylphxAI/cloud, so the platform repository
   names no product.
 - The publisher's look comes from SylphxAI/brand, vendored by
@@ -29,12 +30,16 @@ Chinese, plus the app-link files. Start with [README.md](README.md) and
   legal pages and on the hub.
 - The hub never lists Hypothesis-Idea products, `SylphxAI/bgca` or Cubeage
   titles (not ours to publish); the README has the reasons.
-- Apps own their content as `publisher/app.json` in their own repository; this
-  repository holds a copy. Every text field needs `en` and `zh-Hant`.
+- Products own their card as `publisher/card.json` in their own repository;
+  `.github/workflows/sync-cards.yml` copies it here. Never hand-edit a card
+  that has a source: change it in the product repository. Every text field
+  needs `en` and `zh-Hant`. No product name appears in `src/` or `scripts/`
+  (a test greps for it); product names are data in `content/`.
 
 ## Post-deploy check
 
-After a deploy, `https://sylphx.com/apps` and `/apps/index.json` answer 200 and
-list the expected apps, and one app's `/apps/{app}/privacy` answers 200.
+After a deploy, `https://sylphx.com/apps`, `/apps/index.json`, `/open-source` and
+both `zh-hant` twins answer 200 and list the expected cards, every card `url`
+answers 200, and one app's `/apps/{app}/privacy` answers 200.
 
 Deploy and CI details: README.

@@ -45,7 +45,7 @@ export interface BrandIcon {
 	type?: string
 }
 
-/** Browser icons from the home: the mark, then the app and store sizes. */
+/** Browser icons from the home: the logo, then the app and store sizes. */
 export const ICONS: BrandIcon[] = [
 	{ rel: 'icon', href: `${FAVICON}/favicon.ico`, sizes: '16x16 32x32 48x48' },
 	{ rel: 'icon', href: `${FAVICON}/favicon.svg`, type: 'image/svg+xml', sizes: 'any' },

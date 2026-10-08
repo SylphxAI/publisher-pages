@@ -21,13 +21,75 @@ export const PLATFORM_SERVICES = [
 ] as const
 export type PlatformService = (typeof PLATFORM_SERVICES)[number]
 
+/** The platform's product page of a service, when it has one: `https://sylphx.com/products/{path}`. */
+export const SERVICE_PRODUCT_PATH: Partial<Record<PlatformService, string>> = {
+	Hosting: 'hosting',
+	Data: 'database',
+	Auth: 'auth',
+	AI: 'ai',
+}
+
+/** The closed list of card categories, so the filter chips stay few. */
+export const CARD_CATEGORIES: Text[] = [
+	{ en: 'AI agents', 'zh-Hant': 'AI 代理' },
+	{ en: 'Developer tools', 'zh-Hant': '開發者工具' },
+	{ en: 'Productivity', 'zh-Hant': '效率工具' },
+	{ en: 'Learning', 'zh-Hant': '學習' },
+	{ en: 'Games and fun', 'zh-Hant': '遊戲及娛樂' },
+	{ en: 'Business', 'zh-Hant': '商業' },
+]
+
+export type CardKind = 'app' | 'open-source'
+export type CardStatus = 'available' | 'early-access'
+
+/** What a product's repository publishes as `publisher/card.json`. */
+export interface Card {
+	slug: string
+	kind: CardKind
+	name: Text
+	tagline: Text
+	category: Text
+	url: string
+	status: CardStatus
+	/** A real product screenshot (1200x750 webp, at most 60 KB), a file next to the card. */
+	image?: { src: string; alt: Text }
+	/** A byte copy of the product's brand-home icon, a file next to the card. */
+	icon?: string
+	/** Sylphx services it runs on; a card with services is listed on the apps hub. */
+	services?: PlatformService[]
+	/** Open-source cards: the public repository (`owner/name`) and its SPDX licence. */
+	repo?: string
+	licence?: string
+	docs?: string
+}
+
+/** One product repository the hub reads its card from (`content/sources.json`). */
+export interface Source {
+	slug: string
+	repo: string
+	ref: string
+}
+
+/** A published developer surface of the platform itself, on the open-source hub. */
+export interface Surface {
+	name: string
+	summary: Text
+	url: string
+}
+
+export const CARD_LIMITS = { taglineChars: 110, imageBytes: 60 * 1024, imageWidth: 1200, imageHeight: 750 }
+
 export interface Publisher {
 	legalName: string
 	companyNumber: string
 	registeredOffice: string
 	jurisdiction: Text
 	contactEmail: string
+	/** The company phone, shown in every footer. */
+	phone: string
 	site: string
+	/** Star badge image URL with a `{repo}` placeholder (`owner/name`), from the badge service the CSP allows. */
+	starBadge: string
 }
 
 export interface StoreLink {
@@ -78,13 +140,6 @@ export interface AppContent {
 	name: Text
 	category: Text
 	tagline: Text
-	/** An app with its own site: the index links there and no pages are built. */
-	external?: string
-	/**
-	 * Sylphx platform services the app runs on, proven by its repository's
-	 * `sylphx.toml`. An app with services is listed on the hub and in `/apps/index.json`.
-	 */
-	services?: PlatformService[]
 	description?: Text[]
 	features?: Array<{ title: Text; body: Text }>
 	/** Optional look: the app's own colours for light and dark, and its icon. */
@@ -194,20 +249,12 @@ export function validateApp(raw: unknown, file: string): AppContent {
 	text(app.name, `${file} name`)
 	text(app.category, `${file} category`)
 	text(app.tagline, `${file} tagline`)
+	for (const key of Object.keys(app)) {
+		if (key === 'external' || key === 'services')
+			fail(file, `${key} moved to the card (content/cards/${app.slug}/card.json)`)
+	}
 	if (typeof app.source?.repo !== 'string' || typeof app.source?.path !== 'string') {
 		fail(file, 'source.repo and source.path are required')
-	}
-	if (app.services !== undefined) {
-		if (!Array.isArray(app.services) || app.services.length === 0)
-			fail(file, 'services must be a non-empty list')
-		for (const service of app.services) {
-			if (!PLATFORM_SERVICES.includes(service)) fail(file, `unknown platform service: ${service}`)
-		}
-		if (new Set(app.services).size !== app.services.length) fail(file, 'services repeat')
-	}
-	if (app.external !== undefined) {
-		url(app.external, `${file} external`)
-		return app
 	}
 	list(app.description, `${file} description`, text)
 	list(app.features, `${file} features`, (f, at) => {
@@ -309,6 +356,151 @@ export function validatePublisher(raw: unknown, file: string): Publisher {
 	}
 	text(p.jurisdiction, `${file} jurisdiction`)
 	email(p.contactEmail, `${file} contactEmail`)
+	if (typeof p.phone !== 'string' || !/^\+\d[\d ]{6,18}$/.test(p.phone))
+		fail(file, 'phone must be +CC digits')
 	url(p.site, `${file} site`)
+	if (
+		typeof p.starBadge !== 'string' ||
+		!p.starBadge.startsWith('https://') ||
+		!p.starBadge.includes('{repo}')
+	) {
+		fail(file, 'starBadge must be an https URL with {repo}')
+	}
 	return p
+}
+
+/** The fields a card may carry; `schema/card.schema.json` lists the same. */
+export const CARD_FIELDS = [
+	'slug',
+	'kind',
+	'name',
+	'tagline',
+	'category',
+	'url',
+	'status',
+	'image',
+	'icon',
+	'services',
+	'repo',
+	'licence',
+	'docs',
+] as const
+const CARD_KEYS = new Set<string>(CARD_FIELDS)
+/** Words a tagline may not use: an unshipped product is not listed. */
+const BANNED_TAGLINE = /\b(?:coming soon|soon|beta|waitlist|launching)\b|即將|候補|測試版/i
+const REPO = /^[A-Za-z0-9][A-Za-z0-9-]*\/[A-Za-z0-9._-]+$/
+const SPDX = /^[A-Za-z0-9.+-]+(?: (?:AND|OR|WITH) [A-Za-z0-9.+-]+)*$/
+
+/** Dimensions of a WebP file (lossy, lossless or extended), or undefined if it is not one. */
+export function webpSize(b: Uint8Array): { width: number; height: number } | undefined {
+	const tag = (at: number) => String.fromCharCode(...b.slice(at, at + 4))
+	if (b.length < 30 || tag(0) !== 'RIFF' || tag(8) !== 'WEBP') return undefined
+	const u24 = (at: number) => (b[at] ?? 0) | ((b[at + 1] ?? 0) << 8) | ((b[at + 2] ?? 0) << 16)
+	const chunk = tag(12)
+	if (chunk === 'VP8X') return { width: u24(24) + 1, height: u24(27) + 1 }
+	if (chunk === 'VP8L') {
+		const bits = (b[21] ?? 0) | ((b[22] ?? 0) << 8) | ((b[23] ?? 0) << 16) | ((b[24] ?? 0) << 24)
+		return { width: (bits & 0x3fff) + 1, height: ((bits >>> 14) & 0x3fff) + 1 }
+	}
+	if (chunk === 'VP8 ')
+		return {
+			width: ((b[26] ?? 0) | ((b[27] ?? 0) << 8)) & 0x3fff,
+			height: ((b[28] ?? 0) | ((b[29] ?? 0) << 8)) & 0x3fff,
+		}
+	return undefined
+}
+
+/** The image's own rules (1200x750 WebP, at most 60 KB); returns the problem or undefined. */
+export function cardImageProblem(bytes: Uint8Array): string | undefined {
+	if (bytes.length > CARD_LIMITS.imageBytes)
+		return `image is ${bytes.length} bytes, over ${CARD_LIMITS.imageBytes}`
+	const size = webpSize(bytes)
+	if (!size) return 'image is not a webp file'
+	if (size.width !== CARD_LIMITS.imageWidth || size.height !== CARD_LIMITS.imageHeight) {
+		return `image is ${size.width}x${size.height}, expected ${CARD_LIMITS.imageWidth}x${CARD_LIMITS.imageHeight}`
+	}
+	return undefined
+}
+
+/** Every file a card references next to `card.json`. */
+export function cardAssets(card: Card): string[] {
+	return [card.image?.src, card.icon].filter((f): f is string => f !== undefined)
+}
+
+export function validateCard(raw: unknown, file: string): Card {
+	if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) fail(file, 'expected an object')
+	const card = raw as Card
+	for (const key of Object.keys(card)) if (!CARD_KEYS.has(key)) fail(file, `unknown field: ${key}`)
+	if (typeof card.slug !== 'string' || !SLUG.test(card.slug)) fail(file, 'slug must be kebab-case')
+	if (RESERVED_SLUGS.has(card.slug)) fail(file, `slug ${card.slug} is a reserved path segment`)
+	if (card.kind !== 'app' && card.kind !== 'open-source') fail(file, 'kind must be app or open-source')
+	text(card.name, `${file} name`)
+	text(card.tagline, `${file} tagline`)
+	text(card.category, `${file} category`)
+	for (const locale of LOCALES) {
+		if (card.tagline[locale].length > CARD_LIMITS.taglineChars) {
+			fail(file, `tagline.${locale} is over ${CARD_LIMITS.taglineChars} characters`)
+		}
+		if (BANNED_TAGLINE.test(card.tagline[locale])) fail(file, `tagline.${locale} uses a banned word`)
+	}
+	if (!CARD_CATEGORIES.some((c) => LOCALES.every((l) => c[l] === card.category[l]))) {
+		fail(file, 'category is not on the closed list')
+	}
+	url(card.url, `${file} url`)
+	if (card.url.startsWith('/')) fail(file, 'url must be absolute https')
+	if (card.status !== 'available' && card.status !== 'early-access')
+		fail(file, 'status must be available or early-access')
+	if (card.image !== undefined) {
+		if (typeof card.image !== 'object' || card.image === null) fail(file, 'image must be an object')
+		for (const key of Object.keys(card.image))
+			if (key !== 'src' && key !== 'alt') fail(file, `unknown field: image.${key}`)
+		if (typeof card.image.src !== 'string' || !/^[a-z0-9][a-z0-9._-]*\.webp$/.test(card.image.src)) {
+			fail(file, 'image.src must be a .webp file name')
+		}
+		text(card.image.alt, `${file} image.alt`)
+	}
+	if (card.icon !== undefined) asset(card.icon, `${file} icon`)
+	if (card.services !== undefined) {
+		if (!Array.isArray(card.services) || card.services.length === 0)
+			fail(file, 'services must be a non-empty list')
+		for (const service of card.services) {
+			if (!PLATFORM_SERVICES.includes(service)) fail(file, `unknown platform service: ${service}`)
+		}
+		if (new Set(card.services).size !== card.services.length) fail(file, 'services repeat')
+	}
+	if (card.kind === 'open-source') {
+		if (typeof card.repo !== 'string' || !REPO.test(card.repo))
+			fail(file, 'an open-source card needs repo (owner/name)')
+		if (typeof card.licence !== 'string' || !SPDX.test(card.licence))
+			fail(file, 'an open-source card needs an SPDX licence')
+	} else if (card.repo !== undefined || card.licence !== undefined) {
+		fail(file, 'repo and licence belong to open-source cards')
+	}
+	if (card.docs !== undefined) url(card.docs, `${file} docs`)
+	if (card.kind === 'app' && (card.services?.length ?? 0) === 0) fail(file, 'an app card needs services')
+	return card
+}
+
+export function validateSources(raw: unknown, file: string): Source[] {
+	const sources = list(raw, file, (item, at) => {
+		const s = item as Source
+		for (const key of Object.keys(s))
+			if (!['slug', 'repo', 'ref'].includes(key)) fail(at, `unknown field: ${key}`)
+		if (typeof s.slug !== 'string' || !SLUG.test(s.slug)) fail(at, 'slug must be kebab-case')
+		if (typeof s.repo !== 'string' || !REPO.test(s.repo)) fail(at, 'repo must be owner/name')
+		if (typeof s.ref !== 'string' || s.ref === '') fail(at, 'ref is required')
+		return s
+	})
+	if (new Set(sources.map((s) => s.slug)).size !== sources.length) fail(file, 'a slug repeats')
+	return sources
+}
+
+export function validateSurfaces(raw: unknown, file: string): Surface[] {
+	return list(raw, file, (item, at) => {
+		const s = item as Surface
+		if (typeof s.name !== 'string' || s.name === '') fail(at, 'name')
+		text(s.summary, `${at}.summary`)
+		url(s.url, `${at}.url`)
+		return s
+	})
 }

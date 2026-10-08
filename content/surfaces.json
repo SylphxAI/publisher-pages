@@ -1,0 +1,34 @@
+[
+	{
+		"name": "@sylphx/sdk",
+		"summary": {
+			"en": "The typed TypeScript SDK, generated from the platform contract.",
+			"zh-Hant": "由平台合約生成、附完整型別的 TypeScript SDK。"
+		},
+		"url": "https://www.npmjs.com/package/@sylphx/sdk"
+	},
+	{
+		"name": "@sylphx/contract",
+		"summary": {
+			"en": "The platform contract as a package: the source the SDK and the docs are generated from.",
+			"zh-Hant": "以套件形式發佈的平台合約，SDK 及文件均由此生成。"
+		},
+		"url": "https://www.npmjs.com/package/@sylphx/contract"
+	},
+	{
+		"name": "@sylphx/cli",
+		"summary": {
+			"en": "The Sylphx command line, one Rust binary, installed from npm or with the curl installer.",
+			"zh-Hant": "Sylphx 命令列工具，單一 Rust 執行檔，可經 npm 或 curl 安裝程式安裝。"
+		},
+		"url": "https://www.npmjs.com/package/@sylphx/cli"
+	},
+	{
+		"name": "sylphx-cli",
+		"summary": {
+			"en": "The same CLI as a crate on crates.io.",
+			"zh-Hant": "同一命令列工具的 crates.io 套件。"
+		},
+		"url": "https://crates.io/crates/sylphx-cli"
+	}
+]

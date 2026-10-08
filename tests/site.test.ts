@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { loadSite, renderSite } from '../src/build'
 import { type AppContent, ContentError, validateApp } from '../src/content'
-import { appleAppSiteAssociation, assetLinks } from '../src/render'
+import { appleAppSiteAssociation, assetLinks, PLATFORM_PATHS, unlisted } from '../src/render'
 
 const site = await loadSite()
 const files = await renderSite(site)
@@ -13,7 +13,12 @@ const withoutJsonLd = (html: string) =>
 	html.replace(/<script type="application\/ld\+json">[^<]*<\/script>/g, '')
 
 /** The paths the site is mounted at on sylphx.com (see README). */
-const MOUNTS = ['/apps', '/.well-known/apple-app-site-association', '/.well-known/assetlinks.json']
+const MOUNTS = [
+	'/apps',
+	'/open-source',
+	'/.well-known/apple-app-site-association',
+	'/.well-known/assetlinks.json',
+]
 
 /** Gateway PathPrefix semantics: the prefix itself or a path below it. */
 const mounted = (href: string) => {
@@ -23,7 +28,7 @@ const mounted = (href: string) => {
 
 describe('served pages', () => {
 	test('every app page exists in both languages', () => {
-		for (const app of site.apps.filter((a) => !a.external)) {
+		for (const app of site.apps) {
 			for (const prefix of ['apps/', 'apps/zh-hant/']) {
 				for (const page of ['', '/privacy', '/terms', '/support']) {
 					expect(files.has(`${prefix}${app.slug}${page}/index.html`)).toBe(true)
@@ -38,7 +43,7 @@ describe('served pages', () => {
 		for (const [path, body] of files) {
 			if (!path.endsWith('.html')) continue
 			for (const [, href = ''] of body.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
-				if (href === '/' || href === '/docs') continue // the platform's own pages
+				if (PLATFORM_PATHS.includes(href)) continue // the platform's own pages
 				expect(mounted(href), `${path} links ${href}`).toBe(true)
 			}
 		}
@@ -47,8 +52,23 @@ describe('served pages', () => {
 	test('pages declare their language and both hreflang alternates', () => {
 		const zh = files.get('apps/zh-hant/number-grove/index.html') ?? ''
 		expect(zh).toContain('<html lang="zh-Hant">')
-		expect(zh).toContain('hreflang="en" href="https://sylphx.com/apps/number-grove"')
 		expect(zh).toContain('數字花園')
+		const hub = files.get('apps/zh-hant/index.html') ?? ''
+		expect(hub).toContain('hreflang="en" href="https://sylphx.com/apps"')
+	})
+
+	test('an app with no store link is not indexed and says nothing of coming soon', () => {
+		const ng = site.apps.find((a) => a.slug === 'number-grove') as AppContent
+		expect(unlisted(ng)).toBe(true)
+		for (const path of ['', '/privacy', '/terms', '/support']) {
+			for (const prefix of ['apps/', 'apps/zh-hant/']) {
+				const body = files.get(`${prefix}number-grove${path}/index.html`) ?? ''
+				expect(body, `${prefix}${path}`).toContain('<meta name="robots" content="noindex">')
+				expect(body, `${prefix}${path}`).not.toMatch(/coming soon|即將推出/i)
+			}
+		}
+		expect(files.get('apps/number-grove/support/index.html')).toContain('Not in the stores yet')
+		expect(files.get('apps/number-grove/index.html')).not.toContain('Not in the stores yet')
 	})
 
 	test('privacy pages name the publisher as data controller', () => {
@@ -141,9 +161,16 @@ describe('app-link files', () => {
 	})
 
 	test('are valid when no app declares ids', () => {
-		expect(JSON.parse(files.get('.well-known/apple-app-site-association') ?? '')).toEqual({
-			applinks: { details: [] },
-		})
+		const bare = site.apps.map((a) => ({ ...a, deepLinks: {} }))
+		expect(JSON.parse(appleAppSiteAssociation(bare))).toEqual({ applinks: { details: [] } })
+		expect(JSON.parse(assetLinks(bare))).toEqual([])
+	})
+
+	test('publish the declared ids and only those', () => {
+		const apple = JSON.parse(files.get('.well-known/apple-app-site-association') ?? '')
+		expect(apple.applinks.details).toEqual([
+			{ appIDs: ['3P3M2P34DS.com.sylphx.numbergrove'], components: [{ '/': '/apps/number-grove/*' }] },
+		])
 		expect(JSON.parse(files.get('.well-known/assetlinks.json') ?? '')).toEqual([])
 	})
 
@@ -178,16 +205,15 @@ describe('content validation', () => {
 		expect(() => validateApp(broken, file(valid.slug))).toThrow(/outside/)
 	})
 
-	test('accepts an external app with only a card', () => {
-		const external = {
-			slug: 'elsewhere',
-			name: { en: 'Elsewhere', 'zh-Hant': '別處' },
-			category: { en: 'Tools', 'zh-Hant': '工具' },
-			tagline: { en: 'Has its own site.', 'zh-Hant': '有自己的網站。' },
-			external: 'https://example.com',
-			source: { repo: 'SylphxAI/elsewhere', path: 'publisher/app.json' },
+	test('card fields no longer live in the app file', () => {
+		for (const field of ['external', 'services']) {
+			expect(() =>
+				validateApp(
+					{ ...valid, [field]: field === 'external' ? 'https://example.com' : ['Hosting'] },
+					file(valid.slug),
+				),
+			).toThrow(/moved to the card/)
 		}
-		expect(validateApp(external, file('elsewhere')).external).toBe('https://example.com')
 	})
 })
 

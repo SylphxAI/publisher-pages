@@ -1,0 +1,19 @@
+{
+	"slug": "spiron",
+	"kind": "app",
+	"name": {
+		"en": "Spiron",
+		"zh-Hant": "Spiron"
+	},
+	"tagline": {
+		"en": "An AI agent that sees the job through, asks only when the call is yours, and hands back proof.",
+		"zh-Hant": "自行把工作做完的 AI 代理，只在需要你決定時才詢問，並附證據交回成果。"
+	},
+	"category": {
+		"en": "AI agents",
+		"zh-Hant": "AI 代理"
+	},
+	"url": "https://spiron.ai",
+	"status": "available",
+	"services": ["Hosting", "Data", "AI"]
+}

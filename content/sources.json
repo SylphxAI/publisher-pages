@@ -1,0 +1,62 @@
+[
+	{
+		"slug": "kalkas",
+		"repo": "SylphxAI/kalkas",
+		"ref": "main"
+	},
+	{
+		"slug": "luzzy",
+		"repo": "SylphxAI/luzzy",
+		"ref": "main"
+	},
+	{
+		"slug": "puzzled",
+		"repo": "SylphxAI/puzzled",
+		"ref": "main"
+	},
+	{
+		"slug": "spiron",
+		"repo": "SylphxAI/agents",
+		"ref": "main"
+	},
+	{
+		"slug": "tryit",
+		"repo": "SylphxAI/tryit",
+		"ref": "main"
+	},
+	{
+		"slug": "viszy",
+		"repo": "SylphxAI/viszy.ai",
+		"ref": "main"
+	},
+	{
+		"slug": "tachyn",
+		"repo": "SylphxAI/tachyn",
+		"ref": "main"
+	},
+	{
+		"slug": "mark",
+		"repo": "SylphxAI/readme-mark",
+		"ref": "main"
+	},
+	{
+		"slug": "anymd",
+		"repo": "SylphxAI/anymd",
+		"ref": "main"
+	},
+	{
+		"slug": "repomap",
+		"repo": "SylphxAI/repomap",
+		"ref": "main"
+	},
+	{
+		"slug": "lockdocs",
+		"repo": "SylphxAI/lockdocs",
+		"ref": "main"
+	},
+	{
+		"slug": "skills",
+		"repo": "SylphxAI/skills",
+		"ref": "main"
+	}
+]
