@@ -14,9 +14,123 @@
 	},
 	"external": "https://kalkas.ai",
 	"services": ["Hosting", "Data"],
+	"privacy": {
+		"updated": "2026-10-08",
+		"summary": {
+			"en": "Kalkas uses sign-in sessions to provide account access, notification preferences for optional member call alerts, and consent-gated campaign attribution at checkout. Your theme choice stays in your browser. The general email list is not open.",
+			"zh-Hant": "嘉衡使用登入工作階段提供帳戶存取，以通知偏好處理會員自願開啟的預測電郵通知，並只在獲得同意後於結帳時使用宣傳來源資料。主題選擇只保存在你的瀏覽器內。一般電郵名單尚未開放。"
+		},
+		"sections": [
+			{
+				"heading": {
+					"en": "Sign-in and accounts",
+					"zh-Hant": "登入與帳戶"
+				},
+				"body": [
+					{
+						"en": "Sign-in is handled by Sylphx Auth. Kalkas keeps the returned session in a secure, HttpOnly cookie and does not store your password. A separate browser-readable cookie indicates that you are signed in; it contains no token.",
+						"zh-Hant": "登入由 Sylphx Auth 處理。嘉衡將交回的工作階段存放於安全、HttpOnly 的 Cookie 中，不儲存你的密碼。另一個可由瀏覽器程式讀取的 Cookie 只表示你已登入，不含任何權杖。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Optional member call alerts",
+					"zh-Hant": "自願開啟的會員預測通知"
+				},
+				"body": [
+					{
+						"en": "When you save alert preferences, Kalkas stores your account identifier, verified email address, language and selected markets in Sylphx Notify. Alerts are emailed when a new call is published for a selected market. You can turn a market off on your account page or use the unsubscribe link in an alert. Turning it off mutes that preference; it does not delete the notification recipient. Account deletion removes the notification recipient and its preferences before deleting the sign-in account.",
+						"zh-Hant": "儲存通知偏好時，嘉衡會在 Sylphx Notify 保存你的帳戶識別碼、已驗證電郵地址、語言及所選市場。所選市場有新預測時，會寄送電郵通知。你可在帳戶頁關閉個別市場，或使用通知內的取消訂閱連結。關閉通知會停用該項偏好，而非刪除通知收件者。刪除帳戶時，會先移除通知收件者及其偏好，再刪除登入帳戶。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Campaign attribution and checkout",
+					"zh-Hant": "宣傳來源與結帳"
+				},
+				"body": [
+					{
+						"en": "Only with an explicit marketing-storage grant does Kalkas keep the first campaign source, medium, campaign tag and external referrer hostname in a first-party, secure, HttpOnly cookie for up to 90 days. These fields are passed to Sylphx Money as checkout metadata. Without that grant, or when your browser sends Global Privacy Control, no campaign cookie is set and any existing campaign cookie is removed. The referrer's full URL is not stored in this cookie.",
+						"zh-Hant": "只有在明確同意儲存宣傳資料後，嘉衡才會以第一方、安全、HttpOnly 的 Cookie 保存首次宣傳來源、媒介、宣傳標籤及外部來源主機名稱，最長 90 天。這些欄位會作為結帳附加資料傳送至 Sylphx Money。未獲同意或瀏覽器傳送 Global Privacy Control 訊號時，不會設定宣傳 Cookie，亦會移除已有的宣傳 Cookie。此 Cookie 不會保存來源的完整網址。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Browser preferences",
+					"zh-Hant": "瀏覽器偏好"
+				},
+				"body": [
+					{
+						"en": "Your light or dark theme override is kept in your browser's local storage. Choosing the system theme clears that override. It is not an account preference sent to Kalkas.",
+						"zh-Hant": "淺色或深色的主題設定保存在瀏覽器的本機儲存空間內。選擇跟隨系統會清除這項設定。此設定不會作為帳戶偏好傳送至嘉衡。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "General email updates",
+					"zh-Hant": "一般電郵通知"
+				},
+				"body": [
+					{
+						"en": "The general email list for paid-plan announcements and a weekly digest is not open. The site offers no signup form and does not persist or forward subscriptions for that list. Member call alerts are separate.",
+						"zh-Hant": "用於付費方案公告及每週摘要的一般電郵名單尚未開放。本站不提供登記表格，亦不會儲存或轉交該名單的訂閱。會員預測通知屬另一項服務。"
+					}
+				]
+			}
+		]
+	},
+	"support": {
+		"email": "hi@kalkas.ai",
+		"faq": [
+			{
+				"q": {
+					"en": "How do I contact Kalkas?",
+					"zh-Hant": "如何聯絡嘉衡？"
+				},
+				"a": {
+					"en": "Email hi@kalkas.ai for product, account or privacy questions. For security reports, use the contact instructions at https://kalkas.ai/.well-known/security.txt.",
+					"zh-Hant": "如有產品、帳戶或私隱查詢，請電郵 hi@kalkas.ai。保安事宜請依照 https://kalkas.ai/.well-known/security.txt 的聯絡指示匯報。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I stop member call alerts?",
+					"zh-Hant": "如何停止會員預測通知？"
+				},
+				"a": {
+					"en": "Turn off the market in your account's alert preferences, or use the unsubscribe link in an alert. Unsubscribing from one market leaves your other markets unchanged. Alerts require a verified email address on your account.",
+					"zh-Hant": "在帳戶的通知偏好中關閉該市場，或使用通知內的取消訂閱連結。取消一個市場的訂閱，不會改動其他市場的設定。通知需要帳戶內有已驗證的電郵地址。"
+				}
+			},
+			{
+				"q": {
+					"en": "Can I delete my account?",
+					"zh-Hant": "可以刪除帳戶嗎？"
+				},
+				"a": {
+					"en": "Use the account deletion flow in your account. Deletion cannot complete while a subscription is still renewing or billing cannot confirm it is safe; manage your subscription or contact support first. It removes your notification recipient and preferences, then deletes your sign-in account. Financial records are retained where required by law. If deletion fails, you can retry or contact hi@kalkas.ai.",
+					"zh-Hant": "請使用帳戶內的刪除流程。如訂閱仍會續期，或帳務服務未能確認可安全刪除，流程便不能完成；請先管理訂閱或聯絡支援。流程會移除通知收件者及偏好，再刪除登入帳戶。法律要求保留的財務紀錄會繼續保存。如刪除失敗，你可重試或聯絡 hi@kalkas.ai。"
+				}
+			},
+			{
+				"q": {
+					"en": "Does Kalkas place bets or trades for me?",
+					"zh-Hant": "嘉衡會替我投注或交易嗎？"
+				},
+				"a": {
+					"en": "No. Kalkas provides impersonal information, not investment, betting, tax or financial advice. It does not place, transmit or manage bets or orders for members, and does not pool or hold member money. Forecasts can be wrong; your decisions are your responsibility.",
+					"zh-Hant": "不會。嘉衡提供非個人化資訊，並非投資、投注、稅務或財務建議。我們不會替會員下注、傳送或管理投注或交易指令，亦不匯集或持有會員資金。預測可能出錯，你須自行為決定負責。"
+				}
+			}
+		]
+	},
 	"source": {
 		"repo": "SylphxAI/kalkas",
-		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+		"path": "publisher/app.json",
+		"note": "Copied from SylphxAI/kalkas@f45e670876cc4f0c9f9b8e61e9893de80c6cc788:publisher/app.json. Immutable source: https://github.com/SylphxAI/kalkas/blob/f45e670876cc4f0c9f9b8e61e9893de80c6cc788/publisher/app.json. Manually authored product-owned payload dated 2026-10-08. Behaviour and contact checked against commit 0c793aed97eab14ab16f25a58e6353c7a31d8baf: apps/site/lib/site.ts; apps/site/components/pages/legal.tsx; apps/site/lib/customer/sessionCookie.ts; apps/site/lib/customer/hint.ts; apps/site/lib/customer/account-delete.ts; apps/site/lib/alerts/member.ts; apps/site/lib/alerts/notify.ts; apps/site/lib/alerts/copy.ts; apps/site/lib/campaign-attribution.ts; apps/site/proxy.ts; apps/site/components/ui/theme-toggle.tsx; sylphx.toml. The update date is this payload's authoring date, not a claim about a release."
 	}
 }
