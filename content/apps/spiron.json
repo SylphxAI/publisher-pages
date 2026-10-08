@@ -13,10 +13,106 @@
 		"zh-Hant": "自行把工作做完的 AI 代理，只在需要你決定時才詢問，並附證據交回成果。"
 	},
 	"external": "https://spiron.ai",
-	"services": ["Hosting", "Data", "AI"],
+	"services": [
+		"Hosting",
+		"Data",
+		"AI"
+	],
+	"privacy": {
+		"updated": "2026-10-04",
+		"summary": {
+			"en": "Spiron processes account information and the content you give your agents to run the service and carry out their work. Read the full product privacy policy at https://spiron.ai/privacy.",
+			"zh-Hant": "Spiron 處理帳戶資料及你交給代理的內容，以運作服務並執行工作。完整產品私隱政策見 https://spiron.ai/privacy。"
+		},
+		"sections": [
+			{
+				"heading": {
+					"en": "Account and agent content",
+					"zh-Hant": "帳戶及代理內容"
+				},
+				"body": [
+					{
+						"en": "Spiron handles your sign-in information, workspace membership and roles, messages, files, agent memory and records of agent actions. This information supports your account, conversations and agents’ work.",
+						"zh-Hant": "Spiron 處理你的登入資料、工作空間成員資格及角色、訊息、檔案、代理記憶及代理操作紀錄。這些資料用於支援你的帳戶、對話及代理工作。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "AI processing",
+					"zh-Hant": "AI 處理"
+				},
+				"body": [
+					{
+						"en": "To produce replies and perform work, Spiron sends the context needed for an agent’s model step to AI services. That context can include messages and content you provide. AI providers process what they receive under their own API terms.",
+						"zh-Hant": "為產生回覆及執行工作，Spiron 會把代理模型步驟所需的上下文傳送至 AI 服務，其中可能包括你提供的訊息及內容。AI 供應商按其 API 條款處理所接收的資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Connected channels",
+					"zh-Hant": "已連接的通訊渠道"
+				},
+				"body": [
+					{
+						"en": "Channels you connect, such as Telegram, carry messages, attachments and sender identifiers to and from your agent. Channel providers handle those messages under their own terms and privacy policies. Messages can contain information about people who do not have a Spiron account.",
+						"zh-Hant": "你連接的通訊渠道（例如 Telegram）會向代理傳送及接收訊息、附件及發送者識別資料。渠道供應商按其條款及私隱政策處理這些訊息。訊息可能包含沒有 Spiron 帳戶的人士的資料。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Privacy questions",
+					"zh-Hant": "私隱查詢"
+				},
+				"body": [
+					{
+						"en": "For questions about your data or your privacy rights, email privacy@spiron.ai. The full policy at https://spiron.ai/privacy explains retention, deletion, transfers and your rights.",
+						"zh-Hant": "如對你的資料或私隱權利有疑問，請電郵 privacy@spiron.ai。https://spiron.ai/privacy 的完整政策說明資料保留、刪除、跨境傳輸及你的權利。"
+					}
+				]
+			}
+		]
+	},
+	"support": {
+		"email": "support@spiron.ai",
+		"faq": [
+			{
+				"q": {
+					"en": "How do I contact support?",
+					"zh-Hant": "如何聯絡支援？"
+				},
+				"a": {
+					"en": "Email support@spiron.ai. A person reads every support request. Include your reference if you already have one. In Telegram, ask your agent how it works in plain words; support itself is by email.",
+					"zh-Hant": "請電郵 support@spiron.ai。每宗支援請求均由人員閱讀。如已有參考編號，請一併提供。在 Telegram，你可以用日常語言詢問代理的使用方式；支援服務本身透過電郵提供。"
+				}
+			},
+			{
+				"q": {
+					"en": "When will I receive an answer?",
+					"zh-Hant": "何時會收到回覆？"
+				},
+				"a": {
+					"en": "A person answers within 1 business day (Monday to Friday, except UK public holidays).",
+					"zh-Hant": "人員會在 1 個工作天內回覆（星期一至五，英國公眾假期除外）。"
+				}
+			},
+			{
+				"q": {
+					"en": "What should I include?",
+					"zh-Hant": "應提供哪些資料？"
+				},
+				"a": {
+					"en": "Include the exact name of your agent or workspace, when it happened with your timezone, what you expected and what happened instead, and whether you were viewing or changing something. Never include a password, API key or customer data.",
+					"zh-Hant": "請提供代理或工作空間的確切名稱、發生時間及時區、預期結果及實際情況，以及當時是在查看還是更改內容。切勿提供密碼、API 金鑰或客戶資料。"
+				}
+			}
+		]
+	},
 	"source": {
 		"repo": "SylphxAI/agents",
-		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+		"path": "publisher/app.json",
+		"note": "Copied from SylphxAI/agents@4d8307a8379c9a29a30fd6b54a93502613d14dae:publisher/app.json. Product-owned privacy and support; external hub link retained."
 	}
 }
