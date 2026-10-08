@@ -13,10 +13,105 @@
 		"zh-Hant": "為網店賣家由一張相片製作產品相和宣傳短片。"
 	},
 	"external": "https://viszy.ai",
-	"services": ["Hosting", "Data"],
+	"services": [
+		"Hosting",
+		"Data"
+	],
+	"privacy": {
+		"updated": "2026-10-01",
+		"summary": {
+			"en": "Viszy processes the photos and descriptions you provide to make product images, video and audio. This is a summary of the product's Privacy Policy at https://viszy.ai/legal/privacy.",
+			"zh-Hant": "Viszy 處理你提供的相片和描述，以製作產品圖片、影片和音訊。此處是產品私隱政策的摘要；完整政策載於 https://viszy.ai/legal/privacy。"
+		},
+		"sections": [
+			{
+				"heading": {
+					"en": "Your creations",
+					"zh-Hant": "你的作品"
+				},
+				"body": [
+					{
+						"en": "We process your prompts, uploaded product photos and reference images, and the images, video and audio generated for you, to provide Viszy. Generating a creation involves sending the inputs needed for it to the AI services used by Viszy.",
+						"zh-Hant": "我們處理你的提示文字、上載的產品相片和參考圖片，以及為你生成的圖片、影片和音訊，以提供 Viszy 服務。生成作品時，所需輸入會傳送至 Viszy 使用的 AI 服務。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Support requests",
+					"zh-Hant": "支援請求"
+				},
+				"body": [
+					{
+						"en": "When you send a support request from Viszy, we store your email address, subject and message with your account. You can follow your requests and their status on the support page.",
+						"zh-Hant": "當你透過 Viszy 提交支援請求時，我們會把你的電郵地址、主旨和訊息連同帳戶資料儲存。你可以在支援頁面查看自己的請求及其狀態。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Browser analytics",
+					"zh-Hant": "瀏覽器使用分析"
+				},
+				"body": [
+					{
+						"en": "Browser analytics runs only after you consent to analytics cookies. We use it to understand how Viszy is used and improve the service.",
+						"zh-Hant": "只有在你同意使用分析 Cookie 後，瀏覽器使用分析才會啟用。我們用這些資料了解 Viszy 的使用情況並改善服務。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Privacy questions",
+					"zh-Hant": "私隱查詢"
+				},
+				"body": [
+					{
+						"en": "For privacy requests or complaints, email hi@viszy.ai or use https://viszy.ai/support. The full Privacy Policy explains account and payment information, cookies, retention, international transfers and your rights.",
+						"zh-Hant": "如有私隱請求或投訴，請電郵至 hi@viszy.ai，或使用 https://viszy.ai/support。完整私隱政策說明帳戶和付款資料、Cookie、資料保留、跨境傳輸及你的權利。"
+					}
+				]
+			}
+		]
+	},
+	"support": {
+		"email": "hi@viszy.ai",
+		"faq": [
+			{
+				"q": {
+					"en": "How do I contact support?",
+					"zh-Hant": "如何聯絡支援？"
+				},
+				"a": {
+					"en": "Email hi@viszy.ai. If you have an account, sign in at https://viszy.ai/support to send a message and follow its status. You can also find guidance at https://viszy.ai/help.",
+					"zh-Hant": "請電郵至 hi@viszy.ai。如有帳戶，可登入 https://viszy.ai/support 提交訊息並查看其狀態。你亦可在 https://viszy.ai/help 查閱說明。"
+				}
+			},
+			{
+				"q": {
+					"en": "Do I need an account to ask for help?",
+					"zh-Hant": "需要帳戶才能求助嗎？"
+				},
+				"a": {
+					"en": "No. Without an account, email hi@viszy.ai. The support form requires sign-in because requests submitted there are linked to your account.",
+					"zh-Hant": "不需要。如未有帳戶，請電郵至 hi@viszy.ai。支援表格需要登入，因為透過表格提交的請求會連結至你的帳戶。"
+				}
+			},
+			{
+				"q": {
+					"en": "Where can I read the full privacy policy?",
+					"zh-Hant": "在哪裏可以閱讀完整私隱政策？"
+				},
+				"a": {
+					"en": "Read https://viszy.ai/legal/privacy. Send privacy questions, requests and complaints to hi@viszy.ai, the same contact address used for support.",
+					"zh-Hant": "請瀏覽 https://viszy.ai/legal/privacy。私隱查詢、請求和投訴均可寄至 hi@viszy.ai，與支援使用同一聯絡地址。"
+				}
+			}
+		]
+	},
 	"source": {
 		"repo": "SylphxAI/viszy.ai",
-		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+		"path": "publisher/app.json",
+		"note": "Copied from SylphxAI/viszy.ai@75df046dcfbe3ce27b7436ff462999590993fbe4 publisher/app.json. Manually authored from SylphxAI/viszy.ai@8ba2235ddf78231b2f8890fa2589f8035a438453: src/content/legal/documents.ts (Privacy Policy v2.4.0, updated 2026-10-01), src/lib/company.ts, src/app/support/page.tsx, crates/viszy-api/src/support.rs, crates/viszy-api/src/public_api.rs, crates/viszy-api/src/public_upload.rs and src/lib/analytics/client.ts. Services: sylphx.toml. No response-time or retention promises added."
 	}
 }
