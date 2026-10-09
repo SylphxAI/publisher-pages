@@ -13,10 +13,7 @@
 		"zh-Hant": "為網店賣家由一張相片製作產品相和宣傳短片。"
 	},
 	"external": "https://viszy.ai",
-	"services": [
-		"Hosting",
-		"Data"
-	],
+	"services": ["Hosting", "Data"],
 	"privacy": {
 		"updated": "2026-10-01",
 		"summary": {
