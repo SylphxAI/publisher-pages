@@ -14,9 +14,139 @@
 	},
 	"external": "https://tachyn.ai",
 	"services": ["Hosting", "Data", "Auth", "AI"],
+	"privacy": {
+		"updated": "2026-10-08",
+		"summary": {
+			"en": "Tachyn processes voice and text through its backend for cloud dictation and text clean-up. Audio and transcript history are journaled on your Mac; Tachyn does not store audio or transcript content on its servers. Account, usage and download-request records are separate from your local history.",
+			"zh-Hant": "疾書透過後端處理聲音及文字，提供雲端語音輸入和文字整理。錄音及文字歷史會記錄在你的 Mac 上；疾書不會在伺服器儲存錄音或文字內容。帳戶、用量及下載申請紀錄與你的本機歷史分開保存。"
+		},
+		"sections": [
+			{
+				"heading": {
+					"en": "Voice, text and request context",
+					"zh-Hant": "聲音、文字及請求內容"
+				},
+				"body": [
+					{
+						"en": "Cloud dictation sends audio through Tachyn's backend and the Sylphx AI gateway to speech recognition services. Recognised text, and selected text in command mode, can be sent for text clean-up or the requested edit. The clean-up request sets store to false. These are processing requests, not uploads of your history for server-side storage.",
+						"zh-Hant": "雲端語音輸入會經疾書後端及 Sylphx AI 閘道，將錄音傳送至語音辨識服務。辨識出的文字，以及指令模式中選取的文字，可傳送作文字整理或你要求的修改。文字整理請求的 store 設為 false。這些是處理請求，並非把你的歷史上傳作伺服器儲存。"
+					},
+					{
+						"en": "Recognition context can include personal vocabulary, the focused app's name, its window title and up to 600 characters before the cursor. Secure fields do not supply their text. The local journal records audio before it is sent and keeps recoverable text when dictation or insertion fails. Local history is not a cloud backup.",
+						"zh-Hant": "辨識內容可包括個人詞彙、目前 app 的名稱、視窗標題及游標前最多 600 個字元。安全輸入欄位不會提供其文字。本機紀錄會在傳送前記下錄音，並在語音輸入或插入失敗時保留可取回的文字。本機歷史並非雲端備份。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Accounts, usage and subscriptions",
+					"zh-Hant": "帳戶、用量及訂閱"
+				},
+				"body": [
+					{
+						"en": "Sign-in uses your account identifier and email address. Tachyn keeps account and trial records and per-dictation usage such as word counts, audio duration and clean-up token counts to apply allowances and fair use. Service logs record operational results and timings rather than audio or transcript content.",
+						"zh-Hant": "登入使用你的帳戶識別碼及電郵地址。疾書保存帳戶、試用及每次語音輸入的用量紀錄，例如字數、錄音時長及文字整理的 token 數，用於計算額度及合理使用。服務日誌記錄運作結果及時間，而非錄音或文字內容。"
+					},
+					{
+						"en": "Subscription checkout and management use Sylphx Money's hosted payment pages. Tachyn uses your plan and subscription status to decide access; card entry is handled by the payment service, not the dictation app.",
+						"zh-Hant": "訂閱付款及管理使用 Sylphx Money 的託管付款頁面。疾書根據你的計劃及訂閱狀態決定使用權限；信用卡資料由付款服務處理，並非由語音輸入 app 收集。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Website and download requests",
+					"zh-Hant": "網站及下載申請"
+				},
+				"body": [
+					{
+						"en": "A request for the Mac download records your email address, the notice you accepted, its time and the source page so we can send the download link. Ad measurement is optional: only an opted-in request records the ad click identifier and sends a server-side sign-up event to Google Analytics. That event does not include your email address, name, IP address or browser details. You can withdraw this consent by emailing hi@tachyn.ai.",
+						"zh-Hant": "申請 Mac 版下載會記錄你的電郵地址、接受的聲明、接受時間及來源頁面，以便寄送下載連結。廣告成效衡量屬可選：只有選擇啟用的申請會記錄廣告點擊識別碼，並由伺服器向 Google Analytics 傳送登記事件。該事件不包含你的電郵地址、姓名、IP 地址或瀏覽器資料。你可電郵 hi@tachyn.ai 撤回此同意。"
+					},
+					{
+						"en": "A Tryit referral can carry an opaque referral identifier into a download request or a new account. Tachyn reports sign-up and install conversions using that identifier, not your email address or account identifier. The main website serves static pages; account sign-in is a separate service at accounts.tachyn.ai.",
+						"zh-Hant": "Tryit 推薦可把不含明文個人資料的推薦識別碼帶入下載申請或新帳戶。疾書使用該識別碼回報登記及安裝轉換，而非你的電郵地址或帳戶識別碼。主網站提供靜態頁面；帳戶登入由 accounts.tachyn.ai 的獨立服務處理。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Retention",
+					"zh-Hant": "保存期限"
+				},
+				"body": [
+					{
+						"en": "Tachyn does not keep audio or transcript content server-side after processing. Its hourly cleanup deletes usage older than 400 days and stream checkpoints older than two days, and removes ad click identifiers older than 90 days while keeping the consent note and time. Account records remain until account deletion. Download-request removal can be requested by email; local history remains on your Mac.",
+						"zh-Hant": "處理完成後，疾書不會在伺服器保留錄音或文字內容。每小時的清理會刪除超過 400 日的用量及超過兩日的串流檢查點，並移除超過 90 日的廣告點擊識別碼，同時保留同意聲明及時間。帳戶紀錄會保留至刪除帳戶。你可電郵要求移除下載申請；本機歷史仍留在你的 Mac 上。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Deletion and contact",
+					"zh-Hant": "刪除及聯絡"
+				},
+				"body": [
+					{
+						"en": "Delete your account in Settings → Account → Delete account. A subscription that can still bill must end first: cancel it in Manage subscription and wait until it no longer bills. Deletion removes Tachyn's account and usage records and requests deletion of your sign-in through the platform. It keeps history on your Mac; server-account deletion does not erase that local history or billing records that must be retained.",
+						"zh-Hant": "你可在「設定 → 帳戶 → 刪除帳戶」刪除帳戶。如訂閱仍可收費，須先在「管理訂閱」取消，並等到不再收費才可刪除。刪除會移除疾書的帳戶及用量紀錄，並透過平台申請刪除登入帳戶。Mac 上的歷史會保留；刪除伺服器帳戶不會刪除本機歷史或必須保存的付款紀錄。"
+					},
+					{
+						"en": "For privacy questions or deletion without the app, email hi@tachyn.ai from your account's email address. Tachyn does not sell your data or use your audio or text to train models. The full product privacy policy is at https://tachyn.ai/privacy.",
+						"zh-Hant": "如有私隱問題，或需在沒有 app 的情況下刪除帳戶，請以帳戶的電郵地址寄信至 hi@tachyn.ai。疾書不會出售你的資料，亦不會用你的錄音或文字訓練模型。完整產品私隱政策見 https://tachyn.ai/privacy。"
+					}
+				]
+			}
+		]
+	},
+	"support": {
+		"email": "hi@tachyn.ai",
+		"faq": [
+			{
+				"q": {
+					"en": "Which Macs can run Tachyn?",
+					"zh-Hant": "哪些 Mac 可以使用疾書？"
+				},
+				"a": {
+					"en": "Tachyn supports macOS 13 Ventura or later on Apple silicon and Intel Macs. Download information is at https://tachyn.ai/download. Cloud dictation needs an internet connection and sign-in.",
+					"zh-Hant": "疾書支援 Apple silicon 及 Intel Mac，需使用 macOS 13 Ventura 或更新版本。下載資訊見 https://tachyn.ai/download。雲端語音輸入需要網絡連線及登入。"
+				}
+			},
+			{
+				"q": {
+					"en": "Where do I find text when insertion fails?",
+					"zh-Hant": "文字插入失敗時，在哪裏找回文字？"
+				},
+				"a": {
+					"en": "Check History on your Mac. When the focused app refuses insertion, Tachyn keeps the text in history and tries to put it on the clipboard for manual paste. Check the notice if clipboard access also fails; history is local, not synced to another device.",
+					"zh-Hant": "請查看 Mac 上的「歷史」。目前 app 拒絕插入時，疾書會把文字保留在歷史，並嘗試放到剪貼簿供你手動貼上。如剪貼簿亦失敗，請查看提示；歷史只在本機，不會同步到其他裝置。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I manage a subscription or delete my account?",
+					"zh-Hant": "如何管理訂閱或刪除帳戶？"
+				},
+				"a": {
+					"en": "Use Settings → Account and Manage subscription for the hosted customer portal. Cancel any subscription that can still bill and wait for it to end before choosing Delete account. Account deletion keeps history on your Mac. If you cannot use the app or sign in, email hi@tachyn.ai from the account's email address.",
+					"zh-Hant": "在「設定 → 帳戶」選擇「管理訂閱」，開啟託管客戶頁面。如訂閱仍可收費，請先取消並等候結束，再選擇「刪除帳戶」。刪除帳戶會保留 Mac 上的歷史。如無法使用 app 或登入，請以帳戶的電郵地址寄信至 hi@tachyn.ai。"
+				}
+			},
+			{
+				"q": {
+					"en": "How can I ask for help?",
+					"zh-Hant": "如何尋求協助？"
+				},
+				"a": {
+					"en": "Email hi@tachyn.ai with your macOS version, Tachyn version, the steps you took and the error message. Do not include dictated audio, private transcripts, passwords or payment-card details. This contact does not promise a response time.",
+					"zh-Hant": "請電郵 hi@tachyn.ai，提供 macOS 版本、疾書版本、操作步驟及錯誤訊息。請勿附上錄音、私人文字紀錄、密碼或信用卡資料。此聯絡方式不承諾回覆時限。"
+				}
+			}
+		]
+	},
 	"source": {
 		"repo": "SylphxAI/tachyn",
-		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+		"path": "publisher/app.json",
+		"note": "Copied from SylphxAI/tachyn@0e2eb3cfbea71fed1d5c8b5f63d30069755667d9:publisher/app.json. Immutable source: https://github.com/SylphxAI/tachyn/blob/0e2eb3cfbea71fed1d5c8b5f63d30069755667d9/publisher/app.json. Manually authored product-owned payload dated 2026-10-08; this is its authoring date, not a release date. Behaviour and contact checked at SylphxAI/tachyn@59ba4a29312c8403b358621c42d71bcb0766e96f: README.md; apps/site/src/lib.rs; apps/site/src/legal.rs; crates/tachyn-app/src/insert.rs; crates/tachyn-app/src/service.rs; crates/tachyn-core/src/engine.rs; services/api/src/relay.rs; services/api/src/proxy.rs; services/api/src/meter.rs; services/api/src/money/checkout.rs; services/api/src/waitlist.rs; services/api/src/ads.rs; services/api/src/tryit.rs; services/api/migrations; docs/privacy.md; sylphx.toml. The external hub link remains unchanged."
 	}
 }
