@@ -14,9 +14,139 @@
 	},
 	"external": "https://luzzy.chat",
 	"services": ["Hosting", "Data", "Auth", "AI"],
+	"privacy": {
+		"updated": "2026-10-08",
+		"summary": {
+			"en": "Luzzy is a conversation practice coach for adults aged 18 and over. We process your account details, practice conversations and feedback to run the service and show your progress. Luzzy does not use your transcripts to train AI models.",
+			"zh-Hant": "Luzzy 是供年滿 18 歲成人使用的對話練習教練。我們處理你的帳戶資料、練習對話及回饋，以提供服務和顯示進度。Luzzy 不會使用你的逐字稿訓練 AI 模型。"
+		},
+		"sections": [
+			{
+				"heading": {
+					"en": "Account and practice data",
+					"zh-Hant": "帳戶及練習資料"
+				},
+				"body": [
+					{
+						"en": "Sign-in is handled by Sylphx Auth. Luzzy links your sign-in to your learner account and keeps your name, email address and adult declaration. We keep the scenarios you choose, messages from you and the AI partner, session feedback and scores to provide practice and show your history and progress.",
+						"zh-Hant": "登入由 Sylphx Auth 處理。Luzzy 將你的登入身分連結至學員帳戶，並保存你的姓名、電郵地址及成人聲明。我們保存你選擇的情境、你與 AI 夥伴的訊息、練習回饋及分數，以提供練習和顯示歷史紀錄及進度。"
+					},
+					{
+						"en": "For a first session without an account, we also keep the result and time of your adult declaration, a one-way copy of the browser cookie value and a keyed one-way hash of your IP address to limit guest sessions. Guest sessions and limit records expire after 24 hours and are removed by the daily clean-up, unless you save the session by signing in.",
+						"zh-Hant": "無帳戶的首次練習亦會保存你的成人聲明結果及時間、瀏覽器 cookie 值的單向副本及 IP 地址的加密單向雜湊，以限制訪客練習次數。訪客練習及限額紀錄於 24 小時後到期，由每日清理程序移除；如你登入並保存練習，則會成為你的練習紀錄。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "AI and spoken replies",
+					"zh-Hant": "AI 及語音回覆"
+				},
+				"body": [
+					{
+						"en": "Conversation text is sent through our AI gateway to model providers to generate the partner's replies and your feedback. Luzzy uses transcripts for practice, feedback and progress, not to train models.",
+						"zh-Hant": "對話文字會經我們的 AI 閘道傳送至模型供應商，以產生夥伴回覆及你的回饋。Luzzy 使用逐字稿提供練習、回饋及進度，不用於訓練模型。"
+					},
+					{
+						"en": "If you use the microphone, browser speech recognition is used where available. The browser maker may receive audio under its own privacy terms; Luzzy's transcript promises cover only what reaches Luzzy. Where server speech input is enabled and browser recognition is unavailable, audio is sent through our AI gateway for transcription. Luzzy does not store the recording. Only the text you send is kept as a practice reply.",
+						"zh-Hant": "如你使用麥克風，系統會優先使用瀏覽器提供的語音辨識。瀏覽器開發商可能依其私隱條款接收音訊；Luzzy 對逐字稿的承諾只涵蓋傳送至 Luzzy 的資料。如已啟用伺服器語音輸入而瀏覽器沒有語音辨識，音訊會經我們的 AI 閘道轉錄。Luzzy 不會儲存錄音，只會將你送出的文字保存為練習回覆。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Payments and service operation",
+					"zh-Hant": "付款及服務運作"
+				},
+				"body": [
+					{
+						"en": "Sylphx Money manages new checkout and entitlements. Existing legacy payment records remain where needed to preserve paid access. Subscription and payment records include billing periods, amounts, currencies and provider references, not full card details. Hosting, account-email and error-monitoring services help us operate Luzzy and fix faults.",
+						"zh-Hant": "Sylphx Money 處理新結帳及使用權。現有舊付款紀錄會按需要保留，以維持已付款的使用權。訂閱及付款紀錄包括帳單週期、金額、貨幣及供應商參考編號，不包括完整卡資料。託管、帳戶電郵及錯誤監察服務協助我們運作 Luzzy 和修正故障。"
+					},
+					{
+						"en": "We use account and practice data to provide the service under our contract, operational data to keep the service working and prevent abuse, and payment records to meet tax and accounting obligations. We do not sell your data or show advertising inside Luzzy.",
+						"zh-Hant": "我們依合約使用帳戶及練習資料提供服務，使用運作資料維持服務及防止濫用，並保存付款紀錄以履行稅務及會計義務。我們不會出售你的資料，也不會在 Luzzy 內展示廣告。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Optional advertising measurement",
+					"zh-Hant": "自選廣告成效量度"
+				},
+				"body": [
+					{
+						"en": "Only with your consent, Google Analytics and Google Ads receive public-page views and sign-up, trial, purchase and referral-funnel events. Advertising click identifiers and campaign tags may be kept in an attribution cookie and attached to checkout. Practice conversations, feedback, scenario choices, your name and email, and private app-page addresses are not sent to Google. Personalised advertising is off. You can change your choice on Luzzy's cookies page.",
+						"zh-Hant": "只有在你同意後，Google Analytics 及 Google Ads 才會接收公開頁面瀏覽、註冊、試用、購買及推薦流程事件。廣告點擊識別碼及活動標籤可能會保存在歸因 cookie 並附於結帳資料。我們不會向 Google 傳送練習對話、回饋、情境選擇、你的姓名及電郵，或私人應用程式頁面地址。個人化廣告已關閉。你可在 Luzzy 的 cookie 頁面更改選擇。"
+					}
+				]
+			},
+			{
+				"heading": {
+					"en": "Export, deletion and retention",
+					"zh-Hant": "匯出、刪除及保存期限"
+				},
+				"body": [
+					{
+						"en": "Download your account and practice data as JSON in Settings. Payment records held by Sylphx Money can be requested by email. Cancel any renewing subscription before deleting your account. Successful deletion deactivates the account and deletes the sign-in; the account and practice records are permanently erased after 30 days by the erasure job. Payment records are retained for six years for tax, with legacy account links removed on erasure.",
+						"zh-Hant": "你可在設定中將帳戶及練習資料下載為 JSON。由 Sylphx Money 保存的付款紀錄可透過電郵索取。刪除帳戶前，請先取消會續訂的訂閱。成功刪除後帳戶會停用，登入身分亦會刪除；帳戶及練習紀錄於 30 日後由清除程序永久移除。付款紀錄因稅務需要保存六年，舊紀錄的帳戶連結會於清除時移除。"
+					},
+					{
+						"en": "For other privacy requests, contact hi@luzzy.chat. The full product privacy policy is at https://luzzy.chat/privacy.",
+						"zh-Hant": "其他私隱資料要求請聯絡 hi@luzzy.chat。完整產品私隱政策見 https://luzzy.chat/privacy。"
+					}
+				]
+			}
+		]
+	},
+	"support": {
+		"email": "hi@luzzy.chat",
+		"faq": [
+			{
+				"q": {
+					"en": "How do I get help signing in?",
+					"zh-Hant": "登入遇到問題怎麼辦？"
+				},
+				"a": {
+					"en": "Use Forgot your password? on the sign-in page to request a reset link. For an existing account, use the same email address or sign-in method and confirm your email when asked. If you are still stuck, email hi@luzzy.chat from your account email address.",
+					"zh-Hant": "在登入頁使用「忘記密碼？」索取重設連結。現有帳戶請使用相同電郵地址或登入方式，並按要求確認電郵。如仍無法登入，請使用帳戶的電郵地址聯絡 hi@luzzy.chat。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I cancel or ask about billing?",
+					"zh-Hant": "如何取消訂閱或查詢帳單？"
+				},
+				"a": {
+					"en": "Cancel a renewing subscription in Settings; paid access continues to the end of the paid period. For billing questions, email hi@luzzy.chat with your account email address. No refund window is promised; statutory rights remain.",
+					"zh-Hant": "你可在設定中取消續訂；已付款的使用權會維持至付款期結束。帳單問題請聯絡 hi@luzzy.chat 並提供帳戶電郵地址。我們不承諾退款期限；法定權利不受影響。"
+				}
+			},
+			{
+				"q": {
+					"en": "Can I download or delete my data?",
+					"zh-Hant": "可以下載或刪除我的資料嗎？"
+				},
+				"a": {
+					"en": "Use Download my data or Delete account in Settings. Cancel renewing subscriptions first. Account deletion removes your sign-in and schedules permanent erasure after 30 days. For other privacy requests or payment-record copies, email hi@luzzy.chat.",
+					"zh-Hant": "在設定中使用「下載我的資料」或「刪除帳戶」。請先取消續訂。刪除帳戶會移除登入身分，並安排於 30 日後永久清除資料。其他私隱要求或付款紀錄副本請聯絡 hi@luzzy.chat。"
+				}
+			},
+			{
+				"q": {
+					"en": "How do I report a harmful AI reply?",
+					"zh-Hant": "如何舉報有害的 AI 回覆？"
+				},
+				"a": {
+					"en": "Email hi@luzzy.chat with the date and scenario. Luzzy is not therapy or an emergency service. If you are in danger or crisis, contact local emergency services or use the helplines at https://luzzy.chat/safety.",
+					"zh-Hant": "請將日期及情境電郵至 hi@luzzy.chat。Luzzy 並非治療或緊急服務。如你身處危險或危機，請聯絡當地緊急服務，或使用 https://luzzy.chat/safety 列出的求助熱線。"
+				}
+			}
+		]
+	},
 	"source": {
 		"repo": "SylphxAI/luzzy",
-		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+		"path": "publisher/app.json",
+		"note": "Copied from SylphxAI/luzzy@cea51f4be7112e0fd3dbf7d0d950fee8ea3551f9 publisher/app.json (https://github.com/SylphxAI/luzzy/blob/cea51f4be7112e0fd3dbf7d0d950fee8ea3551f9/publisher/app.json). Behaviour evidence: publisher/README.md at the same commit. Services: sylphx.toml at the same commit."
 	}
 }
