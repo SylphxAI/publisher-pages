@@ -118,8 +118,8 @@
 					"zh-Hant": "如何取消訂閱或查詢帳單？"
 				},
 				"a": {
-					"en": "Cancel a renewing subscription in Settings; paid access continues to the end of the paid period. For billing questions, email hi@luzzy.chat with your account email address. No refund window is promised; statutory rights remain.",
-					"zh-Hant": "你可在設定中取消續訂；已付款的使用權會維持至付款期結束。帳單問題請聯絡 hi@luzzy.chat 並提供帳戶電郵地址。我們不承諾退款期限；法定權利不受影響。"
+					"en": "For a renewing Sylphx Money subscription, cancel in Settings; paid access continues to the end of the paid period. For a legacy subscription cancellation or billing questions, email hi@luzzy.chat with your account email address. No refund window is promised; statutory rights remain.",
+					"zh-Hant": "如你的續訂由 Sylphx Money 處理，可在設定中取消；已付款的使用權會維持至付款期結束。如需取消舊系統的訂閱或查詢帳單，請聯絡 hi@luzzy.chat 並提供帳戶電郵地址。我們不承諾退款期限；法定權利不受影響。"
 				}
 			},
 			{
@@ -147,6 +147,6 @@
 	"source": {
 		"repo": "SylphxAI/luzzy",
 		"path": "publisher/app.json",
-		"note": "Copied from SylphxAI/luzzy@cea51f4be7112e0fd3dbf7d0d950fee8ea3551f9 publisher/app.json (https://github.com/SylphxAI/luzzy/blob/cea51f4be7112e0fd3dbf7d0d950fee8ea3551f9/publisher/app.json). Behaviour evidence: publisher/README.md at the same commit. Services: sylphx.toml at the same commit."
+		"note": "Copied from SylphxAI/luzzy@f6bce1cca829f3ef512c1600a71c69bbb9a99e28 publisher/app.json (https://github.com/SylphxAI/luzzy/blob/f6bce1cca829f3ef512c1600a71c69bbb9a99e28/publisher/app.json). Behaviour evidence: publisher/README.md at the same commit. Services: sylphx.toml at the same commit."
 	}
 }
