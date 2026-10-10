@@ -1,0 +1,56 @@
+name: Verify
+
+# Post-merge verification for optimistic merge: what the merge-queue gate
+# drops (the production build). Runs on each push to main and, called from
+# ci.yml, on a ready pull request. The `verified` job is the marker the
+# platform reads.
+
+on:
+  push:
+    branches: [main]
+  workflow_call:
+    inputs:
+      lanes:
+        type: string
+        default: ""
+  workflow_dispatch:
+    inputs:
+      lanes:
+        description: Comma-separated lanes to run. Empty runs every lane.
+        type: string
+        default: ""
+
+concurrency:
+  group: verify-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+  actions: read
+  checks: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2.0.2
+        with:
+          bun-version: 1.4.0
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      - run: bun run build
+
+  # The marker. Named exactly `verified`; never a required check.
+  verified:
+    name: verified
+    if: always()
+    needs: [build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: SylphxAI/.github/.github/actions/needs-pass@05ac6474b96425bcb4965addd025a93e061b66c4
+        with:
+          needs: ${{ toJSON(needs) }}
+          required: build
