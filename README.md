@@ -21,14 +21,18 @@ the universal-link and app-link files. Owner decision:
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
 | `/apps/zh-hant/…` | The same pages in Traditional Chinese |
-| `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
+| `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Platform-served Universal Links and Android App Links; this repo supplies generated JSON |
 
-The site is a separate Sylphx Hosting project mounted at exactly three paths of
-`sylphx.com`: `/apps`, `/.well-known/apple-app-site-association`
-and `/.well-known/assetlinks.json`. Everything else on the host, including
-`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
-platform repository (`SylphxAI/cloud`) names no product, so all product text
-lives here. Every URL the pages use stays inside the mounted paths: language
+The site is a separate Sylphx Hosting project mounted only at `/apps` on
+`sylphx.com`, using the supported top-level `[[domains]]` declaration in
+`sylphx.toml` (SylphxAI/cloud#9128). Deploy this declaration only after that
+contract version is ready. Everything else on the host, including `/`,
+`/open-source`, `/zh-hant` and `/.well-known`, belongs to the platform site.
+This repository generates app-link JSON from app-owned public metadata for
+handoff; the platform serves both app-link files, not this project's mount.
+Missing Apple application identifiers or Play app-signing certificates must
+never be guessed. Product text lives here. Every URL the pages use stays
+inside `/apps`, apart from links to platform-owned pages: language
 twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.
 The app slugs `zh-hant` and `_assets` are reserved.
 

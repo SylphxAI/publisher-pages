@@ -12,9 +12,10 @@ Chinese, plus the app-link files. Start with [README.md](README.md) and
 
 ## Rules and reasons
 
-- Every URL a page uses stays under `/apps`, or is one of the two app-link
-  files, because only those paths are mounted on sylphx.com. `/open-source` is
-  the platform's page: link to it, do not serve it. Language twins go under the
+- Only `/apps` is mounted from this project on sylphx.com. The platform serves
+  `/`, `/open-source` and both app-link files; this repository supplies generated
+  app-link JSON from verified app-owned public metadata. Link to platform pages,
+  do not mount them here. Language twins go under the
   prefix (`/apps/zh-hant/...`). The tests enforce it.
 - Product text lives here, never in SylphxAI/cloud, so the platform repository
   names no product.

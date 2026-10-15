@@ -19,8 +19,10 @@ app teams (one JSON file in their repository produces all their pages).
 
 ## Boundaries and reasons
 
-- The platform repository names no product, so all product text lives here and
-  the platform holds only generic route configuration.
+- Product text lives here. The supported Hosting mount is only `/apps`;
+  `/`, `/open-source` and both `/.well-known` app-link files stay platform-owned.
+  This repository supplies app-link JSON from verified public app metadata;
+  the platform serves it. A passing source check is not a serving-route receipt.
 - Apps keep their own names and never carry "Sylphx"; Sylphx appears only as
   publisher, because apps are their own brands.
 - Legal pages name Sylphx Limited, registered in England and Wales, as
