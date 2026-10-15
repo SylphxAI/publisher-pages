@@ -140,11 +140,23 @@ describe('app-link files', () => {
 		deepLinks,
 	})
 
-	test('are valid when no app declares ids', () => {
+	test('are valid and name the app that declares ids', () => {
 		expect(JSON.parse(files.get('.well-known/apple-app-site-association') ?? '')).toEqual({
-			applinks: { details: [] },
+			applinks: {
+				details: [
+					{
+						appIDs: ['3P3M2P34DS.com.sylphx.numbergrove'],
+						components: [{ '/': '/apps/number-grove/*' }],
+					},
+				],
+			},
 		})
 		expect(JSON.parse(files.get('.well-known/assetlinks.json') ?? '')).toEqual([])
+	})
+
+	test('are empty when no app declares ids', () => {
+		expect(JSON.parse(appleAppSiteAssociation([]))).toEqual({ applinks: { details: [] } })
+		expect(JSON.parse(assetLinks([]))).toEqual([])
 	})
 
 	test('cover the app paths when ids are declared', () => {
