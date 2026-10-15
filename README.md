@@ -25,12 +25,16 @@ the universal-link and app-link files. Owner decision:
 
 The site is a separate Sylphx Hosting project mounted at exactly three paths of
 `sylphx.com`: `/apps`, `/.well-known/apple-app-site-association`
-and `/.well-known/assetlinks.json`. Everything else on the host, including
-`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
-platform repository (`SylphxAI/cloud`) names no product, so all product text
-lives here. Every URL the pages use stays inside the mounted paths: language
-twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.
-The app slugs `zh-hant` and `_assets` are reserved.
+and `/.well-known/assetlinks.json`. The mount is the service's `path_prefixes`
+and the `[[domains]] hostname = "sylphx.com"` entry in [sylphx.toml](sylphx.toml):
+`sylphx.com` stays the platform site's host and the platform routes only these
+paths here, because the project is platform-owned and declares explicit
+prefixes beside that host's catch-all. Everything else on the host, including
+`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the
+platform site. The platform repository (`SylphxAI/cloud`) names no product, so
+all product text lives here. Every URL the pages use stays inside the mounted
+paths: language twins sit under each prefix, and the stylesheet is at
+`/apps/_assets/site.css`. The app slugs `zh-hant` and `_assets` are reserved.
 
 ## The hub
 
