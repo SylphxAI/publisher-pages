@@ -30,6 +30,10 @@ path_prefixes = [
 mode = "http"
 path = "/healthz"
 
+[ci]
+merge = "optimistic"
+on_red = "revert"
+
 # Serve the three paths above on the apex host. `sylphx.com` stays the platform
 # site's host: this project is platform-owned (organizations.slug = "sylphx")
 # and declares explicit prefixes beside that catch-all, so the platform routes
