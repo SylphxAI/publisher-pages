@@ -16,6 +16,15 @@ port = 8080
 # micro (0.25 CPU, 512 MiB): 7-day p95 0.07 GiB, peak 0.07 GiB, CPU p95 0.000 (read 2026-10-04). Not nano: a nano revision of this service did not become ready on 2026-10-03.
 instance_type = "micro"
 public_networking = true
+# The three paths of sylphx.com this project serves (README "What it serves").
+# Each is a whole path; `path_prefixes` matches on whole segments, so
+# `/apps/...` and the two exact `.well-known` files are covered and no other
+# `.well-known` name is. The platform's own site keeps the host's catch-all.
+path_prefixes = [
+  "/apps",
+  "/.well-known/apple-app-site-association",
+  "/.well-known/assetlinks.json",
+]
 
 [services.health]
 mode = "http"
@@ -24,3 +33,11 @@ path = "/healthz"
 [ci]
 merge = "optimistic"
 on_red = "revert"
+
+# Serve the three paths above on the apex host. `sylphx.com` stays the platform
+# site's host: this project is platform-owned (organizations.slug = "sylphx")
+# and declares explicit prefixes beside that catch-all, so the platform routes
+# only these paths here and leaves every other path with the platform site.
+[[domains]]
+hostname = "sylphx.com"
+service = "web"
