@@ -104,7 +104,9 @@ CI runs `bun run check` and the build on GitHub's free standard hosted runners
 (`ubuntu-latest`), which a public repository may use; the merge queue requires
 the single `ci-ok` check. An `identifiers` job checks the lines a pull request
 or merge group adds for id generators and primary keys that are not UUIDv7
-(owner `standards/identifiers.md`).
+(owner `standards/identifiers.md`), and a `chat-senders` job fails a change that
+adds a direct chat-API host outside the shared allow-list (chat messages go
+through Notify, cloud ADR notify-chat-channel).
 
 `Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
 `sylphx.toml` deploys it on Sylphx Hosting.
