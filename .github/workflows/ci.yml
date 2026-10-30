@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: SylphxAI/.github/.github/actions/main-red-gate@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
+      - uses: SylphxAI/.github/.github/actions/main-red-gate@054710a09ce85a2e0edbc14599bd00df0db879be # main
         with:
           mode: observe
 
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
-      - uses: SylphxAI/.github/.github/actions/zh-hant@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
+      - uses: SylphxAI/.github/.github/actions/zh-hant@054710a09ce85a2e0edbc14599bd00df0db879be # main
   # Discord) outside the shared allow-list: a product sends chat messages
   # through Notify (cloud ADR notify-chat-channel). Only the lines this change
   # adds are checked, and the job needs the full history to see them.
@@ -63,7 +63,7 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: SylphxAI/.github/.github/actions/chat-senders@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
+      - uses: SylphxAI/.github/.github/actions/chat-senders@054710a09ce85a2e0edbc14599bd00df0db879be # main
         with:
           mode: fail
 
@@ -77,7 +77,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Non-v7 ids on added lines (owner standards/identifiers.md)
-        uses: SylphxAI/.github/.github/actions/identifiers@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
+        uses: SylphxAI/.github/.github/actions/identifiers@054710a09ce85a2e0edbc14599bd00df0db879be # main
   # after merge verify.yml runs it on the trunk. Never in a merge group or a draft.
   suite:
     if: github.event_name != 'merge_group' && !github.event.pull_request.draft
@@ -96,7 +96,7 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           filter: blob:none
-      - uses: SylphxAI/.github/.github/actions/stack-conformance@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
+      - uses: SylphxAI/.github/.github/actions/stack-conformance@054710a09ce85a2e0edbc14599bd00df0db879be # main
         with:
           base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || '' }}
 
@@ -107,10 +107,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: SylphxAI/.github/.github/actions/needs-pass@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
+      - uses: SylphxAI/.github/.github/actions/needs-pass@054710a09ce85a2e0edbc14599bd00df0db879be # main
         with:
           needs: ${{ toJSON(needs) }}
-          required: >-
+          required: check,zh-hant,identifiers,chat-senders,stack, ${{ github.event_name == 'merge_group' && 'main-state' || '' }}, ${{ github.event_name != 'merge_group' && !github.event.pull_request.draft && 'suite' || '' }}
             check,zh-hant,identifiers,chat-senders,stack,
             ${{ github.event_name == 'merge_group' && 'main-state' || '' }},
             ${{ github.event_name != 'merge_group' && !github.event.pull_request.draft && 'suite' || '' }}
