@@ -28,6 +28,7 @@ permissions:
   contents: read
   actions: read
   checks: read
+  pull-requests: read
 
 jobs:
   build:
@@ -50,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: SylphxAI/.github/.github/actions/needs-pass@4dcc910606d7624150d2004f2dd970eb570de30e # main
+      - uses: SylphxAI/.github/.github/actions/needs-pass@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
         with:
           needs: ${{ toJSON(needs) }}
           required: build
