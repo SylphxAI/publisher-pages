@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: SylphxAI/.github/.github/actions/needs-pass@96195d86b550ab1205159acb1ae0d75b1fbed47f # main
+      - uses: SylphxAI/.github/.github/actions/needs-pass@054710a09ce85a2e0edbc14599bd00df0db879be # main
         with:
           needs: ${{ toJSON(needs) }}
           required: build

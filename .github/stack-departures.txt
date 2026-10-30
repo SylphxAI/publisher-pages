@@ -21,3 +21,4 @@
 # stack-rule-adopted-v1 architecture/C1/deal-randomness
 # stack-rule-adopted-v1 architecture/C2/tenant-read-functions
 # stack-rule-adopted-v1 force-push
+# stack-rule-adopted-v1 model-selector
