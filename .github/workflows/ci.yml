@@ -110,7 +110,7 @@ jobs:
       - uses: SylphxAI/.github/.github/actions/needs-pass@054710a09ce85a2e0edbc14599bd00df0db879be # main
         with:
           needs: ${{ toJSON(needs) }}
-          required: check,zh-hant,identifiers,chat-senders,stack, ${{ github.event_name == 'merge_group' && 'main-state' || '' }}, ${{ github.event_name != 'merge_group' && !github.event.pull_request.draft && 'suite' || '' }}
+          required: >-
             check,zh-hant,identifiers,chat-senders,stack,
             ${{ github.event_name == 'merge_group' && 'main-state' || '' }},
             ${{ github.event_name != 'merge_group' && !github.event.pull_request.draft && 'suite' || '' }}
