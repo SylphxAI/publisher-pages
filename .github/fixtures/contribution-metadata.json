@@ -1,7 +1,7 @@
 {
 	"pull_request": {
 		"title": "Improve metadata validation",
-		"body": "\u0057\u002d12345"
+		"body": "Validated the required check."
 	},
 	"commits": [
 		{
