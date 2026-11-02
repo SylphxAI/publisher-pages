@@ -64,15 +64,15 @@
 				},
 				"body": [
 					{
-						"en": "For questions about your data or your privacy rights, email privacy@spiron.ai. The full policy at https://spiron.ai/privacy explains retention, deletion, transfers and your rights.",
-						"zh-Hant": "如對你的資料或私隱權利有疑問，請電郵 privacy@spiron.ai。https://spiron.ai/privacy 的完整政策說明資料保留、刪除、跨境傳輸及你的權利。"
+						"en": "For questions about your data or your privacy rights, email hi@spiron.ai. The full policy at https://spiron.ai/privacy explains retention, deletion, transfers and your rights.",
+						"zh-Hant": "如對你的資料或私隱權利有疑問，請電郵 hi@spiron.ai。https://spiron.ai/privacy 的完整政策說明資料保留、刪除、跨境傳輸及你的權利。"
 					}
 				]
 			}
 		]
 	},
 	"support": {
-		"email": "support@spiron.ai",
+		"email": "hi@spiron.ai",
 		"faq": [
 			{
 				"q": {
@@ -80,8 +80,8 @@
 					"zh-Hant": "如何聯絡支援？"
 				},
 				"a": {
-					"en": "Email support@spiron.ai. A person reads every support request. Include your reference if you already have one. In Telegram, ask your agent how it works in plain words; support itself is by email.",
-					"zh-Hant": "請電郵 support@spiron.ai。每宗支援請求均由人員閱讀。如已有參考編號，請一併提供。在 Telegram，你可以用日常語言詢問代理的使用方式；支援服務本身透過電郵提供。"
+					"en": "Email hi@spiron.ai. A person reads every support request. Include your reference if you already have one. In Telegram, ask your agent how it works in plain words; support itself is by email.",
+					"zh-Hant": "請電郵 hi@spiron.ai。每宗支援請求均由人員閱讀。如已有參考編號，請一併提供。在 Telegram，你可以用日常語言詢問代理的使用方式；支援服務本身透過電郵提供。"
 				}
 			},
 			{
@@ -107,8 +107,8 @@
 		]
 	},
 	"source": {
-		"repo": "SylphxAI/agents",
+		"repo": "SylphxAI/spiron",
 		"path": "publisher/app.json",
-		"note": "Copied from SylphxAI/agents@4ae3917d1050f66a776f1ed5b45e8430d66269c2:publisher/app.json. Product-owned privacy and support; external hub link retained."
+		"note": "Copied from SylphxAI/spiron@a3a92c459732330e630988c412c6913931d2e2e9:publisher/app.json. Product-owned privacy and support; external hub link retained."
 	}
 }
