@@ -22,6 +22,16 @@ const mounted = (href: string) => {
 }
 
 describe('served pages', () => {
+	test('every publisher contact uses the general inbox', () => {
+		expect(site.publisher.contactEmail).toBe('hi@sylphx.com')
+		for (const [path, body] of files) {
+			if (!path.endsWith('.html')) continue
+			expect(body, path).toContain('mailto:hi@sylphx.com')
+			const addresses = [...body.matchAll(/[a-zA-Z0-9._%+-]+@sylphx\.com/g)].map(([email]) => email)
+			expect([...new Set(addresses)], path).toEqual(['hi@sylphx.com'])
+		}
+	})
+
 	test('every app page exists in both languages', () => {
 		for (const app of site.apps.filter((a) => !a.external)) {
 			for (const prefix of ['apps/', 'apps/zh-hant/']) {
