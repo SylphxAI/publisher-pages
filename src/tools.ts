@@ -56,7 +56,8 @@ export const TOOLS: Tool[] = [
 		url: 'https://github.com/SylphxAI/firestore_odm',
 		summary: {
 			en: 'Type-safe Firestore ODM for Flutter and Dart — maintained successor to cloud_firestore_odm.',
-			'zh-Hant': '為 Flutter 及 Dart 而設的型別安全 Firestore ODM — 持續維護的 cloud_firestore_odm 繼任套件。',
+			'zh-Hant':
+				'為 Flutter 及 Dart 而設的型別安全 Firestore ODM — 持續維護的 cloud_firestore_odm 繼任套件。',
 		},
 	},
 	{
@@ -72,7 +73,8 @@ export const TOOLS: Tool[] = [
 		url: 'https://github.com/SylphxAI/mcp-kit',
 		summary: {
 			en: 'Shared parts of Sylphx MCP servers: an rmcp stdio server, client setup, npm launcher and a reusable release workflow.',
-			'zh-Hant': 'Sylphx MCP 伺服器的共用組件：rmcp 標準輸入輸出伺服器、客戶端設定、npm 啟動器及可重用發佈工作流。',
+			'zh-Hant':
+				'Sylphx MCP 伺服器的共用組件：rmcp 標準輸入輸出伺服器、客戶端設定、npm 啟動器及可重用發佈工作流。',
 		},
 	},
 ]
