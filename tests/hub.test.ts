@@ -110,7 +110,16 @@ describe('Also from Sylphx', () => {
 	test('lists each open-source tool with its link, in both languages', () => {
 		expect(hub).toContain('<h2>Also from Sylphx</h2>')
 		expect(zh).toContain('<h2>Sylphx 的其他產品</h2>')
-		for (const name of ['anymd', 'repomap', 'lockdocs', 'skills']) {
+		for (const name of [
+			'anymd',
+			'repomap',
+			'lockdocs',
+			'anyagents',
+			'skills',
+			'firestore_odm',
+			'Google Photos Delete Tool',
+			'mcp-kit',
+		]) {
 			expect(hub).toContain(`>${name}</a> — `)
 			expect(zh).toContain(`>${name}</a> — `)
 		}
