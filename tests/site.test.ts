@@ -22,6 +22,16 @@ const mounted = (href: string) => {
 }
 
 describe('served pages', () => {
+	test('every publisher contact uses the general inbox', () => {
+		expect(site.publisher.contactEmail).toBe('hi@sylphx.com')
+		for (const [path, body] of files) {
+			if (!path.endsWith('.html')) continue
+			expect(body, path).toContain('mailto:hi@sylphx.com')
+			const addresses = [...body.matchAll(/[a-zA-Z0-9._%+-]+@sylphx\.com/g)].map(([email]) => email)
+			expect([...new Set(addresses)], path).toEqual(['hi@sylphx.com'])
+		}
+	})
+
 	test('every app page exists in both languages', () => {
 		for (const app of site.apps.filter((a) => !a.external)) {
 			for (const prefix of ['apps/', 'apps/zh-hant/']) {
@@ -140,11 +150,23 @@ describe('app-link files', () => {
 		deepLinks,
 	})
 
-	test('are valid when no app declares ids', () => {
+	test('are valid and name the app that declares ids', () => {
 		expect(JSON.parse(files.get('.well-known/apple-app-site-association') ?? '')).toEqual({
-			applinks: { details: [] },
+			applinks: {
+				details: [
+					{
+						appIDs: ['3P3M2P34DS.com.sylphx.numbergrove'],
+						components: [{ '/': '/apps/number-grove/*' }],
+					},
+				],
+			},
 		})
 		expect(JSON.parse(files.get('.well-known/assetlinks.json') ?? '')).toEqual([])
+	})
+
+	test('are empty when no app declares ids', () => {
+		expect(JSON.parse(appleAppSiteAssociation([]))).toEqual({ applinks: { details: [] } })
+		expect(JSON.parse(assetLinks([]))).toEqual([])
 	})
 
 	test('cover the app paths when ids are declared', () => {

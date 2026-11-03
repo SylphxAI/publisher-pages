@@ -25,12 +25,16 @@ the universal-link and app-link files. Owner decision:
 
 The site is a separate Sylphx Hosting project mounted at exactly three paths of
 `sylphx.com`: `/apps`, `/.well-known/apple-app-site-association`
-and `/.well-known/assetlinks.json`. Everything else on the host, including
-`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the platform site. The
-platform repository (`SylphxAI/cloud`) names no product, so all product text
-lives here. Every URL the pages use stays inside the mounted paths: language
-twins sit under each prefix, and the stylesheet is at `/apps/_assets/site.css`.
-The app slugs `zh-hant` and `_assets` are reserved.
+and `/.well-known/assetlinks.json`. The mount is the service's `path_prefixes`
+and the `[[domains]] hostname = "sylphx.com"` entry in [sylphx.toml](sylphx.toml):
+`sylphx.com` stays the platform site's host and the platform routes only these
+paths here, because the project is platform-owned and declares explicit
+prefixes beside that host's catch-all. Everything else on the host, including
+`/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the
+platform site. The platform repository (`SylphxAI/cloud`) names no product, so
+all product text lives here. Every URL the pages use stays inside the mounted
+paths: language twins sit under each prefix, and the stylesheet is at
+`/apps/_assets/site.css`. The app slugs `zh-hant` and `_assets` are reserved.
 
 ## The hub
 
@@ -100,7 +104,9 @@ CI runs `bun run check` and the build on GitHub's free standard hosted runners
 (`ubuntu-latest`), which a public repository may use; the merge queue requires
 the single `ci-ok` check. An `identifiers` job checks the lines a pull request
 or merge group adds for id generators and primary keys that are not UUIDv7
-(owner `standards/identifiers.md`).
+(owner `standards/identifiers.md`), and a `chat-senders` job fails a change that
+adds a direct chat-API host outside the shared allow-list (chat messages go
+through Notify, cloud ADR notify-chat-channel).
 
 `Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
 `sylphx.toml` deploys it on Sylphx Hosting.
