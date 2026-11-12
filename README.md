@@ -126,7 +126,7 @@ Nothing in this repository redraws a logo, re-letters the name or picks a
 colour (owner `standards/experience.md`, "Brand home").
 
 - `scripts/sync-brand.sh <brand checkout>` copies the token sheet, the font
-  loader with its IBM Plex files, the two header lockups and the browser icons
+  loader with its Inter and JetBrains Mono files, the two header lockups and the browser icons
   into `vendor/brand/`, then writes `vendor/brand/SOURCE`: the commit it copied
   from and each file's sha256.
   Run the script in the pull request that needs new brand files; **never edit
