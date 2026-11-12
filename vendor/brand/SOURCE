@@ -1,21 +1,21 @@
 # The Sylphx brand home, as consumed by these pages.
 # Written by scripts/sync-brand.sh; do not edit.
 repository: SylphxAI/brand
-commit: 99d7d0cc924e6639f4420e63d94c5e918cc2536f
+commit: 297510c9467f0dca28c8f64827de46db7d0b042e
 sha256:
-aeb51e9ab88dcecf8da2449e475eed212663981aeef59a7b0f299887bb0d106e  tokens/brand.css
-09496dc10ca60b137adac28df48356202630f6816dbb41eaae3a2843f5737e1e  fonts/fonts.css
-7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da  fonts/OFL.txt
-3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e  fonts/ibm-plex-sans-latin-400-normal.woff2
-0717336fb31fcdcde4b8deb3675bb4a0f7f6d484864afcd6751ac29975962203  fonts/ibm-plex-sans-latin-500-normal.woff2
-8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f  fonts/ibm-plex-sans-latin-600-normal.woff2
-c93d2a12aaa280f68b9ab7b726ff8dfedda67c99ef9abed047c1847a1cc6d583  fonts/ibm-plex-sans-latin-ext-400-normal.woff2
-2846035d85100f84c79393f80f1442d4ee720129ab8b3ffa8969aae281db8c6c  fonts/ibm-plex-sans-latin-ext-500-normal.woff2
-b25dfd4f979e442ae1e25cd0894463434cf01ba21ac1a35d39f4a82bd4cc060e  fonts/ibm-plex-sans-latin-ext-600-normal.woff2
-08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7  fonts/ibm-plex-mono-latin-400-normal.woff2
-01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22  fonts/ibm-plex-mono-latin-500-normal.woff2
-6bc0f226a5b7884a8170e3f62c63d7675609d4631bdc5931b5cdab81821f00eb  fonts/ibm-plex-mono-latin-ext-400-normal.woff2
-6bb06407c97584b0867a959e05e8874693bfeb8c317de190811c51598f2d99ea  fonts/ibm-plex-mono-latin-ext-500-normal.woff2
+c4b8124136e9a6373ad41153d30576b62945dea152352f7be95b31075446665b  tokens/brand.css
+8445a083f20335442ef283e832f54b2a2f2048319a036de10f551c5dfc54b890  fonts/fonts.css
+ea2fae2f31120328fc47875b248d225f34209b365ea63e06df535b5da687bef9  fonts/OFL.txt
+8909904ab6c872eb994093482a88a28eca2cd95912d7b6fecd72103b0dc07edc  fonts/inter-latin-400-normal.woff2
+f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f  fonts/inter-latin-500-normal.woff2
+f9a06e79cd3a2a20951c0f0e28f66dd0e6d3fda73911d640a2125c8fcb78f21a  fonts/inter-latin-600-normal.woff2
+6744a7f509ebc6ab220a6cd4ea77e898adf014f03d88dcda5d45d8a9feefb4e9  fonts/inter-latin-ext-400-normal.woff2
+2c6fbc42d315528beb06c1096df45487bf4186c4b78b8111d12c9c951f8acca2  fonts/inter-latin-ext-500-normal.woff2
+e4bdf67b0cd15ca9e184509275be95db942195d3cc2b17f6a0452f2adf75d0bf  fonts/inter-latin-ext-600-normal.woff2
+14425ba9c695763c1547f48a206b7aa60350a33ae23de09f0407877f3fcd89eb  fonts/jetbrains-mono-latin-400-normal.woff2
+cb182feeed4d798ff6961d3c79f7026279448fca0676438aaecb21f3fc39553a  fonts/jetbrains-mono-latin-500-normal.woff2
+505dfba8ecbe77e82765f36d317ed7ef4ac42719dc5f4ae68d1c483fd22d0d14  fonts/jetbrains-mono-latin-ext-400-normal.woff2
+879df9319f1cbf633bee1dd489e376a9e1e8c458f4abddcfe381cb83b5e6b027  fonts/jetbrains-mono-latin-ext-500-normal.woff2
 339f3383a4445a164fbc8a2aa73b34c6fa96348ceb425da487fc60dfa297062a  logo/svg/sylphx-lockup-colour.svg
 e13a86053a69eb702c5b6e6b12228c5661574ae0daeb7ba48eae1c05b4174b05  logo/svg/sylphx-lockup-colour-on-dark.svg
 761414bc3f599f0a30dd7d21a3b13198671bd6edefdbdccb027acffa60635b62  logo/favicon/favicon.svg

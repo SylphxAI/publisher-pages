@@ -28,16 +28,16 @@ files=(
 	tokens/brand.css
 	fonts/fonts.css
 	fonts/OFL.txt
-	fonts/ibm-plex-sans-latin-400-normal.woff2
-	fonts/ibm-plex-sans-latin-500-normal.woff2
-	fonts/ibm-plex-sans-latin-600-normal.woff2
-	fonts/ibm-plex-sans-latin-ext-400-normal.woff2
-	fonts/ibm-plex-sans-latin-ext-500-normal.woff2
-	fonts/ibm-plex-sans-latin-ext-600-normal.woff2
-	fonts/ibm-plex-mono-latin-400-normal.woff2
-	fonts/ibm-plex-mono-latin-500-normal.woff2
-	fonts/ibm-plex-mono-latin-ext-400-normal.woff2
-	fonts/ibm-plex-mono-latin-ext-500-normal.woff2
+	fonts/inter-latin-400-normal.woff2
+	fonts/inter-latin-500-normal.woff2
+	fonts/inter-latin-600-normal.woff2
+	fonts/inter-latin-ext-400-normal.woff2
+	fonts/inter-latin-ext-500-normal.woff2
+	fonts/inter-latin-ext-600-normal.woff2
+	fonts/jetbrains-mono-latin-400-normal.woff2
+	fonts/jetbrains-mono-latin-500-normal.woff2
+	fonts/jetbrains-mono-latin-ext-400-normal.woff2
+	fonts/jetbrains-mono-latin-ext-500-normal.woff2
 	logo/svg/sylphx-lockup-colour.svg
 	logo/svg/sylphx-lockup-colour-on-dark.svg
 	logo/favicon/favicon.svg
