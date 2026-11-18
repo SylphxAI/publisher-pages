@@ -24,6 +24,16 @@ import { KEY_TERMS, TERMS_SECTIONS, TERMS_UPDATED } from './terms'
 import { TOOLS } from './tools'
 
 export const ASSET_PREFIX = '/apps/_assets'
+
+/**
+ * Cloudflare, in front of sylphx.com, rewrites every email address it finds
+ * into a link that only a script it injects can decode. The CSP in nginx.conf
+ * blocks that script, so readers would see "[email protected]" instead of the
+ * address. These markers are Cloudflare's documented opt-out; every page's body
+ * sits between them, so each address is served exactly as written.
+ */
+export const EMAIL_OFF = '<!--email_off-->'
+export const EMAIL_ON = '<!--/email_off-->'
 /** Each language's segment, placed after the mounted prefix: `/apps/zh-hant/…`. */
 export const LOCALE_SEGMENT: Record<Locale, string> = { en: '', 'zh-Hant': 'zh-hant' }
 const LOCALE_NAME: Record<Locale, string> = { en: 'English', 'zh-Hant': '繁體中文' }
@@ -156,6 +166,7 @@ export function page({
 		<link rel="stylesheet" href="${ASSET_PREFIX}/site.css">${themeSheet ? `\n\t\t<link rel="stylesheet" href="${themeSheet}">` : ''}${jsonLd ? `\n\t\t<script type="application/ld+json">${JSON.stringify(jsonLd).replaceAll('<', '\\u003c')}</script>` : ''}
 	</head>
 	<body>
+		${EMAIL_OFF}
 		<a class="skip" href="#main">${t(UI.skip)}</a>
 		<header class="bar">
 			<a class="brand" href="/">
@@ -173,6 +184,7 @@ ${body}
 			<nav><a href="${localized(locale, '/apps')}">${t(UI.appsTitle)}</a> <a href="https://sylphx.com/open-source">${t(UI.openSourceTitle)}</a> <a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a></nav>
 			<p>${footer}</p>
 		</footer>
+		${EMAIL_ON}
 	</body>
 </html>
 `
