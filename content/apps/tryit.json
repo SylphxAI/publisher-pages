@@ -5,18 +5,18 @@
 		"zh-Hant": "Tryit"
 	},
 	"category": {
-		"en": "Entertainment",
-		"zh-Hant": "娛樂"
+		"en": "Daily puzzles",
+		"zh-Hant": "每日謎題"
 	},
 	"tagline": {
-		"en": "One-minute plays with a result worth sending. Free, no account, no ads.",
-		"zh-Hant": "一分鐘小遊戲，結果值得分享。免費、免註冊、無廣告。"
+		"en": "Free daily brain games: a fresh set of word, logic, number and spatial puzzles every day. Play any 3 of the 19 free, no account needed.",
+		"zh-Hant": "免費每日腦力遊戲：每天一套全新的文字、邏輯、數字及空間謎題。19 款之中任選 3 款免費玩，毋須註冊。"
 	},
 	"external": "https://tryit.fun",
-	"services": ["Hosting", "Data", "AI"],
+	"services": ["Hosting", "Data", "Auth"],
 	"source": {
 		"repo": "SylphxAI/tryit",
 		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml."
+		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml (web and api services, the database and its migrations, Sylphx Auth sign-in). Formerly Puzzled; its old pages here redirect to tryit.fun (nginx.conf)."
 	}
 }

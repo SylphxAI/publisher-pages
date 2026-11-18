@@ -1,0 +1,22 @@
+{
+	"slug": "pixzy",
+	"name": {
+		"en": "Google Photos Delete Tool",
+		"zh-Hant": "Google Photos Delete Tool"
+	},
+	"category": {
+		"en": "Photo cleanup",
+		"zh-Hant": "相片清理"
+	},
+	"tagline": {
+		"en": "Bulk delete Google Photos and find the look-alike duplicates Google misses. A free Chrome extension that dry-runs first and scans in your browser.",
+		"zh-Hant": "批量刪除 Google 相簿的相片，並找出 Google 漏掉的相似重複相片。免費 Chrome 擴充功能，先模擬執行，並在你的瀏覽器內掃描。"
+	},
+	"external": "https://pixzy.ai",
+	"services": ["Hosting"],
+	"source": {
+		"repo": "SylphxAI/Google-Photos-Delete-Tool",
+		"path": "sylphx.toml",
+		"note": "Runs on Sylphx: pixzy.ai is the web service declared in the repository root sylphx.toml. Name and one-liner follow the product's own site and Chrome Web Store listing (jiahfbbfpacpolomdjlpdpiljllcdenb)."
+	}
+}

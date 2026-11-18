@@ -107,32 +107,58 @@ describe('services field', () => {
 
 describe('Also from Sylphx', () => {
 	const zh = files.get('apps/zh-hant/index.html') ?? ''
-	test('lists each open-source tool with its link, in both languages', () => {
+	test('lists each open-source developer tool with its link, in both languages', () => {
 		expect(hub).toContain('<h2>Also from Sylphx</h2>')
 		expect(zh).toContain('<h2>Sylphx 的其他產品</h2>')
-		for (const name of [
-			'anymd',
-			'repomap',
-			'lockdocs',
-			'anyagents',
-			'skills',
-			'firestore_odm',
-			'Google Photos Delete Tool',
-			'mcp-kit',
-		]) {
+		for (const name of ['anymd', 'repomap', 'lockdocs', 'firestore_odm']) {
 			expect(hub).toContain(`>${name}</a> — `)
 			expect(zh).toContain(`>${name}</a> — `)
 		}
+		expect(hub).toContain('href="https://sylphxai.github.io/anymd/"')
 		expect(hub).toContain('href="https://github.com/SylphxAI/lockdocs"')
-		expect(hub).not.toContain('>Mark</a> — ')
-		expect(zh).not.toContain('>Mark</a> — ')
 	})
-	test('Mark appears once on the hub, as its product card', () => {
-		expect(hub.match(/href="https:\/\/mark\.sylphx\.com"/g)?.length).toBe(1)
-		expect(zh.match(/href="https:\/\/mark\.sylphx\.com"/g)?.length).toBe(1)
+	test('names no internal agent tooling', () => {
+		for (const name of ['anyagents', 'skills', 'mcp-kit']) {
+			expect(hub).not.toContain(`>${name}</a> — `)
+			expect(zh).not.toContain(`>${name}</a> — `)
+		}
+		expect(hub.toLowerCase()).not.toContain('anyagents')
+	})
+	test('a product with a card is not listed again as a tool', () => {
+		for (const url of ['https://mark.sylphx.com', 'https://pixzy.ai']) {
+			expect(hub.split(`href="${url}"`).length - 1).toBe(1)
+			expect(zh.split(`href="${url}"`).length - 1).toBe(1)
+		}
+		expect(hub).not.toContain('>Google Photos Delete Tool</a> — ')
+		expect(hub).not.toContain('>Mark</a> — ')
 	})
 	test('does not add an /open-source page', () => {
 		expect(files.has('apps/open-source/index.html')).toBe(false)
 		expect(files.has('open-source/index.html')).toBe(false)
+	})
+})
+
+describe('Puzzled is now Tryit', () => {
+	test('the hub lists Tryit at its own site and not Puzzled', () => {
+		const tryit = index.find((e) => e.slug === 'tryit')
+		expect(tryit?.url).toBe('https://tryit.fun')
+		expect(index.some((e) => e.slug === 'puzzled')).toBe(false)
+		expect(hub).not.toContain('Puzzled')
+		expect(hub).not.toContain('puzzled.gg')
+	})
+
+	test("nginx sends Puzzled's former pages to the same page on tryit.fun", () => {
+		const conf = readFileSync(join(import.meta.dir, '../nginx.conf'), 'utf8')
+		/** The target of the `return 301` in the block for this exact location pattern. */
+		const redirect = (pattern: string) => {
+			const block = conf.split(`location ~ ^${pattern} {`)[1]
+			return block?.slice(0, block.indexOf('}')).match(/return 301 ([^;]+);/)?.[1]
+		}
+		expect(redirect('/apps/puzzled/?$')).toBe('https://tryit.fun/')
+		expect(redirect('/apps/puzzled/(privacy|terms|support)/?$')).toBe('https://tryit.fun/$1')
+		expect(redirect('/apps/zh-hant/puzzled/?$')).toBe('https://tryit.fun/zh-HK')
+		expect(redirect('/apps/zh-hant/puzzled/(privacy|terms|support)/?$')).toBe('https://tryit.fun/zh-HK/$1')
+		// The redirects come before the trailing-slash rule, which would otherwise answer first.
+		expect(conf.indexOf('location ~ ^/apps/puzzled')).toBeLessThan(conf.indexOf('location ~ ^(/.+)/$'))
 	})
 })
