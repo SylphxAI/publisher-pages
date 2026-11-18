@@ -16,8 +16,8 @@ the universal-link and app-link files. Owner decision:
 
 | Path on sylphx.com | Page |
 |---|---|
-| `/apps` | Hub, "Built on Sylphx": one card per app that runs on Sylphx |
-| `/apps/index.json` | The same list as `[{slug, name, url, summary, services}]`, cached one hour; sylphx.com's home page reads it |
+| `/apps` | Hub, "Built on Sylphx": one card per app that runs on Sylphx, then the apps Sylphx publishes here that are still coming |
+| `/apps/index.json` | The apps that run on Sylphx as `[{slug, name, url, summary, services}]`, cached one hour; sylphx.com's home page reads it |
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
 | `/apps/zh-hant/…` | The same pages in Traditional Chinese |
@@ -41,9 +41,15 @@ paths: language twins sit under each prefix, and the stylesheet is at
 
 An app is listed on `/apps` and in `/apps/index.json` when its JSON has
 `services`: the Sylphx services it runs on, proven by the `sylphx.toml` in its
-repository and a public URL that answers 200. An app with its own site sets
-`external` and gets a card only; its name and one-liner (`tagline`) are its own,
-never Sylphx-branded. An app without `services` is not listed.
+repository and a public URL that answers 200. Its card says "Runs on: Sylphx
+…". An app with its own site sets `external` and gets a card only; its name and
+one-liner (`tagline`) are its own, never Sylphx-branded.
+
+An app whose landing is on this site but whose `sylphx.toml` declares no
+service yet (Number Grove) gets a card after those, tagged with its
+`availability` ("Coming soon") and no "Runs on" line. It stays out of
+`/apps/index.json`, which sylphx.com's home page shows as products running on
+the platform. An external app without `services` is not listed.
 
 Who may be listed (owner rule, 2026-09-29): only products Sylphx builds and
 runs. Never list:
@@ -52,9 +58,6 @@ runs. Never list:
 - `SylphxAI/bgca` (a client project);
 - a Cubeage title (Cubeage is a separate Hong Kong publisher, and Cubeage
   products carry no Sylphx branding).
-
-An app is listed only once its landing is live and its `sylphx.toml` declares
-a service; Number Grove keeps its pages but is not listed until then.
 
 ## Adding or changing an app
 

@@ -195,9 +195,18 @@ function storeLabel(kind: 'app-store' | 'google-play' | 'web', locale: Locale): 
 	return labels[kind][locale]
 }
 
-/** The apps the hub lists: those that name the Sylphx services they run on. */
-export function hubApps(apps: AppContent[]): AppContent[] {
+/** The apps that name the Sylphx services they run on: `/apps/index.json`. */
+export function runsOnSylphx(apps: AppContent[]): AppContent[] {
 	return apps.filter((a) => (a.services?.length ?? 0) > 0)
+}
+
+/**
+ * The apps the hub page lists: those that run on Sylphx, then the apps Sylphx
+ * publishes here (its landing on this site) that do not run on Sylphx yet.
+ */
+export function hubApps(apps: AppContent[]): AppContent[] {
+	const running = runsOnSylphx(apps)
+	return [...running, ...apps.filter((a) => !running.includes(a) && a.external === undefined)]
 }
 
 /** Where an app lives: its own site, or its page here. */
@@ -207,7 +216,7 @@ function appUrl(app: AppContent, publisher: Publisher): string {
 
 /** `/apps/index.json`: the machine-readable hub, read by sylphx.com's home page. */
 export function appsIndexJson(apps: AppContent[], publisher: Publisher): string {
-	const entries = hubApps(apps).map((app) => ({
+	const entries = runsOnSylphx(apps).map((app) => ({
 		slug: app.slug,
 		name: app.name.en,
 		url: appUrl(app, publisher),
@@ -223,12 +232,14 @@ export function appsIndex(apps: AppContent[], locale: Locale, publisher: Publish
 	const cards = listed
 		.map((app) => {
 			const href = app.external ?? localized(locale, `/apps/${app.slug}`)
-			const runsOn = fill(t(UI.runsOn), { services: escapeHtml((app.services ?? []).join(', ')) })
+			const status = app.services?.length
+				? fill(t(UI.runsOn), { services: escapeHtml(app.services.join(', ')) })
+				: `<span class="tag">${t(app.availability?.status === 'available' ? UI.available : UI.comingSoon)}</span>`
 			return `\t\t\t<li class="card">
 				<p class="eyebrow">${escapeHtml(t(app.category))}</p>
 				<h2><a href="${escapeHtml(href)}">${escapeHtml(t(app.name))}</a></h2>
 				<p>${escapeHtml(t(app.tagline))}</p>
-				<p class="eyebrow">${runsOn}</p>
+				<p class="eyebrow">${status}</p>
 				<p class="more" aria-hidden="true">${app.external ? t(UI.visitSite) : t(UI.learnMore)} →</p>
 			</li>`
 		})
