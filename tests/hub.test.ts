@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { loadSite, renderSite } from '../src/build'
 import { ContentError, PLATFORM_SERVICES, validateApp } from '../src/content'
-import { hubApps } from '../src/render'
+import { hubApps, runsOnSylphx } from '../src/render'
 
 const site = await loadSite()
 const files = await renderSite(site)
@@ -27,8 +27,13 @@ describe('/apps/index.json', () => {
 		}
 	})
 
-	test('has the same entries as the hub page, in the same order', () => {
-		expect(index.map((e) => e.slug)).toEqual(hubApps(site.apps).map((a) => a.slug))
+	test('lists the apps that run on Sylphx, first on the hub page and in the same order', () => {
+		expect(index.map((e) => e.slug)).toEqual(runsOnSylphx(site.apps).map((a) => a.slug))
+		expect(index.map((e) => e.slug)).toEqual(
+			hubApps(site.apps)
+				.slice(0, index.length)
+				.map((a) => a.slug),
+		)
 		for (const entry of index) expect(hub).toContain(`href="${entry.url}"`)
 	})
 
@@ -36,7 +41,7 @@ describe('/apps/index.json', () => {
 		expect(new Set(index.map((e) => e.slug)).size).toBe(index.length)
 	})
 
-	test('an app without services is not listed', () => {
+	test('an app without services is not in the JSON', () => {
 		expect(index.some((e) => e.slug === 'number-grove')).toBe(false)
 	})
 
@@ -70,10 +75,10 @@ describe('hub page', () => {
 		const raw = hub.match(/<script type="application\/ld\+json">([^<]*)<\/script>/)?.[1] ?? ''
 		const data = JSON.parse(raw)
 		expect(data['@type']).toBe('ItemList')
-		expect(data.itemListElement).toHaveLength(index.length)
+		expect(data.itemListElement).toHaveLength(hubApps(site.apps).length)
 		for (const [i, el] of data.itemListElement.entries()) {
 			expect(el.item['@type']).toBe('SoftwareApplication')
-			expect(el.item.url).toBe(index[i]?.url)
+			if (i < index.length) expect(el.item.url).toBe(index[i]?.url)
 		}
 	})
 
@@ -81,6 +86,61 @@ describe('hub page', () => {
 		const zh = files.get('apps/zh-hant/index.html') ?? ''
 		expect(zh).toContain('建基於 Sylphx')
 		expect(zh.match(/運行於：Sylphx /g)?.length).toBe(index.length)
+		expect(zh.match(/<li class="card">/g)?.length).toBe(hubApps(site.apps).length)
+	})
+})
+
+describe('Number Grove on the hub', () => {
+	const zh = files.get('apps/zh-hant/index.html') ?? ''
+	/** The hub card whose heading links to `href`. */
+	const card = (page: string, href: string) =>
+		page.split('<li class="card">').find((c) => c.includes(`<h2><a href="${href}">`)) ?? ''
+
+	test('has a card in both languages that links to its own landing page', () => {
+		expect(card(hub, '/apps/number-grove')).toContain('>Number Grove</a></h2>')
+		expect(card(hub, '/apps/number-grove')).toContain('Calm number sense for ages 3 to 7')
+		expect(card(zh, '/apps/zh-hant/number-grove')).toContain('>數字花園</a></h2>')
+		expect(card(zh, '/apps/zh-hant/number-grove')).toContain('給三至七歲孩子的安靜數感花園')
+	})
+
+	test('is marked coming soon and claims no Sylphx service or store link', () => {
+		const en = card(hub, '/apps/number-grove')
+		const zhCard = card(zh, '/apps/zh-hant/number-grove')
+		expect(en).toContain('<span class="tag">Coming soon</span>')
+		expect(zhCard).toContain('<span class="tag">即將推出</span>')
+		expect(en).not.toContain('Runs on')
+		expect(zhCard).not.toContain('運行於')
+		for (const store of ['apps.apple.com', 'play.google.com']) expect(en).not.toContain(store)
+	})
+
+	test('comes after the apps that run on Sylphx', () => {
+		expect(hubApps(site.apps).at(-1)?.slug).toBe('number-grove')
+	})
+})
+
+describe('Pixzy', () => {
+	const zh = files.get('apps/zh-hant/index.html') ?? ''
+	test('is listed as Pixzy at pixzy.ai and names the Google Photos Delete Tool extension', () => {
+		const pixzy = index.find((e) => e.slug === 'pixzy')
+		expect(pixzy?.name).toBe('Pixzy')
+		expect(pixzy?.url).toBe('https://pixzy.ai')
+		expect(String(pixzy?.summary)).toContain('Google Photos Delete Tool')
+		for (const page of [hub, zh]) {
+			expect(page).toContain('<h2><a href="https://pixzy.ai">Pixzy</a></h2>')
+			expect(page).not.toContain('>Google Photos Delete Tool</a>')
+			expect(page).toContain('Google Photos Delete Tool')
+		}
+	})
+})
+
+describe('internal names', () => {
+	test('no served file names an internal engine', () => {
+		for (const [path, body] of files) {
+			if (!/\.(html|json|txt)$/.test(path)) continue
+			for (const name of ['Keel', 'Sylphx Money', 'AnyAgents']) {
+				expect({ path, leaks: body.includes(name) }).toEqual({ path, leaks: false })
+			}
+		}
 	})
 })
 
@@ -130,6 +190,7 @@ describe('Also from Sylphx', () => {
 			expect(zh.split(`href="${url}"`).length - 1).toBe(1)
 		}
 		expect(hub).not.toContain('>Google Photos Delete Tool</a> — ')
+		expect(hub).not.toContain('>Pixzy</a> — ')
 		expect(hub).not.toContain('>Mark</a> — ')
 	})
 	test('does not add an /open-source page', () => {

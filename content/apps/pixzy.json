@@ -1,22 +1,22 @@
 {
 	"slug": "pixzy",
 	"name": {
-		"en": "Google Photos Delete Tool",
-		"zh-Hant": "Google Photos Delete Tool"
+		"en": "Pixzy",
+		"zh-Hant": "Pixzy"
 	},
 	"category": {
 		"en": "Photo cleanup",
 		"zh-Hant": "相片清理"
 	},
 	"tagline": {
-		"en": "Bulk delete Google Photos and find the look-alike duplicates Google misses. A free Chrome extension that dry-runs first and scans in your browser.",
-		"zh-Hant": "批量刪除 Google 相簿的相片，並找出 Google 漏掉的相似重複相片。免費 Chrome 擴充功能，先模擬執行，並在你的瀏覽器內掃描。"
+		"en": "Clean up Google Photos: find look-alike duplicates and blurry shots on your computer, bulk delete in batches of up to 500, then restore keepers in HD or turn them into a memory reel. Free on Chrome as Google Photos Delete Tool.",
+		"zh-Hant": "清理 Google 相簿：在你的電腦上找出相似的重複相片和模糊相片，每批最多 500 張批量刪除，再把值得保留的相片修復成高清，或製作成回憶短片。免費 Chrome 擴充功能，商店名稱為 Google Photos Delete Tool。"
 	},
 	"external": "https://pixzy.ai",
 	"services": ["Hosting"],
 	"source": {
 		"repo": "SylphxAI/Google-Photos-Delete-Tool",
 		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: pixzy.ai is the web service declared in the repository root sylphx.toml. Name and one-liner follow the product's own site and Chrome Web Store listing (jiahfbbfpacpolomdjlpdpiljllcdenb)."
+		"note": "Runs on Sylphx: pixzy.ai is the web service declared in the repository root sylphx.toml. The name is the product's own (site/llms.txt: \"Pixzy (Google Photos Delete Tool)\"); the one-liner follows pixzy.ai and names the Chrome Web Store listing, Google Photos Delete Tool (jiahfbbfpacpolomdjlpdpiljllcdenb), so returning users recognise it."
 	}
 }
