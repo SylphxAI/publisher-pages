@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { loadSite, renderSite } from '../src/build'
 import { type AppContent, ContentError, validateApp } from '../src/content'
-import { appleAppSiteAssociation, assetLinks } from '../src/render'
+import { appleAppSiteAssociation, assetLinks, EMAIL_OFF, EMAIL_ON } from '../src/render'
 
 const site = await loadSite()
 const files = await renderSite(site)
@@ -29,6 +29,18 @@ describe('served pages', () => {
 			expect(body, path).toContain('mailto:hi@sylphx.com')
 			const addresses = [...body.matchAll(/[a-zA-Z0-9._%+-]+@sylphx\.com/g)].map(([email]) => email)
 			expect([...new Set(addresses)], path).toEqual(['hi@sylphx.com'])
+		}
+	})
+
+	test('every email address sits inside the email_off markers, so Cloudflare serves it as written', () => {
+		for (const [path, body] of files) {
+			if (!path.endsWith('.html')) continue
+			const parts = body.split(EMAIL_OFF)
+			expect(parts.length, path).toBe(2)
+			const [inside = '', after = ''] = (parts[1] ?? '').split(EMAIL_ON)
+			expect(after, path).toMatch(/^\s*<\/body>\s*<\/html>\s*$/)
+			expect(inside, path).toContain('<main id="main"')
+			expect(`${parts[0]}${after}`, path).not.toMatch(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/)
 		}
 	})
 
