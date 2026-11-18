@@ -21,6 +21,7 @@ the universal-link and app-link files. Owner decision:
 | `/apps/{app}` | App landing page |
 | `/apps/{app}/privacy`, `/apps/{app}/terms`, `/apps/{app}/support` | Privacy policy, terms of use and support page |
 | `/apps/zh-hant/…` | The same pages in Traditional Chinese |
+| `/apps/puzzled`, `/apps/puzzled/{privacy,terms,support}` and their `zh-hant` twins | 301 to the same page on `tryit.fun`: Puzzled is now Tryit, on its own site |
 | `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json` | Universal Links and Android App Links for the app paths |
 
 The site is a separate Sylphx Hosting project mounted at exactly three paths of
