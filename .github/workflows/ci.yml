@@ -100,10 +100,23 @@ jobs:
         with:
           base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || '' }}
 
+  # Enforces explicit bounded retention-days on actions/upload-artifact steps.
+  workflow-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Artifact retention
+        uses: SylphxAI/.github/.github/actions/workflow-lint@d123f464e4e76ec1fcb960e9a3d158dadbf2fdf0 # main
+        with:
+          rules: artifact-retention
+
   # The one required check (ruleset sylphx-merge-queue): the merge queue waits on this.
   ci-ok:
     if: always() && !cancelled()
-    needs: [main-state, check, zh-hant, identifiers, chat-senders, stack, suite]
+    needs: [main-state, check, zh-hant, identifiers, chat-senders, stack, workflow-lint, suite]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -111,6 +124,6 @@ jobs:
         with:
           needs: ${{ toJSON(needs) }}
           required: >-
-            check,zh-hant,identifiers,chat-senders,stack,
+            check,zh-hant,identifiers,chat-senders,stack,workflow-lint,
             ${{ github.event_name == 'merge_group' && 'main-state' || '' }},
             ${{ github.event_name != 'merge_group' && !github.event.pull_request.draft && 'suite' || '' }}
