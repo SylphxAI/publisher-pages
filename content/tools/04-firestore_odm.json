@@ -1,0 +1,8 @@
+{
+	"name": "firestore_odm",
+	"url": "https://github.com/SylphxAI/firestore_odm",
+	"summary": {
+		"en": "Type-safe Firestore ODM for Flutter and Dart — maintained successor to cloud_firestore_odm.",
+		"zh-Hant": "為 Flutter 及 Dart 而設的型別安全 Firestore ODM — 持續維護的 cloud_firestore_odm 繼任套件。"
+	}
+}

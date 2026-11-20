@@ -1,0 +1,8 @@
+{
+	"name": "repomap",
+	"url": "https://github.com/SylphxAI/repomap",
+	"summary": {
+		"en": "A map of your codebase for AI agents: code graph, search, call paths and change impact. No API key.",
+		"zh-Hant": "為 AI 代理而設的程式碼地圖：程式碼關係圖、搜尋、呼叫路徑及改動影響。無需 API 金鑰。"
+	}
+}

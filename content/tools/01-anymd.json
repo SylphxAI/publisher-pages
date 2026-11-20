@@ -1,0 +1,8 @@
+{
+	"name": "anymd",
+	"url": "https://sylphxai.github.io/anymd/",
+	"summary": {
+		"en": "Any file → clean Markdown for AI agents: PDF, Word, PowerPoint, Excel, EPUB, web pages, images, audio and video. A fast local MCP server and CLI. Nothing is uploaded and no API key is needed.",
+		"zh-Hant": "任何檔案轉為供 AI 代理使用的整潔 Markdown：PDF、Word、PowerPoint、Excel、EPUB、網頁、圖片、音訊及影片。在你電腦上運行的高速 MCP 伺服器及命令列工具，不會上載任何檔案，亦無需 API 金鑰。"
+	}
+}
