@@ -1,0 +1,8 @@
+{
+	"name": "lockdocs",
+	"url": "https://github.com/SylphxAI/lockdocs",
+	"summary": {
+		"en": "Exact-version library docs from your lockfile — local, offline, no rate limits.",
+		"zh-Hant": "按你的鎖定檔取得完全對應版本的函式庫文件：在本機離線運行，沒有請求次數限制。"
+	}
+}

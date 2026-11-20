@@ -12,6 +12,11 @@ the universal-link and app-link files. Owner decision:
 - Discovery loop and measurement boundaries: [docs/growth.md](docs/growth.md)
 - Product sites, one project and one site per product: [docs/product-sites.md](docs/product-sites.md)
 
+The tools under “Also from Sylphx” are separate JSON files in
+`content/tools/`. Each contains a name, an HTTPS URL and a summary in
+English and Traditional Chinese. The hub reads the files in filename order;
+adding a tool does not require editing a list.
+
 ## What it serves
 
 | Path on sylphx.com | Page |

@@ -12,8 +12,10 @@ import {
 	ContentError,
 	LOCALES,
 	type Publisher,
+	type Tool,
 	validateApp,
 	validatePublisher,
+	validateTool,
 } from './content'
 import {
 	appLanding,
@@ -51,6 +53,7 @@ async function vendoredBrand(dir = VENDOR, prefix = ''): Promise<[string, string
 export interface Site {
 	publisher: Publisher
 	apps: AppContent[]
+	tools: Tool[]
 	/** Where each app's asset files live: `content/apps/{slug}/`. */
 	contentDir: string
 }
@@ -69,15 +72,22 @@ export async function loadSite(contentDir = join(ROOT, 'content')): Promise<Site
 		}
 		apps.push(app)
 	}
-	return { publisher, apps, contentDir }
+	const toolDir = join(contentDir, 'tools')
+	const toolFiles = (await readdir(toolDir)).filter((f) => f.endsWith('.json')).sort()
+	const tools = await Promise.all(
+		toolFiles.map(async (file) =>
+			validateTool(await readJson(join(toolDir, file)), join('content/tools', file)),
+		),
+	)
+	return { publisher, apps, tools, contentDir }
 }
 
 /** Every file of the built site, keyed by its path under `dist/`. */
-export async function renderSite({ publisher, apps }: Site): Promise<Map<string, string>> {
+export async function renderSite({ publisher, apps, tools }: Site): Promise<Map<string, string>> {
 	const files = new Map<string, string>()
 	const html = (path: string, body: string) => files.set(join(path.slice(1), 'index.html'), body)
 	for (const locale of LOCALES) {
-		html(localized(locale, '/apps'), appsIndex(apps, locale, publisher))
+		html(localized(locale, '/apps'), appsIndex(apps, tools, locale, publisher))
 		for (const app of apps) {
 			if (app.external) continue
 			const base = localized(locale, `/apps/${app.slug}`)

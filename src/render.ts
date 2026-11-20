@@ -18,10 +18,10 @@ import {
 	type Publisher,
 	type Section,
 	type Text,
+	type Tool,
 } from './content'
 import { UI } from './strings'
 import { KEY_TERMS, TERMS_SECTIONS, TERMS_UPDATED } from './terms'
-import { TOOLS } from './tools'
 
 export const ASSET_PREFIX = '/apps/_assets'
 
@@ -226,7 +226,7 @@ export function appsIndexJson(apps: AppContent[], publisher: Publisher): string 
 	return `${JSON.stringify(entries, null, '\t')}\n`
 }
 
-export function appsIndex(apps: AppContent[], locale: Locale, publisher: Publisher): string {
+export function appsIndex(apps: AppContent[], tools: Tool[], locale: Locale, publisher: Publisher): string {
 	const t = (s: Text) => s[locale]
 	const listed = hubApps(apps)
 	const cards = listed
@@ -244,10 +244,12 @@ export function appsIndex(apps: AppContent[], locale: Locale, publisher: Publish
 			</li>`
 		})
 		.join('\n')
-	const tools = TOOLS.map(
-		(tool) =>
-			`\t\t\t\t\t<li><a href="${escapeHtml(tool.url)}">${escapeHtml(tool.name)}</a> — ${escapeHtml(t(tool.summary))}</li>`,
-	).join('\n')
+	const toolList = tools
+		.map(
+			(tool) =>
+				`\t\t\t\t\t<li><a href="${escapeHtml(tool.url)}">${escapeHtml(tool.name)}</a> — ${escapeHtml(t(tool.summary))}</li>`,
+		)
+		.join('\n')
 	const body = `\t\t\t<h1>${t(UI.appsTitle)}</h1>
 			<p class="lede">${t(UI.appsIntro)}</p>
 			<ul class="cards">
@@ -257,7 +259,7 @@ ${cards}
 				<h2>${t(UI.alsoFromTitle)}</h2>
 				<p class="lede">${t(UI.alsoFromIntro)}</p>
 				<ul class="list">
-${tools}
+${toolList}
 				</ul>
 			</section>`
 	const jsonLd = {

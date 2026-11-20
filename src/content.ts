@@ -21,6 +21,13 @@ export const PLATFORM_SERVICES = [
 ] as const
 export type PlatformService = (typeof PLATFORM_SERVICES)[number]
 
+/** An open-source tool listed on the apps hub. */
+export interface Tool {
+	name: string
+	url: string
+	summary: Text
+}
+
 export interface Publisher {
 	legalName: string
 	companyNumber: string
@@ -147,6 +154,14 @@ function url(value: unknown, where: string): string {
 	}
 	if (parsed.protocol !== 'https:') fail(where, `not https: ${value}`)
 	return value
+}
+
+export function validateTool(value: unknown, where: string): Tool {
+	const tool = value as Partial<Tool> | null
+	if (typeof tool?.name !== 'string' || tool.name.trim() === '') fail(where, 'expected a tool name')
+	const link = url(tool.url, `${where}.url`)
+	if (!link.startsWith('https://')) fail(where, 'expected an https:// tool link')
+	return { name: tool.name, url: link, summary: text(tool.summary, `${where}.summary`) }
 }
 
 function email(value: unknown, where: string): string {
