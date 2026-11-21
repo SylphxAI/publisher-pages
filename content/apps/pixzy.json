@@ -13,7 +13,7 @@
 		"zh-Hant": "清理 Google 相簿：在你的電腦上找出相似的重複相片和模糊相片，每批最多 500 張批量刪除，再把值得保留的相片修復成高清，或製作成回憶短片。免費 Chrome 擴充功能，商店名稱為 Google Photos Delete Tool。"
 	},
 	"external": "https://pixzy.ai",
-	"services": ["Hosting"],
+	"services": ["Hosting", "AI"],
 	"source": {
 		"repo": "SylphxAI/Google-Photos-Delete-Tool",
 		"path": "sylphx.toml",
