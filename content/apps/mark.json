@@ -159,8 +159,8 @@
 		]
 	},
 	"source": {
-		"repo": "SylphxAI/mark",
+		"repo": "SylphxAI/readme-mark",
 		"path": "publisher/app.json",
-		"note": "Copied from SylphxAI/mark@382e5dcc95ea3f3ac8086acb5f676a6d0c32bfe5:publisher/app.json. Manually authored product-owned payload. Behaviour verified at 77b2357a65687a9ba1da8739b048bc031e9d639b: README.md; docs/vision.md; templates/legal-privacy.html; src/interfaces/http/mod.rs, client.rs, response.rs and footer.html; src/capabilities/live/application/cache.rs, service.rs, registries.rs and switch_registries.rs; src/capabilities/mark/domain/svg.rs. Hosting is declared in sylphx.toml. Publisher copy records the exact payload commit."
+		"note": "Copied from SylphxAI/readme-mark@382e5dcc95ea3f3ac8086acb5f676a6d0c32bfe5:publisher/app.json. Manually authored product-owned payload. Behaviour verified at 77b2357a65687a9ba1da8739b048bc031e9d639b: README.md; docs/vision.md; templates/legal-privacy.html; src/interfaces/http/mod.rs, client.rs, response.rs and footer.html; src/capabilities/live/application/cache.rs, service.rs, registries.rs and switch_registries.rs; src/capabilities/mark/domain/svg.rs. Hosting is declared in sylphx.toml. Publisher copy records the exact payload commit."
 	}
 }

@@ -15,7 +15,7 @@
 	"external": "https://pixzy.ai",
 	"services": ["Hosting", "AI"],
 	"source": {
-		"repo": "SylphxAI/Google-Photos-Delete-Tool",
+		"repo": "SylphxAI/pixzy",
 		"path": "sylphx.toml",
 		"note": "Runs on Sylphx: pixzy.ai is the web service declared in the repository root sylphx.toml. The name is the product's own (site/llms.txt: \"Pixzy (Google Photos Delete Tool)\"); the one-liner follows pixzy.ai and names the Chrome Web Store listing, Google Photos Delete Tool (jiahfbbfpacpolomdjlpdpiljllcdenb), so returning users recognise it."
 	}
