@@ -22,7 +22,7 @@ Chinese, plus the app-link files. Start with [README.md](README.md) and
   `vendor/brand/`, redraw a logo or pick a colour: the brand home is the one
   source. `tests/brand.test.ts` enforces it.
 - Pages ship no inline script, `<style>`, `style=` attribute or event handler,
-  because nginx sends a strict Content Security Policy; `bun run check` catches
+  because `sylphx.toml` declares a strict Content Security Policy; `bun run check` catches
   violations.
 - App copy carries no "Sylphx" branding; Sylphx appears only as publisher in
   legal pages and on the hub.

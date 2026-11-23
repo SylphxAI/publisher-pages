@@ -5,39 +5,174 @@ version = "1"
 name = "publisher-pages"
 description = "Publisher pages for apps published by Sylphx"
 
-[build]
-strategy = "dockerfile"
-dockerfile = "Dockerfile"
-context = "."
-
 [[services]]
 name = "web"
-port = 8080
-# micro (0.25 CPU, 512 MiB): 7-day p95 0.07 GiB, peak 0.07 GiB, CPU p95 0.000 (read 2026-10-04). Not nano: a nano revision of this service did not become ready on 2026-10-03.
-instance_type = "micro"
 public_networking = true
-# The three paths of sylphx.com this project serves (README "What it serves").
-# Each is a whole path; `path_prefixes` matches on whole segments, so
-# `/apps/...` and the two exact `.well-known` files are covered and no other
-# `.well-known` name is. The platform's own site keeps the host's catch-all.
+# Whole-segment matches; the platform site keeps the host's catch-all.
 path_prefixes = [
   "/apps",
   "/.well-known/apple-app-site-association",
   "/.well-known/assetlinks.json",
 ]
 
-[services.health]
-mode = "http"
-path = "/healthz"
+[services.static]
+build_command = "bun run build"
+output_dir = "dist"
+spa_fallback = false
+not_found = "/apps/404.html"
+# Serve explicit .html as well as directory indexes. Slash redirects below
+# preserve the legacy 301 (the built-in canonical redirect uses 308).
+clean_urls = false
+trailing_slash = "ignore"
+
+# No scripts or inline styles. External images are limited to Mark badges.
+[[services.static.headers]]
+path = "/*"
+set = { "x-content-type-options" = "nosniff", "referrer-policy" = "strict-origin-when-cross-origin", "content-security-policy" = "default-src 'none'; script-src 'none'; style-src 'self'; img-src 'self' https://mark.sylphx.com; font-src 'self'; manifest-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests" }
+
+[[services.static.headers]]
+path = "/apps"
+set = { "cache-control" = "max-age=300" }
+
+[[services.static.headers]]
+path = "/apps/*"
+set = { "cache-control" = "max-age=300" }
+
+[[services.static.headers]]
+path = "/apps/_assets/*"
+set = { "cache-control" = "max-age=3600" }
+
+# The extensionless Apple file, the Android file, and the hub feed are JSON.
+[[services.static.headers]]
+path = "/.well-known/apple-app-site-association"
+set = { "cache-control" = "max-age=3600", "content-type" = "application/json" }
+
+[[services.static.headers]]
+path = "/.well-known/assetlinks.json"
+set = { "cache-control" = "max-age=3600", "content-type" = "application/json" }
+
+[[services.static.headers]]
+path = "/apps/index.json"
+set = { "cache-control" = "max-age=3600", "content-type" = "application/json" }
+
+# Puzzled moved to Tryit. Exact redirects take precedence over slash removal.
+[[services.static.redirects]]
+from = "/apps/puzzled"
+to = "https://tryit.fun/"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/puzzled/"
+to = "https://tryit.fun/"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/puzzled/privacy"
+to = "https://tryit.fun/privacy"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/puzzled/privacy/"
+to = "https://tryit.fun/privacy"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/puzzled/terms"
+to = "https://tryit.fun/terms"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/puzzled/terms/"
+to = "https://tryit.fun/terms"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/puzzled/support"
+to = "https://tryit.fun/support"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/puzzled/support/"
+to = "https://tryit.fun/support"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled"
+to = "https://tryit.fun/zh-HK"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled/"
+to = "https://tryit.fun/zh-HK"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled/privacy"
+to = "https://tryit.fun/zh-HK/privacy"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled/privacy/"
+to = "https://tryit.fun/zh-HK/privacy"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled/terms"
+to = "https://tryit.fun/zh-HK/terms"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled/terms/"
+to = "https://tryit.fun/zh-HK/terms"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled/support"
+to = "https://tryit.fun/zh-HK/support"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/zh-hant/puzzled/support/"
+to = "https://tryit.fun/zh-HK/support"
+status = 301
+
+# Keep the one-hop, relative 301 for arbitrary trailing-slash requests on
+# the mounted paths (including assets and missing pages).
+[[services.static.redirects]]
+from = "/apps/"
+to = "/apps"
+status = 301
+
+[[services.static.redirects]]
+from = "/apps/*/"
+to = "/apps/:splat"
+status = 301
+
+[[services.static.redirects]]
+from = "/.well-known/apple-app-site-association/"
+to = "/.well-known/apple-app-site-association"
+status = 301
+
+[[services.static.redirects]]
+from = "/.well-known/apple-app-site-association/*/"
+to = "/.well-known/apple-app-site-association/:splat"
+status = 301
+
+[[services.static.redirects]]
+from = "/.well-known/assetlinks.json/"
+to = "/.well-known/assetlinks.json"
+status = 301
+
+[[services.static.redirects]]
+from = "/.well-known/assetlinks.json/*/"
+to = "/.well-known/assetlinks.json/:splat"
+status = 301
 
 [ci]
 merge = "optimistic"
 on_red = "revert"
 
-# Serve the three paths above on the apex host. `sylphx.com` stays the platform
-# site's host: this project is platform-owned (organizations.slug = "sylphx")
-# and declares explicit prefixes beside that catch-all, so the platform routes
-# only these paths here and leaves every other path with the platform site.
+# The platform site owns the catch-all; this project only owns its prefixes.
 [[domains]]
 hostname = "sylphx.com"
 service = "web"

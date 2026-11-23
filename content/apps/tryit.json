@@ -19,6 +19,6 @@
 	"source": {
 		"repo": "SylphxAI/tryit",
 		"path": "sylphx.toml",
-		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml (web and api services, the database and its migrations, Sylphx Auth sign-in). Formerly Puzzled; its old pages here redirect to tryit.fun (nginx.conf)."
+		"note": "Runs on Sylphx: services declared in the repository root sylphx.toml (web and api services, the database and its migrations, Sylphx Auth sign-in). Formerly Puzzled; its old pages here redirect to tryit.fun (publisher-pages sylphx.toml)."
 	}
 }

@@ -108,10 +108,13 @@ or merge group adds for id generators and primary keys that are not UUIDv7.
 A `chat-senders` job fails a change that adds a direct chat-API host outside
 the shared allow-list; chat messages go through Notify.
 
-`Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
-`sylphx.toml` deploys it on Sylphx Hosting.
+Sylphx Hosting builds and publishes `dist/` as a containerless static site
+using `[services.static]` in `sylphx.toml`. The manifest keeps the apex path
+mounts, the exact app-link JSON MIME type, the hourly asset and feed cache,
+and the permanent Puzzled and trailing-slash redirects. Use an isolated PR
+preview to check these rules before changing the apex service.
 
-`nginx.conf` sends a strict Content Security Policy on every response:
+The manifest declares a strict Content Security Policy:
 `default-src 'none'; script-src 'none'; style-src 'self'`, images from the
 site and from Mark, fonts from the site, and no `'unsafe-inline'` or
 `'unsafe-eval'`. Pages therefore carry no inline script, `<style>`, `style=`

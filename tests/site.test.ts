@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'bun:test'
-import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { loadSite, renderSite } from '../src/build'
 import { type AppContent, ContentError, validateApp } from '../src/content'
 import { appleAppSiteAssociation, assetLinks, EMAIL_OFF, EMAIL_ON } from '../src/render'
+import { cspDirective } from './static-manifest'
 
 const site = await loadSite()
 const files = await renderSite(site)
@@ -226,25 +226,7 @@ describe('content validation', () => {
 })
 
 describe('content security policy', () => {
-	const conf = readFileSync(join(import.meta.dir, '../nginx.conf'), 'utf8')
-	const policy = conf.match(/add_header Content-Security-Policy "([^"]+)" always;/)?.[1] ?? ''
-	const directive = (name: string) =>
-		policy
-			.split(';')
-			.map((d) => d.trim().split(/\s+/))
-			.find(([n]) => n === name)
-			?.slice(1) ?? []
 	const pages = [...files].filter(([path]) => path.endsWith('.html'))
-
-	test('nginx sends a strict policy on every response', () => {
-		expect(policy).not.toBe('')
-		expect(policy).not.toMatch(/unsafe-(inline|eval|hashes)/)
-		expect(directive('script-src')).toEqual(["'none'"])
-		expect(directive('style-src')).toEqual(["'self'"])
-		for (const d of ['object-src', 'base-uri', 'frame-ancestors']) expect(directive(d)).toEqual(["'none'"])
-		// A location with its own add_header would drop the server-level headers.
-		expect(conf.match(/add_header/g)?.length).toBe(3)
-	})
 
 	test('pages carry no inline script, style or event handler', () => {
 		for (const [path, body] of pages) {
@@ -259,7 +241,7 @@ describe('content security policy', () => {
 	})
 
 	test('every image origin a page uses is allowed', () => {
-		const allowed = directive('img-src')
+		const allowed = cspDirective('img-src')
 		for (const [, body] of pages) {
 			for (const [, origin] of body.matchAll(/<img[^>]*\ssrc="(https?:\/\/[^/"]+)/g)) {
 				expect(allowed).toContain(origin ?? '')
