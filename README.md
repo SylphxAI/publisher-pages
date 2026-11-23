@@ -4,8 +4,7 @@
 
 The Sylphx publisher pages on `sylphx.com`: the "Built on Sylphx" apps index,
 one landing, privacy, terms and support page per app, and
-the universal-link and app-link files. Owner decision:
-[SylphxAI/owner company/decisions.md, 2026-09-26 "Publisher pages, and when a product gets a domain"](https://github.com/SylphxAI/owner/blob/main/company/decisions.md).
+the universal-link and app-link files.
 
 - Vision: [docs/vision.md](docs/vision.md)
 - Capabilities and completion oracles: [docs/capabilities.md](docs/capabilities.md)
@@ -37,10 +36,10 @@ and the `[[domains]] hostname = "sylphx.com"` entry in [sylphx.toml](sylphx.toml
 paths here, because the project is platform-owned and declares explicit
 prefixes beside that host's catch-all. Everything else on the host, including
 `/open-source`, `/zh-hant` and the rest of `/.well-known`, belongs to the
-platform site. The platform repository (`SylphxAI/cloud`) names no product, so
-all product text lives here. Every URL the pages use stays inside the mounted
-paths: language twins sit under each prefix, and the stylesheet is at
-`/apps/_assets/site.css`. The app slugs `zh-hant` and `_assets` are reserved.
+platform site. Product text lives here, not in the shared platform. All page
+URLs stay inside the mounted paths: language twins sit under each prefix and
+the stylesheet is at `/apps/_assets/site.css`. The app slugs `zh-hant` and
+`_assets` are reserved.
 
 ## The hub
 
@@ -56,13 +55,8 @@ service yet (Number Grove) gets a card after those, tagged with its
 `/apps/index.json`, which sylphx.com's home page shows as products running on
 the platform. An external app without `services` is not listed.
 
-Who may be listed (owner rule, 2026-09-29): only products Sylphx builds and
-runs. Never list:
-
-- a Hypothesis-Idea product (a partner company, not ours);
-- `SylphxAI/bgca` (a client project);
-- a Cubeage title (Cubeage is a separate Hong Kong publisher, and Cubeage
-  products carry no Sylphx branding).
+Only products Sylphx builds and runs may be listed. Exclude third-party partner
+products, client-owned projects and titles from separate publishers.
 
 ## Adding or changing an app
 
@@ -87,10 +81,9 @@ request when it changes.
   `featuresHeading` and `plans`. A page with `sections` uses the wide layout
   and shows the support FAQ. The build fails on a missing image file.
 - `icon` and `theme` come from the app's brand home, the `brand/` folder in
-  its own repository (owner `standards/experience.md`, "Brand home"): the icon
-  is a byte-for-byte copy of the app's app-icon master, and the theme colours
-  are values from its `brand/tokens.json`. Never redraw an icon or pick a
-  colour here. Number Grove's `icon.svg` is its
+  its own repository. The icon is a byte-for-byte copy of its app-icon master,
+  and the theme colours are values from its `brand/tokens.json`. Never redraw
+  an icon or pick a colour here. Number Grove's `icon.svg` is its
   `brand/svg/number-grove-app-icon.svg` (same SHA-256) and its light palette
   is that home's values. Its dark palette, `tag` and `highlight` tints are
   not in that home yet and are picked in `content/apps/number-grove.json`;
@@ -98,8 +91,7 @@ request when it changes.
 - The privacy page adds the publisher, rights and contact sections from
   [content/publisher.json](content/publisher.json); the app supplies only what
   it does with data.
-- The terms of use are shared by every app: [src/terms.ts](src/terms.ts),
-  drafted to owner `standards/commercial.md` "Legal surface" (owner#779).
+- The terms of use are shared by every app: [src/terms.ts](src/terms.ts).
 
 ## Commands
 
@@ -112,10 +104,9 @@ bun run check        # lint, type check, tests
 CI runs `bun run check` and the build on GitHub's free standard hosted runners
 (`ubuntu-latest`), which a public repository may use; the merge queue requires
 the single `ci-ok` check. An `identifiers` job checks the lines a pull request
-or merge group adds for id generators and primary keys that are not UUIDv7
-(owner `standards/identifiers.md`), and a `chat-senders` job fails a change that
-adds a direct chat-API host outside the shared allow-list (chat messages go
-through Notify, cloud ADR notify-chat-channel).
+or merge group adds for id generators and primary keys that are not UUIDv7.
+A `chat-senders` job fails a change that adds a direct chat-API host outside
+the shared allow-list; chat messages go through Notify.
 
 `Dockerfile` builds the pages and serves `dist/` with nginx on port 8080;
 `sylphx.toml` deploys it on Sylphx Hosting.
@@ -132,7 +123,7 @@ loads an image from an origin the policy does not list.
 The publisher's own look is not drawn here: it is the company brand home,
 [SylphxAI/brand](https://github.com/SylphxAI/brand), copied in byte for byte.
 Nothing in this repository redraws a logo, re-letters the name or picks a
-colour (owner `standards/experience.md`, "Brand home").
+colour.
 
 - `scripts/sync-brand.sh <brand checkout>` copies the token sheet, the font
   loader with its Inter and JetBrains Mono files, the two header lockups and the browser icons

@@ -16,8 +16,7 @@ Chinese, plus the app-link files. Start with [README.md](README.md) and
   files, because only those paths are mounted on sylphx.com. `/open-source` is
   the platform's page: link to it, do not serve it. Language twins go under the
   prefix (`/apps/zh-hant/...`). The tests enforce it.
-- Product text lives here, never in SylphxAI/cloud, so the platform repository
-  names no product.
+- Product text lives here, not in the shared platform.
 - The publisher's look comes from SylphxAI/brand, vendored by
   `scripts/sync-brand.sh`, which records the commit and hashes. Never edit
   `vendor/brand/`, redraw a logo or pick a colour: the brand home is the one
@@ -27,8 +26,8 @@ Chinese, plus the app-link files. Start with [README.md](README.md) and
   violations.
 - App copy carries no "Sylphx" branding; Sylphx appears only as publisher in
   legal pages and on the hub.
-- The hub never lists Hypothesis-Idea products, `SylphxAI/bgca` or Cubeage
-  titles (not ours to publish); the README has the reasons.
+- The hub lists only products Sylphx builds and runs, not third-party partner
+  products, client-owned projects or titles from separate publishers.
 - Apps own their content as `publisher/app.json` in their own repository; this
   repository holds a copy. Every text field needs `en` and `zh-Hant`.
 

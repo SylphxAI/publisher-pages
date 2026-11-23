@@ -6,8 +6,8 @@ historical delivery and recovery. **The service is not retired.**
 
 This repository owns the publisher hub, `/apps/index.json` and publisher
 pages. Products own their sites and copy in their own repositories. The
-platform repository (`SylphxAI/cloud`) supplies generic capabilities, not
-product-specific pages or checkout rules.
+platform supplies shared capabilities, not product-specific pages or checkout
+rules.
 
 ## What is live
 
@@ -29,22 +29,15 @@ through the central checkout adapter. The current paid flow uses email,
 Stripe-hosted checkout and offline-verifiable licence tokens; it does not
 require the proposed sign-in and `/account` flow below.
 
-Payment qualification is recorded separately in
-[owner#1722](https://github.com/SylphxAI/owner/pull/1722), merged 2026-11-02:
-simulated Stripe TEST payments exercised fulfilment and client licence/expiry
-checks; production checks created unpaid LIVE Checkout Sessions and stopped
-before card entry. That report names its limits, including the unverified
-vendor-signed duplicate webhook delivery. The GET read above is a surface
-check, not a new payment or historical-recovery test.
+Simulated Stripe Test Mode payments exercised fulfilment and client licence
+expiry checks. Production verification stopped at unpaid Checkout Sessions,
+before card entry. The GET checks above did not exercise payment or
+historical recovery.
 
 ## The central checkout contract
 
-[oss-checkout#29](https://github.com/SylphxAI/oss-checkout/pull/29), merged
-2026-11-02 as `e19aaf15b68b64e6ffed9a1cec9db72314f5c45a`, closed new orders
-for all four catalog entries. The later aggregate-report release,
-[oss-checkout#30](https://github.com/SylphxAI/oss-checkout/pull/30), merged
-2026-11-03 as `b6972919fc2bb2c2ec6ee69da212fd250536c3ea`, was serving
-`/health` with HTTP `200` and that `x-sylphx-revision-sha` at 17:53:48 UTC.
+Central checkout is closed to new orders for all four catalog entries.
+Historical delivery and recovery remain available.
 
 - Known `GET` and form `POST /buy/{product}` requests return HTTP `400`,
   **not `301`**, with a direct product storefront link and a legacy
@@ -62,8 +55,6 @@ for all four catalog entries. The later aggregate-report release,
   licence terms and retention rules. Catalog setup sends nothing when every
   product is closed. There is no data deletion or entitlement re-grant.
 
-The detailed contract, tests and census procedure live in
-[oss-checkout's retirement record](https://github.com/SylphxAI/oss-checkout/blob/main/docs/central-checkout-retirement.md).
 Do not restore central Buy links as a site rollback: the central order and
 new-claim routes are deliberately closed. Repair or roll back the affected
 product storefront while keeping historical delivery and recovery available.
@@ -80,9 +71,7 @@ organization, project and environment, using either the email subject or the
 paid checkout's `buyer_email`. It cannot discover those opaque legacy subjects
 without a supported recovery-contact migration and explicit routing to the
 legacy parent. A non-enumerating `202` recovery acknowledgement proves
-neither a matching purchase nor email delivery. See the
-[Money recovery query](https://github.com/SylphxAI/cloud/blob/ceb6cd4673ca31bc8b9517d3a4baaf44d148c009/services/money/crates/money-api/src/web_client.rs#L846-L881),
-read on 2026-11-03, and the adapter's retirement record.
+neither a matching purchase nor email delivery.
 
 Final retirement remains unproved until both evidence sets are complete:
 
@@ -90,10 +79,8 @@ Final retirement remains unproved until both evidence sets are complete:
    reports and Money's exact-parent lifetime paid/pending-order and licence
    recovery-contact census. The adapter report release is serving, but its
    deployment is not a census result.
-   [cloud#15814](https://github.com/SylphxAI/cloud/pull/15814), which adds the
-   scoped Money census, was still open when read at 17:53 UTC. Local delivery
-   stamps, zero retained rows or a revenue projection cannot establish that
-   no historical paid orders exist.
+   Local delivery stamps, zero retained rows or a revenue projection cannot
+   establish that no historical paid orders exist.
 2. **Historical recovery and fulfilment continuity.** Reconcile pending orders
    and prove recovery for any paid legacy terms. If contact migration is
    needed, use Money's supported capability and the exact legacy parent;
@@ -121,19 +108,10 @@ product. Prices and licence policy come from Money; product copy stays in the
 product repository. The publisher's own look comes from the vendored brand
 home, as described in the [README](../README.md).
 
-The old platform-gap list is not current status:
-
-- Licence tokens landed in
-  [cloud#12080](https://github.com/SylphxAI/cloud/pull/12080), merged 2026-10-05.
-- Hosted-checkout consent landed in
-  [cloud#12181](https://github.com/SylphxAI/cloud/pull/12181), merged 2026-10-26.
-- The generic Notify purchase-receipt change,
-  [cloud#12320](https://github.com/SylphxAI/cloud/pull/12320), was still open
-  when read on 2026-11-03. A merged consent change or a storefront email promise
-  does not establish that this separate change has shipped.
-- Signed-in checkout, portal and licence-list access remain requirements for
-  an account-based site, not prerequisites for the already-shipped email-based
-  storefront. Their complete adoption is not verified here.
+Money provides licence tokens and hosted-checkout consent. Verify purchase
+receipt delivery separately; consent does not prove an email was sent.
+Signed-in checkout, portal and licence-list access are requirements for
+account-based sites, not prerequisites for the current email-based storefronts.
 
 ## Future domain and account work
 
