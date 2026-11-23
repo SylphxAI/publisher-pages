@@ -21,7 +21,7 @@ not a claim of current production behavior.
 
 These are publisher-site capabilities, not the Kernel Publisher that compiles
 Cell Snapshots. Product copy lives here and in the originating product
-repositories, never in `SylphxAI/cloud`. Hosting and Network own deployment,
+repositories, not in the shared platform. Hosting and Network own deployment,
 path mounting and delivery; this repository owns the static output. The
 platform owns `/open-source` and every host path outside the three mounts
 listed in the README.

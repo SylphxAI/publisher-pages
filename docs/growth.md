@@ -54,6 +54,5 @@ capability is separate work using the platform's generic service, not an
 implementation hidden in these docs. Paid promotion belongs to the launched
 product and its authorized budget, not this shared legal and discovery surface.
 
-The company [growth standard](https://github.com/SylphxAI/owner/blob/main/standards/growth.md)
-governs claims, promotion and useful-result metrics. This document records the
-existing discovery path; it introduces no new growth mechanic or experiment.
+This document records the existing discovery path; it introduces no new growth
+mechanic or experiment.
