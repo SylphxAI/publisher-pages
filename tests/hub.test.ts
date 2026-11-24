@@ -1,6 +1,4 @@
 import { describe, expect, test } from 'bun:test'
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { loadSite, renderSite } from '../src/build'
 import { ContentError, PLATFORM_SERVICES, validateApp } from '../src/content'
 import { hubApps, runsOnSylphx } from '../src/render'
@@ -43,13 +41,6 @@ describe('/apps/index.json', () => {
 
 	test('an app without services is not in the JSON', () => {
 		expect(index.some((e) => e.slug === 'number-grove')).toBe(false)
-	})
-
-	test('nginx serves it as JSON with an hourly cache', () => {
-		const conf = readFileSync(join(import.meta.dir, '../nginx.conf'), 'utf8')
-		const block = conf.match(/location = \/apps\/index\.json \{[^}]*\}/)?.[0] ?? ''
-		expect(block).toContain('application/json')
-		expect(block).toContain('expires 1h')
 	})
 })
 
@@ -240,20 +231,5 @@ describe('Puzzled is now Tryit', () => {
 		expect(index.some((e) => e.slug === 'puzzled')).toBe(false)
 		expect(hub).not.toContain('Puzzled')
 		expect(hub).not.toContain('puzzled.gg')
-	})
-
-	test("nginx sends Puzzled's former pages to the same page on tryit.fun", () => {
-		const conf = readFileSync(join(import.meta.dir, '../nginx.conf'), 'utf8')
-		/** The target of the `return 301` in the block for this exact location pattern. */
-		const redirect = (pattern: string) => {
-			const block = conf.split(`location ~ ^${pattern} {`)[1]
-			return block?.slice(0, block.indexOf('}')).match(/return 301 ([^;]+);/)?.[1]
-		}
-		expect(redirect('/apps/puzzled/?$')).toBe('https://tryit.fun/')
-		expect(redirect('/apps/puzzled/(privacy|terms|support)/?$')).toBe('https://tryit.fun/$1')
-		expect(redirect('/apps/zh-hant/puzzled/?$')).toBe('https://tryit.fun/zh-HK')
-		expect(redirect('/apps/zh-hant/puzzled/(privacy|terms|support)/?$')).toBe('https://tryit.fun/zh-HK/$1')
-		// The redirects come before the trailing-slash rule, which would otherwise answer first.
-		expect(conf.indexOf('location ~ ^/apps/puzzled')).toBeLessThan(conf.indexOf('location ~ ^(/.+)/$'))
 	})
 })

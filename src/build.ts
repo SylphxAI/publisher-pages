@@ -1,7 +1,7 @@
 /**
  * Builds the static site into `dist/`: `bun run build`.
  *
- * Output paths mirror the served URLs. nginx serves `dist/` as-is.
+ * Output paths mirror the served URLs. Sylphx Static Sites serves the artifact.
  */
 
 import { access, copyFile, mkdir, readdir, rm, writeFile } from 'node:fs/promises'

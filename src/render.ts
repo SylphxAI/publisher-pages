@@ -1,6 +1,6 @@
 /**
  * Page rendering: plain HTML strings, no client JavaScript and no inline
- * script or style (the CSP in nginx.conf allows neither). Every URL the
+ * script or style (the CSP in sylphx.toml allows neither). Every URL the
  * pages use sits under a path the site is mounted at on sylphx.com
  * (`/apps` and the two app-link files), so the pages work
  * behind the path mount without any platform route of their own.
@@ -27,7 +27,7 @@ export const ASSET_PREFIX = '/apps/_assets'
 
 /**
  * Cloudflare, in front of sylphx.com, rewrites every email address it finds
- * into a link that only a script it injects can decode. The CSP in nginx.conf
+ * into a link that only a script it injects can decode. The CSP in sylphx.toml
  * blocks that script, so readers would see "[email protected]" instead of the
  * address. These markers are Cloudflare's documented opt-out; every page's body
  * sits between them, so each address is served exactly as written.
@@ -98,7 +98,7 @@ const CSS_VAR: Record<PaletteKey, string> = {
 /**
  * The app's palette as custom properties over the shared sheet's defaults.
  * It is served as its own file, not an inline `<style>`, so the CSP in
- * nginx.conf needs no `'unsafe-inline'`.
+ * sylphx.toml needs no `'unsafe-inline'`.
  *
  * The app's own accent is also its accent *text*: unlike Sylphx, an app's
  * brand home names one accent rather than a fill and a text value.

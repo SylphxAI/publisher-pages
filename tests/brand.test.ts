@@ -12,6 +12,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { BRAND_PREFIX, BRAND_SHEETS, LOCKUP } from '../src/brand'
 import { build, loadSite, renderSite } from '../src/build'
+import { cspDirective } from './static-manifest'
 
 const ROOT = join(import.meta.dir, '..')
 const VENDOR = join(ROOT, 'vendor/brand')
@@ -119,17 +120,6 @@ describe('the site on the brand home', () => {
 		}
 	})
 
-	test('the image is built with everything the build reads', () => {
-		const dockerfile = readFileSync(join(ROOT, 'Dockerfile'), 'utf8')
-		const copied = [...dockerfile.matchAll(/^COPY\s+(?!--from)(\S+)/gm)].map(([, path = '']) => path)
-		for (const needed of ['content', 'src', 'vendor/brand']) {
-			expect(copied, `${needed} is not in the image`).toContain(needed)
-		}
-		expect(dockerfile.indexOf('COPY vendor/brand vendor/brand')).toBeLessThan(
-			dockerfile.indexOf('RUN bun run build'),
-		)
-	})
-
 	test('every brand file a page points at is served', async () => {
 		const dist = mkdtempSync(join(tmpdir(), 'publisher-pages-'))
 		await build(dist)
@@ -153,17 +143,8 @@ describe('the site on the brand home', () => {
 })
 
 describe('the policy admits the home’s files', () => {
-	const conf = readFileSync(join(ROOT, 'nginx.conf'), 'utf8')
-	const policy = conf.match(/add_header Content-Security-Policy "([^"]+)" always;/)?.[1] ?? ''
-	const directive = (name: string) =>
-		policy
-			.split(';')
-			.map((d) => d.trim().split(/\s+/))
-			.find(([n]) => n === name)
-			?.slice(1) ?? []
-
 	test('both the fonts and the lockups come from this origin', () => {
-		expect(directive('font-src')).toEqual(["'self'"])
-		expect(directive('img-src')).toContain("'self'")
+		expect(cspDirective('font-src')).toEqual(["'self'"])
+		expect(cspDirective('img-src')).toContain("'self'")
 	})
 })

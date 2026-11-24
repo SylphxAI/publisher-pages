@@ -15,7 +15,7 @@ not a claim of current production behavior.
 | `PUB-INDEX` | `/apps/index.json`: `slug`, `name`, `url`, `summary` and `services`, cached for one hour | live | `PUB-HUB` | The JSON holds the hub's apps that declare services, in the hub's order; the platform consumes the list without owning product copy |
 | `PUB-APP-LINKS` | Apple Universal Links and Android App Links association files | live | `PUB-CONTENT`, Sylphx Network | The two `/.well-known` files contain each configured app's identifiers, paths and certificate fingerprints and validate for its store build |
 | `PUB-BRAND` | Vendored publisher brand files and product-owned icons and theme tokens | live | Brand homes | Publisher assets match `vendor/brand/SOURCE`; app icons and theme values come from the app's brand home, not a second design source |
-| `PUB-STATIC` | Static build served by nginx, with no client JavaScript, tracking or cookies | live | `PUB-PAGES`, `PUB-HUB`, `PUB-APP-LINKS` | `bun run check` and `bun run build` pass; assets and language links stay within the mounted paths and pages meet the configured Content Security Policy |
+| `PUB-STATIC` | Containerless build served by Sylphx Static Sites, with no client JavaScript, tracking or cookies | live | `PUB-PAGES`, `PUB-HUB`, `PUB-APP-LINKS` | `bun run check` and `bun run build` pass; assets and language links stay within the mounted paths and pages meet the configured Content Security Policy |
 
 ## Ownership boundary
 
