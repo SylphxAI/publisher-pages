@@ -10,9 +10,10 @@
 	},
 	"tagline": {
 		"en": "Turn one photo into product images and promo videos for your shop.",
-		"zh-Hant": "用一張相片，為網店製作商品圖和宣傳短片"
+		"zh-Hant": "用一張相片，為網店製作商品圖和宣傳短片。"
 	},
 	"external": "https://viszy.ai",
+	"externalZhHant": "https://viszy.ai/zh-TW",
 	"icon": "hub-icon.png",
 	"services": ["Hosting", "Data"],
 	"privacy": {
