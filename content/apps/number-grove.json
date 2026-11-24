@@ -20,7 +20,7 @@
 		},
 		"alt": {
 			"en": "The garden home: one Start button for today's short session, with other ways to play below.",
-			"zh-Hant": "花園主頁：一個「開始」按鈕進入今天的短練習，下面是其他玩法。"
+			"zh-Hant": "花園主頁：按「開始」就能做今天的短練習，下方還有其他玩法。"
 		},
 		"width": 600,
 		"height": 1298
@@ -52,33 +52,33 @@
 	"description": [
 		{
 			"en": "Number Grove helps young children understand what numbers mean: recognising them, counting, matching a numeral to a quantity, adding, comparing and putting numbers in order. Every screen asks one clear question, with big numerals and seeds to count, so a child can play without being able to read.",
-			"zh-Hant": "數字花園幫助幼童明白數字的意思：認數、點數、把數字配對數量、加法、比較和排序。每個畫面只問一條清楚的問題，配上大大的數字和可以點數的種子，孩子不識字也能玩。"
+			"zh-Hant": "數字花園讓幼童學認數字、數數、把數字和數量配對，還會練習加法、比較和排序。每個畫面只有一題，用大字和種子示範，孩子還未識字也能玩。"
 		},
 		{
 			"en": "It is calm by design. There are no timers, no lives to lose and no noise to chase. A wrong answer stays on the same idea and shows how to fix it, and a missed day never takes progress away. Everything works in English and in Traditional Chinese.",
-			"zh-Hant": "它刻意設計得安靜：沒有計時、沒有會失去的生命，也沒有吵鬧的獎勵。答錯時會留在同一個概念上，並示範怎樣改正；哪怕幾天沒有玩，進度也不會被拿走。所有內容都有英文及繁體中文。"
+			"zh-Hant": "孩子可以慢慢玩：不用限時作答，不會扣生命，也沒有吵鬧的獎勵。答錯了，遊戲會給提示，讓孩子再試。幾天沒玩，進度也會保留。所有內容都有英文和繁體中文。"
 		}
 	],
 	"sections": [
 		{
 			"heading": {
 				"en": "How a session works",
-				"zh-Hant": "每節怎樣進行"
+				"zh-Hant": "每次怎樣玩"
 			},
 			"intro": {
 				"en": "A few minutes, one idea, and a clear place to stop.",
-				"zh-Hant": "幾分鐘、一個概念，以及一個清楚的停下來的地方。"
+				"zh-Hant": "每次幾分鐘，只練習一個概念，做完就可以休息。"
 			},
 			"style": "steps",
 			"items": [
 				{
 					"title": {
 						"en": "See one idea",
-						"zh-Hant": "看一個概念"
+						"zh-Hant": "先看題目"
 					},
 					"body": {
 						"en": "A numeral or a group of seeds, large and clear, with one question about it.",
-						"zh-Hant": "一個數字或一組種子，大而清楚，只問一條相關的問題。"
+						"zh-Hant": "每題只問一件事，畫面上的數字或種子都看得清楚。"
 					}
 				},
 				{
@@ -88,7 +88,7 @@
 					},
 					"body": {
 						"en": "Tap a choice. A miss stays on the same idea and shows what to look at; a correct answer moves on.",
-						"zh-Hant": "點選一個答案。答錯會留在同一個概念上，提示要看哪裏；答對便前進。"
+						"zh-Hant": "點選答案。答錯有提示，可以再試；答對就做下一題。"
 					}
 				},
 				{
@@ -110,7 +110,7 @@
 			},
 			"intro": {
 				"en": "Each step builds on the one before, from 1 to 5 first and then up to 10.",
-				"zh-Hant": "每一步都建基於上一步：先學 1 至 5，再到 10。"
+				"zh-Hant": "先學 1 至 5，打好基礎再學到 10。"
 			},
 			"style": "list",
 			"items": [
@@ -141,7 +141,7 @@
 					},
 					"body": {
 						"en": "Join a numeral to the group it names.",
-						"zh-Hant": "把數字配對到相應數量的一組。"
+						"zh-Hant": "找出哪一組種子的數量和數字相同。"
 					}
 				},
 				{
@@ -151,7 +151,7 @@
 					},
 					"body": {
 						"en": "Put two small groups together.",
-						"zh-Hant": "把兩小組合在一起。"
+						"zh-Hant": "把兩組種子合起來數一數。"
 					}
 				},
 				{
@@ -161,7 +161,7 @@
 					},
 					"body": {
 						"en": "More, same or less; what comes next on the number line.",
-						"zh-Hant": "多、一樣或少；數線上下一個是甚麼。"
+						"zh-Hant": "哪邊較多，還是兩邊一樣多？數線上下一個是甚麼數字？"
 					}
 				},
 				{
@@ -171,7 +171,7 @@
 					},
 					"body": {
 						"en": "Fill the gap in a short sequence.",
-						"zh-Hant": "填補短數列中的空位。"
+						"zh-Hant": "看看數列中漏了哪個數字。"
 					}
 				},
 				{
@@ -181,7 +181,7 @@
 					},
 					"body": {
 						"en": "With the camera, once the basics are secure. Optional.",
-						"zh-Hant": "打好基礎後，用相機點算身邊物件。可選。"
+						"zh-Hant": "打好基礎後，還可以用相機數數身邊的物件。"
 					}
 				}
 			]
@@ -200,7 +200,7 @@
 					},
 					"body": {
 						"en": "The guided path through every idea, with a rest point along the way.",
-						"zh-Hant": "按次序帶孩子走過每個概念的路線，途中設有休息點。"
+						"zh-Hant": "跟着課程一步步學，途中可以休息。"
 					}
 				},
 				{
@@ -210,7 +210,7 @@
 					},
 					"body": {
 						"en": "A short set each day within 1 to 5. Missing a day costs nothing.",
-						"zh-Hant": "每天一小組 1 至 5 的題目。錯過一天也不會失去甚麼。"
+						"zh-Hant": "每天做幾道 1 至 5 的題目。一天沒玩，進度也會保留。"
 					}
 				},
 				{
@@ -220,7 +220,7 @@
 					},
 					"body": {
 						"en": "Picks the skill that needs work next, and shows how close the next level is.",
-						"zh-Hant": "自動挑選下一個需要練習的技能，並顯示離下一級還有多遠。"
+						"zh-Hant": "自動選出需要多練的內容，讓孩子看到距離升級還有多遠。"
 					}
 				},
 				{
@@ -230,7 +230,7 @@
 					},
 					"body": {
 						"en": "A mixed garden of questions with soft rests and no path to finish.",
-						"zh-Hant": "混合各種題目的花園，設有休息點，沒有必須完成的路線。"
+						"zh-Hant": "各種題目混着玩，想休息就停，不用完成指定路線。"
 					}
 				},
 				{
@@ -240,7 +240,7 @@
 					},
 					"body": {
 						"en": "Count real toys around the room. The camera is asked for first, and images stay on the device.",
-						"zh-Hant": "點算房間裏真實的玩具。會先徵求相機權限，影像只留在裝置上。"
+						"zh-Hant": "數數房間裏的玩具。遊戲會先問你能否使用相機，影像只在裝置上處理，不會儲存或傳送。"
 					}
 				}
 			]
@@ -253,12 +253,12 @@
 	"features": [
 		{
 			"title": {
-				"en": "A parent gate on everything that matters",
-				"zh-Hant": "重要設定都有家長關卡"
+				"en": "Purchases and settings stay in the parent area",
+				"zh-Hant": "購買和設定只在家長區"
 			},
 			"body": {
-				"en": "Purchases, links out, resetting progress and settings sit behind a question for grown-ups, then your own PIN.",
-				"zh-Hant": "購買、外部連結、重設進度及設定，都要先回答一條給大人的問題，再輸入你設定的家長 PIN。"
+				"en": "Purchases, external links, progress resets and settings are in the parent area. Answer a multiplication question to set your parent PIN the first time. After that, just enter your PIN. If you forget it, answer a new multiplication question to set a new PIN.",
+				"zh-Hant": "購買、開啟外部連結、重設進度和更改設定，都要先進入家長區。首次進入時，先答一道乘法題，再設定家長 PIN。之後只需輸入 PIN。忘記 PIN 的話，答另一道乘法題就可以重新設定。"
 			}
 		},
 		{
@@ -304,7 +304,7 @@
 		{
 			"title": {
 				"en": "Honest progress",
-				"zh-Hant": "誠實的進度"
+				"zh-Hant": "一目了然的學習進度"
 			},
 			"body": {
 				"en": "The parent area shows what your child has practised and what comes next, in plain words.",
@@ -315,7 +315,7 @@
 	"plans": {
 		"heading": {
 			"en": "Free to start, one subscription for the rest",
-			"zh-Hant": "免費開始，一個訂閱打開其餘內容"
+			"zh-Hant": "免費開始，訂閱即可使用其餘內容"
 		},
 		"intro": {
 			"en": "There are no ads, coins or one-off unlocks. A parent buys inside the parent area only.",
@@ -330,7 +330,7 @@
 				"items": [
 					{
 						"en": "23 Adventure lessons within 1 to 5",
-						"zh-Hant": "23 課 1 至 5 的冒險課程"
+						"zh-Hant": "23 課冒險課程，練習 1 至 5"
 					},
 					{
 						"en": "The Daily garden",
@@ -338,7 +338,7 @@
 					},
 					{
 						"en": "First-level Practice and Free play",
-						"zh-Hant": "第一級練習及自由玩"
+						"zh-Hant": "「練習」和「自由玩」的第一級"
 					},
 					{
 						"en": "Progress, garden growth, badges and the parent report",
@@ -362,7 +362,7 @@
 					},
 					{
 						"en": "Every Practice and Free play level",
-						"zh-Hant": "所有練習及自由玩級別"
+						"zh-Hant": "「練習」和「自由玩」的所有級別"
 					},
 					{
 						"en": "The camera hunt",
@@ -383,7 +383,7 @@
 	"screenshots": {
 		"heading": {
 			"en": "Inside the app",
-			"zh-Hant": "應用程式內"
+			"zh-Hant": "遊戲畫面"
 		},
 		"items": [
 			{
@@ -429,7 +429,7 @@
 				},
 				"alt": {
 					"en": "After a session the garden has grown, with a calm message to keep playing or rest.",
-					"zh-Hant": "完成後花園長大了，並以平靜的訊息讓孩子繼續玩或休息。"
+					"zh-Hant": "完成練習後，花園長大了。畫面提示孩子可以繼續玩，也可以休息。"
 				},
 				"width": 600,
 				"height": 1298
@@ -459,8 +459,8 @@
 					"zh-Hant": "怎樣進入家長區？"
 				},
 				"a": {
-					"en": "Open the parent area from the garden screen. The first time, answer a multiplication question for grown-ups and choose a parent PIN. After that, enter your PIN. Children cannot buy, follow links or reset progress without it. If you forget the PIN, choose Forgot PIN?, answer a new question and choose a new PIN; progress is kept.",
-					"zh-Hant": "在花園畫面打開家長區。首次使用時，先回答一道乘法題，再設定家長 PIN；之後只需輸入 PIN。沒有 PIN，孩子無法購買、打開外部連結或重設進度。如果忘記 PIN，請選擇「忘記 PIN？」，答另一道乘法題後重新設定，進度會保留。"
+					"en": "Open the parent area from the garden screen. Answer a multiplication question to set your parent PIN the first time. After that, just enter your PIN. If you forget it, choose “Forgot PIN?” and answer a new multiplication question to set a new PIN. Your child’s progress stays intact.",
+					"zh-Hant": "在花園畫面開啟家長區。首次進入時，先答一道乘法題，再設定家長 PIN。之後只需輸入 PIN。忘記 PIN 的話，選「忘記 PIN？」並答另一道乘法題，就可以重新設定。孩子的進度會保留。"
 				}
 			},
 			{
@@ -469,8 +469,8 @@
 					"zh-Hant": "哪些內容免費？訂閱會增加甚麼？"
 				},
 				"a": {
-					"en": "The Seed Garden is free: 23 Adventure lessons within 1 to 5, the Daily garden and first-level practice. The Garden subscription opens every later area, all practice levels and the camera hunt. It renews monthly or yearly until you cancel it in your App Store or Google Play account. If it ends, your child keeps every star, badge and garden stage.",
-					"zh-Hant": "「種子花園」免費：包括 23 課 1 至 5 的冒險課程、每日花園及第一級練習。花園訂閱可打開之後所有區域、所有練習級別及相機尋寶，會按月或按年自動續期，直至你在 App Store 或 Google Play 帳戶中取消。訂閱結束後，孩子已得到的星星、徽章和花園成長都會保留。"
+					"en": "The Seed Garden is free: 23 Adventure lessons within 1 to 5, the Daily garden and the first level of both Practice and Free play. The Garden subscription unlocks every later area, all Practice and Free play levels, and the camera hunt. It renews monthly or yearly until you cancel it in your App Store or Google Play account. If it ends, your child keeps every star, badge and garden stage.",
+					"zh-Hant": "「種子花園」免費：有 23 課練習 1 至 5 的冒險課程、每日花園，以及「練習」和「自由玩」的第一級。訂閱後可進入其餘花園區域、玩「練習」和「自由玩」的所有級別，以及玩相機尋寶。訂閱會按月或按年自動續期，你可在 App Store 或 Google Play 帳戶取消。訂閱結束後，孩子的星星、徽章和花園進度都會保留。"
 				}
 			},
 			{

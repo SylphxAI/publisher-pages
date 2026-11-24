@@ -169,7 +169,7 @@ export function page({
 		${EMAIL_OFF}
 		<a class="skip" href="#main">${t(UI.skip)}</a>
 		<header class="bar">
-			<a class="brand" href="/">
+			<a class="brand" href="${locale === 'zh-Hant' ? `${publisher.site}/zh-hant-hk` : '/'}">
 				<picture>
 					<source srcset="${LOCKUP.dark}" media="(prefers-color-scheme: dark)">
 					<img src="${LOCKUP.light}" alt="Sylphx" width="${LOCKUP_WIDTH}" height="${LOCKUP_HEIGHT}">
@@ -233,7 +233,9 @@ export function appsIndex(apps: AppContent[], tools: Tool[], locale: Locale, pub
 	const cards = listed
 		.map((app) => {
 			const href = app.external ? appUrl(app, publisher, locale) : localized(locale, `/apps/${app.slug}`)
-			const englishOnly = locale === 'zh-Hant' && app.external && !app.externalZhHant
+			const handoffLanguage =
+				locale === 'zh-Hant' && app.external ? (app.externalZhHant ? locale : 'en') : null
+			const englishOnly = handoffLanguage === 'en'
 			const id = `app-${app.slug}`
 			const status = app.services?.length
 				? `<small class="app-services">${fill(t(UI.runsOn), { services: escapeHtml(app.services.join(', ')) })}</small>`
@@ -242,7 +244,7 @@ export function appsIndex(apps: AppContent[], tools: Tool[], locale: Locale, pub
 				? `<img class="app-mark" src="${assetUrl(app.slug, app.icon)}" alt="" width="44" height="44">`
 				: ''
 			return `			<li>
-				<a class="app-card" href="${escapeHtml(href)}" aria-labelledby="${id}" aria-describedby="${id}-summary${englishOnly ? ` ${id}-language` : ''}"${englishOnly ? ' hreflang="en"' : ''}>
+				<a class="app-card" href="${escapeHtml(href)}" aria-labelledby="${id}" aria-describedby="${id}-summary${englishOnly ? ` ${id}-language` : ''}"${handoffLanguage ? ` hreflang="${handoffLanguage}"` : ''}>
 					<span class="app-card-top">${mark}<span class="app-card-arrow" aria-hidden="true">${app.external ? '↗' : '→'}</span></span>
 					<h2 id="${id}">${escapeHtml(t(app.name))}</h2>
 					<p id="${id}-summary">${escapeHtml(t(app.tagline))}</p>

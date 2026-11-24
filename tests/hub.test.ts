@@ -115,7 +115,7 @@ test('the Chinese hub links both its cards and JSON-LD to the verified locales o
 		spiron: 'https://spiron.ai/zh-hant',
 		tachyn: 'https://tachyn.ai/zh-hk',
 		tryit: 'https://tryit.fun/zh-HK',
-		viszy: 'https://viszy.ai',
+		viszy: 'https://viszy.ai/zh-TW',
 	}
 	const raw = zhHub.match(/<script type="application\/ld\+json">([^<]*)<\/script>/)?.[1] ?? ''
 	const data = JSON.parse(raw)
@@ -123,8 +123,18 @@ test('the Chinese hub links both its cards and JSON-LD to the verified locales o
 		const html = card(zhHub, slug)
 		expect(html).toContain(`href="${href}"`)
 		expect(data.itemListElement.map((entry: { item: { url: string } }) => entry.item.url)).toContain(href)
-		expect(html.includes('英文網站')).toBe(slug === 'mark' || slug === 'viszy')
+		expect(html).toContain(`hreflang="${slug === 'mark' ? 'en' : 'zh-Hant'}"`)
+		expect(html.includes('英文網站')).toBe(slug === 'mark')
 	}
+	const viszyDescription = '用一張相片，為網店製作商品圖和宣傳短片。'
+	expect(card(zhHub, 'viszy')).toContain(`<p id="app-viszy-summary">${viszyDescription}</p>`)
+	expect(
+		data.itemListElement.find((entry: { item: { name: string } }) => entry.item.name === 'Viszy')?.item,
+	).toMatchObject({
+		url: urls.viszy,
+		description: viszyDescription,
+	})
+	expect(card(hub, 'viszy')).toContain('href="https://viszy.ai"')
 	expect(zhHub).not.toContain('建基於 Sylphx')
 })
 

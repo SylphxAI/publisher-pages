@@ -21,7 +21,7 @@ export const UI = {
 	comingSoon: { en: 'Coming soon', 'zh-Hant': '即將推出' },
 	available: { en: 'Available', 'zh-Hant': '已推出' },
 	englishSite: { en: 'English site', 'zh-Hant': '英文網站' },
-	seeLesson: { en: 'See a lesson', 'zh-Hant': '查看課程示例' },
+	seeLesson: { en: 'See lesson screens', 'zh-Hant': '查看課程畫面' },
 	onThisPage: { en: 'On this page', 'zh-Hant': '本頁目錄' },
 	emailUs: { en: 'Email us', 'zh-Hant': '發送電郵' },
 	privacyNav: { en: 'Privacy', 'zh-Hant': '私隱政策' },
