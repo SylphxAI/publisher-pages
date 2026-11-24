@@ -9,10 +9,11 @@
 		"zh-Hant": "賣家工具"
 	},
 	"tagline": {
-		"en": "Product photos and promo videos for online sellers, made from one photo.",
-		"zh-Hant": "為網店賣家由一張相片製作產品相和宣傳短片。"
+		"en": "Turn one photo into product images and promo videos for your shop.",
+		"zh-Hant": "用一張相片，為網店製作商品圖和宣傳短片"
 	},
 	"external": "https://viszy.ai",
+	"icon": "hub-icon.png",
 	"services": ["Hosting", "Data"],
 	"privacy": {
 		"updated": "2026-10-01",

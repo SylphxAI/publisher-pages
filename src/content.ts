@@ -87,6 +87,8 @@ export interface AppContent {
 	tagline: Text
 	/** An app with its own site: the index links there and no pages are built. */
 	external?: string
+	/** Verified Traditional Chinese landing, if the external site has one. */
+	externalZhHant?: string
 	/**
 	 * Sylphx platform services the app runs on, proven by its repository's
 	 * `sylphx.toml`. An app with services is listed on the hub and in `/apps/index.json`.
@@ -220,6 +222,23 @@ export function validateApp(raw: unknown, file: string): AppContent {
 		}
 		if (new Set(app.services).size !== app.services.length) fail(file, 'services repeat')
 	}
+	if (app.icon !== undefined) asset(app.icon, `${file} icon`)
+	if (app.externalZhHant !== undefined) {
+		const at = `${file} externalZhHant`
+		const href = url(app.externalZhHant, at)
+		if (
+			!href.startsWith('https://') ||
+			typeof app.external !== 'string' ||
+			!app.external.startsWith('https://')
+		) {
+			fail(at, 'expected HTTPS landings for both locales')
+		}
+		const base = new URL(url(app.external, `${file} external`))
+		const localized = new URL(href)
+		if (localized.origin !== base.origin || localized.pathname === base.pathname) {
+			fail(at, 'expected a distinct landing path on the same site')
+		}
+	}
 	if (app.external !== undefined) {
 		url(app.external, `${file} external`)
 		return app
@@ -240,7 +259,6 @@ export function validateApp(raw: unknown, file: string): AppContent {
 			}
 		}
 	}
-	if (app.icon !== undefined) asset(app.icon, `${file} icon`)
 	if (app.hero !== undefined) picture(app.hero, `${file} hero`)
 	if (app.featuresHeading !== undefined) text(app.featuresHeading, `${file} featuresHeading`)
 	if (app.sections !== undefined) {

@@ -43,6 +43,8 @@ a:focus-visible {
 	left: -999px;
 }
 .skip:focus {
+	min-width: 44px;
+	min-height: 44px;
 	left: 16px;
 	top: 8px;
 	background: var(--card);
@@ -62,6 +64,7 @@ main {
 	min-height: 64px;
 }
 .bar a {
+	min-width: 44px;
 	display: inline-flex;
 	align-items: center;
 	min-height: 44px;
@@ -106,35 +109,98 @@ h3 {
 	padding: 0 10px;
 	font-size: 0.85rem;
 }
-.cards {
+.hub-intro {
+	margin: clamp(28px, 5vw, 64px) 0 clamp(22px, 4vw, 40px);
+}
+.hub-intro h1 {
+	margin: 0;
+}
+.hub-intro .lede {
+	margin: 8px 0 0;
+}
+.app-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: clamp(10px, 1.6vw, 20px);
 	list-style: none;
 	padding: 0;
-	display: grid;
-	gap: 16px;
+	margin: 0;
 }
-.card {
-	background: var(--card);
+@media (min-width: 720px) {
+	.app-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+.app-card {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	min-height: 100%;
+	padding: clamp(12px, 1.6vw, 22px);
 	border: 1px solid var(--line);
-	border-radius: 12px;
-	padding: 20px;
-	position: relative;
-}
-.card h2 {
-	margin: 4px 0;
-}
-.card h2 a {
+	border-radius: 16px;
+	background: var(--card);
 	color: var(--fg);
 	text-decoration: none;
+	overflow-wrap: anywhere;
 }
-.cards .card:has(.more) h2 a::after {
-	content: "";
-	position: absolute;
-	inset: 0;
+.app-card:hover {
+	border-color: var(--accent);
 }
-.more {
-	margin: 0;
+.app-card:focus-visible {
+	border-radius: 16px;
+}
+.app-card-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	width: 100%;
+}
+.app-mark {
+	display: block;
+	width: 44px;
+	height: 44px;
+	border-radius: 24%;
+}
+.app-card-arrow {
+	margin-inline-start: auto;
 	color: var(--accent-text);
-	font-weight: 600;
+	line-height: 1;
+	font-size: 1.2rem;
+}
+.app-card h2 {
+	margin: 10px 0 2px;
+	font-size: clamp(1.02rem, 1.7vw, 1.22rem);
+	line-height: 1.25;
+}
+.app-card p {
+	margin: 2px 0 12px;
+	font-size: 0.875rem;
+	line-height: 1.45;
+}
+.app-card-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: start;
+	margin-top: auto;
+}
+.app-services,
+.site-language {
+	color: var(--muted);
+	font-size: 0.75rem;
+	line-height: 1.45;
+}
+.site-language {
+	background: var(--highlight);
+	border-radius: 5px;
+	padding: 1px 5px;
+}
+.also-from .list a {
+	display: inline-flex;
+	align-items: center;
+	min-width: 44px;
+	min-height: 44px;
 }
 .features {
 	list-style: none;
@@ -144,6 +210,10 @@ h3 {
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 .button {
+	min-width: 44px;
+	max-width: 100%;
+	gap: 8px;
+	overflow-wrap: anywhere;
 	display: inline-flex;
 	align-items: center;
 	min-height: 44px;
@@ -167,6 +237,58 @@ h3 {
 	display: inline-flex;
 	align-items: center;
 	min-height: 44px;
+	min-width: 44px;
+}
+.crumbs {
+	gap: 0 8px;
+	font-size: 0.875rem;
+	border-block-end: 1px solid var(--line);
+}
+.crumbs a,
+.links a {
+	justify-content: center;
+	white-space: nowrap;
+}
+.crumbs a[aria-current="page"] {
+	color: var(--fg);
+	text-decoration: none;
+	box-shadow: inset 0 -2px var(--accent);
+}
+@media (max-width: 450px) {
+	.crumbs {
+		gap: 0 6px;
+		font-size: 0.8125rem;
+	}
+}
+.doc-toc {
+	margin-block: 24px 32px;
+	padding: 12px 16px;
+	border: 1px solid var(--line);
+	border-radius: 12px;
+	background: var(--card);
+}
+.doc-toc h2 {
+	font-size: 1rem;
+	margin: 0 0 4px;
+}
+.doc-toc ul {
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 148px), 1fr));
+	column-gap: 16px;
+	padding: 0;
+	margin: 0;
+}
+.doc-toc a {
+	display: flex;
+	align-items: center;
+	min-height: 44px;
+	padding-block: 4px;
+	font-size: 0.875rem;
+	line-height: 1.35;
+}
+h2:target {
+	scroll-margin-top: 16px;
 }
 code {
 	font-family: var(--sx-font-mono);
@@ -194,31 +316,40 @@ code {
 
 /* Landing pages with sections (an app that sets `sections`). */
 main.wide,
-body:has(main.wide) .bar,
-body:has(main.wide) .foot {
+.bar,
+.foot {
 	max-width: 1080px;
 }
 main.wide h1 {
 	font-size: clamp(2.2rem, 6vw, 3.4rem);
 	letter-spacing: -0.02em;
 }
+.hero-identity {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
 .app-icon {
 	display: block;
-	width: 88px;
-	height: 88px;
+	width: 56px;
+	height: 56px;
 	border-radius: 22%;
 	box-shadow:
 		0 1px 2px rgb(0 0 0 / 0.08),
 		0 8px 24px rgb(0 0 0 / 0.08);
-	margin: 16px 0 12px;
 }
 .hero {
 	display: grid;
 	gap: 24px 48px;
-	align-items: center;
-	padding: 8px 0 16px;
+	align-items: start;
+	padding: 24px 0 16px;
+}
+.hero h1 {
+	margin: 6px 0 8px;
 }
 .hero .lede {
+	margin: 0;
 	font-size: clamp(1.15rem, 2.4vw, 1.4rem);
 	color: var(--fg);
 	max-width: 32em;
@@ -226,7 +357,7 @@ main.wide h1 {
 .shot {
 	margin: 0;
 	justify-self: center;
-	width: min(100%, 320px);
+	width: min(100%, 300px);
 }
 .shot img,
 .gallery img {
@@ -241,11 +372,14 @@ main.wide h1 {
 @media (min-width: 760px) {
 	.hero {
 		grid-template-columns: 1.2fr 1fr;
-		padding: 24px 0 32px;
+		padding: 36px 0 32px;
 	}
-	.shot {
-		width: min(100%, 340px);
+	.hero > div {
+		padding-block-start: 28px;
 	}
+}
+.block.lesson-preview {
+	margin-top: 24px;
 }
 .intro {
 	font-size: 1.1rem;

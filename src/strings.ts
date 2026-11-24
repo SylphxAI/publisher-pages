@@ -2,10 +2,10 @@ import type { Text } from './content'
 
 /** Interface copy shared by every page. */
 export const UI = {
-	appsTitle: { en: 'Built on Sylphx', 'zh-Hant': '建基於 Sylphx' },
+	appsTitle: { en: 'Built on Sylphx', 'zh-Hant': '以 Sylphx 打造的產品' },
 	appsIntro: {
-		en: 'The products Sylphx builds and runs on its own platform.',
-		'zh-Hant': 'Sylphx 在自家平台上打造及運行的產品。',
+		en: 'Explore apps for work, play and everyday life.',
+		'zh-Hant': '工作、學習、玩樂，都有合適的應用程式。',
 	},
 	appsDescription: {
 		en: 'The products Sylphx builds and runs on its own platform: what each one does, where to find it, and which Sylphx services it runs on.',
@@ -20,8 +20,12 @@ export const UI = {
 	openSourceTitle: { en: 'Open source', 'zh-Hant': '開源項目' },
 	comingSoon: { en: 'Coming soon', 'zh-Hant': '即將推出' },
 	available: { en: 'Available', 'zh-Hant': '已推出' },
-	visitSite: { en: 'Visit site', 'zh-Hant': '前往網站' },
-	learnMore: { en: 'Learn more', 'zh-Hant': '了解更多' },
+	englishSite: { en: 'English site', 'zh-Hant': '英文網站' },
+	seeLesson: { en: 'See a lesson', 'zh-Hant': '查看課程示例' },
+	onThisPage: { en: 'On this page', 'zh-Hant': '本頁目錄' },
+	emailUs: { en: 'Email us', 'zh-Hant': '發送電郵' },
+	privacyNav: { en: 'Privacy', 'zh-Hant': '私隱政策' },
+	termsNav: { en: 'Terms', 'zh-Hant': '使用條款' },
 	privacy: { en: 'Privacy policy', 'zh-Hant': '私隱政策' },
 	terms: { en: 'Terms of use', 'zh-Hant': '使用條款' },
 	keyTerms: { en: 'Key terms', 'zh-Hant': '主要條款' },

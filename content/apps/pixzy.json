@@ -9,10 +9,12 @@
 		"zh-Hant": "相片清理"
 	},
 	"tagline": {
-		"en": "Clean up Google Photos: find look-alike duplicates and blurry shots on your computer, bulk delete in batches of up to 500, then restore keepers in HD or turn them into a memory reel. Free on Chrome as Google Photos Delete Tool.",
-		"zh-Hant": "清理 Google 相簿：在你的電腦上找出相似的重複相片和模糊相片，每批最多 500 張批量刪除，再把值得保留的相片修復成高清，或製作成回憶短片。免費 Chrome 擴充功能，商店名稱為 Google Photos Delete Tool。"
+		"en": "Clear duplicates and blurry shots from Google Photos. Free on Chrome as Google Photos Delete Tool.",
+		"zh-Hant": "找出並刪除 Google 相簿內重複或模糊的相片。Chrome 免費擴充功能：Google Photos Delete Tool。"
 	},
 	"external": "https://pixzy.ai",
+	"externalZhHant": "https://pixzy.ai/zh-tw/",
+	"icon": "hub-icon.png",
 	"services": ["Hosting", "AI"],
 	"source": {
 		"repo": "SylphxAI/pixzy",

@@ -9,10 +9,12 @@
 		"zh-Hant": "AI 代理"
 	},
 	"tagline": {
-		"en": "An AI agent that sees a job through on its own, asks only when the call is yours, and hands back the result with proof.",
-		"zh-Hant": "自行把工作做完的 AI 代理，只在需要你決定時才詢問，並附證據交回成果。"
+		"en": "Hand off a job to an AI agent and get the finished work back with proof.",
+		"zh-Hant": "把工作交給 AI 代理，收回成果時有證據可查。"
 	},
 	"external": "https://spiron.ai",
+	"externalZhHant": "https://spiron.ai/zh-hant",
+	"icon": "hub-icon.png",
 	"services": ["Hosting", "Data", "AI"],
 	"privacy": {
 		"updated": "2026-10-04",

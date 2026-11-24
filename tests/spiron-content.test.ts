@@ -24,7 +24,8 @@ describe('Spiron publisher content', () => {
 		expect(spiron?.external).toBe('https://spiron.ai')
 		const files = await renderSite(site)
 		for (const prefix of ['apps/', 'apps/zh-hant/']) {
-			expect(files.get(`${prefix}index.html`)).toContain('href="https://spiron.ai"')
+			const href = prefix.includes('zh-hant') ? 'https://spiron.ai/zh-hant' : 'https://spiron.ai'
+			expect(files.get(`${prefix}index.html`)).toContain(`href="${href}"`)
 			for (const page of ['', '/privacy', '/terms', '/support']) {
 				expect(files.has(`${prefix}spiron${page}/index.html`)).toBe(false)
 			}
