@@ -56,7 +56,7 @@ describe('/apps/index.json', () => {
 describe('hub page', () => {
 	test('has the title, standfirst and one "Runs on" line per entry', () => {
 		expect(hub).toContain('<h1>Built on Sylphx</h1>')
-		expect(hub).toContain('The products Sylphx builds and runs on its own platform.')
+		expect(hub).toContain('Explore apps for work, play and everyday life.')
 		expect(hub.match(/Runs on: Sylphx /g)?.length).toBe(index.length)
 		for (const entry of index) {
 			expect(hub).toContain(String(entry.summary))
@@ -84,53 +84,74 @@ describe('hub page', () => {
 
 	test('the Traditional Chinese twin lists the same apps', () => {
 		const zh = files.get('apps/zh-hant/index.html') ?? ''
-		expect(zh).toContain('建基於 Sylphx')
+		expect(zh).toContain('以 Sylphx 打造的產品')
 		expect(zh.match(/運行於：Sylphx /g)?.length).toBe(index.length)
-		expect(zh.match(/<li class="card">/g)?.length).toBe(hubApps(site.apps).length)
+		expect(zh.match(/<a class="app-card"/g)?.length).toBe(hubApps(site.apps).length)
 	})
 })
 
-describe('Number Grove on the hub', () => {
-	const zh = files.get('apps/zh-hant/index.html') ?? ''
-	/** The hub card whose heading links to `href`. */
-	const card = (page: string, href: string) =>
-		page.split('<li class="card">').find((c) => c.includes(`<h2><a href="${href}">`)) ?? ''
+const zhHub = files.get('apps/zh-hant/index.html') ?? ''
+const card = (page: string, slug: string) =>
+	page.match(new RegExp(`<a class="app-card" [^>]*aria-labelledby="app-${slug}"[^>]*>[\\s\\S]*?</a>`))?.[0] ??
+	''
 
-	test('has a card in both languages that links to its own landing page', () => {
-		expect(card(hub, '/apps/number-grove')).toContain('>Number Grove</a></h2>')
-		expect(card(hub, '/apps/number-grove')).toContain('Calm number sense for ages 3 to 7')
-		expect(card(zh, '/apps/zh-hant/number-grove')).toContain('>數字花園</a></h2>')
-		expect(card(zh, '/apps/zh-hant/number-grove')).toContain('給三至七歲孩子的安靜數感花園')
-	})
-
-	test('is marked coming soon and claims no Sylphx service or store link', () => {
-		const en = card(hub, '/apps/number-grove')
-		const zhCard = card(zh, '/apps/zh-hant/number-grove')
-		expect(en).toContain('<span class="tag">Coming soon</span>')
-		expect(zhCard).toContain('<span class="tag">即將推出</span>')
-		expect(en).not.toContain('Runs on')
-		expect(zhCard).not.toContain('運行於')
-		for (const store of ['apps.apple.com', 'play.google.com']) expect(en).not.toContain(store)
-	})
-
-	test('comes after the apps that run on Sylphx', () => {
-		expect(hubApps(site.apps).at(-1)?.slug).toBe('number-grove')
-	})
-})
-
-describe('Pixzy', () => {
-	const zh = files.get('apps/zh-hant/index.html') ?? ''
-	test('is listed as Pixzy at pixzy.ai and names the Google Photos Delete Tool extension', () => {
-		const pixzy = index.find((e) => e.slug === 'pixzy')
-		expect(pixzy?.name).toBe('Pixzy')
-		expect(pixzy?.url).toBe('https://pixzy.ai')
-		expect(String(pixzy?.summary)).toContain('Google Photos Delete Tool')
-		for (const page of [hub, zh]) {
-			expect(page).toContain('<h2><a href="https://pixzy.ai">Pixzy</a></h2>')
-			expect(page).not.toContain('>Google Photos Delete Tool</a>')
-			expect(page).toContain('Google Photos Delete Tool')
+test('eight cards have a local product mark, one full-card link and a unique heading in both languages', () => {
+	for (const page of [hub, zhHub]) {
+		expect(page.match(/class="app-card"/g)).toHaveLength(8)
+		for (const app of hubApps(site.apps)) {
+			const html = card(page, app.slug)
+			expect(html).toContain(`<h2 id="app-${app.slug}">`)
+			expect(html).toContain(`class="app-mark" src="/apps/_assets/${app.slug}/${app.icon}" alt=""`)
+			expect(html.match(/<a /g)).toHaveLength(1)
 		}
-	})
+	}
+})
+
+test('the Chinese hub links both its cards and JSON-LD to the verified locales or labels the English fallbacks', () => {
+	const urls = {
+		luzzy: 'https://luzzy.chat/zh-Hant',
+		mark: 'https://mark.sylphx.com',
+		pixzy: 'https://pixzy.ai/zh-tw/',
+		spiron: 'https://spiron.ai/zh-hant',
+		tachyn: 'https://tachyn.ai/zh-hk',
+		tryit: 'https://tryit.fun/zh-HK',
+		viszy: 'https://viszy.ai',
+	}
+	const raw = zhHub.match(/<script type="application\/ld\+json">([^<]*)<\/script>/)?.[1] ?? ''
+	const data = JSON.parse(raw)
+	for (const [slug, href] of Object.entries(urls)) {
+		const html = card(zhHub, slug)
+		expect(html).toContain(`href="${href}"`)
+		expect(data.itemListElement.map((entry: { item: { url: string } }) => entry.item.url)).toContain(href)
+		expect(html.includes('英文網站')).toBe(slug === 'mark' || slug === 'viszy')
+	}
+	expect(zhHub).not.toContain('建基於 Sylphx')
+})
+
+test('Number Grove links to the local landing, marked coming soon and with no service or store claims', () => {
+	for (const [page, href, name, status] of [
+		[hub, '/apps/number-grove', 'Number Grove', 'Coming soon'],
+		[zhHub, '/apps/zh-hant/number-grove', '數字花園', '即將推出'],
+	] as const) {
+		const html = card(page, 'number-grove')
+		expect(html).toContain(`href="${href}"`)
+		expect(html).toContain(`>${name}</h2>`)
+		expect(html).toContain(`<span class="tag">${status}</span>`)
+		expect(html).not.toMatch(/app-services|apps\.apple\.com|play\.google\.com/)
+	}
+	expect(hubApps(site.apps).at(-1)?.slug).toBe('number-grove')
+})
+
+test('Pixzy retains the Chrome extension identity; product photos belong to Viszy', () => {
+	const pixzy = index.find((e) => e.slug === 'pixzy')
+	expect(pixzy?.name).toBe('Pixzy')
+	expect(pixzy?.url).toBe('https://pixzy.ai')
+	expect(String(pixzy?.summary)).toContain('Google Photos Delete Tool')
+	for (const page of [hub, zhHub]) {
+		expect(card(page, 'pixzy')).toContain('>Pixzy</h2>')
+		expect(card(page, 'pixzy')).toContain('Google Photos Delete Tool')
+	}
+	expect(card(zhHub, 'viszy')).toContain('用一張相片，為網店製作商品圖和宣傳短片')
 })
 
 describe('internal names', () => {
@@ -185,9 +206,12 @@ describe('Also from Sylphx', () => {
 		expect(hub.toLowerCase()).not.toContain('anyagents')
 	})
 	test('a product with a card is not listed again as a tool', () => {
-		for (const url of ['https://mark.sylphx.com', 'https://pixzy.ai']) {
-			expect(hub.split(`href="${url}"`).length - 1).toBe(1)
-			expect(zh.split(`href="${url}"`).length - 1).toBe(1)
+		for (const [en, hk] of [
+			['https://mark.sylphx.com', 'https://mark.sylphx.com'],
+			['https://pixzy.ai', 'https://pixzy.ai/zh-tw/'],
+		]) {
+			expect(hub.split(`href="${en}"`).length - 1).toBe(1)
+			expect(zh.split(`href="${hk}"`).length - 1).toBe(1)
 		}
 		expect(hub).not.toContain('>Google Photos Delete Tool</a> — ')
 		expect(hub).not.toContain('>Pixzy</a> — ')

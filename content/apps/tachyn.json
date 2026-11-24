@@ -9,10 +9,12 @@
 		"zh-Hant": "效率工具"
 	},
 	"tagline": {
-		"en": "Push-to-talk dictation for every app on your Mac, in Cantonese, English or Mandarin.",
-		"zh-Hant": "適用於 Mac 上每個應用程式的按鍵說話輸入，支援粵語、英語及普通話。"
+		"en": "Hold a key and speak to type into any Mac app, including in Cantonese.",
+		"zh-Hant": "在 Mac 上按住按鍵就能說話輸入，支援粵語、英語及普通話。"
 	},
 	"external": "https://tachyn.ai",
+	"externalZhHant": "https://tachyn.ai/zh-hk",
+	"icon": "hub-icon.png",
 	"services": ["Hosting", "Data", "Auth", "AI"],
 	"privacy": {
 		"updated": "2026-10-08",

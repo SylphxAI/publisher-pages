@@ -9,10 +9,11 @@
 		"zh-Hant": "開發者工具"
 	},
 	"tagline": {
-		"en": "README images from one URL: banners, badges, icons and GitHub stats cards.",
-		"zh-Hant": "一個網址生成 README 圖像：橫幅、徽章、圖示及 GitHub 統計卡。"
+		"en": "Create README banners, badges and GitHub stats cards from one URL.",
+		"zh-Hant": "用一個網址製作 README 橫幅、徽章和 GitHub 統計卡。"
 	},
 	"external": "https://mark.sylphx.com",
+	"icon": "hub-icon.png",
 	"services": ["Hosting"],
 	"privacy": {
 		"updated": "2026-10-08",

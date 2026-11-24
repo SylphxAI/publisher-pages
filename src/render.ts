@@ -210,8 +210,9 @@ export function hubApps(apps: AppContent[]): AppContent[] {
 }
 
 /** Where an app lives: its own site, or its page here. */
-function appUrl(app: AppContent, publisher: Publisher): string {
-	return app.external ?? `${publisher.site}/apps/${app.slug}`
+function appUrl(app: AppContent, publisher: Publisher, locale: Locale = 'en'): string {
+	if (app.external) return (locale === 'zh-Hant' && app.externalZhHant) || app.external
+	return `${publisher.site}${localized(locale, `/apps/${app.slug}`)}`
 }
 
 /** `/apps/index.json`: the machine-readable hub, read by sylphx.com's home page. */
@@ -231,16 +232,22 @@ export function appsIndex(apps: AppContent[], tools: Tool[], locale: Locale, pub
 	const listed = hubApps(apps)
 	const cards = listed
 		.map((app) => {
-			const href = app.external ?? localized(locale, `/apps/${app.slug}`)
+			const href = app.external ? appUrl(app, publisher, locale) : localized(locale, `/apps/${app.slug}`)
+			const englishOnly = locale === 'zh-Hant' && app.external && !app.externalZhHant
+			const id = `app-${app.slug}`
 			const status = app.services?.length
-				? fill(t(UI.runsOn), { services: escapeHtml(app.services.join(', ')) })
+				? `<small class="app-services">${fill(t(UI.runsOn), { services: escapeHtml(app.services.join(', ')) })}</small>`
 				: `<span class="tag">${t(app.availability?.status === 'available' ? UI.available : UI.comingSoon)}</span>`
-			return `\t\t\t<li class="card">
-				<p class="eyebrow">${escapeHtml(t(app.category))}</p>
-				<h2><a href="${escapeHtml(href)}">${escapeHtml(t(app.name))}</a></h2>
-				<p>${escapeHtml(t(app.tagline))}</p>
-				<p class="eyebrow">${status}</p>
-				<p class="more" aria-hidden="true">${app.external ? t(UI.visitSite) : t(UI.learnMore)} →</p>
+			const mark = app.icon
+				? `<img class="app-mark" src="${assetUrl(app.slug, app.icon)}" alt="" width="44" height="44">`
+				: ''
+			return `			<li>
+				<a class="app-card" href="${escapeHtml(href)}" aria-labelledby="${id}" aria-describedby="${id}-summary${englishOnly ? ` ${id}-language` : ''}"${englishOnly ? ' hreflang="en"' : ''}>
+					<span class="app-card-top">${mark}<span class="app-card-arrow" aria-hidden="true">${app.external ? '↗' : '→'}</span></span>
+					<h2 id="${id}">${escapeHtml(t(app.name))}</h2>
+					<p id="${id}-summary">${escapeHtml(t(app.tagline))}</p>
+					<div class="app-card-meta">${status}${englishOnly ? `<span class="site-language" id="${id}-language">${t(UI.englishSite)}</span>` : ''}</div>
+				</a>
 			</li>`
 		})
 		.join('\n')
@@ -250,9 +257,11 @@ export function appsIndex(apps: AppContent[], tools: Tool[], locale: Locale, pub
 				`\t\t\t\t\t<li><a href="${escapeHtml(tool.url)}">${escapeHtml(tool.name)}</a> — ${escapeHtml(t(tool.summary))}</li>`,
 		)
 		.join('\n')
-	const body = `\t\t\t<h1>${t(UI.appsTitle)}</h1>
-			<p class="lede">${t(UI.appsIntro)}</p>
-			<ul class="cards">
+	const body = `\t\t\t<div class="hub-intro">
+				<h1>${t(UI.appsTitle)}</h1>
+				<p class="lede">${t(UI.appsIntro)}</p>
+			</div>
+			<ul class="app-grid">
 ${cards}
 			</ul>
 			<section class="block also-from">
@@ -273,7 +282,7 @@ ${toolList}
 				'@type': 'SoftwareApplication',
 				name: t(app.name),
 				description: t(app.tagline),
-				url: appUrl(app, publisher),
+				url: appUrl(app, publisher, locale),
 				applicationCategory: t(app.category),
 			},
 		})),
@@ -286,18 +295,23 @@ ${toolList}
 		body,
 		publisher,
 		jsonLd,
+		wide: true,
 	})
 }
 
-function appNav(app: AppContent, locale: Locale): string {
+type AppPage = '' | 'privacy' | 'terms' | 'support'
+
+function appNav(app: AppContent, locale: Locale, current: AppPage): string {
 	const t = (s: Text) => s[locale]
 	const base = localized(locale, `/apps/${app.slug}`)
-	return `\t\t\t<nav class="crumbs" aria-label="${escapeHtml(t(app.name))}">
+	const link = (page: AppPage, label: string) =>
+		`<a href="${base}${page ? `/${page}` : ''}"${page === current ? ' aria-current="page"' : ''}>${escapeHtml(label)}</a>`
+	return `			<nav class="crumbs" aria-label="${escapeHtml(t(app.name))}">
 				<a href="${localized(locale, '/apps')}">${t(UI.allApps)}</a>
-				<a href="${base}">${escapeHtml(t(app.name))}</a>
-				<a href="${base}/privacy">${t(UI.privacy)}</a>
-				<a href="${base}/terms">${t(UI.terms)}</a>
-				<a href="${base}/support">${t(UI.support)}</a>
+				${link('', t(app.name))}
+				${link('privacy', t(UI.privacyNav))}
+				${link('terms', t(UI.termsNav))}
+				${link('support', t(UI.support))}
 			</nav>`
 }
 
@@ -345,11 +359,15 @@ ${featureItems}
 	const icon = app.icon
 		? `<img class="app-icon" src="${assetUrl(app.slug, app.icon)}" alt="" width="88" height="88">`
 		: ''
-	const heroText = `${icon}
-				<p class="eyebrow">${e(app.category)}</p>
+	const hasShots = (app.screenshots?.items.length ?? 0) > 0
+	const lessonLink = hasShots
+		? `<a class="button lesson-link" href="#lesson-preview">${t(UI.seeLesson)} <span aria-hidden="true">↓</span></a>`
+		: ''
+	const heroText = `<div class="hero-identity">${icon}<p class="eyebrow">${e(app.category)}</p></div>
 				<h1>${e(app.name)}</h1>
 				<p class="lede">${e(app.tagline)}</p>
-				${get}`
+				${get}
+				${lessonLink}`
 	const hero = app.hero
 		? `\t\t\t<section class="hero">
 				<div>
@@ -377,14 +395,15 @@ ${app.plans.tiers
 				${app.plans.note ? `<p class="note">${e(app.plans.note)}</p>` : ''}
 			</section>`
 		: ''
-	const shots = app.screenshots
-		? `\t\t\t<section class="block">
-				<h2>${e(app.screenshots.heading)}</h2>
+	const shots =
+		hasShots && app.screenshots
+			? `\t\t\t<section class="block lesson-preview" aria-labelledby="lesson-preview">
+				<h2 id="lesson-preview" tabindex="-1">${e(app.screenshots.heading)}</h2>
 				<ul class="gallery">
 ${app.screenshots.items.map((p) => `\t\t\t\t\t<li>${img(app.slug, p, locale)}</li>`).join('\n')}
 				</ul>
 			</section>`
-		: ''
+			: ''
 	const base = localized(locale, `/apps/${app.slug}`)
 	const faq =
 		rich && app.support
@@ -395,13 +414,13 @@ ${app.support.faq.map((f) => `\t\t\t\t<details><summary>${e(f.q)}</summary><p>${
 			</section>`
 			: ''
 	const body = [
-		appNav(app, locale),
+		appNav(app, locale, ''),
 		hero,
+		shots,
 		description ? `\t\t\t<div class="intro">\n\t\t\t${description}\n\t\t\t</div>` : '',
 		...(app.sections ?? []).map((s) => section(s, locale)),
 		features,
 		plans,
-		shots,
 		faq,
 	]
 		.filter(Boolean)
@@ -419,6 +438,32 @@ ${app.support.faq.map((f) => `\t\t\t\t<details><summary>${e(f.q)}</summary><p>${
 	})
 }
 
+interface LegalSection {
+	id: string
+	heading: string
+	body: string
+}
+
+function legalSections(sections: LegalSection[], locale: Locale): string {
+	return `<nav class="doc-toc" aria-labelledby="doc-toc-heading">
+				<h2 id="doc-toc-heading">${UI.onThisPage[locale]}</h2>
+				<ul>${sections.map(({ id, heading }) => `<li><a href="#${id}">${heading}</a></li>`).join('')}</ul>
+			</nav>
+${sections
+	.map(
+		({ id, heading, body }) => `<h2 id="${id}" tabindex="-1">${heading}</h2>
+${body}`,
+	)
+	.join('\n')}`
+}
+
+function contactAction(publisher: Publisher, locale: Locale): string {
+	const email = escapeHtml(publisher.contactEmail)
+	return `<p><a class="button contact-action" href="mailto:${email}">${UI.emailUs[locale]} <span aria-hidden="true">↗</span></a></p>`
+}
+
+const colon = (locale: Locale) => (locale === 'zh-Hant' ? '：' : ': ')
+
 export function appPrivacy(app: AppContent, locale: Locale, publisher: Publisher): string {
 	const t = (s: Text) => s[locale]
 	const privacy = app.privacy
@@ -430,28 +475,27 @@ export function appPrivacy(app: AppContent, locale: Locale, publisher: Publisher
 		number: escapeHtml(publisher.companyNumber),
 		office: escapeHtml(publisher.registeredOffice),
 	})
-	const email = `<a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a>`
-	const sections = privacy.sections
-		.map(
-			(s) =>
-				`\t\t\t<h2>${escapeHtml(t(s.heading))}</h2>\n${s.body.map((p) => `\t\t\t<p>${escapeHtml(t(p))}</p>`).join('\n')}`,
-		)
-		.join('\n')
-	const body = `${appNav(app, locale)}
-			<h1>${escapeHtml(t(app.name))}: ${t(UI.privacy)}</h1>
-			<p class="note">${t(UI.lastUpdated)}: <time datetime="${privacy.updated}">${privacy.updated}</time></p>
+	const sections = [
+		{ id: 'publisher', heading: t(UI.whoWeAre), body: `<p>${who}</p>` },
+		...privacy.sections.map((s, i) => ({
+			id: `data-${i + 1}`,
+			heading: escapeHtml(t(s.heading)),
+			body: s.body.map((p) => `<p>${escapeHtml(t(p))}</p>`).join('\n'),
+		})),
+		{ id: 'your-rights', heading: t(UI.yourRights), body: `<p>${t(UI.yourRightsBody)}</p>` },
+		{ id: 'right-to-object', heading: t(UI.rightToObject), body: `<p>${t(UI.rightToObjectBody)}</p>` },
+		{ id: 'changes', heading: t(UI.changes), body: `<p>${t(UI.changesBody)}</p>` },
+		{
+			id: 'contact',
+			heading: t(UI.contact),
+			body: `<p>${fill(t(UI.contactBody), { email: escapeHtml(publisher.contactEmail) })}</p>${contactAction(publisher, locale)}`,
+		},
+	]
+	const body = `${appNav(app, locale, 'privacy')}
+			<h1>${escapeHtml(t(app.name))}${colon(locale)}${t(UI.privacy)}</h1>
+			<p class="note">${t(UI.lastUpdated)}${colon(locale)}<time datetime="${privacy.updated}">${privacy.updated}</time></p>
 			<p class="lede">${escapeHtml(t(privacy.summary))}</p>
-			<h2>${t(UI.whoWeAre)}</h2>
-			<p>${who}</p>
-${sections}
-			<h2>${t(UI.yourRights)}</h2>
-			<p>${t(UI.yourRightsBody)}</p>
-			<h2>${t(UI.rightToObject)}</h2>
-			<p>${t(UI.rightToObjectBody)}</p>
-			<h2>${t(UI.changes)}</h2>
-			<p>${t(UI.changesBody)}</p>
-			<h2>${t(UI.contact)}</h2>
-			<p>${fill(t(UI.contactBody), { email })}</p>`
+${legalSections(sections, locale)}`
 	return page({
 		locale,
 		path: `/apps/${app.slug}/privacy`,
@@ -470,23 +514,24 @@ export function appTerms(app: AppContent, locale: Locale, publisher: Publisher):
 		legal: escapeHtml(publisher.legalName),
 		number: escapeHtml(publisher.companyNumber),
 		office: escapeHtml(publisher.registeredOffice),
-		email: `<a href="mailto:${publisher.contactEmail}">${publisher.contactEmail}</a>`,
+		email: escapeHtml(publisher.contactEmail),
 	}
 	const text = (s: Text) => fill(escapeHtml(t(s)), values)
-	const key = KEY_TERMS.map((k) => `\t\t\t\t<li>${text(k)}</li>`).join('\n')
-	const sections = TERMS_SECTIONS.map(
-		(s, n) =>
-			`\t\t\t<h2>${n + 1}. ${text(s.heading)}</h2>\n${s.body.map((p) => `\t\t\t<p>${text(p)}</p>`).join('\n')}`,
-	).join('\n')
-	const body = `${appNav(app, locale)}
-			<h1>${escapeHtml(t(app.name))}: ${t(UI.terms)}</h1>
-			<p class="note">${t(UI.lastUpdated)}: <time datetime="${TERMS_UPDATED}">${TERMS_UPDATED}</time></p>
-			<h2>${t(UI.keyTerms)}</h2>
-			<p>${t(UI.termsIntro)}</p>
-			<ul>
-${key}
-			</ul>
-${sections}`
+	const key = KEY_TERMS.map((k) => `<li>${text(k)}</li>`).join('\n')
+	const sections = [
+		{ id: 'key-terms', heading: t(UI.keyTerms), body: `<p>${t(UI.termsIntro)}</p><ul>${key}</ul>` },
+		...TERMS_SECTIONS.map((s, n) => ({
+			id: `term-${n + 1}`,
+			heading: `${n + 1}. ${text(s.heading)}`,
+			body: s.body
+				.map((p) => `<p>${text(p)}</p>${t(p).includes('{email}') ? contactAction(publisher, locale) : ''}`)
+				.join('\n'),
+		})),
+	]
+	const body = `${appNav(app, locale, 'terms')}
+			<h1>${escapeHtml(t(app.name))}${colon(locale)}${t(UI.terms)}</h1>
+			<p class="note">${t(UI.lastUpdated)}${colon(locale)}<time datetime="${TERMS_UPDATED}">${TERMS_UPDATED}</time></p>
+${legalSections(sections, locale)}`
 	return page({
 		locale,
 		path: `/apps/${app.slug}/terms`,
@@ -505,10 +550,10 @@ export function appSupport(app: AppContent, locale: Locale, publisher: Publisher
 	const faq = support.faq
 		.map((f) => `\t\t\t<h3>${escapeHtml(t(f.q))}</h3>\n\t\t\t<p>${escapeHtml(t(f.a))}</p>`)
 		.join('\n')
-	const body = `${appNav(app, locale)}
-			<h1>${escapeHtml(t(app.name))}: ${t(UI.support)}</h1>
+	const body = `${appNav(app, locale, 'support')}
+			<h1>${escapeHtml(t(app.name))}${colon(locale)}${t(UI.support)}</h1>
 			<p class="lede">${t(UI.supportIntro)}</p>
-			<p><a class="button" href="mailto:${support.email}?subject=${encodeURIComponent(app.name.en)}">${t(UI.contactUs)}: ${support.email}</a></p>
+			<p><a class="button" href="mailto:${support.email}?subject=${encodeURIComponent(app.name.en)}">${t(UI.contactUs)}${colon(locale)}${support.email}</a></p>
 			<h2>${t(UI.faq)}</h2>
 ${faq}`
 	return page({

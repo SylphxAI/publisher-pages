@@ -9,8 +9,8 @@
 		"zh-Hant": "教育・三至七歲"
 	},
 	"tagline": {
-		"en": "Calm number sense for ages 3 to 7: one small idea at a time, and a garden that grows as they learn.",
-		"zh-Hant": "給三至七歲孩子的安靜數感花園：一次一個小概念，花園隨着學習慢慢長大。"
+		"en": "Count, compare and recognise numbers in short games for ages 3 to 7. Their garden grows as they play.",
+		"zh-Hant": "讓三至七歲孩子透過小遊戲學數數、比較多少和認數字。孩子邊玩，花園邊長大。"
 	},
 	"icon": "icon.svg",
 	"hero": {
@@ -258,7 +258,7 @@
 			},
 			"body": {
 				"en": "Purchases, links out, resetting progress and settings sit behind a question for grown-ups, then your own PIN.",
-				"zh-Hant": "購買、外部連結、重設進度及設定，都要先回答一條給大人的問題，再輸入你自己的密碼。"
+				"zh-Hant": "購買、外部連結、重設進度及設定，都要先回答一條給大人的問題，再輸入你設定的家長 PIN。"
 			}
 		},
 		{
@@ -460,7 +460,7 @@
 				},
 				"a": {
 					"en": "Open the parent area from the garden screen. The first time, answer a multiplication question for grown-ups and choose a parent PIN. After that, enter your PIN. Children cannot buy, follow links or reset progress without it. If you forget the PIN, choose Forgot PIN?, answer a new question and choose a new PIN; progress is kept.",
-					"zh-Hant": "在花園畫面打開家長區。第一次使用時，先回答一條給大人的乘數問題，再設定家長密碼；之後只需輸入密碼。沒有密碼，孩子無法購買、打開外部連結或重設進度。如果忘記密碼，可選擇「忘記 PIN？」，回答新問題後重新設定，進度會保留。"
+					"zh-Hant": "在花園畫面打開家長區。首次使用時，先回答一道乘法題，再設定家長 PIN；之後只需輸入 PIN。沒有 PIN，孩子無法購買、打開外部連結或重設進度。如果忘記 PIN，請選擇「忘記 PIN？」，答另一道乘法題後重新設定，進度會保留。"
 				}
 			},
 			{
